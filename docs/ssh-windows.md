@@ -17,7 +17,7 @@ cat ~/.ssh/gatc_vps.pub
 
 ## Mac: SSH config host entry
 
-Add to `~/.ssh/config`:
+Add to `~/.ssh/config` (already correct for this project):
 
 ```sshconfig
 Host GATC-VPS
@@ -29,6 +29,25 @@ Host GATC-VPS
   PreferredAuthentications publickey
   PasswordAuthentication no
 ```
+
+Connect:
+
+```bash
+ssh GATC-VPS
+```
+
+## Cursor Remote SSH
+
+1. Install the **Remote - SSH** extension in Cursor / VS Code.
+2. Command Palette → **Remote-SSH: Connect to Host…** → choose `GATC-VPS`.
+3. Open folder `C:\GATC\gatc-vps` after the window connects.
+
+### Windows Remote SSH limitations
+
+- Some Linux-oriented remote features are limited or unavailable on Windows SSH hosts.
+- Prefer opening the project folder on the remote, not trying to use a full Linux remote environment.
+- Terminal on the remote is PowerShell/cmd; portable tools live under `C:\GATC\tools\`.
+- If the remote window fails to start a server, fall back to local Mac workspace + `ssh GATC-VPS` for VPS tasks.
 
 ## Windows: create `gatcdev` (RDP as Administrator, once)
 
@@ -44,23 +63,37 @@ Add-LocalGroupMember -Group "Users" -Member "gatcdev"
 
 Do not use Administrator for routine development.
 
+## Windows profile path (important)
+
+On domain/workgroup joined machines the profile may be:
+
+`C:\Users\gatcdev.VPS`
+
+not `C:\Users\gatcdev`. OpenSSH `authorized_keys` must be under the **actual** profile used by the SSH session (`$env:USERPROFILE`).
+
+An orphan `C:\Users\gatcdev\.ssh` (if present) is harmless leftover from an earlier profile guess — do not delete system folders aggressively; leave it unless you are cleaning up deliberately.
+
 ## Windows: install public key
 
-Still on the VPS (adjust if OpenSSH uses a different profile path):
+Still on the VPS (use the real profile; `${User}` must expand correctly in PowerShell):
 
 ```powershell
 $User = "gatcdev"
 $PubKey = "PASTE_PUBLIC_KEY_LINE_HERE"
-$SshDir = "C:\Users\$User\.ssh"
+# Prefer the live profile path from an interactive/SSH session as gatcdev:
+$SshDir = Join-Path $env:USERPROFILE ".ssh"
+# Or explicitly for this VPS:
+# $SshDir = "C:\Users\gatcdev.VPS\.ssh"
 New-Item -ItemType Directory -Force -Path $SshDir | Out-Null
 $AuthKeys = Join-Path $SshDir "authorized_keys"
 Set-Content -Path $AuthKeys -Value $PubKey -Encoding ascii
 
-# Permissions: authorized_keys and .ssh must not be overly permissive
+# Permissions: authorized_keys and .ssh must not be overly permissive.
+# Use ${User} so PowerShell does not treat $(OI) as a subexpression.
 icacls $SshDir /inheritance:r
-icacls $SshDir /grant:r "$User:(OI)(CI)F" /grant:r "SYSTEM:(OI)(CI)F" /grant:r "Administrators:(OI)(CI)F"
+icacls $SshDir /grant:r "${User}:(OI)(CI)F" /grant:r "SYSTEM:(OI)(CI)F" /grant:r "Administrators:(OI)(CI)F"
 icacls $AuthKeys /inheritance:r
-icacls $AuthKeys /grant:r "$User:F" /grant:r "SYSTEM:F" /grant:r "Administrators:F"
+icacls $AuthKeys /grant:r "${User}:F" /grant:r "SYSTEM:F" /grant:r "Administrators:F"
 ```
 
 Confirm OpenSSH is running:
@@ -68,6 +101,32 @@ Confirm OpenSSH is running:
 ```powershell
 Get-Service sshd
 ```
+
+## Portable tools (PATH)
+
+Tools are installed under `C:\GATC\tools\`:
+
+| Tool | Path |
+|------|------|
+| Node.js | `C:\GATC\tools\node\node.exe` |
+| MinGit | `C:\GATC\tools\mingit\cmd\git.exe` |
+| GitHub CLI | usually `C:\Program Files\GitHub CLI\gh.exe` (also fine on PATH) |
+
+Persist for new `gatcdev` sessions (user env):
+
+```powershell
+$add = @(
+  'C:\GATC\tools\node',
+  'C:\GATC\tools\mingit\cmd'
+)
+$userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
+foreach ($p in $add) {
+  if ($userPath -notlike "*$p*") { $userPath = "$p;$userPath" }
+}
+[Environment]::SetEnvironmentVariable('Path', $userPath, 'User')
+```
+
+`Restart-GATC.ps1` prefers `C:\GATC\tools\node\node.exe` so it does not depend on session PATH.
 
 ## Verify host fingerprint before first trust
 
@@ -93,4 +152,23 @@ If authentication fails, stop and diagnose — do not hammer password prompts.
 
 ## Network hardening (recommended)
 
-Restrict inbound TCP/22 at the VPS firewall or provider security group to trusted office/VPN IPs. Do not change firewall rules without explicit approval.
+Restrict inbound TCP/22 at the VPS firewall to your client public IP. Do **not** apply blindly — a wrong/changing IP locks out SSH. Keep RDP as a recovery path.
+
+Prepared script (explicit run only):
+
+```powershell
+# Detect client IP from Mac first, e.g. curl ifconfig.me
+cd C:\GATC\gatc-vps
+.\deployment\Restrict-SSH.ps1 -ClientIp YOUR.PUBLIC.IP -ConfirmRestrict
+```
+
+Example (verify before use; IPs change): Mac public IP observed during setup was `116.68.104.18`.
+
+Exact one-liner equivalent (admin PowerShell) if you prefer not to use the script:
+
+```powershell
+New-NetFirewallRule -DisplayName "GATC SSH allow 116.68.104.18 only" -Direction Inbound -Protocol TCP -LocalPort 22 -RemoteAddress 116.68.104.18 -Action Allow -Profile Any -Enabled True
+# Then disable broad OpenSSH allow-any rules carefully — see Restrict-SSH.ps1
+```
+
+Do not break RDP. Do not run restrict rules unless the IP is stable and you have RDP access.

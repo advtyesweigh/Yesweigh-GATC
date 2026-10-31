@@ -41,6 +41,8 @@ data/
 uploads/
 logs/
 *.log
+*.pid
+backend.pid
 tmp/
 temp/
 .cache/

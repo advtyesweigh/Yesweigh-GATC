@@ -19,6 +19,26 @@ $outLog = Join-Path $logDir 'backend.out.log'
 $errLog = Join-Path $logDir 'backend.err.log'
 $pidFile = Join-Path $DeployRoot 'backend.pid'
 
+# Prefer portable Node under C:\GATC\tools so SSH/session PATH is not required.
+$nodeCandidates = @(
+  'C:\GATC\tools\node\node.exe',
+  (Join-Path $env:LOCALAPPDATA 'Programs\nodejs\node.exe'),
+  'node'
+)
+$nodeExe = $null
+foreach ($candidate in $nodeCandidates) {
+  if ($candidate -eq 'node') {
+    $cmd = Get-Command node -ErrorAction SilentlyContinue
+    if ($cmd) { $nodeExe = $cmd.Source; break }
+  } elseif (Test-Path $candidate) {
+    $nodeExe = $candidate
+    break
+  }
+}
+if (-not $nodeExe) {
+  throw 'node.exe not found. Install portable Node at C:\GATC\tools\node\node.exe'
+}
+
 function Stop-GatcBackend {
   if (Test-Path $pidFile) {
     $pidValue = Get-Content $pidFile -ErrorAction SilentlyContinue
@@ -52,7 +72,7 @@ if (-not (Test-Path $envFile)) {
 
 Push-Location $DeployRoot
 try {
-  $proc = Start-Process -FilePath 'node' `
+  $proc = Start-Process -FilePath $nodeExe `
     -ArgumentList 'backend\src\index.js' `
     -WorkingDirectory $DeployRoot `
     -RedirectStandardOutput $outLog `
@@ -60,7 +80,7 @@ try {
     -WindowStyle Hidden `
     -PassThru
   Set-Content -Path $pidFile -Value $proc.Id -NoNewline
-  Write-Host "Backend started with PID $($proc.Id)"
+  Write-Host "Backend started with PID $($proc.Id) using $nodeExe"
   Write-Host "stdout: $outLog"
   Write-Host "stderr: $errLog"
 }

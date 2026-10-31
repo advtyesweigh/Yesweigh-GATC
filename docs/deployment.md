@@ -17,12 +17,18 @@ Deployment is an **explicit, approved** operation. CI does not push to productio
 # Deploy (requires confirmation switch)
 .\deployment\Deploy-GATC.ps1 -SourcePath D:\releases\gatc-vps-<sha> -ConfirmDeploy
 
-# Restart
+# Restart (uses C:\GATC\tools\node\node.exe when present; survives SSH exit)
 .\deployment\Restart-GATC.ps1
 
 # Rollback
 .\deployment\Rollback-GATC.ps1 -SnapshotPath C:\GATC\gatc-vps\backups\snapshot-<ts> -ConfirmRollback
 .\deployment\Restart-GATC.ps1
+
+# Optional first-boot helper (install/build if missing, then restart + health)
+.\deployment\Bootstrap-Runtime.ps1
+
+# Optional SSH firewall restrict — explicit only; keep RDP; wrong IP locks SSH
+# .\deployment\Restrict-SSH.ps1 -ClientIp YOUR.PUBLIC.IP -ConfirmRestrict
 ```
 
 ## Secrets
