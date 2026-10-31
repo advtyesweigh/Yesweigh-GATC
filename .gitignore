@@ -37,7 +37,7 @@ automation/storage/
 *.db
 *.sqlite
 *.sqlite3
-data/
+/data/
 uploads/
 logs/
 *.log
@@ -75,3 +75,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+
+# Android
+android/.gradle/
+android/**/build/
+android/local.properties
+android/.idea/
+*.apk
+*.aab
+.android-export/
+.postgres-wip-aside/

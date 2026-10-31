@@ -10,6 +10,8 @@ GATC stamping management application for original verification and re-verificati
 |------|---------|
 | `frontend/` | GATC web application |
 | `backend/` | Node.js API |
+| `android/` | Native RC Admin app (Kotlin + Jetpack Compose) |
+| `design/reference/` | UI visual references (not shipped in APK) |
 | `automation/` | Playwright browser integration (operator-assisted) |
 | `deployment/` | Windows VPS deployment and startup scripts |
 | `docs/` | Architecture, setup, and deployment docs |
