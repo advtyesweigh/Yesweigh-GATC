@@ -2,17 +2,20 @@
 
 GATC stamping management application for original verification and re-verification of weighing and measuring instruments through the Government of India eMaap portal.
 
-**Status:** Infrastructure bootstrap. Government portal form submission is intentionally not implemented yet.
+**Status:** Infrastructure bootstrap + Phase 1 architecture. Customer UI target is **native Android** (not the Vite scaffold). Government portal (eMaap) form submission is intentionally not implemented yet.
+
+**Phase 1 design:** [ARCHITECTURE.md](./ARCHITECTURE.md) · [IMPLEMENTATION_PLAN.md](./IMPLEMENTATION_PLAN.md)
 
 ## Repository layout
 
 | Path | Purpose |
 |------|---------|
-| `frontend/` | GATC web application |
-| `backend/` | Node.js API |
-| `automation/` | Playwright browser integration (operator-assisted) |
+| `frontend/` | Bootstrap status page only — **not** the customer-facing app (replaced by Android) |
+| `backend/` | Node.js API (headless; domain APIs planned) |
+| `android/` | Native Kotlin Compose app (added in first implementation milestone) |
+| `automation/` | Playwright browser integration (operator-assisted; eMaap future) |
 | `deployment/` | Windows VPS deployment and startup scripts |
-| `docs/` | Architecture, setup, and deployment docs |
+| `docs/` | Setup, deployment, SSH |
 | `.github/workflows/` | CI validation (build and tests) |
 
 ## Development workflow
