@@ -6,9 +6,11 @@
   Stops any existing node process started for gatc-vps backend, then starts it again
   under the least-privilege service account context (run as gatcdev, not Administrator).
 
-  Prefers a one-shot scheduled task so the process survives Windows OpenSSH session teardown.
-  Interactive-only schtasks often ignore /Run from SSH (result 0x41303); in that case we
-  detach via Start-Process -WindowStyle Hidden (survives SSH when WorkingDirectory is set).
+  Uses Win32 CreateProcess with CREATE_BREAKAWAY_FROM_JOB so Windows OpenSSH session
+  teardown does not kill the backend. Prefer portable Node at C:\GATC\tools\node\node.exe.
+
+  Note: Interactive-only schtasks /Run from SSH is unreliable (often 0x41303 / never runs).
+  Plain Start-Process from an SSH session is killed with the OpenSSH job object.
 #>
 [CmdletBinding()]
 param(
@@ -22,14 +24,11 @@ New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $outLog = Join-Path $logDir 'backend.out.log'
 $errLog = Join-Path $logDir 'backend.err.log'
 $pidFile = Join-Path $DeployRoot 'backend.pid'
-$taskName = 'GATC-Backend'
 $wrapperCmd = Join-Path $logDir 'run-backend.cmd'
 
-# Prefer portable Node under C:\GATC\tools so SSH/session PATH is not required.
 $nodeCandidates = @(
   'C:\GATC\tools\node\node.exe',
   (Join-Path $env:LOCALAPPDATA 'Programs\nodejs\node.exe'),
-  (Join-Path $env:LOCALAPPDATA 'Programs\node\node.exe'),
   'node'
 )
 $nodeExe = $null
@@ -57,20 +56,6 @@ function Get-ListeningPidOnPort {
   return $null
 }
 
-function Wait-ForPort {
-  param(
-    [int]$Port = 3000,
-    [int]$Attempts = 40,
-    [int]$DelayMs = 500
-  )
-  for ($i = 0; $i -lt $Attempts; $i++) {
-    $pidOnPort = Get-ListeningPidOnPort -Port $Port
-    if ($pidOnPort) { return $pidOnPort }
-    Start-Sleep -Milliseconds $DelayMs
-  }
-  return $null
-}
-
 function Stop-GatcBackend {
   if (Test-Path $pidFile) {
     $pidValue = Get-Content $pidFile -ErrorAction SilentlyContinue
@@ -92,61 +77,72 @@ function Stop-GatcBackend {
       Write-Host "Stopped listening node PID $listenPid on :3000"
     }
   }
-
-  cmd /c "schtasks /Delete /TN $taskName /F >nul 2>nul" | Out-Null
 }
 
-function Start-ViaSchtasks {
-  # Schedule one minute ahead so /ST is valid; /Run is supposed to start immediately,
-  # but Interactive-only tasks often ignore /Run from non-interactive SSH sessions.
-  $st = (Get-Date).AddMinutes(1).ToString('HH:mm')
-  $tr = "cmd /c `"$wrapperCmd`""
-  $createOut = cmd /c "schtasks /Create /TN $taskName /TR `"$tr`" /SC ONCE /ST $st /RL LIMITED /F 2>&1"
-  $createCode = $LASTEXITCODE
-  Write-Host $createOut
-  if ($createCode -ne 0) {
-    Write-Warning "schtasks create failed with exit $createCode (may need elevation for non-interactive tasks)"
-    return $null
-  }
+function Start-BreakawayProcess {
+  param(
+    [Parameter(Mandatory = $true)][string]$FileName,
+    [Parameter(Mandatory = $true)][string]$CommandLine,
+    [Parameter(Mandatory = $true)][string]$WorkingDirectory
+  )
 
-  $runOut = cmd /c "schtasks /Run /TN $taskName 2>&1"
-  $runCode = $LASTEXITCODE
-  Write-Host $runOut
-  if ($runCode -ne 0) {
-    Write-Warning "schtasks run failed with exit $runCode"
-    return $null
+  if (-not ('DetachProc' -as [type])) {
+    Add-Type -TypeDefinition @"
+using System;
+using System.Runtime.InteropServices;
+public class DetachProc {
+  [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+  public struct STARTUPINFO {
+    public int cb;
+    public string lpReserved;
+    public string lpDesktop;
+    public string lpTitle;
+    public int dwX, dwY, dwXSize, dwYSize, dwXCountChars, dwYCountChars, dwFillAttribute, dwFlags;
+    public short wShowWindow, cbReserved2;
+    public IntPtr lpReserved2, hStdInput, hStdOutput, hStdError;
   }
-
-  # Short poll: only succeed if /Run actually detached a process immediately.
-  return (Wait-ForPort -Port 3000 -Attempts 20 -DelayMs 500)
+  [StructLayout(LayoutKind.Sequential)]
+  public struct PROCESS_INFORMATION {
+    public IntPtr hProcess, hThread;
+    public int dwProcessId, dwThreadId;
+  }
+  [DllImport("kernel32.dll", SetLastError=true, CharSet=CharSet.Unicode)]
+  public static extern bool CreateProcess(
+    string lpApplicationName,
+    string lpCommandLine,
+    IntPtr lpProcessAttributes,
+    IntPtr lpThreadAttributes,
+    bool bInheritHandles,
+    uint dwCreationFlags,
+    IntPtr lpEnvironment,
+    string lpCurrentDirectory,
+    ref STARTUPINFO lpStartupInfo,
+    out PROCESS_INFORMATION lpProcessInformation);
 }
-
-function Start-ViaDetachedProcess {
-  # Detach from the SSH job so the backend survives session teardown.
-  # Prefer Start-Process Hidden; fall back to Win32_Process.Create if needed.
-  Write-Host 'Falling back to detached Start-Process (schtasks did not open :3000; Interactive-only /Run is unreliable over SSH without elevation).'
-  try {
-    $proc = Start-Process -FilePath 'cmd.exe' `
-      -ArgumentList "/c `"$wrapperCmd`"" `
-      -WorkingDirectory $DeployRoot `
-      -WindowStyle Hidden `
-      -PassThru
-    if ($proc) {
-      Write-Host "Started wrapper PID $($proc.Id) via Start-Process"
-    }
-  } catch {
-    Write-Warning "Start-Process failed: $($_.Exception.Message); trying Win32_Process.Create"
-    $created = Invoke-CimMethod -ClassName Win32_Process -MethodName Create -Arguments @{
-      CommandLine      = "cmd /c `"$wrapperCmd`""
-      CurrentDirectory = $DeployRoot
-    }
-    if ($created.ReturnValue -ne 0) {
-      throw "Win32_Process.Create failed with ReturnValue $($created.ReturnValue)"
-    }
-    Write-Host "Started wrapper PID $($created.ProcessId) via Win32_Process.Create"
+"@
   }
 
-  return (Wait-ForPort -Port 3000 -Attempts 40 -DelayMs 500)
+  $si = New-Object DetachProc+STARTUPINFO
+  $si.cb = [Runtime.InteropServices.Marshal]::SizeOf($si)
+  $pi = New-Object DetachProc+PROCESS_INFORMATION
+  # CREATE_BREAKAWAY_FROM_JOB | CREATE_NEW_PROCESS_GROUP | CREATE_NO_WINDOW
+  $flags = [uint32]0x09000200
+  $ok = [DetachProc]::CreateProcess(
+    $FileName,
+    $CommandLine,
+    [IntPtr]::Zero,
+    [IntPtr]::Zero,
+    $false,
+    $flags,
+    [IntPtr]::Zero,
+    $WorkingDirectory,
+    [ref]$si,
+    [ref]$pi
+  )
+  if (-not $ok) {
+    throw "CreateProcess breakaway failed for $FileName (Win32=$([Runtime.InteropServices.Marshal]::GetLastWin32Error()))"
+  }
+  return $pi.dwProcessId
 }
 
 Stop-GatcBackend
@@ -173,23 +169,24 @@ cd /d "$DeployRoot"
 "@
 Set-Content -Path $wrapperCmd -Value $wrapperBody -Encoding ascii
 
-$startedPid = Start-ViaSchtasks
-$startMethod = 'schtasks'
+$cmdExe = Join-Path $env:SystemRoot 'System32\cmd.exe'
+$launchPid = Start-BreakawayProcess -FileName $cmdExe -CommandLine "`"$cmdExe`" /c `"$wrapperCmd`"" -WorkingDirectory $DeployRoot
+Write-Host "Launched breakaway wrapper PID $launchPid"
 
-if (-not $startedPid) {
-  $startedPid = Start-ViaDetachedProcess
-  $startMethod = 'Start-Process'
+$startedPid = $null
+for ($i = 0; $i -lt 30; $i++) {
+  Start-Sleep -Milliseconds 500
+  $startedPid = Get-ListeningPidOnPort -Port 3000
+  if ($startedPid) { break }
 }
 
 if (-not $startedPid) {
   Write-Host 'Backend did not open :3000 in time. Recent stderr:'
   if (Test-Path $errLog) { Get-Content $errLog -Tail 40 }
-  Write-Host 'Task query:'
-  cmd /c "schtasks /Query /TN $taskName /V /FO LIST 2>&1"
   throw 'Backend start failed (port 3000 not listening).'
 }
 
 Set-Content -Path $pidFile -Value $startedPid -NoNewline
-Write-Host "Backend started with PID $startedPid using $nodeExe via $startMethod"
+Write-Host "Backend started with PID $startedPid using $nodeExe (OpenSSH-safe breakaway)"
 Write-Host "stdout: $outLog"
 Write-Host "stderr: $errLog"
