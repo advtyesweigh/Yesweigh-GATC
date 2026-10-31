@@ -1,0 +1,12 @@
+{
+  "name": "@gatc/automation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node -e \"console.log('automation: scaffold only')\"",
+    "test": "node --test test/*.test.js",
+    "lint": "node -e \"console.log('automation: lint placeholder ok')\""
+  },
+  "description": "Playwright integration scaffold. Operator-assisted sessions only; no CAPTCHA bypass."
+}

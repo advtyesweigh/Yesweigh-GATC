@@ -1,0 +1,24 @@
+{
+  "name": "gatc-vps",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GATC stamping management — original verification and re-verification via eMaap",
+  "workspaces": [
+    "backend",
+    "frontend",
+    "automation"
+  ],
+  "scripts": {
+    "install:all": "npm install",
+    "dev": "npm run dev --workspace=backend",
+    "dev:backend": "npm run dev --workspace=backend",
+    "dev:frontend": "npm run dev --workspace=frontend",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "start": "npm run start --workspace=backend",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GATC — Stamping Management</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="brand">
+        <p class="eyebrow">Government Authorized Testing Center</p>
+        <h1>GATC</h1>
+        <p class="tagline">Stamping management for weighing and measuring instruments</p>
+      </header>
+
+      <section class="status-panel" aria-live="polite">
+        <h2>Backend connection</h2>
+        <p id="status-label" class="status unknown">Checking…</p>
+        <pre id="status-detail" class="detail"></pre>
+      </section>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
