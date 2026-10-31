@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { checkDb } from './db.js';
+import { mountAuthRoutes, createAuthMiddleware } from './auth.js';
 
 export function createApp({ config, logger, pool = null }) {
   const app = express();
@@ -46,6 +47,10 @@ export function createApp({ config, logger, pool = null }) {
       timestamp: new Date().toISOString(),
     });
   });
+
+  // Auth routes always mount; handlers return 503 when DB/JWT are unconfigured.
+  mountAuthRoutes(app, { config, pool, logger });
+  app.locals.auth = createAuthMiddleware({ config, pool, logger });
 
   app.use((err, _req, res, _next) => {
     logger.error('Unhandled error', { error: err.message });
