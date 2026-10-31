@@ -1,0 +1,39 @@
+# GATC public HTTPS on :443 (Tun4China reclaimed). Prefer Let's Encrypt automatic HTTPS.
+# Fallback: copy Caddyfile.tls-internal over this file and re-run Start-Caddy.ps1
+# if ACME fails (port 80 blocked). See Admin-Free443-For-GATC.ps1 for firewall 80/443.
+#
+# Site root: static RC Admin UI from C:\GATC\gatc-vps\public
+# API/health stay on the Node backend (:3000). Do not reverse_proxy bare /.
+
+{
+	admin off
+	email admin@gatc.yesweigh.in
+	# Non-interactive VPS: do not try to install local CA into system trust store.
+	skip_install_trust
+}
+
+gatc.yesweigh.in {
+	encode gzip
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		-Server
+	}
+
+	handle /api* {
+		reverse_proxy 127.0.0.1:3000
+	}
+	handle /health {
+		reverse_proxy 127.0.0.1:3000
+	}
+	handle {
+		root * C:\GATC\gatc-vps\public
+		try_files {path} /index.html
+		file_server
+	}
+}
+
+# Brief secondary: old :8443 clients redirect to canonical HTTPS.
+# Same hostname must share one TLS automation policy (do not mix tls internal here).
+gatc.yesweigh.in:8443 {
+	redir https://gatc.yesweigh.in{uri} permanent
+}

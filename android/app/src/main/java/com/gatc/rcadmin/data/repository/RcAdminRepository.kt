@@ -64,25 +64,28 @@ class SampleRcAdminRepository : RcAdminRepository {
 
     override fun saveDraft(draft: VerificationDraft): VerificationRecord {
         _drafts.update { it + draft }
-        val nextRef = "GATC-S${1000 + _verifications.value.size}"
-        val record = VerificationRecord(
-            id = UUID.randomUUID().toString(),
-            reference = nextRef,
-            jobType = draft.jobType,
-            customerName = draft.customerName.ifBlank { "Sample customer" },
-            productName = draft.productName.ifBlank { "Sample product" },
-            capacityLabel = draft.maximumCapacity.ifBlank { "—" }.let {
-                if (it == "—") it else "$it kg"
-            },
-            serialNumber = draft.serialNumber.ifBlank { "SAMPLE-SN" },
-            status = VerificationUiStatus.DRAFT,
-            dateLabel = "31 Oct 2026",
-            ambientTemperature = draft.ambientTemperature,
-            relativeHumidity = draft.relativeHumidity,
-            sealIdentificationNumber = draft.sealIdentificationNumber,
-            manufacturingYear = draft.manufacturingYear,
-        )
-        _verifications.update { listOf(record) + it }
+        lateinit var record: VerificationRecord
+        _verifications.update { current ->
+            val nextRef = "GATC-S${1000 + current.size}"
+            record = VerificationRecord(
+                id = UUID.randomUUID().toString(),
+                reference = nextRef,
+                jobType = draft.jobType,
+                customerName = draft.customerName.ifBlank { "Sample customer" },
+                productName = draft.productName.ifBlank { "Sample product" },
+                capacityLabel = draft.maximumCapacity.ifBlank { "—" }.let {
+                    if (it == "—") it else "$it kg"
+                },
+                serialNumber = draft.serialNumber.ifBlank { "SAMPLE-SN" },
+                status = VerificationUiStatus.DRAFT,
+                dateLabel = "31 Oct 2026",
+                ambientTemperature = draft.ambientTemperature,
+                relativeHumidity = draft.relativeHumidity,
+                sealIdentificationNumber = draft.sealIdentificationNumber,
+                manufacturingYear = draft.manufacturingYear,
+            )
+            listOf(record) + current
+        }
         return record
     }
 }

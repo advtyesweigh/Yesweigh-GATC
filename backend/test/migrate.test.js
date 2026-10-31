@@ -13,6 +13,7 @@ describe('migrations', () => {
     assert.ok(files.length >= 1);
     assert.deepEqual([...files].sort(), files);
     assert.ok(files.includes('001_m1_core.sql'));
+    assert.ok(files.includes('002_yesgatc_import.sql'));
   });
 
   it('M1 migration SQL defines required tables', async () => {
@@ -30,6 +31,16 @@ describe('migrations', () => {
     ]) {
       assert.match(sql, new RegExp(`CREATE TABLE ${table}\\b`));
     }
+  });
+
+  it('002 migration adds yesgatc import columns and doca_certificates', async () => {
+    const sql = await fs.readFile(
+      path.join(MIGRATIONS_DIR, '002_yesgatc_import.sql'),
+      'utf8',
+    );
+    assert.match(sql, /source_firebase_id/);
+    assert.match(sql, /CREATE TABLE IF NOT EXISTS doca_certificates\b/);
+    assert.match(sql, /certificate_number/);
   });
 
   it('applies migrations when DATABASE_URL is set', async () => {

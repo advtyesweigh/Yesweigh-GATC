@@ -1,0 +1,17 @@
+# Coexist with an unkilleable interim Caddy on :80/:8443/:2019.
+# Binds only :443 (no HTTP redirect, alternate admin port).
+{
+	skip_install_trust
+	auto_https disable_redirects
+	admin 127.0.0.1:2020
+}
+
+gatc.yesweigh.in {
+	tls internal
+	encode gzip
+	reverse_proxy 127.0.0.1:3000
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		-Server
+	}
+}

@@ -1,0 +1,26 @@
+# Temporary self-signed TLS on :443 when Let's Encrypt HTTP-01 is blocked.
+# Browsers will warn until a real cert is issued.
+{
+	admin off
+	skip_install_trust
+}
+
+gatc.yesweigh.in {
+	tls internal
+	encode gzip
+	reverse_proxy 127.0.0.1:3000
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		-Server
+	}
+}
+
+# Keep :8443 serving during cutover (do not redirect until portless :443 is proven).
+gatc.yesweigh.in:8443 {
+	tls internal
+	encode gzip
+	reverse_proxy 127.0.0.1:3000
+	header {
+		-Server
+	}
+}

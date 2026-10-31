@@ -44,8 +44,12 @@ logs/
 *.pid
 backend.pid
 tmp/
+.tmp/
 temp/
 .cache/
+# One-off Firebase→Postgres dumps (may contain PII; never commit)
+**/*users-export*.json
+**/yesgatc-*-export.json
 
 # Dependencies and build
 node_modules/

@@ -1,0 +1,13 @@
+# Interim only — keep :8443 alive until Admin frees :443.
+# After Admin-Free443-For-GATC.ps1, replace with deployment\Caddyfile and Start-Caddy.ps1.
+{
+	admin off
+	auto_https disable_redirects
+	skip_install_trust
+}
+
+gatc.yesweigh.in:8443 {
+	tls internal
+	encode gzip
+	reverse_proxy 127.0.0.1:3000
+}

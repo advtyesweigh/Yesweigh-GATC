@@ -28,4 +28,22 @@ describe('health endpoint', () => {
       await new Promise((resolve) => server.close(resolve));
     }
   });
+
+  it('root serves the RC Admin HTML UI', async () => {
+    const app = createApp({ config, logger: createLogger('error') });
+    const server = app.listen(0);
+    const { port } = server.address();
+
+    try {
+      const res = await fetch(`http://127.0.0.1:${port}/`);
+      assert.equal(res.status, 200);
+      const ct = res.headers.get('content-type') || '';
+      assert.match(ct, /text\/html/i);
+      const body = await res.text();
+      assert.match(body, /GATC/i);
+      assert.doesNotMatch(body, /^\s*\{/);
+    } finally {
+      await new Promise((resolve) => server.close(resolve));
+    }
+  });
 });

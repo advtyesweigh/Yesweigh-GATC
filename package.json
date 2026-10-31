@@ -18,7 +18,12 @@
     "start": "npm run start --workspace=backend",
     "lint": "npm run lint --workspaces --if-present",
     "db:migrate": "npm run db:migrate --workspace=backend",
-    "db:seed": "npm run db:seed --workspace=backend"
+    "db:seed": "npm run db:seed --workspace=backend",
+    "yesgatc:export-users": "node scripts/export-yesgatc-users.mjs",
+    "yesgatc:import-users": "node scripts/import-yesgatc-users.mjs",
+    "yesgatc:export-certs": "node scripts/export-yesgatc-certs.mjs",
+    "yesgatc:import-certs": "node scripts/import-yesgatc-certs.mjs",
+    "yesgatc:verify-certs": "node scripts/verify-cert-counts.mjs"
   },
   "engines": {
     "node": ">=20"
