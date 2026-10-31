@@ -12,7 +12,8 @@ GATC stamping management application for original verification and re-verificati
 |------|---------|
 | `frontend/` | Bootstrap status page only — **not** the customer-facing app (replaced by Android) |
 | `backend/` | Node.js API (headless; domain APIs planned) |
-| `android/` | Native Kotlin Compose app (added in first implementation milestone) |
+| `android/` | Native RC Admin app (Kotlin + Jetpack Compose) |
+| `design/reference/` | UI visual references (not shipped in APK) |
 | `automation/` | Playwright browser integration (operator-assisted; eMaap future) |
 | `deployment/` | Windows VPS deployment and startup scripts |
 | `docs/` | Setup, deployment, SSH |
