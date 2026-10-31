@@ -74,6 +74,8 @@ git -C C:\GATC\gatc-vps checkout -B main FETCH_HEAD
 3. Set `DATABASE_URL=postgresql://gatc:YOUR_PASSWORD@127.0.0.1:5432/gatc` in `.env`.
 4. Set `DATA_ROOT` to a writable local path.
 5. Run migrations: `npm run db:migrate`.
+6. Set `JWT_SECRET` (long random) and `SEED_PASSWORD` (local only), then `npm run db:seed`.
+7. Auth smoke: `POST /api/v1/auth/login` with seed Aadhaar `999999999901` + `SEED_PASSWORD`; then `GET /api/v1/auth/me` with `Authorization: Bearer <token>`.
 
 ## PostgreSQL on Windows VPS (portable, no admin)
 

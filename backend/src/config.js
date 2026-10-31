@@ -25,6 +25,7 @@ export function loadConfig() {
     databaseUrl: process.env.DATABASE_URL || '',
     dataRoot: process.env.DATA_ROOT || '',
     jwtSecret: process.env.JWT_SECRET || '',
+    jwtExpiresIn: process.env.JWT_EXPIRES_IN || '12h',
   };
 
   if (config.port < 1 || config.port > 65535) {

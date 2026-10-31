@@ -10,12 +10,15 @@
     "build": "node -e \"console.log('backend: no compile step')\"",
     "test": "node --test test/*.test.js",
     "lint": "node -e \"console.log('backend: lint placeholder ok')\"",
-    "db:migrate": "node src/migrate.js"
+    "db:migrate": "node src/migrate.js",
+    "db:seed": "node src/seed.js"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.3",
     "pg": "^8.16.3"
   }
 }
