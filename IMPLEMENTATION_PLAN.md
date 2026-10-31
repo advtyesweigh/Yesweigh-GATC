@@ -41,7 +41,7 @@ yesgatc remains the business-logic reference at `/Users/mac/Projects/gatc/yesgat
 
 ### Defer
 
-- eMaap / DOCA / DSC workers and certificate issuance pipeline  
+- **Phase 5 — eMaap / DOCA / DSC** (see §8): ground in yesgatc `certificate-worker`, not a greenfield portal design  
 - Verifier role, Vr Allotted UX, full Yesone/PAS/GAS complexity (introduce serial bank after core OV drafts work)  
 - Razorpay wallet, Zoho Books, Yesone webhooks  
 - Public certificate download SPA  
@@ -52,6 +52,7 @@ yesgatc remains the business-logic reference at `/Users/mac/Projects/gatc/yesgat
 - Copying Firebase into VPS  
 - Shipping WebView customer app  
 - Inventing new government-mandated certificate field names beyond what yesgatc already models (when unsure, leave nullable / future)  
+- Inventing a Phase 5 eMaap flow that ignores the yesgatc certificate worker  
 - Disruptive VPS changes while another agent finishes bootstrap  
 
 ---
@@ -105,10 +106,10 @@ yesgatc remains the business-logic reference at `/Users/mac/Projects/gatc/yesgat
 
 - HTTPS terminator, backups, log rotation, 4 GB memory budget review  
 
-### M7 — eMaap phase (future)
+### M7 — Phase 5 eMaap (future; after M1–M4)
 
-- Operator-assisted automation only; reuse policy in `automation/` and ARCHITECTURE  
-- Certificate fields, PDF storage, status → `approved` / `certified`  
+See **§8 Phase 5** below and [ARCHITECTURE.md §6](./ARCHITECTURE.md#6-phase-5--government-emaap-integration-deferred).  
+Not part of the first usable release.
 
 ---
 
@@ -163,7 +164,7 @@ Suggested feature branch after docs merge: `feat/m1-auth-postgres-android-shell`
 | 4 GB VPS exhaustion | No Chromium in M1–M5; single Node process; small Postgres buffers |
 | Parallel VPS setup conflicts | Prefer Mac-local Postgres for M1; read-only VPS checks |
 | yesgatc field drift | Treat yesgatc types as reference; nullable columns for uncertain gov fields |
-| Scope creep (wallet/eMaap) | Hard defer until M7 / separate RFCs |
+| Scope creep (wallet/eMaap) | Hard defer until Phase 5 / M7; design must cite yesgatc `certificate-worker` |
 | Vite frontend confusion | README pointer: customer UI = Android |
 
 ---
@@ -176,7 +177,7 @@ Suggested feature branch after docs merge: `feat/m1-auth-postgres-android-shell`
 | Backend DB | PostgreSQL |
 | Files | VPS filesystem |
 | Firebase | None |
-| eMaap | Future only |
+| eMaap | Phase 5 only — refer to yesgatc `certificate-worker` (ARCHITECTURE §6) |
 | Verifier role | Deferred |
 | First code milestone | M1 thin vertical (auth + RC isolation + OV Self draft + media) |
 
@@ -185,3 +186,53 @@ Suggested feature branch after docs merge: `feat/m1-auth-postgres-android-shell`
 ## 7. Immediate next action after this PR
 
 Merge `docs/phase1-architecture` → open `feat/m1-auth-postgres-android-shell` and implement M1 only.
+
+---
+
+## 8. Phase 5 — Government eMaap (deferred)
+
+**When:** Only after **M1–M4** (and preferably M5–M6 hardening): first usable product is Android + VPS API + Postgres **without** government submit.  
+**Reference (mandatory):** yesgatc certificate worker — do not invent a blind alternative.
+
+### 8.1 Reference: yesgatc certificate worker
+
+| Item | Detail |
+|------|--------|
+| Root | `/Users/mac/Projects/gatc/yesgatc/certificate-worker/` |
+| Docs | `README.md`, `server/README-SERVER.md`, `Yesgatc.DscEngine/README.md` |
+| Primary app | `Yesgatc.CertificateWorker` — Super Admin, all-RC Playwright eMaap fill/certify + issued PDF + signed upload |
+| Related | `Yesgatc.EmaapEngine` (RC-scoped eMaap); `Yesgatc.DscEngine` (RC USB DSC sign — not VPS) |
+| Tech | .NET 8, Playwright/Chrome (headed), Firebase queue today |
+| Inputs | Submitted verifications + party/instrument/photos/fees resolved per `rcId` |
+| Outputs | Portal acknowledgement, certificate number, issued/signed PDF bytes, Firebase status → certified (gatc-vps will use Postgres + filesystem instead) |
+| Manual steps today | Captcha / OTP / RDP session for Chrome; operator intervention when portal challenges |
+
+Full architectural summary: [ARCHITECTURE.md §6](./ARCHITECTURE.md#6-phase-5--government-emaap-integration-deferred).
+
+### 8.2 Reuse strategy for gatc-vps
+
+**Reuse**
+
+- Portal workflow and form field mapping proven in `EmaapCertificateGenerationAutomation` / Certificates Issued services  
+- Status transitions and failure phases (`submitted` → certified; failed-at-submit recovery)  
+- Acknowledgement dialog handling; serial/cert matching for PDF download  
+- Preserve exact government / DSC-signed PDF bytes on disk  
+
+**Do not copy**
+
+- Firebase coupling, yesgatc credentials, OCR API keys, production portal logins  
+- Default unattended captcha auto-solve as product policy  
+- Shipping DSC Engine or CertificateWorker binaries unchanged onto gatc-vps without a Postgres-backed redesign  
+
+**gatc-vps shape**
+
+1. Prefer **official API**, then automation modeled on the certificate worker.  
+2. **VPS-side worker** separate from Android and from the public REST surface.  
+3. **Manual CAPTCHA/OTP**; **human review before submit**.  
+4. Land under `automation/` (or a dedicated worker package) when Phase 5 opens — scaffold only until then.
+
+### 8.3 Explicit non-goals until Phase 5
+
+- No eMaap login, form fill, or PDF sync in M1–M4  
+- No Chromium memory budget commitment on the 4 GB VPS before Phase 5  
+- No modifications to yesgatc `certificate-worker` from this repo’s track  

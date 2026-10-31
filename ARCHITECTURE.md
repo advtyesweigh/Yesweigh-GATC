@@ -15,7 +15,7 @@
 | Backend | Windows VPS; authenticated HTTPS REST; **PostgreSQL**; filesystem for images/PDFs |
 | Cloud | **No Firebase** (Auth, Firestore, Storage, Hosting, Cloud Functions) |
 | Roles (v1) | **ADMIN**, **RC ADMIN**, **VCT** — RC data isolation enforced **on the backend** |
-| eMaap / DOCA government integration | **Future phase only** — not in first implementation milestones |
+| eMaap / DOCA government integration | **Phase 5 only** — deferred until after M1–M4 / Phases 2–4; ground design in yesgatc `certificate-worker` (do not invent a parallel approach) |
 | Repo / process | Private `gatc-vps`; preserve CI; feature branches + PRs; explicit VPS deploy |
 
 Existing Vite `frontend/` in this scaffold is a bootstrap status page only. Plan: **replace customer UI with Android**; keep a thin headless API (+ optional internal admin utilities later). Do not grow a Capacitor/React customer app.
@@ -31,7 +31,7 @@ Production GATC portal for **Original Verification (OV)** and **Re-verification 
 - **UI:** React + TypeScript + Vite, also shipped as **Capacitor Android** (WebView shell — **do not reuse as architecture**)
 - **Data / auth:** Firebase Auth (Aadhaar-as-login via `{aadhar}@yesgatc.auth`), Firestore, Cloud Storage
 - **Server logic:** Firebase Cloud Functions (wallet, Zoho RV, Yesone webhooks, stale/resubmit helpers, public cert lookup, serial-plate OCR helper)
-- **Certificates:** Windows `.NET` workers (`Yesgatc.CertificateWorker`, `Yesgatc.EmaapEngine`, `Yesgatc.DscEngine`) driving eMaap/DOCA — **out of scope for early gatc-vps phases**
+- **Certificates:** Windows `.NET` workers under `certificate-worker/` (`Yesgatc.CertificateWorker`, `Yesgatc.EmaapEngine`, `Yesgatc.DscEngine`) driving eMaap/DOCA — **Phase 5 only**; see [§6](#6-phase-5--government-emaap-integration-deferred)
 
 Live domains observed locally: `yesgatc.in`, `crm.yesgatc.in`, `yesgatc.web.app`.
 
@@ -109,7 +109,7 @@ RV extras: old verification certificate, old invoice, manufacturing year, perfor
 - **Firebase** as source of truth + security primarily in client rules — move to server RBAC + Postgres.  
 - **Cleartext password** fields on user docs — never replicate.  
 - **Certificate worker corruption markers** (`System.Collections.Generic.Dictionary` string pollution) — design typed DB columns and strict serializers.  
-- **CAPTCHA solving / unattended government bulk submit** in workers — gatc-vps policy: operator-assisted only when eMaap phase starts; no bypass.  
+- **Unattended CAPTCHA bypass / silent bulk government submit** — yesgatc workers may OCR captcha and auto-run; gatc-vps Phase 5 policy is **operator-assisted** CAPTCHA/OTP and **human review before submit** (reuse their workflow, not their unattended defaults).  
 - Monolithic `siteCalibrations` document with dozens of optional integration fields (Zoho, Yesone, pipeline) — split core verification vs integrations tables.  
 - Login via fake email domain tied to Firebase — replace with JWT (or similar) issued by VPS API after credential check.
 
@@ -144,8 +144,8 @@ RV extras: old verification certificate, old invoice, manufacturing year, perfor
                                       (images, PDFs)
 ```
 
-- **Optional later:** internal admin CLI / minimal operator utility; Playwright automation package remains scaffold for **future eMaap**, not customer UI.  
-- **Out of scope now:** Firebase, Capacitor, public React customer SPA growth, eMaap auto-submit.
+- **Optional later:** internal admin CLI / minimal operator utility; Playwright automation package remains scaffold for **Phase 5 eMaap** (see §6), not customer UI.  
+- **Out of scope now:** Firebase, Capacitor, public React customer SPA growth, eMaap automation.
 
 ### 3.1 Repository layout (evolution)
 
@@ -321,7 +321,7 @@ Verified lightly (read-only): SSH host `GATC-VPS` works as `gatcdev`; project at
 | Backend | Firebase | Windows VPS REST + Postgres |
 | Auth | Firebase Auth | Self-hosted JWT |
 | Isolation | Firestore rules | API + SQL |
-| eMaap | Active workers | Future phase |
+| eMaap | Active `.NET` certificate workers (Firebase-coupled) | Phase 5 — VPS worker; refer to yesgatc `certificate-worker` |
 | Roles | 4 roles | 3 roles (verifier deferred) |
 | Customer web | Full React SPA | No customer web app |
 
@@ -335,12 +335,69 @@ Verified lightly (read-only): SSH host `GATC-VPS` works as `gatcdev`; project at
 - HTTPS + auth on all domain routes.  
 - RC isolation tested with automated API tests.  
 - No Firebase.  
-- Government portal: future; operator review; no CAPTCHA bypass.
+- Government portal: Phase 5 only; operator review; manual CAPTCHA/OTP; no bypass (§6).
 
 ---
 
-## 6. Related docs
+## 6. Phase 5 — Government eMaap integration (deferred)
 
-- [IMPLEMENTATION_PLAN.md](./IMPLEMENTATION_PLAN.md) — milestones and first build slice  
+**Status:** Not in the first usable release. Start only **after M1–M4 / Phases 2–4** (auth, OV/RV drafts, evidence, serial bank). Do **not** implement eMaap automation in early milestones.  
+**Rule:** Design Phase 5 by **referring to the yesgatc certificate worker** — do not invent a parallel portal workflow from scratch.
+
+### 6.1 Reference: yesgatc certificate worker
+
+Local path (read-only reference; **never modify** from gatc-vps work):
+
+| Path | Role |
+|------|------|
+| `/Users/mac/Projects/gatc/yesgatc/certificate-worker/` | Root: README, publish scripts, server deploy helpers |
+| `…/certificate-worker/README.md` | Product overview, auto-worker, captcha/OTP login notes |
+| `…/certificate-worker/Yesgatc.CertificateWorker/` | **Primary** Super Admin Windows app — all-RC queue, Playwright eMaap fill/certify, issued-PDF download, signed-PDF upload |
+| `…/certificate-worker/Yesgatc.EmaapEngine/` | RC-scoped eMaap certificate generation variant (local RC machines; README says do **not** install on VPS in yesgatc) |
+| `…/certificate-worker/Yesgatc.DscEngine/` | RC-scoped **WD PROXKey** DSC sign + Firebase upload — local RC PC only, not VPS |
+| `…/certificate-worker/server/README-SERVER.md` | Windows Server / RDP unattended layout |
+| Key services (CertificateWorker) | `EmaapLoginAutomation`, `EmaapCertificateGenerationAutomation`, `EmaapCertificatesIssuedAutomation`, `EmaapSubmitDialog`, `AutomationService`, `FirestoreService`, `WorkerQueueStagePicker`, `PipelineFailureClassifier` |
+
+**What it does (summary):**
+
+1. Authenticates as Super Admin against **Firebase** (`{aadhar}@yesgatc.auth`), lists `siteCalibrations` with `status == submitted` (all RCs).  
+2. Drives **headed Chrome** via **Playwright** against `emaap.gov.in/gatc` (migrated from DOCA).  
+3. Login: canvas captcha (OCR providers configurable) → Send OTP → OTP from Firestore / UI paste / optional Gmail fallback.  
+4. **Fill + certify:** Generate Certificates form (`frm-gatc` field ids) — party/belong-to, address, instrument, metrological, checks, fees/charges — then submit and handle acknowledgement dialogs.  
+5. **Certificates Issued:** match serial / certificate number, download government PDF, mark job **certified** (and store cert number / public PDF URL fields).  
+6. **Queue stages** (`WorkerQueueStagePicker`): `FillCertify` → optional local `PdfSigner` / DSC path → `SignedEmaapUpload` (upload DSC-signed PDF back to eMaap).  
+7. Failures: retries then `pipelineFailedPhase=submit` (or certification); permanent data errors → `rejected`. PDFs/stamping images cached under `%LOCALAPPDATA%\YesGATC\CertificateWorker\`.
+
+**Stack:** .NET 8 Windows desktop, Playwright + Chrome, Firebase Auth/Firestore/Storage coupling, optional captcha OCR APIs. **Not** part of the Android/Capacitor app.
+
+### 6.2 Reuse vs do not copy (gatc-vps)
+
+| Reuse (workflow / domain) | Do **not** copy |
+|---------------------------|-----------------|
+| Portal steps: login → fill Generate Certificates → submit ack → Certificates Issued → PDF | Firebase Auth / Firestore queue / Storage as source of truth |
+| Field mapping & alphanumeric constraints (`belongs_to`, address, instrument blocks, fees) | yesgatc credentials, API keys, master OTPs, production Firebase project ids |
+| Status intent: `submitted` → government success → `certified` (+ mid-states / `pipelineFailedPhase` concepts as Postgres columns) | Blind copy of `.NET` / Avalonia UI / yesgatc install paths (`C:\YesGATC\…`) |
+| Acknowledgement / dialog handling patterns; issued-row match by serial/cert number | Hard-coded production eMaap account endpoints or session cookies from yesgatc machines |
+| Preserve **exact signed / issued PDF bytes**; store paths in DB; never recompress away signatures | Unattended captcha auto-solve as default policy |
+| Separation: **VPS-side worker** ≠ Android app (mirror CertificateWorker vs Capacitor split) | Running DSC Engine / USB tokens on the shared VPS without a dedicated design |
+
+### 6.3 gatc-vps Phase 5 approach (intent)
+
+1. **Prefer an official government API** if/when available; fall back to **browser automation** only where the yesgatc worker already proves the portal path.  
+2. Implement a **VPS-side worker** (separate process from the Node API and from Android) that reads the **Postgres** verification queue — not Firebase.  
+3. **Manual CAPTCHA and OTP** (operator at RDP/console); no silent bypass.  
+4. **Human review before submit** — filled form or payload visible to an operator; no blind bulk fire-and-forget in v1 of Phase 5.  
+5. On success: persist certificate number, acknowledgement metadata, and **raw PDF bytes** under `C:\GATC\data\certificates\…`; transition status consistently with the yesgatc machine (`submitted` → certified path; surface failed-at-submit style recovery).  
+6. DSC / hardware signing remains a **later / RC-local** concern unless product explicitly moves it; do not conflate with first eMaap fill/certify slice.  
+7. Revisit VPS RAM (Chromium) only when Phase 5 starts; keep `automation/` as the scaffold landing zone, informed by CertificateWorker services above.
+
+**Explicit deferral:** Phase 5 is **out of scope** for M1–M4 and the first usable Android + API release. Track detail in [IMPLEMENTATION_PLAN.md](./IMPLEMENTATION_PLAN.md) § Phase 5 / M7.
+
+---
+
+## 7. Related docs
+
+- [IMPLEMENTATION_PLAN.md](./IMPLEMENTATION_PLAN.md) — milestones and first build slice (Phase 5 / M7 deferred)  
 - [docs/setup.md](./docs/setup.md), [docs/deployment.md](./docs/deployment.md), [docs/ssh-windows.md](./docs/ssh-windows.md) — infra bootstrap  
-- yesgatc source of truth for field-level workflow detail: `/Users/mac/Projects/gatc/yesgatc` (`src/types.ts`, `src/lib/verification*.ts`, `firestore.rules`)
+- yesgatc field-level workflow: `/Users/mac/Projects/gatc/yesgatc` (`src/types.ts`, `src/lib/verification*.ts`, `firestore.rules`)  
+- yesgatc eMaap reference: `/Users/mac/Projects/gatc/yesgatc/certificate-worker/` (see §6)
