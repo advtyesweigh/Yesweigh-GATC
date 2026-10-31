@@ -29,7 +29,8 @@ New-Item -ItemType Directory -Force -Path $ToolsRoot | Out-Null
 New-Item -ItemType Directory -Force -Path (Split-Path $DataDir) | Out-Null
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 
-if (-not (Test-Path (Join-Path $PgsqlHome 'bin\postgres.exe'))) {
+# Require a complete tree (postgres.exe alone can exist from a truncated extract).
+if (-not (Test-Path (Join-Path $PgsqlHome 'share\postgres.bki'))) {
   if (-not (Test-Path $ZipPath)) {
     Write-Step 'Downloading PostgreSQL 16 Windows x64 binaries...'
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
@@ -42,11 +43,18 @@ if (-not (Test-Path (Join-Path $PgsqlHome 'bin\postgres.exe'))) {
     throw "Checksum mismatch for $ZipPath. Got $hash expected $ExpectedSha"
   }
 
-  Write-Step 'Extracting...'
+  Write-Step 'Extracting with tar.exe (faster/more reliable than Expand-Archive)...'
   $extractRoot = Join-Path $ToolsRoot 'pgsql-extract'
   if (Test-Path $extractRoot) { Remove-Item -Recurse -Force $extractRoot }
   if (Test-Path $PgsqlHome) { Remove-Item -Recurse -Force $PgsqlHome }
-  Expand-Archive -Path $ZipPath -DestinationPath $extractRoot -Force
+  New-Item -ItemType Directory -Force -Path $extractRoot | Out-Null
+  Push-Location $extractRoot
+  try {
+    & tar.exe -xf $ZipPath
+    if ($LASTEXITCODE -ne 0) { throw "tar extract failed with exit $LASTEXITCODE" }
+  } finally {
+    Pop-Location
+  }
   if (Test-Path (Join-Path $extractRoot 'pgsql')) {
     Move-Item (Join-Path $extractRoot 'pgsql') $PgsqlHome
     Remove-Item -Recurse -Force $extractRoot
