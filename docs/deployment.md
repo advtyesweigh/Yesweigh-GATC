@@ -17,7 +17,7 @@ Deployment is an **explicit, approved** operation. CI does not push to productio
 # Deploy (requires confirmation switch)
 .\deployment\Deploy-GATC.ps1 -SourcePath D:\releases\gatc-vps-<sha> -ConfirmDeploy
 
-# Restart (uses C:\GATC\tools\node\node.exe when present; survives SSH exit)
+# Restart (uses C:\GATC\tools\node\node.exe; CreateProcess BREAKAWAY so OpenSSH disconnect does not kill it)
 .\deployment\Restart-GATC.ps1
 
 # Rollback
