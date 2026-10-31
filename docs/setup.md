@@ -34,6 +34,7 @@ See `docs/ssh-windows.md` for exact Windows account, `icacls` `${User}` fix, por
 
 - Node: `C:\GATC\tools\node\`
 - MinGit: `C:\GATC\tools\mingit\cmd\`
+- PostgreSQL (portable): `C:\GATC\tools\pgsql\`
 - Optional bundle: `C:\GATC\tools\gatc-vps.bundle`
 - User PATH should include the Node and MinGit directories (persisted via `[Environment]::SetEnvironmentVariable`).
 
@@ -65,6 +66,34 @@ scp /tmp/gatc-vps.bundle GATC-VPS:C:/GATC/tools/gatc-vps.bundle
 git -C C:\GATC\gatc-vps fetch C:\GATC\tools\gatc-vps.bundle
 git -C C:\GATC\gatc-vps checkout -B main FETCH_HEAD
 ```
+
+## PostgreSQL (local Mac)
+
+1. Install PostgreSQL 16+ (Homebrew: `brew install postgresql@16`).
+2. Create role/database `gatc` / `gatc`.
+3. Set `DATABASE_URL=postgresql://gatc:YOUR_PASSWORD@127.0.0.1:5432/gatc` in `.env`.
+4. Set `DATA_ROOT` to a writable local path.
+5. Run migrations: `npm run db:migrate`.
+
+## PostgreSQL on Windows VPS (portable, no admin)
+
+Preferred because `gatcdev` is not an Administrator:
+
+```powershell
+cd C:\GATC\gatc-vps
+.\deployment\Install-PortablePostgres.ps1
+.\deployment\Start-Postgres.ps1
+.\deployment\Create-GatcDatabase.ps1   # writes DATABASE_URL into .env (does not print password)
+.\deployment\Ensure-DataDirs.ps1
+npm run db:migrate
+```
+
+- Binaries: `C:\GATC\tools\pgsql`
+- Data: `C:\GATC\pgsql\data`
+- Listen: `127.0.0.1:5432` only (`shared_buffers=128MB`)
+- App data root: `C:\GATC\data` (`DATA_ROOT`)
+
+Admin silent installer fallback (elevated RDP only): `deployment/Install-Postgres-AdminSilent.ps1`.
 
 ## Application runtime on VPS
 
