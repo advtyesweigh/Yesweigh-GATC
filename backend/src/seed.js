@@ -14,6 +14,7 @@ const SEED_USERS = [
     username: 'seed_admin',
     role: 'ADMIN',
     rc: false,
+    phone: '9000000001',
   },
   {
     key: 'rc_admin',
@@ -21,6 +22,7 @@ const SEED_USERS = [
     username: 'seed_rc_admin',
     role: 'RC_ADMIN',
     rc: true,
+    phone: '9000000002',
   },
   {
     key: 'vct',
@@ -28,6 +30,7 @@ const SEED_USERS = [
     username: 'seed_vct',
     role: 'VCT',
     rc: true,
+    phone: '9000000003',
   },
 ];
 
@@ -80,13 +83,14 @@ export async function seedDatabase({
     for (const u of SEED_USERS) {
       const result = await client.query(
         `INSERT INTO users (
-           aadhaar, username, password_hash, role, rc_id, active, workflow_mode
-         ) VALUES ($1, $2, $3, $4, $5, TRUE, $6)
+           aadhaar, username, password_hash, role, rc_id, phone, active, workflow_mode
+         ) VALUES ($1, $2, $3, $4, $5, $6, TRUE, $7)
          ON CONFLICT (aadhaar) DO UPDATE
            SET username = EXCLUDED.username,
                password_hash = EXCLUDED.password_hash,
                role = EXCLUDED.role,
                rc_id = EXCLUDED.rc_id,
+               phone = COALESCE(EXCLUDED.phone, users.phone),
                active = TRUE,
                updated_at = NOW()
          RETURNING id, aadhaar, role, rc_id`,
@@ -96,6 +100,7 @@ export async function seedDatabase({
           passwordHash,
           u.role,
           u.rc ? rcId : null,
+          u.phone || null,
           u.role === 'VCT' ? 'manual' : null,
         ],
       );

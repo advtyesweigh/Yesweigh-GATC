@@ -31,6 +31,15 @@ Debug APK: `android/app/build/outputs/apk/debug/app-debug.apk`
 
 Sample data is labeled in-app (“Sample UI only · Not connected to VPS”).
 
+## Auth API (when wiring live login)
+
+Password alone no longer returns a JWT. Flow:
+
+1. `POST /api/v1/auth/login` `{ userId|aadhaar, password }` → `{ challengeId, phoneHint, otpRequired }`
+2. `POST /api/v1/auth/otp/verify` `{ challengeId, otp }` → `{ token, user, sessionId }`
+3. Send `Authorization: Bearer <token>` on subsequent calls
+4. New login on another device revokes the previous session (`SESSION_REVOKED`)
+
 ## Package
 
 - `applicationId`: `in.gatc.rcadmin` (debug suffix `.debug`)

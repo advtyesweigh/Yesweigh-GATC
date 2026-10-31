@@ -1,14 +1,20 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<title>GATC RC Admin — Computer UI Reference</title><meta name="description" content="Self-contained interactive GATC RC Admin desktop design reference. Not a production app."/>
+<title>GATC Calibration &amp; Verification System</title>
+<meta name="description" content="Secure sign-in for GATC calibration, verification, and certificates."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&amp;family=Source+Sans+3:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <style>:root{--blue:#0866ff;--blue-dark:#0750ce;--blue-faint:#ebf3ff;--navy:#101b35;--ink:#121a2a;--muted:#67748a;--faint:#98a3b3;--border:#e7edf4;--bg:#f5f7fb;--white:#fff;--green:#128260;--green-bg:#e9f7f0;--amber:#b16d12;--amber-bg:#fff4e6;--shadow:0 12px 36px rgba(30,52,90,.045)}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #91baff;outline-offset:2px}svg{vertical-align:middle}.i{width:19px;height:19px;stroke:currentColor;stroke-width:1.85;stroke-linecap:round;stroke-linejoin:round;fill:none;flex:none}.i.sm{width:16px;height:16px}.i.lg{width:22px;height:22px}.muted{color:var(--muted)}.small{font-size:12px}.xs{font-size:11px}.strong{font-weight:750}.app{height:100vh;min-height:620px;display:flex;overflow:hidden;background:var(--bg)}
 /* navigation */
-.sidebar{width:250px;flex:none;background:#fff;border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:30;min-width:0;transition:width .2s,transform .2s}.sidebar-top{padding:26px 17px 17px}.logo-row{display:flex;align-items:center;gap:12px;padding:0 8px;margin-bottom:25px}.logo-mark{height:39px;width:39px;background:var(--blue);border-radius:11px;display:grid;place-items:center;color:white}.logo-title{font-size:22px;letter-spacing:-.9px;line-height:1;font-weight:850}.logo-title em{color:var(--blue);font-style:normal}.logo-note{font-size:9px;letter-spacing:1.3px;font-weight:800;color:#9aa7b8;margin-top:4px}.workspace{background:#f6f8fd;border:1px solid #eaf0f7;border-radius:11px;padding:11px 10px;display:flex;align-items:center;gap:10px}.workspace-icon{height:34px;width:34px;border-radius:9px;display:grid;place-items:center;background:#e3eeff;color:var(--blue)}.workspace-text{flex:1;min-width:0}.workspace-text b{display:block;font-size:12px}.workspace-text span{display:block;color:#91a0b2;font-size:10px;margin-top:2px}.sidebar-body{padding:0 11px;overflow-y:auto;flex:1}.nav-caption{font-size:10px;font-weight:800;letter-spacing:1.15px;color:#a0adbf;padding:11px 14px 7px}.nav-btn{width:100%;border:0;background:transparent;border-radius:10px;text-align:left;display:flex;align-items:center;gap:13px;padding:12px 13px;color:#526072;font-size:12.5px;font-weight:650;margin:1px 0}.nav-btn:hover{background:#f4f7fd}.nav-btn.active{background:#eaf2ff;color:#0866ff;font-weight:800}.nav-btn .nav-label{flex:1}.subnav{padding-left:18px}.subnav .nav-btn{padding-top:10px;padding-bottom:10px;font-size:12px}.subnav .i{width:17px;height:17px}.sidebar-bottom{border-top:1px solid var(--border);padding:11px 13px 14px}.account-foot{display:flex;align-items:center;gap:10px;padding:9px 8px 4px}.avatar{height:36px;width:36px;background:#e8f0ff;color:#0956d8;border:0;display:grid;place-items:center;border-radius:50%;font-size:11px;font-weight:850;flex:none}.account-foot b{font-size:11px}.account-foot small{display:block;color:#98a4b2;margin-top:3px;font-size:10px}.drawer-overlay{display:none}
+.sidebar{width:250px;flex:none;background:#fff;border-right:1px solid var(--border);display:flex;flex-direction:column;z-index:30;min-width:0;transition:width .2s,transform .2s}.sidebar-top{padding:26px 17px 17px}.logo-row{display:flex;align-items:center;gap:12px;padding:0 8px;margin-bottom:25px}.logo-mark{height:39px;width:39px;background:var(--blue);border-radius:50%;display:grid;place-items:center;color:white;overflow:hidden}.logo-mark svg{width:24px;height:24px}.logo-title{font-size:22px;letter-spacing:-.9px;line-height:1;font-weight:850}.logo-title em{color:var(--blue);font-style:normal}.logo-note{font-size:9px;letter-spacing:1.3px;font-weight:800;color:#9aa7b8;margin-top:4px}.workspace{background:#f6f8fd;border:1px solid #eaf0f7;border-radius:11px;padding:11px 10px;display:flex;align-items:center;gap:10px}.workspace-icon{height:34px;width:34px;border-radius:9px;display:grid;place-items:center;background:#e3eeff;color:var(--blue)}.workspace-text{flex:1;min-width:0}.workspace-text b{display:block;font-size:12px}.workspace-text span{display:block;color:#91a0b2;font-size:10px;margin-top:2px}.sidebar-body{padding:0 11px;overflow-y:auto;flex:1}.nav-caption{font-size:10px;font-weight:800;letter-spacing:1.15px;color:#a0adbf;padding:11px 14px 7px}.nav-btn{width:100%;border:0;background:transparent;border-radius:10px;text-align:left;display:flex;align-items:center;gap:13px;padding:12px 13px;color:#526072;font-size:12.5px;font-weight:650;margin:1px 0}.nav-btn:hover{background:#f4f7fd}.nav-btn.active{background:#eaf2ff;color:#0866ff;font-weight:800}.nav-btn .nav-label{flex:1}.subnav{padding-left:18px}.subnav .nav-btn{padding-top:10px;padding-bottom:10px;font-size:12px}.subnav .i{width:17px;height:17px}.sidebar-bottom{border-top:1px solid var(--border);padding:11px 13px 14px}.account-foot{display:flex;align-items:center;gap:10px;padding:9px 8px 4px}.avatar{height:36px;width:36px;background:#e8f0ff;color:#0956d8;border:0;display:grid;place-items:center;border-radius:50%;font-size:11px;font-weight:850;flex:none}.account-foot b{font-size:11px}.account-foot small{display:block;color:#98a4b2;margin-top:3px;font-size:10px}.logout-btn{border:0;background:#f3f6fb;color:#44566c;border-radius:8px;font-size:10px;font-weight:750;padding:7px 9px;flex:none}.logout-btn:hover{background:#e8eef8;color:#1f2a3c}.drawer-overlay{display:none}
 /* top */
 .main{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden}.topbar{flex:none;height:69px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 32px;gap:12px}.crumb{font-size:12px;color:#9aa5b5}.crumb strong{color:#344054;font-weight:760}.top-spacer{flex:1}.top-right{display:flex;align-items:center;gap:11px}.online-pill{display:flex;align-items:center;gap:7px;background:#f5f8fc;color:#657285;font-size:11px;padding:8px 11px;border-radius:99px}.online-dot{height:7px;width:7px;border-radius:50%;background:#13a36f}.iconbtn{height:35px;width:35px;border-radius:9px;background:#fff;border:1px solid var(--border);display:grid;place-items:center;color:#526073;position:relative}.iconbtn:hover{background:#f6f9ff}.notify-dot{height:6px;width:6px;background:var(--blue);border-radius:50%;position:absolute;right:8px;top:6px}.menu-toggle{display:none}.scroll{overflow-y:auto;min-height:0;flex:1}.content{padding:29px 32px 40px;max-width:1450px;margin:auto;width:100%}
 /* dashboard */
 .page-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:22px}.eyebrow{color:#8794a7;font-size:10px;font-weight:800;letter-spacing:1.15px;margin-bottom:5px}.page-heading h1{font-size:28px;letter-spacing:-1.1px;margin:0;font-weight:830;line-height:1.12}.page-description{font-size:12px;color:#8693a5;margin-top:7px}.date-chip{display:flex;gap:8px;align-items:center;background:white;border:1px solid var(--border);border-radius:9px;color:#69788c;padding:10px 12px;font-size:11px;white-space:nowrap}.hero{background:linear-gradient(108deg,#112746,#11203c 64%,#0e3469);position:relative;overflow:hidden;border-radius:15px;min-height:143px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 27px;color:white;margin-bottom:18px}.hero:after{content:"";position:absolute;right:-75px;top:-105px;border:1px solid #a9cbff30;border-radius:50%;height:245px;width:245px;box-shadow:0 0 0 47px #9ec5ff0c,0 0 0 93px #9ec5ff08;pointer-events:none}.hero-text,.hero-actions{position:relative;z-index:1}.hero-label{font-size:10px;font-weight:850;color:#a6c9ff;letter-spacing:1.1px;margin-bottom:6px}.hero h2{font-size:22px;letter-spacing:-.65px;font-weight:800;margin:0 0 6px}.hero p{font-size:12px;color:#c0cee3;margin:0}.hero-actions{display:flex;gap:9px;flex-wrap:wrap}.btn{border:0;border-radius:9px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 16px;min-height:40px;white-space:nowrap}.btn.primary{background:var(--blue);color:white}.btn.primary:hover{background:var(--blue-dark)}.btn.white{color:#193154;background:white}.btn.ghost-white{border:1px solid #c4d9ff6c;background:#ffffff1a;color:white}.btn.subtle{color:#075ad9;background:#eaf2ff}.btn.outline{background:white;color:#44546b;border:1px solid #dae4f0}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:21px}.metric{background:white;border:1px solid var(--border);border-radius:13px;padding:17px 16px 16px;box-shadow:var(--shadow);min-width:0}.metric-title-row{display:flex;align-items:center;justify-content:space-between;gap:5px}.metric-title{font-size:11.5px;color:#6b788a;font-weight:650}.metric-icon{width:32px;height:32px;border-radius:9px;background:#edf3ff;color:#0866ff;display:grid;place-items:center}.metric-icon.good{background:var(--green-bg);color:var(--green)}.metric-icon.warn{background:var(--amber-bg);color:var(--amber)}.metric-number{font-size:31px;line-height:1.1;letter-spacing:-1.2px;font-weight:830;margin-top:10px;font-variant-numeric:tabular-nums}.metric-sub{font-size:10.5px;color:#97a3b2;margin-top:7px}.metric-sub .positive{color:#0e8d65;font-weight:750}.dashboard-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(270px,.8fr);align-items:start;gap:16px}.side-column{display:flex;flex-direction:column;gap:16px}.panel{border:1px solid var(--border);background:white;border-radius:13px;overflow:hidden;box-shadow:var(--shadow)}.panel-head{padding:18px 19px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}.panel-head h3{font-size:14px;font-weight:800;letter-spacing:-.2px;margin:0}.panel-head p{font-size:11px;color:#94a0b0;margin:4px 0 0}.linkbtn{border:0;background:none;color:#0866ff;font-size:11px;font-weight:800;padding:6px;white-space:nowrap}.record-tools{padding:0 18px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px}.searchbox{display:flex;align-items:center;gap:8px;border:1px solid #e3eaf3;border-radius:9px;background:white;padding:0 10px;max-width:285px;flex:1;color:#a3afbf}.searchbox input{min-width:0;border:0;outline:0;background:transparent;color:#243147;font-size:11px;width:100%;height:36px}.segmented{display:flex;gap:3px;background:#f2f5fa;padding:3px;border-radius:8px}.segment{border:0;background:transparent;color:#7b8799;font-size:10.5px;font-weight:800;border-radius:6px;padding:7px 11px}.segment.active{background:white;color:#0866ff;box-shadow:0 1px 4px #23406417}.record-table{width:100%;border-collapse:collapse}.record-table th{text-align:left;background:#fafbfd;padding:11px 18px;color:#95a0b1;font-size:10px;letter-spacing:.35px;font-weight:800;border-top:1px solid #eff2f6}.record-table td{padding:13px 18px;border-top:1px solid #f0f3f7;font-size:11px;color:#667488}.record-table tr[data-record]{cursor:pointer}.record-table tr[data-record]:hover{background:#f7faff}.record-customer{font-size:12px;font-weight:780;color:#202a3b;display:block;margin-bottom:4px}.record-sub{font-size:10px;color:#98a4b3}.record-id{font-weight:750;color:#41516a}.status{display:inline-flex;padding:5px 9px;border-radius:99px;font-size:10px;font-weight:750;white-space:nowrap}.status.completed{background:var(--green-bg);color:var(--green)}.status.pending{background:var(--amber-bg);color:var(--amber)}.status.pdf{background:#ebf2ff;color:#315dc7}.status.draft{background:#eef1f5;color:#6b7889}.panel-foot{text-align:center;padding:11px;border-top:1px solid #eef2f6}.attention-row{padding:14px 18px;display:flex;gap:11px;align-items:center;border-top:1px solid #eef2f6}.attention-ico{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:#fff5e7;color:#b77916}.attention-ico.blue{color:#0866ff;background:#edf3ff}.attention-meta{flex:1;min-width:0}.attention-meta b{font-size:11.5px;display:block}.attention-meta small{font-size:10px;color:#96a2b0;display:block;margin-top:3px}.attention-value{font-size:20px;font-weight:830}.quick-link{width:100%;display:flex;align-items:center;gap:11px;border:0;background:white;padding:12px 18px;text-align:left;font-size:12px;font-weight:700;color:#41516a}.quick-link:hover{background:#f7faff}.quick-link .i{color:var(--blue)}.quick-link span{flex:1}.ui-note{margin:16px 0 0;color:#9aa6b3;font-size:11px;display:flex;gap:7px;align-items:center}.section-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:3px 0 12px}.section-row h3{font-size:14px;margin:0;font-weight:800}.empty{font-size:12px;text-align:center;color:#95a1b2;padding:27px 16px}.mobile-records{display:none}
+/* Super Admin — VPS Health / Service Status (does not affect auth-shell) */
+.vps-range{display:flex;gap:4px;background:#f2f5fa;padding:3px;border-radius:9px}.vps-range button{border:0;background:transparent;color:#7b8799;font-size:10.5px;font-weight:800;border-radius:7px;padding:7px 12px}.vps-range button.active{background:#0866ff;color:#fff;box-shadow:0 1px 4px #0866ff44}.vps-hero{background:linear-gradient(108deg,#112746,#11203c 58%,#0e3469);position:relative;overflow:hidden;border-radius:15px;min-height:148px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 26px;color:#fff;margin-bottom:16px}.vps-hero:after{content:"";position:absolute;right:-70px;top:-100px;border:1px solid #a9cbff30;border-radius:50%;height:230px;width:230px;box-shadow:0 0 0 44px #9ec5ff0c,0 0 0 88px #9ec5ff08;pointer-events:none}.vps-hero-main,.vps-hero-side{position:relative;z-index:1}.vps-hero-label{font-size:10px;font-weight:850;color:#a6c9ff;letter-spacing:1.1px;margin-bottom:6px}.vps-hero h2{font-size:26px;letter-spacing:-.7px;font-weight:820;margin:0 0 12px}.vps-hero-pills{display:flex;flex-wrap:wrap;gap:8px}.vps-chip{display:inline-flex;align-items:center;gap:7px;background:#ffffff18;border:1px solid #ffffff22;border-radius:99px;padding:7px 11px;font-size:11px;font-weight:700;color:#d7e5f8}.vps-chip .dot{width:7px;height:7px;border-radius:50%;background:#13a36f;flex:none}.vps-chip.warn .dot{background:#e2a12b}.vps-chip.bad .dot{background:#e25555}.vps-uptime{text-align:center;min-width:96px}.vps-uptime-ring{width:86px;height:86px;border-radius:50%;margin:0 auto 8px;background:conic-gradient(#22c55e 0 99.9%,#ffffff22 99.9% 100%);display:grid;place-items:center}.vps-uptime-ring>span{width:64px;height:64px;border-radius:50%;background:#112746;display:grid;place-items:center;font-size:11px;font-weight:800;line-height:1.15;color:#fff}.vps-uptime small{display:block;font-size:10px;color:#a9bdd8;letter-spacing:.4px;font-weight:700}.res-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.res-card{background:#fff;border:1px solid var(--border);border-radius:13px;padding:15px;box-shadow:var(--shadow);min-width:0}.res-card .res-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}.res-card .res-name{font-size:12px;font-weight:780;color:#3a465a}.res-card .res-ico{width:30px;height:30px;border-radius:9px;display:grid;place-items:center}.res-card .res-ico.cpu{background:#ebf3ff;color:#0866ff}.res-card .res-ico.ram{background:#f3eaff;color:#7c3aed}.res-card .res-ico.disk{background:#e9f7f0;color:#128260}.res-card .res-ico.bw{background:#fff4e6;color:#b16d12}.res-card .res-val{font-size:26px;font-weight:830;letter-spacing:-1px;line-height:1.1}.res-card .res-sub{font-size:10.5px;color:#97a3b2;margin-top:6px}.svc-panel .svc-list{padding:4px 14px 14px;display:flex;flex-direction:column;gap:8px}.svc-row{display:flex;align-items:center;gap:12px;padding:12px 13px;border:1px solid #eef2f7;border-radius:11px;background:#fbfcfe}.svc-ico{width:34px;height:34px;border-radius:9px;background:#edf3ff;color:#0866ff;display:grid;place-items:center;flex:none}.svc-meta{flex:1;min-width:0}.svc-meta b{display:block;font-size:12.5px;font-weight:780;color:#1f2a3c}.svc-meta small{display:block;font-size:10px;color:#94a0b0;margin-top:3px}.svc-pill{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:5px 10px;font-size:10.5px;font-weight:780;white-space:nowrap}.svc-pill .dot{width:6px;height:6px;border-radius:50%;flex:none}.svc-pill.ok{background:var(--green-bg);color:var(--green)}.svc-pill.ok .dot{background:var(--green)}.svc-pill.bad{background:#fdecec;color:#c0392b}.svc-pill.bad .dot{background:#c0392b}.svc-pill.warn{background:var(--amber-bg);color:var(--amber)}.svc-pill.warn .dot{background:var(--amber)}.svc-pill.muted{background:#eef1f5;color:#6b7889}.svc-pill.muted .dot{background:#9aa6b3}.admin-ops-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.85fr);gap:16px;align-items:start}@media(max-width:900px){.res-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-ops-grid{grid-template-columns:1fr}.vps-hero{flex-direction:column;align-items:flex-start}.vps-hero-side{align-self:flex-end}}
 /* non dashboard */
 .module-panel{padding:22px}.module-icon{width:48px;height:48px;background:#e9f1ff;color:var(--blue);border-radius:13px;display:grid;place-items:center;margin-bottom:12px}.module-title{font-size:17px;font-weight:800;letter-spacing:-.4px;margin:0}.module-summary{font-size:12px;color:#7c899a;margin:7px 0 17px}.module-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.module-item{border:1px solid var(--border);border-radius:11px;padding:15px;background:#fff;display:flex;align-items:center;gap:12px;min-height:72px;text-align:left;color:#243147}.module-item:hover{background:#f8faff}.module-item .i{color:var(--blue)}.module-item span{flex:1}.module-item b{display:block;font-size:12px}.module-item small{display:block;color:#96a3b3;font-size:10px;margin-top:3px}
 /* modal + toast */
@@ -19,11 +25,761 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
 @media(max-width:725px){body.desktop .sidebar{position:absolute;top:0;bottom:0;left:0;width:260px;transform:translateX(-102%)}body.desktop .sidebar.open{transform:translateX(0)}body.desktop .drawer-overlay.visible{display:block;position:absolute;inset:0;background:#0b193763;z-index:20}body.desktop .app{position:relative}body.desktop .menu-toggle{display:grid}body.desktop .content{padding:18px 15px}body.desktop .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}body.desktop .dashboard-grid{display:flex;flex-direction:column}body.desktop .side-column{width:100%}}
 @media(max-width:420px){body.mobile{padding:0;align-items:stretch}body.mobile .app{width:100%;height:100dvh;max-height:none;border:0;border-radius:0;box-shadow:none}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+/* auth gate — compact GATC sign-in (desktop ≤100vh, no hero art) */
+.auth-shell{--navy:#001A3D;--royal:#0056D2;--royal-deep:#0046b0;--sky:#5eb0ff;--cyan:#00AEEF;--wa:#25D366;--wa-deep:#1da851;--ink:#142033;--muted:#667789;--line:#e4ebf3;--soft:#f4f7fb;height:100vh;height:100dvh;max-height:100dvh;overflow:hidden;display:flex;flex-direction:column;background:linear-gradient(180deg,#f3f6fb 0%,#e8eef6 100%);font-family:"Source Sans 3",system-ui,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+.auth-shell *{box-sizing:border-box}
+.auth-hero{position:relative;overflow:hidden;flex:none;color:#fff;background:linear-gradient(135deg,#001226 0%,#001A3D 48%,#0a3a8a 82%,#0056D2 100%);padding:12px 16px 28px}
+.auth-hero-glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 55% 80% at 90% 30%,rgba(94,176,255,.26),transparent 60%),radial-gradient(ellipse 40% 50% at 10% 100%,rgba(37,211,102,.08),transparent 55%)}
+.auth-hero-grid{position:absolute;inset:0;opacity:.1;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:22px 22px;mask-image:linear-gradient(90deg,transparent,#000 20%,#000 100%)}
+.auth-hero-inner{position:relative;z-index:1;display:grid;gap:8px;max-width:920px;margin:0 auto;width:100%}
+.auth-brand{display:flex;align-items:center;gap:10px;animation:auth-rise .55s ease both}
+.auth-logo{width:36px;height:36px;border-radius:50%;flex:none;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#1a4f9c,#0b2a5c 70%);box-shadow:0 0 0 1px rgba(255,255,255,.18),0 6px 16px rgba(0,0,0,.28)}
+.auth-logo svg{width:22px;height:22px}
+.auth-brand-text{font-family:Outfit,system-ui,sans-serif;color:#fff;line-height:1.12}
+.auth-brand-text .brand-name{display:block;font-weight:800;font-size:1.25rem;letter-spacing:-.03em}
+.auth-brand-text .brand-sub{display:inline-block;font-weight:650;font-size:9px;letter-spacing:.11em;text-transform:uppercase;opacity:.92;border-bottom:2px solid var(--wa);padding-bottom:1px;margin-top:2px}
+.auth-hero-copy{animation:auth-rise .6s .05s ease both}
+.auth-hero-copy h1{margin:0;font-family:Outfit,system-ui,sans-serif;font-weight:800;font-size:clamp(1.15rem,2.6vw,1.45rem);letter-spacing:-.03em;line-height:1.15;max-width:28ch}
+.auth-hero-copy h1 .accent{color:var(--cyan)}
+.auth-hero-copy p{margin:5px 0 0;font-size:12.5px;line-height:1.4;color:#c7d7ef;max-width:46ch}
+.auth-hero-art{display:none!important}
+.auth-wave{position:absolute;left:0;right:0;bottom:-1px;height:18px;z-index:2;color:#f3f6fb}
+.auth-wave svg{display:block;width:100%;height:100%}
+.auth-badge-wrap{position:relative;z-index:3;display:flex;justify-content:center;margin-top:-16px;margin-bottom:-6px;pointer-events:none}
+.auth-badge{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(160deg,#1a6dff,#0056D2 55%,#003f9e);box-shadow:0 0 0 4px #f3f6fb,0 6px 16px rgba(0,86,210,.4);animation:auth-pulse 2.8s ease-in-out infinite}
+.auth-badge svg{width:18px;height:18px;color:#fff}
+.auth-card-wrap{flex:1;min-height:0;padding:4px 14px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:2;overflow:hidden}
+.auth-stack{width:min(100%,400px);display:flex;flex-direction:column;gap:10px;flex:none;animation:auth-rise .55s .08s ease both}
+.auth-card{width:100%;background:#fff;border:1px solid rgba(228,235,243,.9);border-radius:14px;padding:12px 16px 10px;box-shadow:0 14px 32px rgba(10,30,70,.09),0 2px 0 rgba(255,255,255,.8) inset}
+.auth-steps{display:flex;align-items:center;justify-content:center;gap:6px;margin:0 0 8px}
+.auth-step{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;color:#93a1b3;font-family:Outfit,system-ui,sans-serif}
+.auth-step .num{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#e8eef6;color:#7d8b9d;font-size:10px;font-weight:800}
+.auth-step.on{color:var(--royal)}.auth-step.on .num{background:var(--royal);color:#fff;box-shadow:0 3px 8px rgba(0,86,210,.32)}
+.auth-step.done{color:var(--wa-deep)}.auth-step.done .num{background:var(--wa);color:#fff}
+.auth-step-sep{width:18px;height:2px;border-radius:99px;background:#d9e2ee;flex:none}
+.auth-step-sep.on{background:linear-gradient(90deg,var(--royal),#8eb6ff)}
+.auth-card h2{margin:0 0 2px;font-family:Outfit,system-ui,sans-serif;font-size:1.15rem;font-weight:800;letter-spacing:-.03em;color:var(--navy)}
+.auth-card .auth-sub{margin:0 0 8px;font-size:12.5px;color:var(--muted);line-height:1.35}
+.auth-error{background:#fff1f0;color:#b42318;border:1px solid #f3c6c2;border-radius:9px;padding:7px 9px;font-size:12px;margin-bottom:8px}
+.auth-notice{background:#eef7ff;color:#0b4fad;border:1px solid #cfe3ff;border-radius:9px;padding:7px 9px;font-size:12px;margin-bottom:8px}
+.auth-field{margin-top:8px}.auth-field:first-of-type{margin-top:0}
+.auth-field-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.auth-field-label{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:#243147;margin:0}
+.auth-field-label .aadhaar-mark{display:inline-flex;align-items:center;justify-content:center;height:16px;padding:0 5px;border-radius:3px;background:linear-gradient(90deg,#ff9933 0 33%,#fff 33% 66%,#138808 66%);font-size:0;width:26px;position:relative;overflow:hidden;box-shadow:inset 0 0 0 1px #c9d0d8}
+.auth-field-label .aadhaar-mark::after{content:"AADHAAR";position:absolute;inset:0;display:grid;place-items:center;font-size:5px;font-weight:800;letter-spacing:.04em;color:#0b3d91;background:rgba(255,255,255,.72)}
+.auth-pill{font-size:10px;font-weight:700;color:#6b7c90;background:#eef3f9;border:1px solid #e0e8f1;border-radius:99px;padding:2px 8px}
+.auth-field-meta{font-size:11px;font-weight:600;color:#93a1b3}
+.auth-input{display:flex;align-items:center;gap:8px;border:1px solid #d5deea;border-radius:10px;background:#fff;padding:0 10px;min-height:40px;color:#8896a8;transition:border-color .15s,box-shadow .15s}
+.auth-input:focus-within{border-color:#7eb0ff;box-shadow:0 0 0 3px rgba(0,86,210,.14)}
+.auth-input input{flex:1;min-width:0;border:0;outline:0;background:transparent;font-size:14px;color:#142033;height:38px;font-family:inherit;letter-spacing:.03em}
+.auth-input input::placeholder{color:#a8b3c2;letter-spacing:.12em}
+.auth-input .icon-btn{border:0;background:transparent;color:#8896a8;display:grid;place-items:center;padding:4px;cursor:pointer;border-radius:8px}
+.auth-input .icon-btn:hover{color:var(--royal);background:#f0f5ff}
+.auth-forgot-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:6px}
+.auth-forgot,.auth-help{border:0;background:none;color:var(--royal);font-size:12px;font-weight:700;cursor:pointer;padding:0;font-family:inherit}
+.auth-forgot:hover,.auth-help:hover{text-decoration:underline}
+.auth-help{color:#6b7c90;font-weight:650}
+.auth-submit{width:100%;margin-top:10px;min-height:40px;border:0;border-radius:10px;background:linear-gradient(180deg,#1a6dff 0%,var(--royal) 100%);color:#fff;font-size:13.5px;font-weight:700;font-family:Outfit,system-ui,sans-serif;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 14px;box-shadow:0 7px 16px rgba(0,86,210,.26);cursor:pointer;transition:transform .15s,box-shadow .15s,filter .15s}
+.auth-submit:hover{filter:brightness(1.05);box-shadow:0 9px 20px rgba(0,86,210,.32)}
+.auth-submit:active{transform:translateY(1px)}
+.auth-submit:disabled{opacity:.65;cursor:not-allowed;transform:none}
+.auth-submit .wa-ico{width:18px;height:18px;flex:none}
+.auth-trust{margin-top:8px;border:1px solid rgba(37,211,102,.3);background:linear-gradient(180deg,#f3fcf6,#edf9f1);border-radius:8px;padding:6px 9px;display:flex;align-items:center;justify-content:center;gap:6px;color:#1b6b3a;font-size:10.5px;font-weight:700;text-align:center;line-height:1.25}
+.auth-trust svg{color:var(--wa);flex:none;width:14px;height:14px}
+.auth-features{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 12px;margin-top:8px;padding-top:8px;border-top:1px solid #eef2f7}
+.auth-feat{display:inline-flex;align-items:center;gap:5px;text-align:left;padding:0}
+.auth-feat-ico{width:20px;height:20px;margin:0;border-radius:6px;display:grid;place-items:center;background:#f3f7fc;color:var(--royal);position:relative;flex:none}
+.auth-feat-ico .i{width:12px;height:12px}.auth-feat-ico .wa-ico{width:12px;height:12px}
+.auth-feat-ico.wa{color:var(--wa);background:#eefaf3}
+.auth-feat-ico .ok{display:none}
+.auth-feat b{display:block;font-size:9.5px;font-weight:700;line-height:1.15;color:#314257;font-family:Outfit,system-ui,sans-serif;max-width:11ch}
+.auth-foot{width:100%;flex:none;padding:9px 12px 8px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(236,242,250,.95));border:1px solid rgba(210,221,235,.9);box-shadow:0 4px 14px rgba(20,40,80,.04);text-align:center}
+.auth-foot-brand{display:flex;align-items:center;justify-content:center;gap:8px;margin:0 0 5px}
+.auth-foot-brand::before,.auth-foot-brand::after{content:"";flex:1;max-width:52px;height:1px;background:linear-gradient(90deg,transparent,#b8c7da)}
+.auth-foot-title{font-family:Outfit,system-ui,sans-serif;font-size:10px;font-weight:700;color:#4a5d76;letter-spacing:.01em;line-height:1.25}
+.auth-foot-co{margin:0;font-size:9.5px;font-weight:650;color:#7d8ea3;letter-spacing:.04em}
+.auth-foot-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;margin-top:7px}
+.auth-foot-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:99px;background:#fff;border:1px solid #e2e9f2;color:#5f7086;font-size:9px;font-weight:700;font-family:Outfit,system-ui,sans-serif;line-height:1}
+.auth-foot-chip svg{width:10px;height:10px;flex:none;color:var(--royal)}
+.auth-foot-chip.wa svg{color:var(--wa)}
+.auth-otp-cells{display:flex;gap:6px;justify-content:center;margin:4px 0 8px}
+.auth-otp-cell{width:38px;height:42px;border:1px solid #d5deea;border-radius:9px;display:grid;place-items:center;font-family:Outfit,system-ui,sans-serif;font-size:1.15rem;font-weight:700;color:var(--ink);background:#fff;box-shadow:inset 0 1px 0 #fff}
+.auth-otp-cell.filled{border-color:#9fc2ff;background:#f5f9ff}
+.auth-otp-cell.active{border-color:var(--royal);box-shadow:0 0 0 3px rgba(0,86,210,.14)}
+.auth-keypad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:4px 0 2px;user-select:none}
+.auth-key{border:1px solid #e2e9f2;background:#f8fafc;border-radius:9px;min-height:38px;font-family:Outfit,system-ui,sans-serif;font-size:1.05rem;font-weight:700;color:#243147;cursor:pointer;transition:background .12s,transform .12s}
+.auth-key:hover{background:#eef4fb}.auth-key:active{transform:scale(.97);background:#e5eef8}
+.auth-key.ghost{color:#667789;font-size:11px;font-weight:700}.auth-key.danger{color:#b42318}
+.auth-otp-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.auth-otp-actions .btn{flex:1;min-width:90px;border:1px solid #dae4f0;background:#fff;color:#44546b;border-radius:9px;font-size:12px;font-weight:700;padding:8px 12px;min-height:36px;cursor:pointer;font-family:inherit}
+.auth-otp-actions .btn:hover{background:#f6f9ff}
+.auth-hint{font-size:10.5px;color:#8794a7;margin:4px 0 0;line-height:1.3;text-align:center}
+@keyframes auth-rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes auth-pulse{0%,100%{box-shadow:0 0 0 4px #f3f6fb,0 6px 16px rgba(0,86,210,.4),0 0 18px rgba(94,176,255,.28)}50%{box-shadow:0 0 0 4px #f3f6fb,0 8px 20px rgba(0,86,210,.5),0 0 26px rgba(94,176,255,.42)}}
+@media(min-width:760px){
+.auth-hero{padding:12px 28px 26px}
+.auth-hero-inner{gap:6px}
+.auth-brand-text .brand-name{font-size:1.35rem}
+.auth-card{padding:14px 18px 12px}
+.auth-card-wrap{padding:0 20px 16px}
+.auth-stack{gap:12px}
+}
+@media(min-width:1024px){
+.auth-hero{padding:10px 36px 22px}
+.auth-wave{height:14px}
+.auth-hero-copy h1{font-size:1.35rem}
+.auth-hero-copy p{font-size:12px;margin-top:4px}
+.auth-features{display:none}
+.auth-card-wrap{padding:0 24px 18px}
+.auth-foot-chips{display:flex}
+}
+@media(max-height:760px){
+.auth-hero{padding-top:8px;padding-bottom:18px}
+.auth-hero-copy p{display:none}
+.auth-features{display:none}
+.auth-trust{padding:5px 8px;font-size:10px}
+.auth-badge{width:34px;height:34px}
+.auth-badge-wrap{margin-top:-14px}
+.auth-card-wrap{padding-bottom:10px}
+.auth-foot-chips{display:none}
+}
+@media(max-height:680px){
+.auth-hero-copy h1{font-size:1.1rem}
+.auth-trust{display:none}
+.auth-foot{padding:6px 10px}
+.auth-card{padding:10px 14px 8px}
+.auth-stack{gap:8px}
+}
+@media(max-width:420px){
+.auth-shell{height:auto;max-height:none;min-height:100dvh;overflow:auto}
+.auth-feat b{font-size:9px}
+.auth-otp-cell{width:34px;height:40px;font-size:1.05rem}
+}
+@media(prefers-reduced-motion:reduce){.auth-badge,.auth-brand,.auth-hero-copy,.auth-card{animation:none!important}}
 </style></head><body class="desktop"><div id="app"></div><script>(() => {
+  const TOKEN_KEY = 'gatc_rc_admin_token';
+  const USER_KEY = 'gatc_rc_admin_user';
+  // Empty = same-origin (Vite proxies /api → :3000; production/backend serve UI+API together).
+  // Pure static preview without a proxy: set to 'http://127.0.0.1:3000' (local) or
+  // 'https://gatc.yesweigh.in' (live; requires that host allow this origin via CORS).
+  const API_BASE = '';
+  const appRoot = document.getElementById('app');
+
+  function authIcon(paths){return `<svg aria-hidden="true" class="i lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;}
+  function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+  async function api(path, { method='GET', body, token } = {}) {
+    const headers = { 'content-type': 'application/json' };
+    if (token) headers.authorization = `Bearer ${token}`;
+    const res = await fetch(API_BASE + path, {
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
+    });
+    const json = await res.json().catch(() => ({}));
+    return { res, json };
+  }
+
+  function clearAuth() {
+    sessionStorage.removeItem(TOKEN_KEY);
+    sessionStorage.removeItem(USER_KEY);
+  }
+
+  function formatAadhaarInput(raw) {
+    const digits = String(raw || '').replace(/\D/g, '').slice(0, 12);
+    return digits.replace(/(\d{4})(?=\d)/g, '$1 ').trim();
+  }
+
+
+  function renderLogin(state) {
+    const step = state.step || 'credentials';
+    const err = state.error ? `<div class="auth-error" role="alert">${escapeHtml(state.error)}</div>` : '';
+    const notice = state.notice ? `<div class="auth-notice" role="status">${escapeHtml(state.notice)}</div>` : '';
+
+    const svg = (paths, cls='i', attrs='') => `<svg aria-hidden="true" class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" ${attrs}>${paths}</svg>`;
+    const lockIcon = svg('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>');
+    const idIcon = svg('<rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="12" r="2.2"/><path d="M14 10h5M14 14h4"/>');
+    const eyeIcon = svg('<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>');
+    const eyeOffIcon = svg('<path d="M3 3l18 18M10.6 10.6A3 3 0 0 0 12 15a3 3 0 0 0 2.4-1.2M9.9 5.2A11 11 0 0 1 12 5c6.5 0 10 7 10 7a18 18 0 0 1-4.2 4.7M6.1 6.1C3.7 7.9 2 12 2 12a18 18 0 0 0 6.3 5.5"/>');
+    const arrowIcon = svg('<path d="M5 12h14M13 6l6 6-6 6"/>');
+    const checkIcon = svg('<path d="M20 6 9 17l-5-5"/>', 'i', 'stroke-width="2.4"');
+    const serverIcon = svg('<rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M8 6.5h.01M8 17.5h.01M12 6.5h4M12 17.5h4"/>');
+    const waIcon = `<svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.55 2 2.1 6.45 2.1 11.94c0 1.76.46 3.47 1.34 4.98L2 22l5.25-1.38c1.45.79 3.08 1.21 4.77 1.21h.01c5.49 0 9.94-4.45 9.94-9.94a9.86 9.86 0 0 0-2.92-6.98Zm-7.01 15.24h-.01a8.22 8.22 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.39c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.7-.8-.23-.09-.39-.12-.56.12-.16.25-.64.8-.78.96-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>`;
+    const logoMark = `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="18" fill="none" stroke="#7eb6ff" stroke-width="2.2"/><circle cx="24" cy="24" r="13.5" fill="none" stroke="#d6e8ff" stroke-width="1.4" opacity=".7"/><path d="M24 11v13l8 4" stroke="#9fd0ff" stroke-width="2.2" stroke-linecap="round"/><circle cx="24" cy="24" r="2.4" fill="#25D366"/><path d="M17.5 25.2 21.4 29l8.4-9.2" fill="none" stroke="#25D366" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    const shieldBadge = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.5 20 6v5.8c0 4.7-3.4 7.8-8 9.7-4.6-1.9-8-5-8-9.7V6l8-3.5Z" fill="rgba(255,255,255,.14)" stroke="currentColor" stroke-width="1.6"/><rect x="9.2" y="10.2" width="5.6" height="5" rx="1.2" fill="#fff"/><path d="M10.4 10.2V9a1.6 1.6 0 0 1 3.2 0v1.2" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>`;
+    const stepsHtml = (active) => {
+      const s1 = active === 1 ? 'on' : (active > 1 ? 'done' : '');
+      const s2 = active === 2 ? 'on' : '';
+      const sep = active >= 2 ? 'on' : '';
+      return `<div class="auth-steps" aria-label="Sign-in steps">
+        <div class="auth-step ${s1}"><span class="num">${active > 1 ? '✓' : '1'}</span><span>Credentials</span></div>
+        <div class="auth-step-sep ${sep}" aria-hidden="true"></div>
+        <div class="auth-step ${s2}"><span class="num">2</span><span>WhatsApp OTP</span></div>
+      </div>`;
+    };
+
+    const features = `<div class="auth-features" aria-label="Security features">
+      <div class="auth-feat"><div class="auth-feat-ico">${serverIcon}</div><b>Secure VPS Auth</b></div>
+      <div class="auth-feat"><div class="auth-feat-ico">${lockIcon}</div><b>TLS Encryption</b></div>
+      <div class="auth-feat"><div class="auth-feat-ico wa">${waIcon}</div><b>WhatsApp OTP</b></div>
+    </div>`;
+
+    const trust = `<div class="auth-trust">${svg('<circle cx="12" cy="12" r="9"/><path d="m8 12 2.8 2.8L16.5 9"/>','i','stroke-width="2"')}<span>Secure Server • Encrypted Data • Two-Step Verification</span></div>`;
+    const footChip = (paths, label, cls='') => `<span class="auth-foot-chip ${cls}">${svg(paths,'i','stroke-width="2"')}${label}</span>`;
+    const authFoot = `<footer class="auth-foot">
+      <div class="auth-foot-brand"><span class="auth-foot-title">GATC – Government Approved Test Center (Calibration)</span></div>
+      <p class="auth-foot-co">Interweighing Pvt Ltd</p>
+      <div class="auth-foot-chips" aria-hidden="true">
+        ${footChip('<rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M8 6.5h.01M8 17.5h.01"/>','Secure VPS')}
+        ${footChip('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>','Encrypted')}
+        ${footChip('<path d="M12 2.5 20 6v5.8c0 4.7-3.4 7.8-8 9.7-4.6-1.9-8-5-8-9.7V6l8-3.5Z"/><path d="m8.5 12 2.4 2.4L15.5 10"/>','OTP','wa')}
+      </div>
+    </footer>`;
+
+    const shell = (stepNum, cardBody, extras='') => `<div class="auth-shell">
+      <header class="auth-hero">
+        <div class="auth-hero-glow" aria-hidden="true"></div>
+        <div class="auth-hero-grid" aria-hidden="true"></div>
+        <div class="auth-hero-inner">
+          <div class="auth-brand">
+            <div class="auth-logo">${logoMark}</div>
+            <div class="auth-brand-text"><span class="brand-name">GATC</span><span class="brand-sub">Calibration &amp; Verification System</span></div>
+          </div>
+          <div class="auth-hero-copy">
+            <h1>Secure Access for <span class="accent">Calibration</span> Operations</h1>
+            <p>Manage calibration, verification, and certificates with a secure, two-step login.</p>
+          </div>
+        </div>
+        <div class="auth-wave" aria-hidden="true"><svg viewBox="0 0 1440 48" preserveAspectRatio="none"><path fill="currentColor" d="M0,22 C240,48 480,0 720,18 C960,36 1200,48 1440,20 L1440,48 L0,48 Z"/></svg></div>
+      </header>
+      <div class="auth-badge-wrap"><div class="auth-badge">${shieldBadge}</div></div>
+      <div class="auth-card-wrap">
+        <div class="auth-stack">
+          <div class="auth-card">${stepsHtml(stepNum)}${cardBody}${extras}</div>
+          ${authFoot}
+        </div>
+      </div>
+    </div>`;
+
+    if (step === 'otp') {
+      const digits = String(state.otpValue || '').replace(/\D/g, '').slice(0, 6);
+      const cells = Array.from({ length: 6 }, (_, i) => {
+        const ch = digits[i] || '';
+        const cls = ch ? 'filled' : (i === digits.length ? 'active' : '');
+        return `<div class="auth-otp-cell ${cls}" aria-hidden="true">${ch ? '•' : ''}</div>`;
+      }).join('');
+      const keypad = [1,2,3,4,5,6,7,8,9,'clr',0,'del'].map((k) => {
+        if (k === 'clr') return `<button type="button" class="auth-key ghost" data-key="clr" aria-label="Clear">Clear</button>`;
+        if (k === 'del') return `<button type="button" class="auth-key danger" data-key="del" aria-label="Delete">⌫</button>`;
+        return `<button type="button" class="auth-key" data-key="${k}" aria-label="Digit ${k}">${k}</button>`;
+      }).join('');
+      appRoot.innerHTML = shell(2, `
+        <h2>Enter verification code</h2>
+        <p class="auth-sub">Code for <strong>${escapeHtml(state.phoneHint || 'your registered WhatsApp')}</strong>.</p>
+        ${err}${notice}
+        <form id="otp-form" autocomplete="one-time-code">
+          <input id="otp" name="otp" type="tel" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required value="${escapeHtml(digits)}" aria-label="6-digit OTP" style="position:absolute;opacity:0;pointer-events:none;height:0;width:0"/>
+          <div class="auth-otp-cells" id="otp-cells">${cells}</div>
+          <div class="auth-keypad" id="otp-keypad">${keypad}</div>
+          <p class="auth-hint">One active device only — signing in here signs out other sessions.</p>
+          <button type="submit" class="auth-submit" id="otp-submit">Verify and continue ${arrowIcon}</button>
+          <div class="auth-otp-actions">
+            <button type="button" class="btn" id="otp-back">Back</button>
+            <button type="button" class="btn" id="otp-resend">Resend code</button>
+          </div>
+        </form>`, trust);
+
+      const otpInput = appRoot.querySelector('#otp');
+      const syncCells = () => {
+        const v = String(otpInput.value || '').replace(/\D/g, '').slice(0, 6);
+        otpInput.value = v;
+        const box = appRoot.querySelector('#otp-cells');
+        if (!box) return;
+        box.innerHTML = Array.from({ length: 6 }, (_, i) => {
+          const ch = v[i] || '';
+          const cls = ch ? 'filled' : (i === v.length ? 'active' : '');
+          return `<div class="auth-otp-cell ${cls}">${ch ? '•' : ''}</div>`;
+        }).join('');
+      };
+      const setOtp = (next) => {
+        otpInput.value = String(next || '').replace(/\D/g, '').slice(0, 6);
+        syncCells();
+      };
+      appRoot.querySelector('#otp-keypad')?.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-key]');
+        if (!btn) return;
+        const key = btn.getAttribute('data-key');
+        const cur = otpInput.value || '';
+        if (key === 'clr') setOtp('');
+        else if (key === 'del') setOtp(cur.slice(0, -1));
+        else setOtp(cur + key);
+      });
+      otpInput?.addEventListener('input', syncCells);
+      if (renderLogin._otpKeys) window.removeEventListener('keydown', renderLogin._otpKeys);
+      renderLogin._otpKeys = function onKey(ev) {
+        if (!appRoot.querySelector('#otp-form')) { window.removeEventListener('keydown', onKey); return; }
+        if (ev.key >= '0' && ev.key <= '9') { ev.preventDefault(); setOtp((otpInput.value || '') + ev.key); }
+        else if (ev.key === 'Backspace') { ev.preventDefault(); setOtp((otpInput.value || '').slice(0, -1)); }
+      };
+      window.addEventListener('keydown', renderLogin._otpKeys);
+      syncCells();
+      appRoot.querySelector('#otp-back')?.addEventListener('click', () => renderLogin({ step: 'credentials' }));
+      appRoot.querySelector('#otp-resend')?.addEventListener('click', async () => {
+        const btn = appRoot.querySelector('#otp-resend');
+        if (btn) btn.disabled = true;
+        const { res, json } = await api('/api/v1/auth/otp/resend', { method: 'POST', body: { challengeId: state.challengeId } });
+        if (!res.ok) {
+          renderLogin({ ...state, error: json.error?.message || 'Could not resend OTP', notice: null, otpValue: otpInput?.value || '' });
+          return;
+        }
+        renderLogin({ ...state, phoneHint: json.data?.phoneHint || state.phoneHint, error: null, notice: 'A new code was requested.', otpValue: '' });
+      });
+      appRoot.querySelector('#otp-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const otp = (otpInput?.value || '').replace(/\D/g, '').slice(0, 6);
+        const submit = appRoot.querySelector('#otp-submit');
+        if (otp.length !== 6) {
+          renderLogin({ ...state, error: 'Enter the 6-digit OTP', notice: null, otpValue: otp });
+          return;
+        }
+        if (submit) submit.disabled = true;
+        const { res, json } = await api('/api/v1/auth/otp/verify', { method: 'POST', body: { challengeId: state.challengeId, otp } });
+        if (!res.ok) {
+          renderLogin({ ...state, error: json.error?.message || 'Invalid OTP', notice: null, otpValue: '' });
+          return;
+        }
+        sessionStorage.setItem(TOKEN_KEY, json.data.token);
+        sessionStorage.setItem(USER_KEY, JSON.stringify(json.data.user || {}));
+        bootApp(json.data.token, json.data.user || {});
+      });
+      return;
+    }
+
+    const aadhaarValue = escapeHtml(formatAadhaarInput(state.aadhaar || ''));
+    appRoot.innerHTML = shell(1, `
+      <h2>Sign In to GATC</h2>
+      <p class="auth-sub">Enter Aadhaar and password to continue.</p>
+      ${err}${notice}
+      <form id="login-form" autocomplete="on">
+        <div class="auth-field">
+          <div class="auth-field-head">
+            <label class="auth-field-label" for="aadhaar"><span class="aadhaar-mark" aria-hidden="true"></span> Aadhaar Number</label>
+            <span class="auth-pill">12-digit</span>
+          </div>
+          <div class="auth-input">${idIcon}<input id="aadhaar" name="aadhaar" inputmode="numeric" autocomplete="username" maxlength="14" required placeholder="XXXX XXXX XXXX" value="${aadhaarValue}" /><button type="button" class="icon-btn" id="toggle-aadhaar" aria-label="Hide Aadhaar">${eyeOffIcon}</button></div>
+        </div>
+        <div class="auth-field">
+          <div class="auth-field-head">
+            <label class="auth-field-label" for="password">${lockIcon} Password</label>
+            <span class="auth-field-meta">Account protection</span>
+          </div>
+          <div class="auth-input">${lockIcon}<input id="password" name="password" type="password" autocomplete="current-password" required placeholder="••••••••" /><button type="button" class="icon-btn" id="toggle-password" aria-label="Show password">${eyeIcon}</button></div>
+          <div class="auth-forgot-row">
+            <button type="button" class="auth-forgot" id="forgot-link">Forgot Password?</button>
+            <button type="button" class="auth-help" id="help-link">Need Help?</button>
+          </div>
+        </div>
+        <button type="submit" class="auth-submit" id="login-submit"><span>Next</span> ${arrowIcon}</button>
+      </form>`, `${trust}${features}`);
+
+    const aadhaarInput = appRoot.querySelector('#aadhaar');
+    aadhaarInput?.focus();
+    aadhaarInput?.addEventListener('input', () => {
+      const start = aadhaarInput.selectionStart;
+      const before = aadhaarInput.value;
+      aadhaarInput.value = formatAadhaarInput(aadhaarInput.value);
+      if (typeof start === 'number') {
+        const delta = aadhaarInput.value.length - before.length;
+        aadhaarInput.setSelectionRange(start + delta, start + delta);
+      }
+    });
+    appRoot.querySelector('#forgot-link')?.addEventListener('click', () => {
+      renderLogin({ step: 'credentials', aadhaar: aadhaarInput?.value || '', notice: 'Ask an administrator to reset your password.', error: null });
+    });
+    appRoot.querySelector('#help-link')?.addEventListener('click', () => {
+      renderLogin({ step: 'credentials', aadhaar: aadhaarInput?.value || '', notice: 'Contact your GATC administrator for account help.', error: null });
+    });
+    let aadhaarHidden = false;
+    appRoot.querySelector('#toggle-aadhaar')?.addEventListener('click', () => {
+      const input = appRoot.querySelector('#aadhaar');
+      const btn = appRoot.querySelector('#toggle-aadhaar');
+      if (!input || !btn) return;
+      aadhaarHidden = !aadhaarHidden;
+      input.style.webkitTextSecurity = aadhaarHidden ? 'disc' : '';
+      input.style.textSecurity = aadhaarHidden ? 'disc' : '';
+      btn.innerHTML = aadhaarHidden ? eyeIcon : eyeOffIcon;
+      btn.setAttribute('aria-label', aadhaarHidden ? 'Show Aadhaar' : 'Hide Aadhaar');
+    });
+    appRoot.querySelector('#toggle-password')?.addEventListener('click', () => {
+      const input = appRoot.querySelector('#password');
+      const btn = appRoot.querySelector('#toggle-password');
+      if (!input || !btn) return;
+      const show = input.type === 'password';
+      input.type = show ? 'text' : 'password';
+      btn.innerHTML = show ? eyeOffIcon : eyeIcon;
+      btn.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
+    });
+    appRoot.querySelector('#login-form')?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const aadhaar = (appRoot.querySelector('#aadhaar')?.value || '').replace(/\D/g, '');
+      const password = appRoot.querySelector('#password')?.value || '';
+      const submit = appRoot.querySelector('#login-submit');
+      if (aadhaar.length !== 12) {
+        renderLogin({ step: 'credentials', aadhaar, error: 'Enter a valid 12-digit Aadhaar number' });
+        return;
+      }
+      if (submit) submit.disabled = true;
+      const { res, json } = await api('/api/v1/auth/login', { method: 'POST', body: { aadhaar, password } });
+      if (!res.ok) {
+        renderLogin({ step: 'credentials', aadhaar, error: json.error?.message || 'Login failed' });
+        return;
+      }
+      renderLogin({
+        step: 'otp',
+        challengeId: json.data.challengeId,
+        phoneHint: json.data.phoneHint,
+      });
+    });
+  }
+
+
+  async function ensureSession() {
+    const token = sessionStorage.getItem(TOKEN_KEY);
+    if (!token) {
+      renderLogin({ step: 'credentials' });
+      return;
+    }
+    const { res, json } = await api('/api/v1/auth/me', { token });
+    if (!res.ok) {
+      clearAuth();
+      renderLogin({
+        step: 'credentials',
+        error: json.error?.code === 'SESSION_REVOKED'
+          ? 'Signed in on another device. Please sign in again.'
+          : 'Session expired. Please sign in again.',
+      });
+      return;
+    }
+    sessionStorage.setItem(USER_KEY, JSON.stringify(json.data.user || {}));
+    bootApp(token, json.data.user || {});
+  }
+
+  function bootAdminApp(authToken, authUser) {
+    const root = document.getElementById('app');
+    const isMobile = document.body.classList.contains('mobile');
+    const authState = { token: authToken, user: authUser || {} };
+    const state = {
+      page: 'VPS Health',
+      drawer: false,
+      period: '30D',
+      toast: null,
+      loading: true,
+      error: null,
+      ops: null,
+    };
+    let toastTimer;
+    let pollTimer;
+
+    const I = {
+      menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
+      scale:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="6.2" opacity=".45"/><path d="M12 5.5V12l4 2"/><circle cx="12" cy="12" r="1.35" fill="#25D366" stroke="none"/><path d="m8.2 12.4 2.1 2.1 4.4-4.9" stroke="#25D366" stroke-width="2.2"/>',
+      dashboard:'<rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="11" width="7" height="10" rx="1.5"/><rect x="3" y="14" width="8" height="7" rx="1.5"/>',
+      gear:'<circle cx="12" cy="12" r="3"/><path d="M9 3h6l.7 2.5 1.5.7 2.4-1.1 2.4 4.3-2 1.6v2l2 1.6-2.4 4.3-2.4-1.1-1.5.7L15 21H9l-.7-2.5-1.5-.7-2.4 1.1L2 14.6 4 13v-2L2 9.4l2.4-4.3 2.4 1.1 1.5-.7L9 3Z"/>',
+      profile:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+      down:'<path d="m6 9 6 6 6-6"/>',
+      bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 10h18c0-3-3-3-3-10M10 21h4"/>',
+      calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/>',
+      shield:'<path d="M12 2 21 6v6c0 5-4 8-9 10-5-2-9-5-9-10V6l9-4ZM8 12l3 3 5-5"/>',
+      building:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M10 21v-5h4v5"/>',
+      server:'<rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M8 6.5h.01M8 17.5h.01M12 6.5h4M12 17.5h4"/>',
+      globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
+      db:'<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>',
+      user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+      refresh:'<path d="M20 7v6h-6M4 17v-6h6M5.5 9A8 8 0 0 1 20 13M18.5 15A8 8 0 0 1 4 11"/>',
+      cpu:'<rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4M9 9h6v6H9z"/>',
+      ram:'<rect x="3" y="8" width="18" height="9" rx="1.5"/><path d="M7 8V6M11 8V6M15 8V6M7 17v2M11 17v2M15 17v2"/>',
+      disk:'<ellipse cx="12" cy="7" rx="8" ry="3"/><path d="M4 7v5c0 1.7 3.6 3 8 3s8-1.3 8-3V7M4 12v5c0 1.7 3.6 3 8 3s8-1.3 8-3v-5"/>',
+      bw:'<path d="M4 14h4l2-7 3 12 2-5h5"/>',
+      check:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+    };
+    const icon = (n, cls = '') => `<svg aria-hidden="true" class="i ${cls}" viewBox="0 0 24 24">${I[n] || I.server}</svg>`;
+    const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    async function doLogout() {
+      try { await api('/api/v1/auth/logout', { method: 'POST', token: authState.token }); } catch (_) { /* ignore */ }
+      clearInterval(pollTimer);
+      clearAuth();
+      renderLogin({ step: 'credentials' });
+    }
+
+    function fmtUptime(sec) {
+      const s = Number(sec) || 0;
+      if (s < 60) return `${s}s`;
+      if (s < 3600) return `${Math.floor(s / 60)}m`;
+      if (s < 86400) return `${Math.floor(s / 3600)}h ${Math.floor((s % 3600) / 60)}m`;
+      return `${Math.floor(s / 86400)}d ${Math.floor((s % 86400) / 3600)}h`;
+    }
+
+    function fmtChecked(iso) {
+      if (!iso) return '—';
+      const t = Date.parse(iso);
+      if (Number.isNaN(t)) return '—';
+      const mins = Math.max(0, Math.round((Date.now() - t) / 60000));
+      if (mins <= 0) return 'just now';
+      if (mins === 1) return '1 minute ago';
+      if (mins < 60) return `${mins} minutes ago`;
+      return new Date(t).toLocaleString();
+    }
+
+    function svcPill(svc) {
+      if (!svc) return `<span class="svc-pill muted"><span class="dot"></span> Unknown</span>`;
+      if (svc.id === 'emaap' || svc.status === 'logged_in' || svc.status === 'not_logged_in') {
+        const ok = svc.loggedIn === true || svc.status === 'logged_in';
+        return `<span class="svc-pill ${ok ? 'ok' : 'bad'}"><span class="dot"></span> ${esc(svc.label || (ok ? 'Logged In' : 'Not Logged In'))}</span>`;
+      }
+      if (svc.online === true || svc.status === 'online') {
+        return `<span class="svc-pill ok"><span class="dot"></span> ${esc(svc.label || 'Online')}</span>`;
+      }
+      if (svc.status === 'inactive' || svc.status === 'unknown' || svc.status === 'unconfigured') {
+        return `<span class="svc-pill warn"><span class="dot"></span> ${esc(svc.label || 'Inactive')}</span>`;
+      }
+      return `<span class="svc-pill bad"><span class="dot"></span> ${esc(svc.label || 'Offline')}</span>`;
+    }
+
+    function sidebar() {
+      const uname = escapeHtml(authState.user.username || authState.user.aadhaar || 'Super Admin');
+      const initials = (authState.user.username || 'SA').slice(0, 2).toUpperCase();
+      const nav = [
+        { label: 'VPS Health', ico: 'dashboard' },
+        { label: 'Service Status', ico: 'server' },
+      ];
+      return `<div class="drawer-overlay ${state.drawer ? 'visible' : ''}" data-action="close-drawer"></div>
+      <aside class="sidebar ${state.drawer ? 'open' : ''}" aria-label="Super Admin navigation">
+        <div class="sidebar-top">
+          <div class="logo-row"><div class="logo-mark">${icon('scale', 'lg')}</div><div><div class="logo-title">GATC<em>.</em></div><div class="logo-note">SUPER ADMIN</div></div></div>
+          <div class="workspace"><span class="workspace-icon">${icon('server')}</span><div class="workspace-text"><b>Ops Workspace</b><span>VPS · eMaap session</span></div>${icon('down', 'sm')}</div>
+        </div>
+        <nav class="sidebar-body"><div class="nav-caption">MONITORING</div>
+          ${nav.map((n) => `<button type="button" class="nav-btn ${state.page === n.label ? 'active' : ''}" data-page="${esc(n.label)}">${icon(n.ico)}<span class="nav-label">${esc(n.label)}</span></button>`).join('')}
+        </nav>
+        <div class="sidebar-bottom">
+          <button type="button" class="nav-btn ${state.page === 'Profile' ? 'active' : ''}" data-page="Profile">${icon('profile')}<span class="nav-label">Profile</span></button>
+          <div class="account-foot"><div class="avatar">${escapeHtml(initials)}</div><div style="flex:1;min-width:0"><b>${uname}</b><small>ADMIN</small></div>
+          <button type="button" class="logout-btn" data-action="logout" title="Sign out">Sign out</button></div>
+        </div>
+      </aside>`;
+    }
+
+    function header() {
+      const updated = state.ops?.checkedAt ? fmtChecked(state.ops.checkedAt) : '—';
+      return `<div class="mobile-status"><span>9:41</span><span>●●● &nbsp;◕ &nbsp;▰</span></div>
+      <header class="topbar">
+        <button class="iconbtn menu-toggle" type="button" aria-label="Open left menu" data-action="open-drawer">${icon('menu')}</button>
+        <div class="crumb">GATC / <strong>${esc(state.page)}</strong></div>
+        <div class="mobile-brand"><b>GATC<em>.</em></b><small>SUPER ADMIN</small></div>
+        <div class="top-spacer"></div>
+        <div class="top-right">
+          <span class="online-pill"><span class="online-dot"></span> Last updated ${esc(updated)}</span>
+          <div class="vps-range" role="group" aria-label="Time range">
+            ${['24H', '7D', '30D'].map((p) => `<button type="button" class="${state.period === p ? 'active' : ''}" data-period="${p}">${p}</button>`).join('')}
+          </div>
+          <button type="button" class="iconbtn" aria-label="Refresh status" data-action="refresh">${icon('refresh', 'sm')}</button>
+          <button type="button" class="avatar" aria-label="Open profile" data-page="Profile">SA</button>
+        </div>
+      </header>`;
+    }
+
+    function hero() {
+      const sys = state.ops?.system || {};
+      const healthy = sys.healthy !== false;
+      const services = state.ops?.services || {};
+      const emaapOk = services.emaap?.loggedIn === true;
+      const dbOk = services.db?.online === true || services.db?.status === 'online';
+      return `<section class="vps-hero" aria-label="VPS status">
+        <div class="vps-hero-main">
+          <div class="vps-hero-label">VPS STATUS</div>
+          <h2>${healthy ? 'System Healthy' : 'System Degraded'}</h2>
+          <div class="vps-hero-pills">
+            <span class="vps-chip ${healthy ? '' : 'bad'}"><span class="dot"></span> All Systems · ${healthy ? 'Operational' : 'Degraded'}</span>
+            <span class="vps-chip"><span class="dot"></span> Monitoring · Active</span>
+            <span class="vps-chip ${dbOk ? '' : 'warn'}"><span class="dot"></span> DB · ${esc(services.db?.label || 'Checking')}</span>
+            <span class="vps-chip ${emaapOk ? '' : 'bad'}"><span class="dot"></span> eMaap · ${esc(services.emaap?.label || 'Not Logged In')}</span>
+          </div>
+        </div>
+        <div class="vps-hero-side">
+          <div class="vps-uptime">
+            <div class="vps-uptime-ring"><span>${esc(fmtUptime(sys.uptimeSeconds))}<br/>UP</span></div>
+            <small>PROCESS UPTIME</small>
+          </div>
+        </div>
+      </section>`;
+    }
+
+    function resourceCards() {
+      const cards = [
+        { name: 'CPU', ico: 'cpu', cls: 'cpu', val: '—', sub: 'Host metrics pending' },
+        { name: 'RAM', ico: 'ram', cls: 'ram', val: '—', sub: 'Host metrics pending' },
+        { name: 'Storage', ico: 'disk', cls: 'disk', val: '—', sub: 'Host metrics pending' },
+        { name: 'Bandwidth', ico: 'bw', cls: 'bw', val: '—', sub: `Window ${state.period}` },
+      ];
+      return `<div class="res-grid">${cards.map((c) => `<article class="res-card"><div class="res-top"><span class="res-name">${esc(c.name)}</span><span class="res-ico ${c.cls}">${icon(c.ico, 'sm')}</span></div><div class="res-val">${esc(c.val)}</div><div class="res-sub">${esc(c.sub)}</div></article>`).join('')}</div>`;
+    }
+
+    function serviceStatusCard() {
+      const s = state.ops?.services || {};
+      const rows = [
+        { key: 'api', name: 'API', ico: 'globe', hint: 'Backend HTTP API' },
+        { key: 'db', name: 'DB', ico: 'db', hint: 'PostgreSQL' },
+        { key: 'worker', name: 'Worker', ico: 'gear', hint: 'Automation scaffold' },
+        { key: 'emaap', name: 'eMaap', ico: 'user', hint: 'Portal session (operator-assisted)' },
+      ];
+      return `<section class="panel svc-panel">
+        <div class="panel-head"><div><h3>Service Status</h3><p>Live API · DB · Worker · eMaap session</p></div>
+          <button type="button" class="linkbtn" data-action="refresh">Refresh →</button></div>
+        <div class="svc-list">
+          ${rows.map((r) => {
+            const svc = s[r.key] || { id: r.key, label: '…', status: 'unknown' };
+            return `<div class="svc-row"><span class="svc-ico">${icon(r.ico)}</span><div class="svc-meta"><b>${esc(r.name)}</b><small>${esc(r.hint)}</small></div>${svcPill(svc)}</div>`;
+          }).join('')}
+        </div>
+      </section>`;
+    }
+
+    function emaapDetailCard() {
+      const e = state.ops?.emaap || {};
+      const ok = e.loggedIn === true;
+      return `<section class="panel">
+        <div class="panel-head"><div><h3>eMaap session</h3><p>Status file · no CAPTCHA automation</p></div>${svcPill({ id: 'emaap', ...e })}</div>
+        <div style="padding:0 18px 16px">
+          <div class="detail-line"><span>State</span><b>${esc(e.label || 'Not Logged In')}</b></div>
+          <div class="detail-line"><span>Source</span><b>${esc(e.source || 'stub')}</b></div>
+          <div class="detail-line"><span>Updated</span><b>${esc(e.updatedAt ? fmtChecked(e.updatedAt) : '—')}</b></div>
+          <p class="form-note" style="margin-top:12px">${esc(e.note || 'Waiting for operator-assisted session wiring.')}</p>
+          ${ok ? '' : `<p class="ui-note">${icon('shield', 'sm')} Hook: write DATA_ROOT/emaap/session-status.json after manual portal login.</p>`}
+        </div>
+      </section>`;
+    }
+
+    function dashboard() {
+      if (state.loading && !state.ops) {
+        return `${heading('VPS Health', 'SUPER ADMIN', 'Server monitoring and eMaap session')}<p class="ui-note">Loading ops status…</p>`;
+      }
+      if (state.error && !state.ops) {
+        return `${heading('VPS Health', 'SUPER ADMIN', 'Server monitoring and eMaap session')}<p class="auth-error" role="alert">${esc(state.error)}</p><button class="btn primary" data-action="refresh">Retry</button>`;
+      }
+      return `${heading('VPS Health', 'SUPER ADMIN', 'Server monitoring and eMaap session')}${hero()}${resourceCards()}
+        <div class="admin-ops-grid">${serviceStatusCard()}${emaapDetailCard()}</div>
+        <p class="ui-note">${icon('shield', 'sm')} eMaap status is file-backed · CAPTCHA and login remain operator-assisted</p>`;
+    }
+
+    function heading(title, eyebrow, desc) {
+      return `<div class="page-heading"><div><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(title)}</h1>${desc ? `<p class="page-description">${esc(desc)}</p>` : ''}</div>
+        <div class="date-chip">${icon('calendar', 'sm')}<span>${new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}</span></div></div>`;
+    }
+
+    function content() {
+      if (state.page === 'Service Status') {
+        return `${heading('Service Status', 'SUPER ADMIN', 'API, database, worker, and eMaap')}${serviceStatusCard()}${emaapDetailCard()}`;
+      }
+      if (state.page === 'Profile') {
+        const u = authState.user;
+        return `${heading('Profile', 'SUPER ADMIN', 'Account')}
+          <section class="panel module-panel"><div class="module-icon">${icon('profile', 'lg')}</div>
+          <h2 class="module-title">Super Admin</h2>
+          <div class="detail-line"><span>Username</span><b>${esc(u.username || '—')}</b></div>
+          <div class="detail-line"><span>Role</span><b>ADMIN</b></div>
+          <div class="detail-line"><span>Aadhaar</span><b>${esc(u.aadhaar || '—')}</b></div></section>`;
+      }
+      return dashboard();
+    }
+
+    function render(preserveScroll = false) {
+      const scrollTop = preserveScroll ? (root.querySelector('.scroll')?.scrollTop || 0) : 0;
+      root.innerHTML = `<div class="app">${sidebar()}<div class="main">${header()}<div class="scroll"><div class="content">${content()}</div></div></div>${state.toast ? `<div class="toast" role="status">${esc(state.toast)}</div>` : ''}</div>`;
+      if (preserveScroll) {
+        const scroll = root.querySelector('.scroll');
+        if (scroll) scroll.scrollTop = scrollTop;
+      }
+    }
+
+    function toast(message) {
+      state.toast = message;
+      render(true);
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { state.toast = null; render(true); }, 2700);
+    }
+
+    async function loadOps(silent = false) {
+      if (!silent) state.loading = true;
+      try {
+        const { res, json } = await api('/api/v1/admin/ops-status', { token: authState.token });
+        if (!res.ok) {
+          if (res.status === 401) {
+            clearAuth();
+            clearInterval(pollTimer);
+            renderLogin({ step: 'credentials', error: 'Session expired. Please sign in again.' });
+            return;
+          }
+          state.error = json.error?.message || 'Failed to load ops status';
+          state.loading = false;
+          render(true);
+          return;
+        }
+        state.ops = json.data;
+        state.error = null;
+        state.loading = false;
+        render(true);
+      } catch (err) {
+        state.error = err.message || 'Network error';
+        state.loading = false;
+        render(true);
+      }
+    }
+
+    root.addEventListener('click', (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+      if (btn.dataset.page) {
+        state.page = btn.dataset.page;
+        state.drawer = false;
+        render();
+        return;
+      }
+      if (btn.dataset.period) {
+        state.period = btn.dataset.period;
+        render(true);
+        return;
+      }
+      const action = btn.dataset.action;
+      if (action === 'open-drawer') { state.drawer = true; render(true); }
+      else if (action === 'close-drawer') { state.drawer = false; render(true); }
+      else if (action === 'refresh') { toast('Refreshing status…'); loadOps(true); }
+      else if (action === 'logout') { doLogout(); }
+    });
+
+    render();
+    loadOps();
+    pollTimer = setInterval(() => loadOps(true), 60_000);
+  }
+
+  function bootApp(authToken, authUser) {
+  if ((authUser || {}).role === 'ADMIN') {
+    bootAdminApp(authToken, authUser);
+    return;
+  }
   const root = document.getElementById('app');
   const isMobile = document.body.classList.contains('mobile');
+  const authState = { token: authToken, user: authUser || {} };
+
+  async function doLogout() {
+    try {
+      await api('/api/v1/auth/logout', { method: 'POST', token: authState.token });
+    } catch (_) { /* ignore */ }
+    clearAuth();
+    renderLogin({ step: 'credentials' });
+  }
   const I = {
-    menu:'<path d="M4 6h16M4 12h16M4 18h16"/>', scale:'<path d="M12 3v18M5 6h14M7 6l-4 8h8L7 6Zm10 0-4 8h8l-4-8ZM8 21h8"/>',
+    menu:'<path d="M4 6h16M4 12h16M4 18h16"/>', scale:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="6.2" opacity=".45"/><path d="M12 5.5V12l4 2"/><circle cx="12" cy="12" r="1.35" fill="#25D366" stroke="none"/><path d="m8.2 12.4 2.1 2.1 4.4-4.9" stroke="#25D366" stroke-width="2.2"/>',
     dashboard:'<rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="11" width="7" height="10" rx="1.5"/><rect x="3" y="14" width="8" height="7" rx="1.5"/>',
     verification:'<rect x="5" y="3" width="14" height="19" rx="2"/><path d="M9 3V2h6v1M9 11l2 2 4-4M9 17h6"/>', people:'<circle cx="9" cy="8" r="3"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M17 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 5v2"/>',
     package:'<path d="m12 2 9 5v10l-9 5-9-5V7l9-5ZM3 7l9 5 9-5M12 12v10"/>', bag:'<path d="M4 9h16l-1 12H5L4 9ZM9 10V7a3 3 0 0 1 6 0v3"/>',
@@ -45,7 +801,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
   ], search:'', toast:null};
   let toastTimer;
   function listnav(items){return items.map(n=>`<button type="button" class="nav-btn ${state.page===n.label?'active':''}" data-page="${esc(n.label)}">${icon(n.ico)}<span class="nav-label">${esc(n.label)}</span></button>`).join('');}
-  function sidebar(){return `<div class="drawer-overlay ${state.drawer?'visible':''}" data-action="close-drawer"></div><aside class="sidebar ${state.drawer?'open':''}" aria-label="Primary navigation"><div class="sidebar-top"><div class="logo-row"><div class="logo-mark">${icon('scale','lg')}</div><div><div class="logo-title">GATC<em>.</em></div><div class="logo-note">VERIFICATION SYSTEM</div></div></div><div class="workspace"><span class="workspace-icon">${icon('building')}</span><div class="workspace-text"><b>RC Workspace</b><span>Regional Centre Admin</span></div>${icon('down','sm')}</div></div><nav class="sidebar-body"><div class="nav-caption">WORKSPACE</div>${listnav(nav)}<div class="nav-caption" style="margin-top:15px">MANAGEMENT</div><button class="nav-btn" data-action="toggle-settings">${icon('gear')}<span class="nav-label">Settings</span>${icon('down','sm')}</button>${state.settings?`<div class="subnav">${listnav(subnav)}</div>`:''}</nav><div class="sidebar-bottom">${listnav([{label:'Profile',ico:'profile'}])}<div class="account-foot"><div class="avatar">RC</div><div><b>RC Administrator</b><small>Regional Centre</small></div></div></div></aside>`;}
+  function sidebar(){const uname=escapeHtml(authState.user.username||authState.user.aadhaar||'RC Admin');const role=escapeHtml(authState.user.role||'RC_ADMIN');const initials=(authState.user.username||'RC').slice(0,2).toUpperCase();return `<div class="drawer-overlay ${state.drawer?'visible':''}" data-action="close-drawer"></div><aside class="sidebar ${state.drawer?'open':''}" aria-label="Primary navigation"><div class="sidebar-top"><div class="logo-row"><div class="logo-mark">${icon('scale','lg')}</div><div><div class="logo-title">GATC<em>.</em></div><div class="logo-note">VERIFICATION SYSTEM</div></div></div><div class="workspace"><span class="workspace-icon">${icon('building')}</span><div class="workspace-text"><b>RC Workspace</b><span>Regional Centre Admin</span></div>${icon('down','sm')}</div></div><nav class="sidebar-body"><div class="nav-caption">WORKSPACE</div>${listnav(nav)}<div class="nav-caption" style="margin-top:15px">MANAGEMENT</div><button class="nav-btn" data-action="toggle-settings">${icon('gear')}<span class="nav-label">Settings</span>${icon('down','sm')}</button>${state.settings?`<div class="subnav">${listnav(subnav)}</div>`:''}</nav><div class="sidebar-bottom">${listnav([{label:'Profile',ico:'profile'}])}<div class="account-foot"><div class="avatar">${escapeHtml(initials)}</div><div style="flex:1;min-width:0"><b>${uname}</b><small>${role}</small></div><button type="button" class="logout-btn" data-action="logout" title="Sign out">Sign out</button></div></div></aside>`;}
   function header(){return `<div class="mobile-status"><span>9:41</span><span>●●● &nbsp;◕ &nbsp;▰</span></div><header class="topbar"><button class="iconbtn menu-toggle" type="button" aria-label="Open left menu" data-action="open-drawer">${icon('menu')}</button><div class="crumb">GATC / <strong>${esc(state.page)}</strong></div><div class="mobile-brand"><b>GATC<em>.</em></b><small>RC ADMIN WORKSPACE</small></div><div class="top-spacer"></div><div class="top-right"><span class="online-pill"><span class="online-dot"></span> UI Preview</span><button type="button" class="iconbtn" aria-label="Notifications" data-action="notifications">${icon('bell','sm')}<span class="notify-dot"></span></button><button type="button" class="avatar" aria-label="Open profile" data-page="Profile">RC</button></div></header>`;}
   function statData(){const drafts=state.records.filter(r=>r.status==='Draft');const initial=state.period==='today'?{ov:3,rv:8,done:9,pending:2}:{ov:28,rv:72,done:88,pending:12};return {ov:initial.ov+drafts.filter(r=>r.type==='OV').length,rv:initial.rv+drafts.filter(r=>r.type==='RV').length,total:initial.ov+initial.rv+drafts.length,done:initial.done,pending:initial.pending+drafts.length};}
   function metrics(){const s=statData();const vals=[{name:'Total Verifications',num:s.total,ico:'verification',sub:'All verification requests'},{name:'Completed',num:s.done,ico:'check',sub:'Successfully completed',cls:'good'},{name:'Original (OV)',num:s.ov,ico:'file',sub:'Initial verifications'},{name:'Re-verify (RV)',num:s.rv,ico:'refresh',sub:'Periodic verifications'}];if(!isMobile){vals[1]={name:'Original (OV)',num:s.ov,ico:'file',sub:'Initial verification'};vals[2]={name:'Re-verification (RV)',num:s.rv,ico:'refresh',sub:'Periodic verification'};vals[3]={name:'Pending Actions',num:s.pending,ico:'clock',sub:'Requires your attention',cls:'warn'};}return `<div class="metrics">${vals.map(x=>`<article class="metric"><div class="metric-title-row"><span class="metric-title">${x.name}</span><span class="metric-icon ${x.cls||''}">${icon(x.ico,'sm')}</span></div><div class="metric-number">${x.num}</div><div class="metric-sub">${x.sub}</div></article>`).join('')}</div>`;}
@@ -85,10 +841,14 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
     else if(action==='close-modal'){state.modal=null;render(true)}
     else if(action==='notifications')toast('Demo: 7 submissions pending; 5 signed PDFs awaiting upload')
     else if(action==='module-item'){const m=moduleConfig[state.page],i=Number(btn.dataset.item);if(m&&m.rows[i])toast(`${m.rows[i][0]} — planned for native Android implementation`)}
+    else if(action==='logout'){doLogout();}
   });
   root.addEventListener('input',e=>{if(e.target.id!=='search-records')return;state.search=e.target.value;const r=rows();const tbody=root.querySelector('#record-table-body'),cards=root.querySelector('#mobile-records');if(tbody)tbody.innerHTML=r.table;if(cards)cards.innerHTML=r.cards;});
   root.addEventListener('submit',e=>{if(e.target.id!=='draft-form')return;e.preventDefault();const fd=new FormData(e.target);const customer=(fd.get('customer')||'').toString().trim(),product=(fd.get('product')||'').toString().trim(),serial=(fd.get('serial')||'').toString().trim();if(!customer||!product||!serial)return;const type=state.modal.verificationType;const index=state.records.filter(x=>x.status==='Draft').length+1;state.records.unshift({id:'DRAFT-'+String(index).padStart(3,'0'),customer,type,product:product+' · '+serial,status:'Draft',date:'Today'});state.modal=null;state.page='Dashboard';state.filter='All';state.search='';toast('Demo draft saved locally — not submitted to the VPS');});
   root.addEventListener('keydown',e=>{if(e.key==='Escape'&&(state.modal||state.drawer)){state.modal=null;state.drawer=false;render(true);}if((e.key==='Enter'||e.key===' ')&&e.target.matches('tr[data-record]')){e.preventDefault();state.modal={type:'record',id:e.target.dataset.record};render(true);}});
   render();
+  } // end bootApp
+
+  ensureSession();
 })();
 </script></body></html>

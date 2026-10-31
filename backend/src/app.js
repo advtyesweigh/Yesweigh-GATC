@@ -4,6 +4,7 @@ import express from 'express';
 import cors from 'cors';
 import { checkDb } from './db.js';
 import { mountAuthRoutes, createAuthMiddleware } from './auth.js';
+import { mountAdminRoutes } from './admin.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const defaultPublicDir = path.resolve(__dirname, '../../public');
@@ -56,6 +57,8 @@ export function createApp({ config, logger, pool = null, publicDir = defaultPubl
   // Auth routes always mount; handlers return 503 when DB/JWT are unconfigured.
   mountAuthRoutes(app, { config, pool, logger });
   app.locals.auth = createAuthMiddleware({ config, pool, logger });
+  // Super Admin ops (eMaap session status, service health) — ADMIN only.
+  mountAdminRoutes(app, { config, pool, logger, startedAt });
 
   // RC Admin reference UI (and other static assets). API routes above take precedence.
   app.use(express.static(publicDir, { index: 'index.html', fallthrough: true }));

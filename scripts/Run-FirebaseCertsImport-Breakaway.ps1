@@ -79,10 +79,12 @@ function Resolve-SecretsPath {
 try {
   if (Test-Path $LockPath) {
     $old = Get-Content -Raw $LockPath
-    Write-Log ("WARN lock present: $old — continuing under this runner")
+    Write-Log ("WARN lock present: $old - continuing under this runner")
   }
   Set-Content -Path $LockPath -Value ("pid=$PID started=$(Get-Date -Format o)") -Encoding ascii
 
+  Write-Log 'REFUSE_DUPLICATE: use Run-FirebaseCertImport-Breakaway.ps1 (singular); this duplicate runner is retired'
+  throw 'Retired duplicate runner — use Run-FirebaseCertImport-Breakaway.ps1'
   Set-Status 'running'
   if (Test-Path $LogPath) { Remove-Item $LogPath -Force -ErrorAction SilentlyContinue }
   Write-Log 'START firebase certs export+import (VPS breakaway)'

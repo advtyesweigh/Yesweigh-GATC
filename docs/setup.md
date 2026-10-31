@@ -75,7 +75,13 @@ git -C C:\GATC\gatc-vps checkout -B main FETCH_HEAD
 4. Set `DATA_ROOT` to a writable local path.
 5. Run migrations: `npm run db:migrate`.
 6. Set `JWT_SECRET` (long random) and `SEED_PASSWORD` (local only), then `npm run db:seed`.
-7. Auth smoke: `POST /api/v1/auth/login` with seed Aadhaar `999999999901` + `SEED_PASSWORD`; then `GET /api/v1/auth/me` with `Authorization: Bearer <token>`.
+7. Auth smoke (OTP login):
+   - Ensure `JWT_SECRET` is set. For local SMS-less testing, leave `SMS_PROVIDER` empty/`log` (OTP appears in backend logs only).
+   - `POST /api/v1/auth/login` with `{ "userId": "999999999901", "password": "<SEED_PASSWORD>" }` → `{ challengeId, phoneHint }` (no token yet).
+   - `POST /api/v1/auth/otp/verify` with `{ "challengeId", "otp" }` → `{ token, user }`.
+   - `GET /api/v1/auth/me` with `Authorization: Bearer <token>`.
+   - A second successful login invalidates the previous session (`SESSION_REVOKED`).
+   - Production SMS: set `SMS_PROVIDER=http|msg91`, `SMS_API_KEY`, and `SMS_API_URL` or `SMS_MSG91_TEMPLATE_ID` (see `.env.example`).
 
 ## PostgreSQL on Windows VPS (portable, no admin)
 

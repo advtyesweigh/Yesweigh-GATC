@@ -14,6 +14,7 @@ describe('migrations', () => {
     assert.deepEqual([...files].sort(), files);
     assert.ok(files.includes('001_m1_core.sql'));
     assert.ok(files.includes('002_yesgatc_import.sql'));
+    assert.ok(files.includes('003_auth_sessions_otp.sql'));
   });
 
   it('M1 migration SQL defines required tables', async () => {
