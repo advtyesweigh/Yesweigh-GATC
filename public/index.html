@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"/>
-<meta name="gatc-build" content="sa-zoho-orgid-20261114-1"/>
+<meta name="gatc-build" content="sa-pdf-certname-20261114-1"/>
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <script>
@@ -17,7 +17,7 @@
   } catch (e) {}
 })();
 </script><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<!-- deploy-tag: sa-zoho-noskip-20261114-1 -->
+<!-- deploy-tag: sa-ov-rv-align-20261114-1 -->
 <title>GATC Calibration &amp; Verification System</title>
 <link rel="icon" href="/assets/favicon.ico" sizes="any"/>
 <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32"/>
@@ -213,7 +213,7 @@
 .sa-empty{text-align:center;padding:36px 16px;color:#8a96a8;font-size:13px}
 /* Verification rich cards (mockup layout, light SA theme) */
 .sa-vcards{display:flex;flex-direction:column;gap:10px}
-.sa-vcard{display:grid;grid-template-columns:88px minmax(0,1fr) 88px;gap:16px;align-items:stretch;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(20,40,80,.04)}
+.sa-vcard{display:grid;grid-template-columns:88px minmax(0,1fr) auto;gap:16px;align-items:stretch;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(20,40,80,.04)}
 .sa-vcard-left{display:flex;flex-direction:column;align-items:center;gap:8px;justify-content:center}
 .sa-vcard-thumb{width:72px;height:72px;border-radius:12px;background:#fff;border:1px solid #e8eef5;display:grid;place-items:center;overflow:hidden;color:var(--blue);flex:none;position:relative}
 .sa-vcard-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#fff}
@@ -221,13 +221,14 @@
 .sa-vcard-status{font-size:12px;font-weight:800;letter-spacing:.01em;text-align:center;line-height:1.2}
 .sa-vcard-status.ok{color:var(--ok)}.sa-vcard-status.warn{color:var(--warn)}.sa-vcard-status.bad{color:var(--bad)}.sa-vcard-status.blue{color:var(--blue)}.sa-vcard-status.muted{color:var(--muted)}
 .sa-vcard-main{min-width:0;display:flex;flex-direction:column;gap:10px}
-.sa-vcard-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
-.sa-vcard-name{margin:0;font-family:Outfit,system-ui,sans-serif;font-size:1.05rem;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-transform:uppercase;line-height:1.25;word-break:break-word}
-.sa-vcard-type{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:28px;padding:0 10px;border-radius:999px;background:#2563eb;color:#fff;font-size:11px;font-weight:800;letter-spacing:.04em}
+.sa-vcard-head{display:flex;align-items:flex-start;gap:10px;min-width:0}
+.sa-vcard-name{margin:0;font-family:Outfit,system-ui,sans-serif;font-size:1.05rem;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-transform:uppercase;line-height:1.25;word-break:break-word;min-width:0;flex:1}
+.sa-vcard-type{flex:none;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;min-width:36px;padding:0;border-radius:50%;background:#2563eb;color:#fff;font-size:11px;font-weight:800;letter-spacing:.04em;line-height:1}
 .sa-vcard-type.rv{background:#0f172a}
 .sa-vcard-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:12px;color:#475569}
 .sa-vcard-ref{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;font-weight:700;color:#334155;word-break:break-all}
-.sa-vcard-pdf{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;border:1.5px solid #14b8a6;color:#0f766e;font-size:10px;font-weight:800;letter-spacing:.02em;background:#f0fdfa}
+.sa-vcard-pdf{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;border:1.5px solid #14b8a6;color:#0f766e;font-size:10px;font-weight:800;letter-spacing:.02em;background:#f0fdfa;text-decoration:none;cursor:pointer}
+a.sa-vcard-pdf:hover{background:#ccfbf1;border-color:#0d9488}
 .sa-vcard-divider{width:1px;height:14px;background:#cbd5e1;flex:none}
 .sa-vcard-rc{font-weight:700;color:#64748b}
 .sa-vcard-specs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px 12px;padding-top:10px;border-top:1px solid #eef2f7}
@@ -235,13 +236,12 @@
 .sa-vcard-spec span{display:block;font-size:10px;font-weight:700;color:#94a3b8;margin-bottom:3px;letter-spacing:.02em}
 .sa-vcard-spec b{display:block;font-size:13px;font-weight:780;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .sa-vcard-spec b.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
-.sa-vcard-action{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;align-self:center}
-.sa-vcard-dl{width:52px;height:52px;border-radius:50%;border:0;background:#16a34a;color:#fff;display:grid;place-items:center;cursor:pointer;text-decoration:none;box-shadow:0 8px 18px rgba(22,163,74,.28)}
-.sa-vcard-dl:hover{background:#15803d}
-.sa-vcard-dl .i{width:22px;height:22px}
-.sa-vcard-dl[aria-disabled="true"],.sa-vcard-dl:disabled{opacity:.35;cursor:not-allowed;pointer-events:none;box-shadow:none;background:#94a3b8}
-.sa-vcard-dl-label{font-size:11px;font-weight:800;color:var(--ok)}
-.sa-vcard-dl-label.off{color:#94a3b8}
+.sa-vcard-action{display:flex;flex-direction:row;align-items:center;justify-content:center;align-self:center;gap:10px;flex:none}
+.sa-vcard-dl{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px 0 10px;border-radius:999px;border:1.5px solid #86efac;background:#e8f5e9;color:#15803d;font-size:13px;font-weight:800;letter-spacing:.01em;text-decoration:none;cursor:pointer;box-shadow:none;white-space:nowrap;line-height:1}
+.sa-vcard-dl:hover{background:#dcfce7;border-color:#4ade80;color:#166534}
+.sa-vcard-dl .sa-pdf-ico{width:22px;height:26px;flex:none;display:block}
+.sa-vcard-dl[aria-disabled="true"],.sa-vcard-dl:disabled{opacity:.45;cursor:not-allowed;pointer-events:none;background:#f1f5f9;border-color:#cbd5e1;color:#94a3b8}
+.sa-vcard-dl[aria-disabled="true"] .sa-pdf-ico,.sa-vcard-dl:disabled .sa-pdf-ico{filter:grayscale(1);opacity:.85}
 @media(max-width:900px){
 .sa-vcard{grid-template-columns:72px minmax(0,1fr);grid-template-rows:auto auto}
 .sa-vcard-action{grid-column:1 / -1;flex-direction:row;justify-content:flex-end;padding-top:4px;border-top:1px solid #eef2f7}
@@ -667,11 +667,10 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       { id: 'Customers', label: 'Customers', ico: 'bag' },
       { id: 'Products', label: 'Products', ico: 'package' },
       { id: 'Laboratory', label: 'LAB', ico: 'flask' },
-      { id: 'Purchases', label: 'Purchases', ico: 'cart' },
       { id: 'Reports', label: 'Reports', ico: 'chart' },
       { id: 'Settings', label: 'Settings', ico: 'gear' },
     ];
-    const LIST_PAGES = new Set(['Verification', 'Regional Centers', 'Products', 'VCT', 'Customers']);
+    const LIST_PAGES = new Set(['Verification', 'Regional Centers', 'Products', 'VCT', 'Customers', 'RC Quota', 'RC Wallet', 'Vehicles']);
     const VERIF_PAGE_SIZE = 10;
     const DEFAULT_LIST_LIMIT = 50;
     function listLimitFor(page) {
@@ -687,7 +686,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       dash: null,
       listLoading: false,
       listError: null,
-      list: { total: 0, items: [], limit: DEFAULT_LIST_LIMIT, offset: 0 },
+      list: { total: 0, items: [], limit: DEFAULT_LIST_LIMIT, offset: 0, summary: null },
       q: '',
       statusFilter: '',
       typeFilter: '',
@@ -698,8 +697,9 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       emaap: { configured: false, label: 'Not connected', userIdMasked: null, loading: false },
       emaapSaving: false,
       emaapApis: { loading: false, error: null, baseUrl: 'https://emaap.gov.in/gatcapi', counts: { v1: 0, v2: 0 }, v1: [], v2: [] },
-      yesone: { configured: false, label: 'Not connected', userIdMasked: null, baseUrl: 'https://yesgatc.in', loading: false },
+      yesone: { configured: false, label: 'Not connected', userIdMasked: null, baseUrl: 'https://yesgatc.in', loading: false, sync: null },
       yesoneSaving: false,
+      yesoneSyncing: false,
       razorpay: {
         configured: false,
         label: 'Not connected',
@@ -861,6 +861,15 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       if (state.page === 'Products') return `/api/v1/admin/products?limit=${lim}&offset=${off}&q=${q}`;
       if (state.page === 'VCT') return `/api/v1/admin/users?role=VCT&limit=${lim}&offset=${off}&q=${q}`;
       if (state.page === 'Customers') return `/api/v1/admin/customers?limit=${lim}&offset=${off}&q=${q}`;
+      if (state.page === 'RC Quota') return `/api/v1/admin/quota?limit=${lim}&offset=${off}&q=${q}`;
+      if (state.page === 'RC Wallet') {
+        const tab = encodeURIComponent(state.subTab || 'balances');
+        return `/api/v1/admin/wallets?limit=${lim}&offset=${off}&q=${q}&view=${tab}&tab=${tab}`;
+      }
+      if (state.page === 'Vehicles') {
+        const tab = encodeURIComponent(state.subTab || 'All');
+        return `/api/v1/admin/vehicles?limit=${lim}&offset=${off}&q=${q}&tab=${tab}`;
+      }
       return null;
     }
 
@@ -911,6 +920,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         items: data.items || [],
         limit: data.limit != null ? data.limit : (state.list.limit || listLimitFor(state.page)),
         offset: data.offset != null ? data.offset : (state.list.offset || 0),
+        summary: data.summary || null,
       };
       state.listLoading = false;
       state.listError = null;
@@ -928,8 +938,12 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       state.rcFilter = opts.rcFilter != null
         ? opts.rcFilter
         : (page === 'Verification' && prevPage === 'Verification' ? state.rcFilter : '');
-      state.subTab = opts.tab != null ? opts.tab : '';
-      state.list = { total: 0, items: [], limit: listLimitFor(page), offset: 0 };
+      {
+        const defaults = { 'RC Wallet': 'balances', Vehicles: 'All', Laboratory: 'menu' };
+        const incoming = opts.tab != null ? String(opts.tab) : '';
+        state.subTab = incoming || defaults[page] || '';
+      }
+      state.list = { total: 0, items: [], limit: listLimitFor(page), offset: 0, summary: null };
       state.listError = null;
       render();
       if (LIST_PAGES.has(page)) {
@@ -1119,17 +1133,24 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       const thumb = `${icon('layers')}${r.product_image_url
         ? `<img src="${esc(r.product_image_url)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
         : ''}`;
-      const pdfBadge = r.has_signed_pdf || r.signed_pdf_url
-        ? `<span class="sa-vcard-pdf">Signed PDF</span>`
-        : (r.download_url ? `<span class="sa-vcard-pdf">PDF</span>` : '');
-      const rc = r.rc_name || r.rc_code || '';
       const dlUrl = r.download_url || r.signed_pdf_url || r.certificate_pdf_url || '';
+      const viewUrl = r.signed_pdf_url || r.download_url || r.certificate_pdf_url || '';
+      const pdfFileBase = String(ref || '').trim();
+      const pdfFileName = pdfFileBase && pdfFileBase !== '—'
+        ? `${pdfFileBase.replace(/\.pdf$/i, '').replace(/[\\/]+/g, '-').replace(/[^\w.\-]+/g, '_')}.pdf`
+        : 'certificate.pdf';
+      const pdfBadge = viewUrl
+        ? `<a class="sa-vcard-pdf" href="${esc(viewUrl)}" data-action="open-pdf" data-url="${esc(viewUrl)}" data-disposition="inline" data-filename="${esc(pdfFileName)}" title="Open certificate PDF">${r.has_signed_pdf || r.signed_pdf_url ? 'Signed PDF' : 'PDF'}</a>`
+        : '';
+      const rc = r.rc_name || r.rc_code || '';
       const canDl = Boolean(dlUrl);
+      const dlHref = dlUrl.startsWith('/api/')
+        ? `${esc(dlUrl)}${dlUrl.includes('?') ? '&' : '?'}disposition=attachment`
+        : esc(dlUrl);
+      const pdfIco = `<svg class="sa-pdf-ico" viewBox="0 0 22 26" aria-hidden="true" focusable="false"><rect x="1" y="1" width="20" height="24" rx="2.5" fill="#fff" stroke="#e2e8f0" stroke-width="1"/><path d="M1 1h14l6 6v3H1V1Z" fill="#dc2626"/><path d="M15 1v6h6" fill="#fecaca"/><text x="11" y="19" text-anchor="middle" font-size="7.5" font-weight="800" font-family="Outfit,system-ui,sans-serif" fill="#dc2626">PDF</text></svg>`;
       const dlBtn = canDl
-        ? `<a class="sa-vcard-dl" href="${esc(dlUrl)}" target="_blank" rel="noopener noreferrer" download title="Download certificate PDF" aria-label="Download certificate PDF">${icon('download')}</a>
-           <span class="sa-vcard-dl-label">Download</span>`
-        : `<button type="button" class="sa-vcard-dl" disabled aria-disabled="true" title="No PDF available">${icon('download')}</button>
-           <span class="sa-vcard-dl-label off">No PDF</span>`;
+        ? `<a class="sa-vcard-dl" href="${dlHref}" data-action="open-pdf" data-url="${esc(dlUrl)}" data-disposition="attachment" data-filename="${esc(pdfFileName)}" title="Download ${esc(pdfFileName)}" aria-label="Download ${esc(pdfFileName)}">${pdfIco}<span>Download</span></a>`
+        : `<button type="button" class="sa-vcard-dl" disabled aria-disabled="true" title="No PDF available">${pdfIco}<span>No PDF</span></button>`;
       return `<article class="sa-vcard">
         <div class="sa-vcard-left">
           <div class="sa-vcard-thumb">${thumb}</div>
@@ -1138,7 +1159,6 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         <div class="sa-vcard-main">
           <div class="sa-vcard-head">
             <h3 class="sa-vcard-name">${esc(r.customer_name || '—')}</h3>
-            <span class="sa-vcard-type ${type === 'RV' ? 'rv' : ''}">${esc(type || '—')}</span>
           </div>
           <div class="sa-vcard-meta">
             <span class="sa-vcard-ref">${esc(ref)}</span>
@@ -1154,7 +1174,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
             <div class="sa-vcard-spec"><span>VCT</span><b title="${esc(r.vct_name || '')}">${esc(r.vct_name || '—')}</b></div>
           </div>
         </div>
-        <div class="sa-vcard-action">${dlBtn}</div>
+        <div class="sa-vcard-action"><span class="sa-vcard-type ${type === 'RV' ? 'rv' : ''}" title="${esc(type || '—')}">${esc(type || '—')}</span>${dlBtn}</div>
       </article>`;
     }
 
@@ -1165,6 +1185,8 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         { label: 'Original (OV)', typeFilter: 'OV', statusFilter: '' },
         { label: 'Re-Verification (RV)', typeFilter: 'RV', statusFilter: '' },
         { label: 'Certified', typeFilter: '', statusFilter: 'certified' },
+        { label: 'Signed', typeFilter: '', statusFilter: 'signed' },
+        { label: 'Unsigned', typeFilter: '', statusFilter: 'unsigned' },
         { label: 'Drafts', typeFilter: '', statusFilter: 'draft' },
         { label: 'Failed', typeFilter: '', statusFilter: 'failed_submit' },
       ];
@@ -1175,7 +1197,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         if (t.statusFilter) attrs.push(`data-status-filter="${esc(t.statusFilter)}"`);
         return `<button type="button" class="${on ? 'on' : ''}" ${attrs.join(' ')}>${esc(t.label)}</button>`;
       }).join('');
-      const statusOpts = ['','draft','submitted','pending_rc','certified','rejected','failed_submit'];
+      const statusOpts = ['','draft','submitted','pending_rc','certified','signed','unsigned','rejected','failed_submit'];
       const rcOpts = state.rcOptions || [];
       const rcSelect = `<select id="sa-rc" aria-label="Regional Centre"><option value="" ${!state.rcFilter?'selected':''}>All</option>${rcOpts.map((rc)=>{
         const label = rc.code ? `${esc(rc.name)} (${esc(rc.code)})` : esc(rc.name);
@@ -1274,55 +1296,124 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       return `<div class="sa-empty-polished"><div class="ico">${icon(ico)}</div><h3>${esc(title)}</h3><p>${esc(blurb)}</p></div>`;
     }
 
+    function inr(v) {
+      const nVal = Number(v);
+      if (!Number.isFinite(nVal)) return '—';
+      return `₹${nVal.toLocaleString('en-IN', { maximumFractionDigits: 0 })}`;
+    }
+
     function quotaPage() {
-      return `${heading('RC Quota', 'Billed instruments and OV allowance', periodButtons())}
+      const items = state.list.items || [];
+      const sum = state.list.summary || {};
+      const rows = items.length ? items.map((r) => `<tr>
+          <td><span class="primary">${esc(r.name || '—')}</span><span class="sub">${esc(r.code || '')}</span></td>
+          <td>${n(r.allotted)}</td>
+          <td>${n(r.used)}</td>
+          <td>${n(r.available)}</td>
+          <td>${n(r.reserved)}</td>
+          <td>${r.utilization_pct != null ? `${esc(r.utilization_pct)}%` : '—'}</td>
+        </tr>`).join('') : `<tr><td colspan="6" class="sa-empty">${state.listLoading ? 'Loading…' : 'No quota rows yet'}</td></tr>`;
+      return `${heading('RC Quota', 'Billed instruments and OV allowance')}
         <div class="sa-kpi">
-          <div class="card"><div class="t">Total allotted<span class="ico">${icon('hash')}</span></div><div class="v">—</div><div class="s">Awaiting Zoho / quota API</div></div>
-          <div class="card"><div class="t">Used<span class="ico green">${icon('shield')}</span></div><div class="v">—</div><div class="s">Period utilization</div></div>
-          <div class="card"><div class="t">Available balance<span class="ico">${icon('award')}</span></div><div class="v">—</div><div class="s">Remaining allowance</div></div>
-          <div class="card"><div class="t">Reserved<span class="ico amber">${icon('calendar')}</span></div><div class="v">—</div><div class="s">Pending bill serials</div></div>
+          <div class="card"><div class="t">Total allotted<span class="ico">${icon('hash')}</span></div><div class="v">${state.listLoading ? '…' : n(sum.allotted)}</div><div class="s">Across ${n(state.list.total)} centres</div></div>
+          <div class="card"><div class="t">Used<span class="ico green">${icon('shield')}</span></div><div class="v">${state.listLoading ? '…' : n(sum.used)}</div><div class="s">Consumed OV seats</div></div>
+          <div class="card"><div class="t">Available balance<span class="ico">${icon('award')}</span></div><div class="v">${state.listLoading ? '…' : n(sum.available)}</div><div class="s">Remaining allowance</div></div>
+          <div class="card"><div class="t">Reserved<span class="ico amber">${icon('calendar')}</span></div><div class="v">${state.listLoading ? '…' : n(sum.reserved)}</div><div class="s">Reserved serial seats</div></div>
         </div>
         <section class="sa-panel">
-          <div class="sa-panel-h"><h2>Quota utilization by Regional Centre</h2><button type="button" class="sa-btn ghost" data-action="noop-export">${icon('download')} Export</button></div>
-          ${emptyPolished('Quota data not connected', 'RC quota allotment, used and balance will appear here once Zoho invoice sync and quota APIs are wired.', 'hash')}
+          ${listTools()}
+          <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} regional centres`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
+          <div class="sa-table-wrap"><table class="sa-table"><thead><tr><th>Regional Centre</th><th>Allotted</th><th>Used</th><th>Available</th><th>Reserved</th><th>Utilization</th></tr></thead><tbody>${rows}</tbody></table></div>
+          ${pager()}
         </section>`;
     }
 
     function walletPage() {
       const tab = state.subTab || 'balances';
-      return `${heading('RC Wallet', 'Regional centre wallet summary, spends and credits', periodButtons())}
+      const items = state.list.items || [];
+      const sum = state.list.summary || {};
+      let rows = '';
+      if (tab === 'tx') {
+        rows = items.length ? items.map((r) => `<tr>
+            <td><span class="primary">${esc(r.rc_name || r.rc_code || '—')}</span><span class="sub">${esc(r.rc_code || '')}</span></td>
+            <td>${esc(r.entry_type || '—')}</td>
+            <td>${inr(r.amount_inr)}</td>
+            <td>${inr(r.balance_after_inr)}</td>
+            <td>${esc(fmtDate(r.created_at))}</td>
+          </tr>`).join('') : `<tr><td colspan="5" class="sa-empty">${state.listLoading ? 'Loading…' : 'No transactions yet'}</td></tr>`;
+      } else if (tab === 'dues' || tab === 'topup') {
+        rows = items.length ? items.map((r) => `<tr>
+            <td><span class="primary">${esc(r.rc_name || r.rc_code || '—')}</span><span class="sub">${esc(r.rc_code || '')}</span></td>
+            <td>${inr(r.amount_inr)}</td>
+            <td>${esc(r.status || '—')}</td>
+            <td>${esc(r.recharge_method || '—')}</td>
+            <td>${esc(fmtDate(r.submitted_at))}</td>
+          </tr>`).join('') : `<tr><td colspan="5" class="sa-empty">${state.listLoading ? 'Loading…' : (tab === 'dues' ? 'No payment dues' : 'No top-ups yet')}</td></tr>`;
+      } else {
+        rows = items.length ? items.map((r) => `<tr>
+            <td><span class="primary">${esc(r.rc_name || '—')}</span><span class="sub">${esc(r.rc_code || '')}</span></td>
+            <td>${inr(r.balance_inr)}</td>
+            <td>${esc(fmtDate(r.updated_at))}</td>
+            <td>${Number(r.balance_inr) > 0 ? '<span class="sa-badge ok">Funded</span>' : '<span class="sa-badge off">Empty</span>'}</td>
+          </tr>`).join('') : `<tr><td colspan="4" class="sa-empty">${state.listLoading ? 'Loading…' : 'No wallet balances'}</td></tr>`;
+      }
+      const head = tab === 'tx'
+        ? '<th>Regional Centre</th><th>Type</th><th>Amount</th><th>Balance after</th><th>When</th>'
+        : (tab === 'dues' || tab === 'topup')
+          ? '<th>Regional Centre</th><th>Amount</th><th>Status</th><th>Method</th><th>Submitted</th>'
+          : '<th>Regional Centre</th><th>Balance</th><th>Updated</th><th>Status</th>';
+      return `${heading('RC Wallet', 'Regional centre wallet summary, spends and credits')}
         <div class="sa-kpi">
-          <div class="card"><div class="t">Total Balance<span class="ico green">${icon('wallet')}</span></div><div class="v">—</div><div class="s">Live wallet API pending</div></div>
-          <div class="card"><div class="t">Total Spend<span class="ico">${icon('download')}</span></div><div class="v">—</div><div class="s">Selected period</div></div>
-          <div class="card"><div class="t">Total Credits<span class="ico green">${icon('plus')}</span></div><div class="v">—</div><div class="s">Selected period</div></div>
-          <div class="card"><div class="t">Regional Centres<span class="ico amber">${icon('building')}</span></div><div class="v">${n((state.dash&&state.dash.totals&&state.dash.totals.regional_centers)||0)}</div><div class="s">Active centres</div></div>
+          <div class="card"><div class="t">Total Balance<span class="ico green">${icon('wallet')}</span></div><div class="v">${state.listLoading ? '…' : inr(sum.total_balance)}</div><div class="s">${n(sum.wallet_count)} wallets</div></div>
+          <div class="card"><div class="t">Total Spend<span class="ico">${icon('download')}</span></div><div class="v">${state.listLoading ? '…' : inr(sum.spend)}</div><div class="s">RV payments</div></div>
+          <div class="card"><div class="t">Total Credits<span class="ico green">${icon('plus')}</span></div><div class="v">${state.listLoading ? '…' : inr(sum.credits)}</div><div class="s">Top-ups &amp; refunds</div></div>
+          <div class="card"><div class="t">Rows<span class="ico amber">${icon('building')}</span></div><div class="v">${state.listLoading ? '…' : n(state.list.total)}</div><div class="s">In this view</div></div>
         </div>
         <div class="sa-tabs" role="tablist" aria-label="Wallet sections">
-          ${[['balances','Wallet Balances'],['tx','Transactions'],['dues','Payment Dues'],['topup','Top Up / Settlement']].map(([k,l])=>`<button type="button" class="${(tab===k || (!tab && k==='balances'))?'on':''}" data-page="RC Wallet" data-tab="${k}">${l}</button>`).join('')}
+          ${[['balances','Wallet Balances'],['tx','Transactions'],['dues','Payment Dues'],['topup','Top Up / Settlement']].map(([k,l])=>`<button type="button" class="${tab===k?'on':''}" data-page="RC Wallet" data-tab="${k}">${l}</button>`).join('')}
         </div>
         <section class="sa-panel">
-          <div class="sa-panel-h"><h2>RC Wallet Details</h2><div class="sa-actions"><button type="button" class="sa-btn outline" data-action="noop-settle">Settle Payment Due</button><button type="button" class="sa-btn ghost" data-action="noop-export">${icon('download')} Export</button></div></div>
-          ${emptyPolished(tab==='tx'?'No transactions yet':tab==='dues'?'No payment dues':tab==='topup'?'Top up / settlement ready':'Wallet balances unavailable', 'Wallet ledgers will load here when the RC wallet API is connected. Layout matches the production wallet balances screen.', 'wallet')}
+          ${listTools()}
+          <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} records`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
+          <div class="sa-table-wrap"><table class="sa-table"><thead><tr>${head}</tr></thead><tbody>${rows}</tbody></table></div>
+          ${pager()}
         </section>`;
     }
 
     function vehiclesPage() {
       const tab = state.subTab || 'All';
-      return `${heading('Car', 'Manage registered vehicles, RC, insurance and pollution', periodButtons())}
+      const items = state.list.items || [];
+      const sum = state.list.summary || {};
+      const total = Number(sum.total) || 0;
+      const active = Number(sum.active) || 0;
+      const inactive = Number(sum.inactive) || 0;
+      const activePct = total ? Math.round((active / total) * 100) : 0;
+      const inactivePct = total ? Math.round((inactive / total) * 100) : 0;
+      const rows = items.length ? items.map((r) => `<tr>
+          <td><span class="primary">${esc(r.brand || '—')} ${esc(r.model || '')}</span><span class="sub">${esc(r.year || '')}</span></td>
+          <td>${esc(r.reg_number || '—')}</td>
+          <td>${esc(r.rc_name || r.rc_code || '—')}</td>
+          <td>${esc(fmtDate(r.rc_validity))}</td>
+          <td>${esc(fmtDate(r.insurance_validity))}</td>
+          <td>${esc(fmtDate(r.pollution_validity))}</td>
+          <td>${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge off">Inactive</span>'}</td>
+        </tr>`).join('') : `<tr><td colspan="7" class="sa-empty">${state.listLoading ? 'Loading…' : 'No vehicles registered'}</td></tr>`;
+      return `${heading('Car', 'Manage registered vehicles, RC, insurance and pollution')}
         <div class="sa-kpi">
-          <div class="card"><div class="t">Total Vehicles<span class="ico">${icon('car')}</span></div><div class="v">0</div><div class="s">Register when vehicle API is live</div></div>
-          <div class="card"><div class="t">Regional Centres<span class="ico purple">${icon('building')}</span></div><div class="v">${n((state.dash&&state.dash.totals&&state.dash.totals.regional_centers)||0)}</div><div class="s">Represented</div></div>
-          <div class="card"><div class="t">Active Vehicles<span class="ico green">${icon('shield')}</span></div><div class="v">0</div><div class="s">0% of total</div></div>
-          <div class="card"><div class="t">Inactive Vehicles<span class="ico amber">${icon('power')}</span></div><div class="v">0</div><div class="s">0% of total</div></div>
+          <div class="card"><div class="t">Total Vehicles<span class="ico">${icon('car')}</span></div><div class="v">${state.listLoading ? '…' : n(total)}</div><div class="s">Synced from yesgatc</div></div>
+          <div class="card"><div class="t">Listed now<span class="ico purple">${icon('building')}</span></div><div class="v">${state.listLoading ? '…' : n(state.list.total)}</div><div class="s">Current filter</div></div>
+          <div class="card"><div class="t">Active Vehicles<span class="ico green">${icon('shield')}</span></div><div class="v">${state.listLoading ? '…' : n(active)}</div><div class="s">${activePct}% of total</div></div>
+          <div class="card"><div class="t">Inactive Vehicles<span class="ico amber">${icon('power')}</span></div><div class="v">${state.listLoading ? '…' : n(inactive)}</div><div class="s">${inactivePct}% of total</div></div>
         </div>
         <div class="sa-tabs" role="tablist" aria-label="Car status filters">
-          ${[['All','All Vehicles'],['Active','Active'],['Expired','Expired'],['Inactive','Inactive']].map(([k,l])=>`<button type="button" class="${(tab===k || (tab===''&&k==='All'))?'on':''}" data-page="Vehicles" data-tab="${k}">${l}</button>`).join('')}
-          <div class="spacer" style="flex:1"></div>
-          <button type="button" class="sa-btn" data-action="noop-add">${icon('plus')} Add Vehicle</button>
+          ${[['All','All Vehicles'],['Active','Active'],['Expired','Expired'],['Inactive','Inactive']].map(([k,l])=>`<button type="button" class="${tab===k?'on':''}" data-page="Vehicles" data-tab="${k}">${l}</button>`).join('')}
         </div>
-        <div class="sa-veh">
-          ${emptyPolished('No vehicles registered', 'Vehicle cards with RC, registration plate, insurance and pollution validity will appear here. Matching the Vehicles management mockup.', 'car')}
-        </div>`;
+        <section class="sa-panel">
+          ${listTools()}
+          <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} vehicles`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
+          <div class="sa-table-wrap"><table class="sa-table"><thead><tr><th>Vehicle</th><th>Reg. no.</th><th>RC</th><th>RC validity</th><th>Insurance</th><th>Pollution</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>
+          ${pager()}
+        </section>`;
     }
 
     function laboratoryPage() {
@@ -1356,20 +1447,6 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
           ${[['menu','Lab Menu'],['seal','Seal ID']].map(([k,l])=>`<button type="button" class="${tab===k?'on':''}" data-page="Laboratory" data-tab="${k}">${l}</button>`).join('')}
         </div>
         ${tab === 'seal' ? sealBlock : menuBlock}`;
-    }
-
-    function purchasesPage() {
-      return `${heading('Purchases', 'Purchase register and supplier invoices')}
-        <div class="sa-kpi">
-          <div class="card"><div class="t">Purchase records<span class="ico">${icon('cart')}</span></div><div class="v">0</div><div class="s">Local register</div></div>
-          <div class="card"><div class="t">Imported invoices<span class="ico">${icon('file')}</span></div><div class="v">—</div><div class="s">Zoho import</div></div>
-          <div class="card"><div class="t">Zoho connection<span class="ico amber">${icon('refresh')}</span></div><div class="v" style="font-size:1.1rem">Offline</div><div class="s">Not connected</div></div>
-          <div class="card"><div class="t">This month amount<span class="ico green">${icon('wallet')}</span></div><div class="v">—</div><div class="s">Awaiting data</div></div>
-        </div>
-        <section class="sa-panel">
-          <div class="sa-panel-h"><h2>Purchase register</h2><button type="button" class="sa-btn" data-action="noop-add">${icon('plus')} Add purchase</button></div>
-          ${emptyPolished('No purchases yet', 'Purchase entries will appear in a clean register table. This module does not create Zoho quota until reconciliation is wired.', 'cart')}
-        </section>`;
     }
 
     function reportsPage() {
@@ -1406,8 +1483,40 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         userIdMasked: d.userIdMasked || null,
         baseUrl: d.baseUrl || 'https://yesgatc.in',
         updatedAt: d.updatedAt || null,
+        sync: d.sync || null,
         loading: false,
       };
+    }
+
+    function formatYesoneSyncWhen(iso) {
+      if (!iso) return 'Never';
+      try {
+        const d = new Date(iso);
+        if (Number.isNaN(d.getTime())) return String(iso);
+        return d.toLocaleString();
+      } catch {
+        return String(iso);
+      }
+    }
+
+    function yesoneSyncSummary(sync) {
+      if (!sync) return 'No sync runs yet.';
+      if (sync.running) return 'Sync in progress…';
+      if (sync.lastError) return `Error: ${sync.lastError}`;
+      const run = sync.lastRun;
+      if (!run) return sync.lastSuccessAt ? `Last success ${formatYesoneSyncWhen(sync.lastSuccessAt)}` : 'No sync runs yet.';
+      const u = run.upserted || {};
+      const parts = [];
+      const vi = (u.verificationsInserted || 0) + (u.verificationsUpdated || 0);
+      if (vi) parts.push(`${vi} verification${vi === 1 ? '' : 's'}`);
+      const ui = (u.usersInserted || 0) + (u.usersUpdated || 0);
+      if (ui) parts.push(`${ui} user${ui === 1 ? '' : 's'}`);
+      const rc = u.regionalCenters || 0;
+      if (rc) parts.push(`${rc} RC`);
+      const pdf = run.pdfDownloaded || 0;
+      if (pdf) parts.push(`${pdf} PDF`);
+      const tail = parts.length ? parts.join(', ') : 'no changes';
+      return `Last success ${formatYesoneSyncWhen(sync.lastSuccessAt)} · ${tail}`;
     }
 
     function applyRazorpayStatus(data) {
@@ -1766,6 +1875,32 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       state.integrationModal = null;
       toast('eMaap connected — credentials stored on server');
       render(true);
+    }
+
+    async function runYesoneSyncNow() {
+      if (state.yesoneSyncing || state.yesone?.sync?.running) return;
+      state.yesoneSyncing = true;
+      render(true);
+      const { res, json } = await api('/api/v1/admin/integrations/yesone/sync', {
+        method: 'POST',
+        token: authState.token,
+      });
+      state.yesoneSyncing = false;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        toast(json.error?.message || 'Could not start sync');
+        render(true);
+        return;
+      }
+      applyYesoneStatus(json.data);
+      toast('Yesgatc sync started');
+      render(true);
+      let ticks = 0;
+      const poll = setInterval(async () => {
+        ticks += 1;
+        await loadYesoneStatus(true);
+        if (!state.yesone?.sync?.running || ticks > 90) clearInterval(poll);
+      }, 4000);
     }
 
     async function saveYesoneCredentialsFromForm() {
@@ -2207,6 +2342,21 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         if (modal === 'yesone') {
           const configured = yesoneConfigured;
           const baseUrl = state.yesone?.baseUrl || 'https://yesgatc.in';
+          const sync = state.yesone?.sync || null;
+          const syncRunning = Boolean(sync?.running || state.yesoneSyncing);
+          const syncBadgeCls = syncRunning ? 'blue' : (sync?.lastError ? 'off' : (sync?.lastSuccessAt ? 'ok' : 'off'));
+          const syncPanel = configured
+            ? `<div style="margin:14px 0 0;padding:12px 14px;border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+                  <div>
+                    <div style="font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#64748b">Hourly yesgatc sync</div>
+                    <div style="margin-top:4px;font-size:13px;font-weight:700;color:#0f172a">${esc(sync?.label || 'Never synced')}</div>
+                    <div style="margin-top:4px;font-size:12px;color:#64748b;line-height:1.4">${esc(yesoneSyncSummary(sync))}</div>
+                  </div>
+                  <span class="sa-badge ${syncBadgeCls}">${esc(syncRunning ? 'Syncing…' : (sync?.lastError ? 'Failed' : (sync?.lastSuccessAt ? 'OK' : 'Idle')))}</span>
+                </div>
+              </div>`
+            : '';
           const fields = configured
             ? `<div class="fields">
                 <div><label>URL base</label><input value="${esc(baseUrl)}" readonly onclick="this.select()" autocomplete="off"/></div>
@@ -2220,7 +2370,8 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
                   <div><label for="yesone-user-id">User ID</label><input id="yesone-user-id" placeholder="Portal user ID" autocomplete="off"/></div>
                   <div><label for="yesone-password">Password</label><input id="yesone-password" type="password" placeholder="••••••••" autocomplete="new-password"/></div>
                 </div>
-              </details>`
+              </details>
+              ${syncPanel}`
             : `<div class="fields">
                 <div><label>URL base</label><input value="${esc(baseUrl)}" readonly onclick="this.select()" autocomplete="off"/></div>
                 <div><label for="yesone-user-id">User ID</label><input id="yesone-user-id" placeholder="Portal user ID" autocomplete="off"/></div>
@@ -2239,6 +2390,9 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
               ${fields}
               <div class="actions" style="margin-top:14px">
                 <button type="button" class="sa-btn ghost" data-action="close-integration-modal">Cancel</button>
+                ${configured
+                  ? `<button type="button" class="sa-btn ghost" data-action="yesone-sync-now"${syncRunning ? ' disabled' : ''}>${syncRunning ? 'Syncing…' : 'Sync now'}</button>`
+                  : ''}
                 <button type="button" class="sa-btn" data-action="save-yesone-credentials"${state.yesoneSaving ? ' disabled' : ''}>${state.yesoneSaving ? 'Saving…' : (configured ? 'Update' : 'Save')}</button>
               </div>
             </div>
@@ -2310,7 +2464,6 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       if (state.page === 'RC Wallet') return walletPage();
       if (state.page === 'Vehicles') return vehiclesPage();
       if (state.page === 'Laboratory') return laboratoryPage();
-      if (state.page === 'Purchases') return purchasesPage();
       if (state.page === 'Reports') return reportsPage();
       if (state.page === 'Settings' || state.page === 'Integrations') return settingsPage();
       return `${heading(state.page, 'Module workspace')}${emptyPolished('Coming soon', 'This module is not wired yet.', 'file')}`;
@@ -2367,6 +2520,66 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       render(true);
     }
 
+    function filenameFromContentDisposition(header) {
+      if (!header) return '';
+      const star = /filename\*\s*=\s*(?:UTF-8''|utf-8'')([^;]+)/i.exec(header);
+      if (star?.[1]) {
+        try {
+          return decodeURIComponent(star[1].trim().replace(/^"|"$/g, ''));
+        } catch (_) { /* ignore */ }
+      }
+      const plain = /filename\s*=\s*"((?:\\.|[^"\\])*)"|filename\s*=\s*([^;]+)/i.exec(header);
+      const raw = (plain?.[1] || plain?.[2] || '').trim().replace(/^"|"$/g, '');
+      return raw;
+    }
+
+    function safePdfDownloadName(name, fallback = 'certificate.pdf') {
+      const raw = String(name || '').trim() || fallback;
+      let base = raw.replace(/\.pdf$/i, '').replace(/[\\/]+/g, '-').replace(/[^\w.\-]+/g, '_');
+      if (!base) base = 'certificate';
+      return `${base}.pdf`;
+    }
+
+    async function openCertificatePdf(url, disposition = 'inline', preferredName = '') {
+      if (!url) return;
+      let target = url;
+      if (target.startsWith('/api/') && disposition === 'attachment') {
+        target += (target.includes('?') ? '&' : '?') + 'disposition=attachment';
+      }
+      if (target.startsWith('/api/')) {
+        toast(disposition === 'attachment' ? 'Downloading PDF…' : 'Opening PDF…');
+        try {
+          const res = await fetch(API_BASE + target, {
+            headers: { authorization: `Bearer ${authState.token}` },
+          });
+          if (!res.ok) {
+            toast('PDF unavailable');
+            return;
+          }
+          const headerName = filenameFromContentDisposition(res.headers.get('content-disposition'));
+          const fileName = safePdfDownloadName(headerName || preferredName || 'certificate.pdf');
+          const blob = await res.blob();
+          const obj = URL.createObjectURL(blob);
+          if (disposition === 'attachment') {
+            const a = document.createElement('a');
+            a.href = obj;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            setTimeout(() => URL.revokeObjectURL(obj), 60_000);
+          } else {
+            window.open(obj, '_blank', 'noopener');
+            setTimeout(() => URL.revokeObjectURL(obj), 120_000);
+          }
+        } catch (_) {
+          toast('PDF download failed');
+        }
+        return;
+      }
+      window.open(target, '_blank', 'noopener,noreferrer');
+    }
+
     root.onclick = (e) => {
       // Backdrop click (dimmed overlay only — not dialog internals).
       if (e.target.classList?.contains('sa-int-modal') && e.target.dataset.backdrop === 'integration') {
@@ -2375,6 +2588,15 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       }
       const btn = e.target.closest('button,[data-page],[data-action]');
       if (!btn) return;
+      if (btn.dataset.action === 'open-pdf') {
+        e.preventDefault();
+        openCertificatePdf(
+          btn.dataset.url || btn.getAttribute('href'),
+          btn.dataset.disposition || 'inline',
+          btn.dataset.filename || '',
+        );
+        return;
+      }
       if (btn.dataset.page) {
         goPage(btn.dataset.page, {
           typeFilter: btn.dataset.typeFilter || '',
@@ -2444,6 +2666,9 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       }
       else if (action === 'save-yesone-credentials') {
         saveYesoneCredentialsFromForm();
+      }
+      else if (action === 'yesone-sync-now') {
+        runYesoneSyncNow();
       }
       else if (action === 'save-razorpay-credentials') {
         saveRazorpayCredentialsFromForm();
@@ -2564,7 +2789,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
   };
   const icon = (n,cls='')=>`<svg aria-hidden="true" class="i ${cls}" viewBox="0 0 24 24">${I[n] || I.file}</svg>`;
   const esc = (v)=>String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const nav = [{label:'Dashboard',ico:'dashboard'},{label:'Verification',ico:'verification'},{label:'Customer',ico:'people'},{label:'Product',ico:'package'},{label:'Purchases',ico:'bag'}];
+  const nav = [{label:'Dashboard',ico:'dashboard'},{label:'Verification',ico:'verification'},{label:'Customer',ico:'people'},{label:'Product',ico:'package'}];
   const subnav = [{label:'VCT',ico:'people'},{label:'Vehicle',ico:'truck'},{label:'Laboratory',ico:'flask'}];
   const state = {page:'Dashboard',drawer:false,settings:true,filter:'All',period:'month',modal:null,records:[
     {id:'GATC-1042',customer:'Metro Weighing Solutions',type:'RV',product:'Electronic Scale · 30 kg',status:'Awaiting PDF',date:'31 Oct 2026'},
@@ -2589,7 +2814,6 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
   const moduleConfig={
     Customer:{summary:'Customer directory and verification history',ico:'people',rows:[['Customer directory','View and search customers'],['Add customer','Create a customer record'],['Customer history','Related OV, RV and certificates']]},
     Product:{summary:'Instrument and product master',ico:'package',rows:[['Product catalogue','Instrument types, capacities and models'],['Add product','Create a product master entry'],['Product categories','Manage classifications']]},
-    Purchases:{summary:'Purchases and linked instrument records',ico:'bag',rows:[['Purchase register','Review purchase records'],['New purchase','Create a purchase entry'],['Purchase documents','Related supporting files']]},
     VCT:{summary:'Manage VCT members within your RC',ico:'people',rows:[['VCT directory','View VCT users'],['Create VCT','Add a VCT account'],['Assigned verifications','Review assigned work']]},
     Vehicle:{summary:'Vehicles associated with the RC',ico:'truck',rows:[['Vehicle directory','View registered vehicles'],['Add vehicle','Create vehicle record']]},
     Laboratory:{summary:'Laboratory details and equipment',ico:'flask',rows:[['Laboratory profile','Centre profile and facilities'],['Equipment register','Review laboratory equipment']]},
