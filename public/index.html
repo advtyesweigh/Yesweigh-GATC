@@ -1,6 +1,29 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<html lang="en"><head><meta charset="utf-8"/>
+<meta name="gatc-build" content="sa-zoho-orgid-20261114-1"/>
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
+<meta http-equiv="Pragma" content="no-cache"/>
+<script>
+(function(){
+  try {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(regs){
+        regs.forEach(function(r){ r.unregister(); });
+      });
+    }
+    if (window.caches && caches.keys) {
+      caches.keys().then(function(keys){ keys.forEach(function(k){ caches.delete(k); }); });
+    }
+  } catch (e) {}
+})();
+</script><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<!-- deploy-tag: sa-yesone-20261114-1 -->
 <title>GATC Calibration &amp; Verification System</title>
+<link rel="icon" href="/assets/favicon.ico" sizes="any"/>
+<link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32"/>
+<link rel="icon" type="image/png" href="/assets/favicon-16.png" sizes="16x16"/>
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180"/>
+<link rel="manifest" href="/assets/site.webmanifest"/>
 <meta name="description" content="Secure sign-in for GATC calibration, verification, and certificates."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -13,7 +36,276 @@
 .main{flex:1;min-width:0;display:flex;flex-direction:column;overflow:hidden}.topbar{flex:none;height:69px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 32px;gap:12px}.crumb{font-size:12px;color:#9aa5b5}.crumb strong{color:#344054;font-weight:760}.top-spacer{flex:1}.top-right{display:flex;align-items:center;gap:11px}.online-pill{display:flex;align-items:center;gap:7px;background:#f5f8fc;color:#657285;font-size:11px;padding:8px 11px;border-radius:99px}.online-dot{height:7px;width:7px;border-radius:50%;background:#13a36f}.iconbtn{height:35px;width:35px;border-radius:9px;background:#fff;border:1px solid var(--border);display:grid;place-items:center;color:#526073;position:relative}.iconbtn:hover{background:#f6f9ff}.notify-dot{height:6px;width:6px;background:var(--blue);border-radius:50%;position:absolute;right:8px;top:6px}.menu-toggle{display:none}.scroll{overflow-y:auto;min-height:0;flex:1}.content{padding:29px 32px 40px;max-width:1450px;margin:auto;width:100%}
 /* dashboard */
 .page-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:22px}.eyebrow{color:#8794a7;font-size:10px;font-weight:800;letter-spacing:1.15px;margin-bottom:5px}.page-heading h1{font-size:28px;letter-spacing:-1.1px;margin:0;font-weight:830;line-height:1.12}.page-description{font-size:12px;color:#8693a5;margin-top:7px}.date-chip{display:flex;gap:8px;align-items:center;background:white;border:1px solid var(--border);border-radius:9px;color:#69788c;padding:10px 12px;font-size:11px;white-space:nowrap}.hero{background:linear-gradient(108deg,#112746,#11203c 64%,#0e3469);position:relative;overflow:hidden;border-radius:15px;min-height:143px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px 27px;color:white;margin-bottom:18px}.hero:after{content:"";position:absolute;right:-75px;top:-105px;border:1px solid #a9cbff30;border-radius:50%;height:245px;width:245px;box-shadow:0 0 0 47px #9ec5ff0c,0 0 0 93px #9ec5ff08;pointer-events:none}.hero-text,.hero-actions{position:relative;z-index:1}.hero-label{font-size:10px;font-weight:850;color:#a6c9ff;letter-spacing:1.1px;margin-bottom:6px}.hero h2{font-size:22px;letter-spacing:-.65px;font-weight:800;margin:0 0 6px}.hero p{font-size:12px;color:#c0cee3;margin:0}.hero-actions{display:flex;gap:9px;flex-wrap:wrap}.btn{border:0;border-radius:9px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 16px;min-height:40px;white-space:nowrap}.btn.primary{background:var(--blue);color:white}.btn.primary:hover{background:var(--blue-dark)}.btn.white{color:#193154;background:white}.btn.ghost-white{border:1px solid #c4d9ff6c;background:#ffffff1a;color:white}.btn.subtle{color:#075ad9;background:#eaf2ff}.btn.outline{background:white;color:#44546b;border:1px solid #dae4f0}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin-bottom:21px}.metric{background:white;border:1px solid var(--border);border-radius:13px;padding:17px 16px 16px;box-shadow:var(--shadow);min-width:0}.metric-title-row{display:flex;align-items:center;justify-content:space-between;gap:5px}.metric-title{font-size:11.5px;color:#6b788a;font-weight:650}.metric-icon{width:32px;height:32px;border-radius:9px;background:#edf3ff;color:#0866ff;display:grid;place-items:center}.metric-icon.good{background:var(--green-bg);color:var(--green)}.metric-icon.warn{background:var(--amber-bg);color:var(--amber)}.metric-number{font-size:31px;line-height:1.1;letter-spacing:-1.2px;font-weight:830;margin-top:10px;font-variant-numeric:tabular-nums}.metric-sub{font-size:10.5px;color:#97a3b2;margin-top:7px}.metric-sub .positive{color:#0e8d65;font-weight:750}.dashboard-grid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(270px,.8fr);align-items:start;gap:16px}.side-column{display:flex;flex-direction:column;gap:16px}.panel{border:1px solid var(--border);background:white;border-radius:13px;overflow:hidden;box-shadow:var(--shadow)}.panel-head{padding:18px 19px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px}.panel-head h3{font-size:14px;font-weight:800;letter-spacing:-.2px;margin:0}.panel-head p{font-size:11px;color:#94a0b0;margin:4px 0 0}.linkbtn{border:0;background:none;color:#0866ff;font-size:11px;font-weight:800;padding:6px;white-space:nowrap}.record-tools{padding:0 18px 13px;display:flex;align-items:center;justify-content:space-between;gap:10px}.searchbox{display:flex;align-items:center;gap:8px;border:1px solid #e3eaf3;border-radius:9px;background:white;padding:0 10px;max-width:285px;flex:1;color:#a3afbf}.searchbox input{min-width:0;border:0;outline:0;background:transparent;color:#243147;font-size:11px;width:100%;height:36px}.segmented{display:flex;gap:3px;background:#f2f5fa;padding:3px;border-radius:8px}.segment{border:0;background:transparent;color:#7b8799;font-size:10.5px;font-weight:800;border-radius:6px;padding:7px 11px}.segment.active{background:white;color:#0866ff;box-shadow:0 1px 4px #23406417}.record-table{width:100%;border-collapse:collapse}.record-table th{text-align:left;background:#fafbfd;padding:11px 18px;color:#95a0b1;font-size:10px;letter-spacing:.35px;font-weight:800;border-top:1px solid #eff2f6}.record-table td{padding:13px 18px;border-top:1px solid #f0f3f7;font-size:11px;color:#667488}.record-table tr[data-record]{cursor:pointer}.record-table tr[data-record]:hover{background:#f7faff}.record-customer{font-size:12px;font-weight:780;color:#202a3b;display:block;margin-bottom:4px}.record-sub{font-size:10px;color:#98a4b3}.record-id{font-weight:750;color:#41516a}.status{display:inline-flex;padding:5px 9px;border-radius:99px;font-size:10px;font-weight:750;white-space:nowrap}.status.completed{background:var(--green-bg);color:var(--green)}.status.pending{background:var(--amber-bg);color:var(--amber)}.status.pdf{background:#ebf2ff;color:#315dc7}.status.draft{background:#eef1f5;color:#6b7889}.panel-foot{text-align:center;padding:11px;border-top:1px solid #eef2f6}.attention-row{padding:14px 18px;display:flex;gap:11px;align-items:center;border-top:1px solid #eef2f6}.attention-ico{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:#fff5e7;color:#b77916}.attention-ico.blue{color:#0866ff;background:#edf3ff}.attention-meta{flex:1;min-width:0}.attention-meta b{font-size:11.5px;display:block}.attention-meta small{font-size:10px;color:#96a2b0;display:block;margin-top:3px}.attention-value{font-size:20px;font-weight:830}.quick-link{width:100%;display:flex;align-items:center;gap:11px;border:0;background:white;padding:12px 18px;text-align:left;font-size:12px;font-weight:700;color:#41516a}.quick-link:hover{background:#f7faff}.quick-link .i{color:var(--blue)}.quick-link span{flex:1}.ui-note{margin:16px 0 0;color:#9aa6b3;font-size:11px;display:flex;gap:7px;align-items:center}.section-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:3px 0 12px}.section-row h3{font-size:14px;margin:0;font-weight:800}.empty{font-size:12px;text-align:center;color:#95a1b2;padding:27px 16px}.mobile-records{display:none}
-/* Super Admin — VPS Health / Service Status (does not affect auth-shell) */
+
+/* GATC Super Admin — yesgatc layout, white / blue / black */
+
+/* GATC Super Admin — navy sidebar + light content (mockup language) */
+.sa-shell{--blue:#2563eb;--blue-deep:#1d4ed8;--blue-soft:#eff6ff;--navy:#0b162c;--navy2:#12213d;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--bg:#f1f5f9;--white:#fff;--ok:#16a34a;--warn:#b45309;--bad:#dc2626;height:100vh;display:flex;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif}
+.sa-shell .i{width:18px;height:18px;stroke:currentColor;stroke-width:1.85;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.sa-side{width:268px;flex:none;background:linear-gradient(180deg,#071225,#0f1c35 55%,#122445);color:#e2e8f0;display:flex;flex-direction:column;border-right:0;box-shadow:4px 0 24px rgba(7,18,37,.18)}
+.sa-side-top{padding:20px 16px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sa-brand{display:flex;align-items:center;gap:10px;margin-bottom:0}
+.sa-logo{width:38px;height:38px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#22c55e,#15803d);display:grid;place-items:center;color:#fff;box-shadow:0 6px 16px rgba(34,197,94,.28);flex:none}
+.sa-logo svg{width:20px;height:20px}
+.sa-brand b{display:block;font-family:Outfit,system-ui,sans-serif;font-size:1.2rem;letter-spacing:-.03em;color:#fff}
+.sa-brand small{display:block;font-size:9px;letter-spacing:.04em;font-weight:600;color:#94a3b8;margin-top:2px;line-height:1.25}
+.sa-nav{padding:12px 10px 16px;overflow:auto;flex:1}
+.sa-cap{font-size:10px;font-weight:800;letter-spacing:1.1px;color:#64748b;padding:10px 12px 6px}
+.sa-navbtn{width:100%;border:0;background:transparent;border-radius:10px;display:flex;align-items:center;gap:12px;padding:12px 14px;color:#cbd5e1;font-size:15px;font-weight:700;line-height:1.3;text-align:left;cursor:pointer;letter-spacing:-.01em}
+.sa-navbtn .i{width:20px;height:20px;stroke-width:2;color:#94a3b8;flex:none}
+.sa-navbtn:hover{background:rgba(255,255,255,.06);color:#fff}
+.sa-navbtn:hover .i{color:#e2e8f0}
+.sa-navbtn.on{background:#2563eb;color:#fff;font-weight:800;box-shadow:0 8px 20px rgba(37,99,235,.35)}
+.sa-navbtn.on .i{color:#fff}
+.sa-foot{border-top:1px solid rgba(255,255,255,.08);padding:12px}
+.sa-user{display:flex;align-items:center;gap:10px}
+.sa-av{width:34px;height:34px;border-radius:50%;background:#1e3a8a;color:#93c5fd;display:grid;place-items:center;font-size:11px;font-weight:800}
+.sa-foot b{font-size:13px!important;color:#f1f5f9}
+.sa-foot span{color:#94a3b8!important;font-size:11px!important}
+.sa-out{border:0;background:rgba(255,255,255,.08);border-radius:8px;padding:7px 9px;font-size:10px;font-weight:750;cursor:pointer;color:#cbd5e1}
+.sa-out:hover{background:rgba(255,255,255,.14);color:#fff}
+.sa-main{flex:1;min-width:0;display:flex;flex-direction:column}
+.sa-top{height:64px;background:var(--white);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px;padding:0 22px}
+.sa-crumb{font-size:12px;color:#8a96a8}.sa-crumb strong{color:var(--ink)}
+.sa-top .spacer{flex:1}
+.sa-top-search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:#f8fafc;border-radius:999px;padding:8px 14px;min-width:280px;max-width:420px;flex:1;color:#94a3b8}
+.sa-top-search input{border:0;outline:0;background:transparent;width:100%;font-size:13px;color:var(--ink)}
+.sa-top-search kbd{font-size:10px;background:#e2e8f0;border-radius:6px;padding:2px 6px;color:#64748b;font-family:inherit}
+.sa-pill{display:inline-flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:11px;color:var(--muted)}
+.sa-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.sa-scroll{overflow:auto;flex:1}
+.sa-content{padding:22px 24px 36px;max-width:1280px;margin:0 auto;width:100%}
+.sa-h{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:18px}
+.sa-h .eye{font-size:10px;font-weight:800;letter-spacing:1.1px;color:#8b97a8;margin-bottom:4px}
+.sa-h h1{margin:0;font-family:Outfit,system-ui,sans-serif;font-size:1.7rem;letter-spacing:-.04em}
+.sa-h p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.sa-date{background:var(--white);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:11px;color:var(--muted);display:flex;gap:7px;align-items:center}
+.sa-h-row{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.sa-periods{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sa-periods button{border:1px solid var(--line);background:var(--white);border-radius:999px;padding:8px 12px;font-size:11px;font-weight:750;cursor:pointer;color:#445}
+.sa-periods button.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.sa-hero{display:grid;grid-template-columns:1.15fr 1.15fr minmax(220px,260px);gap:12px;margin-bottom:14px}
+.sa-type{border:0;border-radius:16px;padding:20px;color:#fff;text-align:left;cursor:pointer;min-height:118px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 12px 28px rgba(0,40,100,.14);position:relative;overflow:hidden}
+.sa-type:after{content:"";position:absolute;right:-30px;top:-40px;width:120px;height:120px;border-radius:50%;border:1px solid rgba(255,255,255,.18);pointer-events:none;box-shadow:0 0 0 28px rgba(255,255,255,.05)}
+.sa-type.ov{background:linear-gradient(135deg,#061428,#1d4ed8 55%,#3b82f6)}
+.sa-type.rv{background:linear-gradient(135deg,#050505,#0f172a 45%,#1e3a5f)}
+.sa-type .top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}
+.sa-type .badge{font-size:12px;font-weight:800;letter-spacing:.1em;opacity:.95}
+.sa-type .num{font-family:Outfit,system-ui,sans-serif;font-size:2.55rem;font-weight:800;letter-spacing:-.05em;position:relative;z-index:1}
+.sa-type .tiny{font-size:11px;opacity:.8;position:relative;z-index:1}
+.sa-scope{border:1px solid var(--line);border-radius:16px;padding:20px;background:var(--white);box-shadow:0 8px 22px rgba(20,40,80,.05);display:flex;flex-direction:column;justify-content:center;gap:6px;min-height:118px}
+.sa-scope .lbl{font-size:12px;color:var(--muted);font-weight:700}
+.sa-scope .val{font-family:Outfit,system-ui,sans-serif;font-size:1.45rem;font-weight:800;color:var(--blue);letter-spacing:-.03em}
+.sa-scope .sub{font-size:12px;color:#64748b}
+.sa-stage-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:14px}
+.sa-stage-card{border:1px solid var(--line);border-radius:14px;padding:14px 12px;background:var(--white);box-shadow:0 6px 16px rgba(20,40,80,.04);display:flex;flex-direction:column;gap:10px;min-height:96px}
+.sa-stage-card .row{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.sa-stage-card .lbl{font-size:11px;color:var(--muted);font-weight:700}
+.sa-stage-card .cnt{font-family:Outfit,system-ui,sans-serif;font-size:1.55rem;font-weight:800;letter-spacing:-.03em}
+.sa-stage-ico{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;flex:none}
+.sa-stage-ico.blue{background:#e8f1ff;color:var(--blue)}.sa-stage-ico.red{background:#fdecec;color:var(--bad)}
+.sa-stage-ico.violet{background:#f3e8ff;color:#6d28d9}.sa-stage-ico.green{background:#e9f7f0;color:var(--ok)}
+.sa-stage-ico.gray{background:#eef1f5;color:#64748b}
+.sa-stage-card.blue .cnt{color:var(--blue)}.sa-stage-card.red .cnt{color:var(--bad)}
+.sa-stage-card.violet .cnt{color:#6d28d9}.sa-stage-card.green .cnt{color:var(--ok)}.sa-stage-card.gray .cnt{color:#475569}
+.sa-mid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}
+.sa-q{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--white);display:flex;gap:12px;align-items:center;box-shadow:0 6px 16px rgba(20,40,80,.04)}
+.sa-q .ico{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:#fff;flex:none}
+.sa-q.orange .ico{background:#ea580c}.sa-q.green .ico{background:var(--ok)}
+.sa-q b{display:block;font-size:11px;color:var(--muted);font-weight:700}.sa-q strong{font-family:Outfit,system-ui,sans-serif;font-size:1.55rem;letter-spacing:-.03em}.sa-q small{color:#8a96a8;font-size:11px}
+.sa-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:0 0 14px}
+.sa-stat{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--white);box-shadow:0 6px 16px rgba(20,40,80,.04)}.sa-stat span{display:block;font-size:11px;color:var(--muted)}.sa-stat b{font-family:Outfit,system-ui,sans-serif;font-size:1.4rem;letter-spacing:-.03em}
+.sa-panel{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 8px 22px rgba(20,40,80,.04)}
+.sa-panel-h{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.sa-panel-h h2{margin:0;font-size:15px;font-family:Outfit,system-ui,sans-serif;color:#0f172a}
+.sa-link{border:0;background:none;color:var(--blue);font-size:12px;font-weight:800;cursor:pointer}
+.sa-lists{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:8px}
+.sa-rc,.sa-vct{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;max-height:none;overflow:visible}
+.sa-rc li,.sa-vct li{border:0;border-bottom:1px solid #eef2f7;border-radius:0;padding:12px 4px;display:flex;align-items:center;gap:12px;background:transparent}
+.sa-rc li:last-child,.sa-vct li:last-child{border-bottom:0}
+.sa-rc .rank,.sa-vct .rank{font-size:12px;font-weight:800;color:var(--blue);min-width:28px}
+.sa-avimg{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#e8f1ff;flex:none;display:grid;place-items:center;font-size:11px;font-weight:800;color:var(--blue);overflow:hidden}
+.sa-avimg img{width:100%;height:100%;object-fit:cover;display:block}
+.sa-rc .body,.sa-vct .body{flex:1;min-width:0}.sa-rc .body b,.sa-vct .body b{display:block;font-size:13px;font-weight:780;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sa-rc .body span,.sa-vct .body span{font-size:11px;color:var(--muted)}
+.sa-rc .cnt,.sa-vct .cnt{font-weight:800;font-family:Outfit,system-ui,sans-serif;color:#1d4ed8;background:#ebf4ff;border-radius:999px;padding:5px 11px;font-size:12px;min-width:42px;text-align:center}
+.sa-kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.sa-kpi .card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 6px 16px rgba(20,40,80,.04)}
+.sa-kpi .card .t{font-size:12px;color:var(--muted);font-weight:700;display:flex;justify-content:space-between;align-items:center}
+.sa-kpi .card .v{font-family:Outfit,system-ui,sans-serif;font-size:1.7rem;font-weight:800;letter-spacing:-.04em;margin-top:8px}
+.sa-kpi .card .s{font-size:11px;color:#94a3b8;margin-top:6px}
+.sa-kpi .ico{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue)}
+.sa-kpi .ico.green{background:#e9f7f0;color:var(--ok)}.sa-kpi .ico.amber{background:#fff4e6;color:var(--warn)}.sa-kpi .ico.purple{background:#f3e8ff;color:#7c3aed}
+.sa-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.sa-tabs button{border:1px solid var(--line);background:var(--white);border-radius:999px;padding:8px 12px;font-size:12px;font-weight:750;cursor:pointer;color:#475569}
+.sa-tabs button.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.sa-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sa-btn{border:0;border-radius:10px;background:var(--blue);color:#fff;font-size:12px;font-weight:800;padding:10px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.sa-btn:hover{background:var(--blue-deep)}
+.sa-btn.ghost{background:var(--white);color:#334;border:1px solid var(--line)}
+.sa-btn.outline{background:var(--white);color:var(--blue);border:1px solid #93c5fd}
+.sa-progress{height:8px;background:#e2e8f0;border-radius:99px;overflow:hidden;min-width:80px}
+.sa-progress>i{display:block;height:100%;background:linear-gradient(90deg,#2563eb,#22c55e);border-radius:99px}
+.sa-money-ok{background:#e9f7f0;color:#15803d;padding:4px 10px;border-radius:999px;font-weight:800;font-size:12px}
+.sa-money-bad{background:#fdecec;color:#b91c1c;padding:4px 10px;border-radius:999px;font-weight:800;font-size:12px}
+.sa-seal{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.sa-seal .box{background:linear-gradient(110deg,#fff,#e8f2ff);border:1px solid #d1e2fa;border-radius:14px;padding:16px;display:flex;gap:12px;align-items:center}
+.sa-seal .box b{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;letter-spacing:-.02em}
+.sa-labgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.sa-labtile{border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--white);text-align:left;cursor:pointer;display:flex;gap:12px;align-items:flex-start;min-height:110px;box-shadow:0 6px 16px rgba(20,40,80,.04);color:inherit;font:inherit;width:100%}
+.sa-labtile:hover{border-color:#93c5fd;background:#f8fbff}
+.sa-labtile .num{font-size:11px;font-weight:800;color:#94a3b8;min-width:18px}
+.sa-labtile .thumb{width:56px;height:56px;border-radius:12px;background:#eff6ff;color:var(--blue);display:grid;place-items:center;flex:none}
+.sa-labtile h3{margin:0 0 4px;font-size:14px;font-family:Outfit,system-ui,sans-serif}
+.sa-labtile p{margin:0;font-size:12px;color:var(--muted);line-height:1.35}
+.sa-veh{display:flex;flex-direction:column;gap:12px}
+.sa-vehcard{display:grid;grid-template-columns:140px 1fr auto;gap:14px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--white);box-shadow:0 6px 16px rgba(20,40,80,.04)}
+.sa-vehcard .ph{width:140px;height:96px;border-radius:10px;background:linear-gradient(135deg,#e2e8f0,#cbd5e1);display:grid;place-items:center;color:#64748b}
+.sa-vehcard h3{margin:0 0 6px;font-size:15px;font-family:Outfit,system-ui,sans-serif}
+.sa-tags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+.sa-tag{background:#eef2ff;color:#334155;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700}
+.sa-tag.plate{background:#dbeafe;color:#1d4ed8}
+.sa-docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sa-docs small{display:block;font-size:10px;color:var(--muted)}.sa-docs b{font-size:12px}
+.sa-reportgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.sa-empty-polished{text-align:center;padding:48px 20px;color:var(--muted)}
+.sa-empty-polished .ico{width:56px;height:56px;border-radius:16px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;margin:0 auto 14px}
+.sa-empty-polished h3{margin:0 0 6px;font-family:Outfit,system-ui,sans-serif;color:var(--ink);font-size:17px}
+.sa-empty-polished p{margin:0 auto;max-width:420px;font-size:13px;line-height:1.5}
+@media(max-width:960px){
+.sa-hero{grid-template-columns:1fr 1fr}.sa-stage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sa-lists{grid-template-columns:1fr}.sa-stats{grid-template-columns:1fr 1fr}.sa-kpi{grid-template-columns:1fr 1fr}
+.sa-labgrid,.sa-reportgrid,.sa-seal{grid-template-columns:1fr}.sa-vehcard{grid-template-columns:1fr}.sa-vehcard .ph{width:100%;height:120px}
+.sa-side{position:fixed;inset:0 auto 0 0;transform:translateX(-105%);z-index:40;transition:transform .2s}
+.sa-side.open{transform:none}.sa-menu{display:grid}.sa-overlay{display:none;position:fixed;inset:0;background:rgba(10,20,40,.45);z-index:30}
+.sa-overlay.on{display:block}
+}
+.sa-mod{padding:8px 2px}.sa-mod h2{margin:0 0 6px;font-family:Outfit,system-ui,sans-serif}.sa-mod p{margin:0;color:var(--muted);font-size:13px}
+.sa-stat-btn{border:0;text-align:left;cursor:pointer;font:inherit;color:inherit;width:100%}
+.sa-stat-btn:hover{border-color:#c5d6f0;background:#f7faff}
+.sa-menu{display:none;border:0;background:var(--bg);border-radius:9px;padding:8px;cursor:pointer}
+.sa-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.sa-tools .sa-search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;background:var(--white);padding:0 12px;min-width:220px;flex:1;max-width:360px;color:#9aa6b6}
+.sa-tools .sa-search input{border:0;outline:0;background:transparent;width:100%;height:38px;font-size:13px;color:var(--ink)}
+.sa-tools select{height:38px;border:1px solid var(--line);border-radius:10px;background:var(--white);padding:0 10px;font-size:12px;font-weight:700;color:#334;min-width:130px}
+.sa-tools .sa-btn{height:38px;border:0;border-radius:10px;background:var(--blue);color:#fff;font-size:12px;font-weight:800;padding:0 14px;cursor:pointer}
+.sa-tools .sa-btn:hover{background:var(--blue-deep)}
+.sa-tools .sa-btn.ghost{background:var(--bg);color:#334;border:1px solid var(--line)}
+.sa-meta{font-size:12px;color:var(--muted);margin:0 0 10px}
+.sa-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
+.sa-table{width:100%;border-collapse:collapse;min-width:720px;background:var(--white)}
+.sa-table th{text-align:left;background:#f8fafc;padding:11px 14px;font-size:10px;letter-spacing:.4px;font-weight:800;color:#8a96a8;border-bottom:1px solid var(--line);white-space:nowrap}
+.sa-table td{padding:12px 14px;border-top:1px solid #eef2f7;font-size:12px;color:#4b586c;vertical-align:top}
+.sa-table tr:nth-child(even) td{background:#fbfdff}
+.sa-table .primary{display:block;font-weight:780;color:#0a0a0a;margin-bottom:3px}
+.sa-table .sub{display:block;font-size:11px;color:#8a96a8}
+.sa-badge{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:750;white-space:nowrap;background:#eef1f5;color:#526072}
+.sa-badge.ok{background:#e9f7f0;color:#0f8a4b}.sa-badge.warn{background:#fff4e6;color:#b45309}
+.sa-badge.bad{background:#fdecec;color:#c62828}.sa-badge.blue{background:#e8f1ff;color:#2563eb}
+.sa-badge.off{background:#fde8e8;color:#c62828}
+/* Connector / platform status pills — more prominent */
+.sa-intcard .sa-badge,.sa-labtile .sa-badge{font-size:12px;padding:6px 12px;font-weight:800;letter-spacing:.01em}
+.sa-intcard .sa-badge.ok,.sa-labtile .sa-badge.ok{font-size:12.5px;padding:7px 13px}
+.sa-intcard .sa-badge.off,.sa-labtile .sa-badge.off{font-size:13px;padding:7px 14px;background:#fde8e8;color:#c62828}
+.sa-pager{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;flex-wrap:wrap}
+.sa-pager.top{margin-top:0;margin-bottom:12px}
+.sa-pager span{font-size:12px;color:var(--muted)}
+.sa-pager .sa-btn[disabled]{opacity:.45;cursor:not-allowed}
+.sa-empty{text-align:center;padding:36px 16px;color:#8a96a8;font-size:13px}
+/* Verification rich cards (mockup layout, light SA theme) */
+.sa-vcards{display:flex;flex-direction:column;gap:10px}
+.sa-vcard{display:grid;grid-template-columns:88px minmax(0,1fr) 88px;gap:16px;align-items:stretch;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(20,40,80,.04)}
+.sa-vcard-left{display:flex;flex-direction:column;align-items:center;gap:8px;justify-content:center}
+.sa-vcard-thumb{width:72px;height:72px;border-radius:12px;background:#fff;border:1px solid #e8eef5;display:grid;place-items:center;overflow:hidden;color:var(--blue);flex:none;position:relative}
+.sa-vcard-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#fff}
+.sa-vcard-thumb .i{width:32px;height:32px}
+.sa-vcard-status{font-size:12px;font-weight:800;letter-spacing:.01em;text-align:center;line-height:1.2}
+.sa-vcard-status.ok{color:var(--ok)}.sa-vcard-status.warn{color:var(--warn)}.sa-vcard-status.bad{color:var(--bad)}.sa-vcard-status.blue{color:var(--blue)}.sa-vcard-status.muted{color:var(--muted)}
+.sa-vcard-main{min-width:0;display:flex;flex-direction:column;gap:10px}
+.sa-vcard-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.sa-vcard-name{margin:0;font-family:Outfit,system-ui,sans-serif;font-size:1.05rem;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-transform:uppercase;line-height:1.25;word-break:break-word}
+.sa-vcard-type{flex:none;display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:28px;padding:0 10px;border-radius:999px;background:#2563eb;color:#fff;font-size:11px;font-weight:800;letter-spacing:.04em}
+.sa-vcard-type.rv{background:#0f172a}
+.sa-vcard-meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;font-size:12px;color:#475569}
+.sa-vcard-ref{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;font-weight:700;color:#334155;word-break:break-all}
+.sa-vcard-pdf{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;border:1.5px solid #14b8a6;color:#0f766e;font-size:10px;font-weight:800;letter-spacing:.02em;background:#f0fdfa}
+.sa-vcard-divider{width:1px;height:14px;background:#cbd5e1;flex:none}
+.sa-vcard-rc{font-weight:700;color:#64748b}
+.sa-vcard-specs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px 12px;padding-top:10px;border-top:1px solid #eef2f7}
+.sa-vcard-spec{min-width:0}
+.sa-vcard-spec span{display:block;font-size:10px;font-weight:700;color:#94a3b8;margin-bottom:3px;letter-spacing:.02em}
+.sa-vcard-spec b{display:block;font-size:13px;font-weight:780;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sa-vcard-spec b.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:12px}
+.sa-vcard-action{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;align-self:center}
+.sa-vcard-dl{width:52px;height:52px;border-radius:50%;border:0;background:#16a34a;color:#fff;display:grid;place-items:center;cursor:pointer;text-decoration:none;box-shadow:0 8px 18px rgba(22,163,74,.28)}
+.sa-vcard-dl:hover{background:#15803d}
+.sa-vcard-dl .i{width:22px;height:22px}
+.sa-vcard-dl[aria-disabled="true"],.sa-vcard-dl:disabled{opacity:.35;cursor:not-allowed;pointer-events:none;box-shadow:none;background:#94a3b8}
+.sa-vcard-dl-label{font-size:11px;font-weight:800;color:var(--ok)}
+.sa-vcard-dl-label.off{color:#94a3b8}
+@media(max-width:900px){
+.sa-vcard{grid-template-columns:72px minmax(0,1fr);grid-template-rows:auto auto}
+.sa-vcard-action{grid-column:1 / -1;flex-direction:row;justify-content:flex-end;padding-top:4px;border-top:1px solid #eef2f7}
+.sa-vcard-specs{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:560px){
+.sa-vcard{grid-template-columns:1fr;padding:14px}
+.sa-vcard-left{flex-direction:row;justify-content:flex-start;gap:12px}
+.sa-vcard-specs{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+.sa-soon{padding:8px 2px}.sa-soon h2{margin:0 0 6px;font-family:Outfit,system-ui,sans-serif}.sa-soon p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.sa-top--minimal{height:0;padding:0;border:0;overflow:visible;background:transparent}
+.sa-top--minimal .sa-menu{position:absolute;top:14px;left:14px;z-index:5;display:none;border:1px solid var(--line);background:var(--white);border-radius:9px;padding:8px;cursor:pointer}
+@media(max-width:960px){.sa-top--minimal{height:52px;padding:0 14px;border-bottom:1px solid var(--line);background:var(--white);display:flex;align-items:center}.sa-top--minimal .sa-menu{display:grid;position:static}}
+
+.sa-intgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:8px}
+.sa-intcard{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 8px 22px rgba(20,40,80,.05);display:flex;flex-direction:column;gap:14px;min-height:190px}
+.sa-intcard .top{display:flex;align-items:flex-start;gap:12px}
+.sa-intcard .logo{width:48px;height:48px;border-radius:14px;display:grid;place-items:center;flex:none;overflow:hidden;background:#fff;border:1px solid #e8eef5;padding:5px;box-sizing:border-box}
+.sa-intcard .logo img{width:100%;height:100%;object-fit:contain;display:block}
+.sa-intcard .logo.fallback{color:#fff;font-family:Outfit,system-ui,sans-serif;font-weight:800;font-size:13px;letter-spacing:-.02em;border:0;padding:0}
+.sa-intcard .logo.fallback.zoho{background:linear-gradient(135deg,#0f3d68,#1d4ed8)}
+.sa-intcard .logo.fallback.razor{background:linear-gradient(135deg,#0b1b33,#2563eb)}
+.sa-intcard .logo.fallback.emaap{background:linear-gradient(135deg,#052e1c,#15803d)}
+.sa-intcard .logo.fallback.yesone{background:linear-gradient(135deg,#1e1b4b,#4f46e5)}
+.sa-intcard h3{margin:0 0 4px;font-family:Outfit,system-ui,sans-serif;font-size:17px;letter-spacing:-.02em}
+.sa-intcard p{margin:0;font-size:13px;color:var(--muted);line-height:1.45}
+.sa-intcard .foot{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;flex-wrap:wrap}
+.sa-int-modal{position:fixed;inset:0;background:rgba(10,20,40,.48);display:flex;align-items:center;justify-content:center;padding:20px;z-index:80}
+.sa-int-dialog{width:min(100%,440px);background:#fff;border-radius:16px;padding:22px;box-shadow:0 24px 60px rgba(0,0,0,.2)}
+.sa-int-dialog h2{margin:0;font-family:Outfit,system-ui,sans-serif;font-size:1.25rem}
+.sa-int-dialog .fields{display:flex;flex-direction:column;gap:10px;margin:16px 0}
+.sa-int-dialog label{font-size:11px;font-weight:800;color:#64748b}
+.sa-int-dialog input,.sa-int-dialog select{width:100%;border:1px solid var(--line);border-radius:10px;padding:11px 12px;font-size:13px;background:#f8fafc}
+.sa-int-dialog .actions{display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap}
+.zoho-org-list{display:grid;gap:8px;max-height:min(52vh,420px);overflow:auto;margin:0 0 14px;padding:2px}
+.zoho-org-item{display:grid;gap:2px;text-align:left;border:1px solid var(--line);background:#fff;border-radius:10px;padding:12px 14px;cursor:pointer;width:100%;font:inherit}
+.zoho-org-item:hover{border-color:#94a3b8}
+.zoho-org-item.is-selected{border-color:#1d4ed8;background:#eff6ff}
+.zoho-org-item strong{font-size:13px;color:#0f172a}
+.zoho-org-item span{font-size:12px;color:#64748b}
+.sa-int-modal.sa-int-modal--fs{padding:0;align-items:stretch;justify-content:stretch;background:#0b1220}
+.sa-int-dialog.sa-int-dialog--fs{width:100%;max-width:none;height:100%;min-height:100%;border-radius:0;padding:0;box-shadow:none;display:flex;flex-direction:column;background:#f4f7fb}
+.sa-int-dialog--fs .sa-emaap-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:18px 22px;background:#fff;border-bottom:1px solid var(--line);flex:none}
+.sa-int-dialog--fs .sa-emaap-body{flex:1;overflow:auto;padding:18px 22px 28px;display:grid;gap:18px;align-content:start}
+.sa-int-dialog--fs .sa-emaap-foot{display:flex;justify-content:flex-end;gap:8px;padding:14px 22px;background:#fff;border-top:1px solid var(--line);flex:none}
+.sa-emaap-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.sa-emaap-card h3{margin:0 0 4px;font-family:Outfit,system-ui,sans-serif;font-size:15px}
+.sa-emaap-card .sa-emaap-sub{margin:0 0 12px;font-size:12px;color:var(--muted)}
+.sa-emaap-base{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 12px}
+.sa-emaap-base code{font-size:12px;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;padding:7px 10px;color:#0f172a}
+.sa-emaap-api-group{margin-top:14px}
+.sa-emaap-api-group h4{margin:0 0 8px;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#475569}
+.sa-emaap-api-table{width:100%;border-collapse:collapse;font-size:12px}
+.sa-emaap-api-table th,.sa-emaap-api-table td{text-align:left;padding:8px 10px;border-bottom:1px solid #eef2f7;vertical-align:top}
+.sa-emaap-api-table th{font-size:10px;font-weight:800;color:#64748b;text-transform:uppercase;letter-spacing:.04em;background:#f8fafc}
+.sa-emaap-method{display:inline-block;min-width:52px;text-align:center;font-size:10px;font-weight:800;border-radius:6px;padding:3px 6px;background:#e8f1ff;color:#1d4ed8}
+.sa-emaap-method.post{background:#ecfdf5;color:#047857}
+.sa-emaap-method.put,.sa-emaap-method.patch{background:#fff7ed;color:#c2410c}
+.sa-emaap-method.delete{background:#fef2f2;color:#b91c1c}
+.sa-emaap-path{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;color:#0f172a;word-break:break-all}
+@media(max-width:1100px){.sa-intgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.sa-intgrid{grid-template-columns:1fr}}
+/* Legacy Super Admin helpers (unused by sa-shell) */
 .vps-range{display:flex;gap:4px;background:#f2f5fa;padding:3px;border-radius:9px}.vps-range button{border:0;background:transparent;color:#7b8799;font-size:10.5px;font-weight:800;border-radius:7px;padding:7px 12px}.vps-range button.active{background:#0866ff;color:#fff;box-shadow:0 1px 4px #0866ff44}.vps-hero{background:linear-gradient(108deg,#112746,#11203c 58%,#0e3469);position:relative;overflow:hidden;border-radius:15px;min-height:148px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 26px;color:#fff;margin-bottom:16px}.vps-hero:after{content:"";position:absolute;right:-70px;top:-100px;border:1px solid #a9cbff30;border-radius:50%;height:230px;width:230px;box-shadow:0 0 0 44px #9ec5ff0c,0 0 0 88px #9ec5ff08;pointer-events:none}.vps-hero-main,.vps-hero-side{position:relative;z-index:1}.vps-hero-label{font-size:10px;font-weight:850;color:#a6c9ff;letter-spacing:1.1px;margin-bottom:6px}.vps-hero h2{font-size:26px;letter-spacing:-.7px;font-weight:820;margin:0 0 12px}.vps-hero-pills{display:flex;flex-wrap:wrap;gap:8px}.vps-chip{display:inline-flex;align-items:center;gap:7px;background:#ffffff18;border:1px solid #ffffff22;border-radius:99px;padding:7px 11px;font-size:11px;font-weight:700;color:#d7e5f8}.vps-chip .dot{width:7px;height:7px;border-radius:50%;background:#13a36f;flex:none}.vps-chip.warn .dot{background:#e2a12b}.vps-chip.bad .dot{background:#e25555}.vps-uptime{text-align:center;min-width:96px}.vps-uptime-ring{width:86px;height:86px;border-radius:50%;margin:0 auto 8px;background:conic-gradient(#22c55e 0 99.9%,#ffffff22 99.9% 100%);display:grid;place-items:center}.vps-uptime-ring>span{width:64px;height:64px;border-radius:50%;background:#112746;display:grid;place-items:center;font-size:11px;font-weight:800;line-height:1.15;color:#fff}.vps-uptime small{display:block;font-size:10px;color:#a9bdd8;letter-spacing:.4px;font-weight:700}.res-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.res-card{background:#fff;border:1px solid var(--border);border-radius:13px;padding:15px;box-shadow:var(--shadow);min-width:0}.res-card .res-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}.res-card .res-name{font-size:12px;font-weight:780;color:#3a465a}.res-card .res-ico{width:30px;height:30px;border-radius:9px;display:grid;place-items:center}.res-card .res-ico.cpu{background:#ebf3ff;color:#0866ff}.res-card .res-ico.ram{background:#f3eaff;color:#7c3aed}.res-card .res-ico.disk{background:#e9f7f0;color:#128260}.res-card .res-ico.bw{background:#fff4e6;color:#b16d12}.res-card .res-val{font-size:26px;font-weight:830;letter-spacing:-1px;line-height:1.1}.res-card .res-sub{font-size:10.5px;color:#97a3b2;margin-top:6px}.svc-panel .svc-list{padding:4px 14px 14px;display:flex;flex-direction:column;gap:8px}.svc-row{display:flex;align-items:center;gap:12px;padding:12px 13px;border:1px solid #eef2f7;border-radius:11px;background:#fbfcfe}.svc-ico{width:34px;height:34px;border-radius:9px;background:#edf3ff;color:#0866ff;display:grid;place-items:center;flex:none}.svc-meta{flex:1;min-width:0}.svc-meta b{display:block;font-size:12.5px;font-weight:780;color:#1f2a3c}.svc-meta small{display:block;font-size:10px;color:#94a0b0;margin-top:3px}.svc-pill{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:5px 10px;font-size:10.5px;font-weight:780;white-space:nowrap}.svc-pill .dot{width:6px;height:6px;border-radius:50%;flex:none}.svc-pill.ok{background:var(--green-bg);color:var(--green)}.svc-pill.ok .dot{background:var(--green)}.svc-pill.bad{background:#fdecec;color:#c0392b}.svc-pill.bad .dot{background:#c0392b}.svc-pill.warn{background:var(--amber-bg);color:var(--amber)}.svc-pill.warn .dot{background:var(--amber)}.svc-pill.muted{background:#eef1f5;color:#6b7889}.svc-pill.muted .dot{background:#9aa6b3}.admin-ops-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.85fr);gap:16px;align-items:start}@media(max-width:900px){.res-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-ops-grid{grid-template-columns:1fr}.vps-hero{flex-direction:column;align-items:flex-start}.vps-hero-side{align-self:flex-end}}
 /* non dashboard */
 .module-panel{padding:22px}.module-icon{width:48px;height:48px;background:#e9f1ff;color:var(--blue);border-radius:13px;display:grid;place-items:center;margin-bottom:12px}.module-title{font-size:17px;font-weight:800;letter-spacing:-.4px;margin:0}.module-summary{font-size:12px;color:#7c899a;margin:7px 0 17px}.module-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.module-item{border:1px solid var(--border);border-radius:11px;padding:15px;background:#fff;display:flex;align-items:center;gap:12px;min-height:72px;text-align:left;color:#243147}.module-item:hover{background:#f8faff}.module-item .i{color:var(--blue)}.module-item span{flex:1}.module-item b{display:block;font-size:12px}.module-item small{display:block;color:#96a3b3;font-size:10px;margin-top:3px}
@@ -51,13 +343,13 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
 .auth-card-wrap{flex:1;min-height:0;padding:4px 14px 14px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:2;overflow:hidden}
 .auth-stack{width:min(100%,400px);display:flex;flex-direction:column;gap:10px;flex:none;animation:auth-rise .55s .08s ease both}
 .auth-card{width:100%;background:#fff;border:1px solid rgba(228,235,243,.9);border-radius:14px;padding:12px 16px 10px;box-shadow:0 14px 32px rgba(10,30,70,.09),0 2px 0 rgba(255,255,255,.8) inset}
-.auth-steps{display:flex;align-items:center;justify-content:center;gap:6px;margin:0 0 8px}
-.auth-step{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;color:#93a1b3;font-family:Outfit,system-ui,sans-serif}
+
+
 .auth-step .num{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#e8eef6;color:#7d8b9d;font-size:10px;font-weight:800}
-.auth-step.on{color:var(--royal)}.auth-step.on .num{background:var(--royal);color:#fff;box-shadow:0 3px 8px rgba(0,86,210,.32)}
-.auth-step.done{color:var(--wa-deep)}.auth-step.done .num{background:var(--wa);color:#fff}
-.auth-step-sep{width:18px;height:2px;border-radius:99px;background:#d9e2ee;flex:none}
-.auth-step-sep.on{background:linear-gradient(90deg,var(--royal),#8eb6ff)}
+.auth-step.on .num{background:var(--royal);color:#fff;box-shadow:0 3px 8px rgba(0,86,210,.32)}
+.auth-step.done .num{background:var(--wa);color:#fff}
+
+
 .auth-card h2{margin:0 0 2px;font-family:Outfit,system-ui,sans-serif;font-size:1.15rem;font-weight:800;letter-spacing:-.03em;color:var(--navy)}
 .auth-card .auth-sub{margin:0 0 8px;font-size:12.5px;color:var(--muted);line-height:1.35}
 .auth-error{background:#fff1f0;color:#b42318;border:1px solid #f3c6c2;border-radius:9px;padding:7px 9px;font-size:12px;margin-bottom:8px}
@@ -102,17 +394,17 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
 .auth-foot-chip{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:99px;background:#fff;border:1px solid #e2e9f2;color:#5f7086;font-size:9px;font-weight:700;font-family:Outfit,system-ui,sans-serif;line-height:1}
 .auth-foot-chip svg{width:10px;height:10px;flex:none;color:var(--royal)}
 .auth-foot-chip.wa svg{color:var(--wa)}
-.auth-otp-cells{display:flex;gap:6px;justify-content:center;margin:4px 0 8px}
-.auth-otp-cell{width:38px;height:42px;border:1px solid #d5deea;border-radius:9px;display:grid;place-items:center;font-family:Outfit,system-ui,sans-serif;font-size:1.15rem;font-weight:700;color:var(--ink);background:#fff;box-shadow:inset 0 1px 0 #fff}
-.auth-otp-cell.filled{border-color:#9fc2ff;background:#f5f9ff}
-.auth-otp-cell.active{border-color:var(--royal);box-shadow:0 0 0 3px rgba(0,86,210,.14)}
-.auth-keypad{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin:4px 0 2px;user-select:none}
-.auth-key{border:1px solid #e2e9f2;background:#f8fafc;border-radius:9px;min-height:38px;font-family:Outfit,system-ui,sans-serif;font-size:1.05rem;font-weight:700;color:#243147;cursor:pointer;transition:background .12s,transform .12s}
-.auth-key:hover{background:#eef4fb}.auth-key:active{transform:scale(.97);background:#e5eef8}
-.auth-key.ghost{color:#667789;font-size:11px;font-weight:700}.auth-key.danger{color:#b42318}
-.auth-otp-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-.auth-otp-actions .btn{flex:1;min-width:90px;border:1px solid #dae4f0;background:#fff;color:#44546b;border-radius:9px;font-size:12px;font-weight:700;padding:8px 12px;min-height:36px;cursor:pointer;font-family:inherit}
-.auth-otp-actions .btn:hover{background:#f6f9ff}
+
+
+
+
+
+
+
+
+
+
+
 .auth-hint{font-size:10.5px;color:#8794a7;margin:4px 0 0;line-height:1.3;text-align:center}
 @keyframes auth-rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @keyframes auth-pulse{0%,100%{box-shadow:0 0 0 4px #f3f6fb,0 6px 16px rgba(0,86,210,.4),0 0 18px rgba(94,176,255,.28)}50%{box-shadow:0 0 0 4px #f3f6fb,0 8px 20px rgba(0,86,210,.5),0 0 26px rgba(94,176,255,.42)}}
@@ -153,7 +445,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
 @media(max-width:420px){
 .auth-shell{height:auto;max-height:none;min-height:100dvh;overflow:auto}
 .auth-feat b{font-size:9px}
-.auth-otp-cell{width:34px;height:40px;font-size:1.05rem}
+
 }
 @media(prefers-reduced-motion:reduce){.auth-badge,.auth-brand,.auth-hero-copy,.auth-card{animation:none!important}}
 </style></head><body class="desktop"><div id="app"></div><script>(() => {
@@ -181,8 +473,8 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
   }
 
   function clearAuth() {
-    sessionStorage.removeItem(TOKEN_KEY);
-    sessionStorage.removeItem(USER_KEY);
+    localStorage.removeItem(TOKEN_KEY);
+    localStorage.removeItem(USER_KEY);
   }
 
   function formatAadhaarInput(raw) {
@@ -207,24 +499,13 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
     const waIcon = `<svg class="wa-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19.05 4.91A9.82 9.82 0 0 0 12.04 2C6.55 2 2.1 6.45 2.1 11.94c0 1.76.46 3.47 1.34 4.98L2 22l5.25-1.38c1.45.79 3.08 1.21 4.77 1.21h.01c5.49 0 9.94-4.45 9.94-9.94a9.86 9.86 0 0 0-2.92-6.98Zm-7.01 15.24h-.01a8.22 8.22 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.23 8.23 0 0 1-1.26-4.39c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.2 8.2 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.24 8.24Zm4.52-6.16c-.25-.12-1.47-.72-1.7-.8-.23-.09-.39-.12-.56.12-.16.25-.64.8-.78.96-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.35-.77-1.85-.2-.48-.41-.42-.56-.42h-.48c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28Z"/></svg>`;
     const logoMark = `<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="18" fill="none" stroke="#7eb6ff" stroke-width="2.2"/><circle cx="24" cy="24" r="13.5" fill="none" stroke="#d6e8ff" stroke-width="1.4" opacity=".7"/><path d="M24 11v13l8 4" stroke="#9fd0ff" stroke-width="2.2" stroke-linecap="round"/><circle cx="24" cy="24" r="2.4" fill="#25D366"/><path d="M17.5 25.2 21.4 29l8.4-9.2" fill="none" stroke="#25D366" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
     const shieldBadge = `<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2.5 20 6v5.8c0 4.7-3.4 7.8-8 9.7-4.6-1.9-8-5-8-9.7V6l8-3.5Z" fill="rgba(255,255,255,.14)" stroke="currentColor" stroke-width="1.6"/><rect x="9.2" y="10.2" width="5.6" height="5" rx="1.2" fill="#fff"/><path d="M10.4 10.2V9a1.6 1.6 0 0 1 3.2 0v1.2" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/></svg>`;
-    const stepsHtml = (active) => {
-      const s1 = active === 1 ? 'on' : (active > 1 ? 'done' : '');
-      const s2 = active === 2 ? 'on' : '';
-      const sep = active >= 2 ? 'on' : '';
-      return `<div class="auth-steps" aria-label="Sign-in steps">
-        <div class="auth-step ${s1}"><span class="num">${active > 1 ? '✓' : '1'}</span><span>Credentials</span></div>
-        <div class="auth-step-sep ${sep}" aria-hidden="true"></div>
-        <div class="auth-step ${s2}"><span class="num">2</span><span>WhatsApp OTP</span></div>
-      </div>`;
-    };
-
     const features = `<div class="auth-features" aria-label="Security features">
       <div class="auth-feat"><div class="auth-feat-ico">${serverIcon}</div><b>Secure VPS Auth</b></div>
       <div class="auth-feat"><div class="auth-feat-ico">${lockIcon}</div><b>TLS Encryption</b></div>
-      <div class="auth-feat"><div class="auth-feat-ico wa">${waIcon}</div><b>WhatsApp OTP</b></div>
+      <div class="auth-feat"><div class="auth-feat-ico">${checkIcon}</div><b>Password Login</b></div>
     </div>`;
 
-    const trust = `<div class="auth-trust">${svg('<circle cx="12" cy="12" r="9"/><path d="m8 12 2.8 2.8L16.5 9"/>','i','stroke-width="2"')}<span>Secure Server • Encrypted Data • Two-Step Verification</span></div>`;
+    const trust = `<div class="auth-trust">${svg('<circle cx="12" cy="12" r="9"/><path d="m8 12 2.8 2.8L16.5 9"/>','i','stroke-width="2"')}<span>Secure Server • Encrypted Data • Password Sign-In</span></div>`;
     const footChip = (paths, label, cls='') => `<span class="auth-foot-chip ${cls}">${svg(paths,'i','stroke-width="2"')}${label}</span>`;
     const authFoot = `<footer class="auth-foot">
       <div class="auth-foot-brand"><span class="auth-foot-title">GATC – Government Approved Test Center (Calibration)</span></div>
@@ -232,11 +513,11 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       <div class="auth-foot-chips" aria-hidden="true">
         ${footChip('<rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M8 6.5h.01M8 17.5h.01"/>','Secure VPS')}
         ${footChip('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>','Encrypted')}
-        ${footChip('<path d="M12 2.5 20 6v5.8c0 4.7-3.4 7.8-8 9.7-4.6-1.9-8-5-8-9.7V6l8-3.5Z"/><path d="m8.5 12 2.4 2.4L15.5 10"/>','OTP','wa')}
+        ${footChip('<path d="M20 6 9 17l-5-5"/>','Password')}
       </div>
     </footer>`;
 
-    const shell = (stepNum, cardBody, extras='') => `<div class="auth-shell">
+    const shell = (cardBody, extras='') => `<div class="auth-shell">
       <header class="auth-hero">
         <div class="auth-hero-glow" aria-hidden="true"></div>
         <div class="auth-hero-grid" aria-hidden="true"></div>
@@ -247,7 +528,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
           </div>
           <div class="auth-hero-copy">
             <h1>Secure Access for <span class="accent">Calibration</span> Operations</h1>
-            <p>Manage calibration, verification, and certificates with a secure, two-step login.</p>
+            <p>Manage calibration, verification, and certificates with a secure password login.</p>
           </div>
         </div>
         <div class="auth-wave" aria-hidden="true"><svg viewBox="0 0 1440 48" preserveAspectRatio="none"><path fill="currentColor" d="M0,22 C240,48 480,0 720,18 C960,36 1200,48 1440,20 L1440,48 L0,48 Z"/></svg></div>
@@ -255,108 +536,14 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       <div class="auth-badge-wrap"><div class="auth-badge">${shieldBadge}</div></div>
       <div class="auth-card-wrap">
         <div class="auth-stack">
-          <div class="auth-card">${stepsHtml(stepNum)}${cardBody}${extras}</div>
+          <div class="auth-card">${cardBody}${extras}</div>
           ${authFoot}
         </div>
       </div>
     </div>`;
 
-    if (step === 'otp') {
-      const digits = String(state.otpValue || '').replace(/\D/g, '').slice(0, 6);
-      const cells = Array.from({ length: 6 }, (_, i) => {
-        const ch = digits[i] || '';
-        const cls = ch ? 'filled' : (i === digits.length ? 'active' : '');
-        return `<div class="auth-otp-cell ${cls}" aria-hidden="true">${ch ? '•' : ''}</div>`;
-      }).join('');
-      const keypad = [1,2,3,4,5,6,7,8,9,'clr',0,'del'].map((k) => {
-        if (k === 'clr') return `<button type="button" class="auth-key ghost" data-key="clr" aria-label="Clear">Clear</button>`;
-        if (k === 'del') return `<button type="button" class="auth-key danger" data-key="del" aria-label="Delete">⌫</button>`;
-        return `<button type="button" class="auth-key" data-key="${k}" aria-label="Digit ${k}">${k}</button>`;
-      }).join('');
-      appRoot.innerHTML = shell(2, `
-        <h2>Enter verification code</h2>
-        <p class="auth-sub">Code for <strong>${escapeHtml(state.phoneHint || 'your registered WhatsApp')}</strong>.</p>
-        ${err}${notice}
-        <form id="otp-form" autocomplete="one-time-code">
-          <input id="otp" name="otp" type="tel" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required value="${escapeHtml(digits)}" aria-label="6-digit OTP" style="position:absolute;opacity:0;pointer-events:none;height:0;width:0"/>
-          <div class="auth-otp-cells" id="otp-cells">${cells}</div>
-          <div class="auth-keypad" id="otp-keypad">${keypad}</div>
-          <p class="auth-hint">One active device only — signing in here signs out other sessions.</p>
-          <button type="submit" class="auth-submit" id="otp-submit">Verify and continue ${arrowIcon}</button>
-          <div class="auth-otp-actions">
-            <button type="button" class="btn" id="otp-back">Back</button>
-            <button type="button" class="btn" id="otp-resend">Resend code</button>
-          </div>
-        </form>`, trust);
-
-      const otpInput = appRoot.querySelector('#otp');
-      const syncCells = () => {
-        const v = String(otpInput.value || '').replace(/\D/g, '').slice(0, 6);
-        otpInput.value = v;
-        const box = appRoot.querySelector('#otp-cells');
-        if (!box) return;
-        box.innerHTML = Array.from({ length: 6 }, (_, i) => {
-          const ch = v[i] || '';
-          const cls = ch ? 'filled' : (i === v.length ? 'active' : '');
-          return `<div class="auth-otp-cell ${cls}">${ch ? '•' : ''}</div>`;
-        }).join('');
-      };
-      const setOtp = (next) => {
-        otpInput.value = String(next || '').replace(/\D/g, '').slice(0, 6);
-        syncCells();
-      };
-      appRoot.querySelector('#otp-keypad')?.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-key]');
-        if (!btn) return;
-        const key = btn.getAttribute('data-key');
-        const cur = otpInput.value || '';
-        if (key === 'clr') setOtp('');
-        else if (key === 'del') setOtp(cur.slice(0, -1));
-        else setOtp(cur + key);
-      });
-      otpInput?.addEventListener('input', syncCells);
-      if (renderLogin._otpKeys) window.removeEventListener('keydown', renderLogin._otpKeys);
-      renderLogin._otpKeys = function onKey(ev) {
-        if (!appRoot.querySelector('#otp-form')) { window.removeEventListener('keydown', onKey); return; }
-        if (ev.key >= '0' && ev.key <= '9') { ev.preventDefault(); setOtp((otpInput.value || '') + ev.key); }
-        else if (ev.key === 'Backspace') { ev.preventDefault(); setOtp((otpInput.value || '').slice(0, -1)); }
-      };
-      window.addEventListener('keydown', renderLogin._otpKeys);
-      syncCells();
-      appRoot.querySelector('#otp-back')?.addEventListener('click', () => renderLogin({ step: 'credentials' }));
-      appRoot.querySelector('#otp-resend')?.addEventListener('click', async () => {
-        const btn = appRoot.querySelector('#otp-resend');
-        if (btn) btn.disabled = true;
-        const { res, json } = await api('/api/v1/auth/otp/resend', { method: 'POST', body: { challengeId: state.challengeId } });
-        if (!res.ok) {
-          renderLogin({ ...state, error: json.error?.message || 'Could not resend OTP', notice: null, otpValue: otpInput?.value || '' });
-          return;
-        }
-        renderLogin({ ...state, phoneHint: json.data?.phoneHint || state.phoneHint, error: null, notice: 'A new code was requested.', otpValue: '' });
-      });
-      appRoot.querySelector('#otp-form')?.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const otp = (otpInput?.value || '').replace(/\D/g, '').slice(0, 6);
-        const submit = appRoot.querySelector('#otp-submit');
-        if (otp.length !== 6) {
-          renderLogin({ ...state, error: 'Enter the 6-digit OTP', notice: null, otpValue: otp });
-          return;
-        }
-        if (submit) submit.disabled = true;
-        const { res, json } = await api('/api/v1/auth/otp/verify', { method: 'POST', body: { challengeId: state.challengeId, otp } });
-        if (!res.ok) {
-          renderLogin({ ...state, error: json.error?.message || 'Invalid OTP', notice: null, otpValue: '' });
-          return;
-        }
-        sessionStorage.setItem(TOKEN_KEY, json.data.token);
-        sessionStorage.setItem(USER_KEY, JSON.stringify(json.data.user || {}));
-        bootApp(json.data.token, json.data.user || {});
-      });
-      return;
-    }
-
     const aadhaarValue = escapeHtml(formatAadhaarInput(state.aadhaar || ''));
-    appRoot.innerHTML = shell(1, `
+    appRoot.innerHTML = shell(`
       <h2>Sign In to GATC</h2>
       <p class="auth-sub">Enter Aadhaar and password to continue.</p>
       ${err}${notice}
@@ -379,7 +566,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
             <button type="button" class="auth-help" id="help-link">Need Help?</button>
           </div>
         </div>
-        <button type="submit" class="auth-submit" id="login-submit"><span>Next</span> ${arrowIcon}</button>
+        <button type="submit" class="auth-submit" id="login-submit"><span>Sign in</span> ${arrowIcon}</button>
       </form>`, `${trust}${features}`);
 
     const aadhaarInput = appRoot.querySelector('#aadhaar');
@@ -434,17 +621,19 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         renderLogin({ step: 'credentials', aadhaar, error: json.error?.message || 'Login failed' });
         return;
       }
-      renderLogin({
-        step: 'otp',
-        challengeId: json.data.challengeId,
-        phoneHint: json.data.phoneHint,
-      });
+      if (!json.data?.token) {
+        renderLogin({ step: 'credentials', aadhaar, error: 'Login succeeded but no session token was returned' });
+        return;
+      }
+      localStorage.setItem(TOKEN_KEY, json.data.token);
+      localStorage.setItem(USER_KEY, JSON.stringify(json.data.user || {}));
+      bootApp(json.data.token, json.data.user || {});
     });
   }
 
 
   async function ensureSession() {
-    const token = sessionStorage.getItem(TOKEN_KEY);
+    const token = localStorage.getItem(TOKEN_KEY);
     if (!token) {
       renderLogin({ step: 'credentials' });
       return;
@@ -460,306 +649,1890 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       });
       return;
     }
-    sessionStorage.setItem(USER_KEY, JSON.stringify(json.data.user || {}));
+    localStorage.setItem(USER_KEY, JSON.stringify(json.data.user || {}));
     bootApp(token, json.data.user || {});
   }
 
   function bootAdminApp(authToken, authUser) {
     const root = document.getElementById('app');
-    const isMobile = document.body.classList.contains('mobile');
     const authState = { token: authToken, user: authUser || {} };
+    const MENUS = [
+      { id: 'Dashboard', label: 'Dashboard', ico: 'dashboard' },
+      { id: 'Verification', label: 'Verification', ico: 'shield' },
+      { id: 'Regional Centers', label: 'Regional Centres', ico: 'building' },
+      { id: 'VCT', label: 'VCT', ico: 'user' },
+      { id: 'RC Quota', label: 'RC Quota', ico: 'hash' },
+      { id: 'RC Wallet', label: 'Wallet', ico: 'wallet' },
+      { id: 'Vehicles', label: 'Car', ico: 'car' },
+      { id: 'Customers', label: 'Customers', ico: 'bag' },
+      { id: 'Products', label: 'Products', ico: 'package' },
+      { id: 'Laboratory', label: 'LAB', ico: 'flask' },
+      { id: 'Purchases', label: 'Purchases', ico: 'cart' },
+      { id: 'Reports', label: 'Reports', ico: 'chart' },
+      { id: 'Settings', label: 'Settings', ico: 'gear' },
+    ];
+    const LIST_PAGES = new Set(['Verification', 'Regional Centers', 'Products', 'VCT', 'Customers']);
+    const VERIF_PAGE_SIZE = 10;
+    const DEFAULT_LIST_LIMIT = 50;
+    function listLimitFor(page) {
+      return page === 'Verification' ? VERIF_PAGE_SIZE : DEFAULT_LIST_LIMIT;
+    }
     const state = {
-      page: 'VPS Health',
+      page: 'Dashboard',
       drawer: false,
-      period: '30D',
+      period: 'month',
       toast: null,
       loading: true,
       error: null,
-      ops: null,
+      dash: null,
+      listLoading: false,
+      listError: null,
+      list: { total: 0, items: [], limit: DEFAULT_LIST_LIMIT, offset: 0 },
+      q: '',
+      statusFilter: '',
+      typeFilter: '',
+      rcFilter: '',
+      rcOptions: [],
+      subTab: '',
+      integrationModal: null,
+      emaap: { configured: false, label: 'Not connected', userIdMasked: null, loading: false },
+      emaapSaving: false,
+      emaapApis: { loading: false, error: null, baseUrl: 'https://emaap.gov.in/gatcapi', counts: { v1: 0, v2: 0 }, v1: [], v2: [] },
+      yesone: { configured: false, label: 'Not connected', userIdMasked: null, baseUrl: 'https://yesgatc.in', loading: false },
+      yesoneSaving: false,
+      razorpay: {
+        configured: false,
+        label: 'Not connected',
+        keyIdMasked: null,
+        webhookUrl: 'https://gatc.yesweigh.in/api/v1/integrations/razorpay/webhook',
+        webhookSecretSet: false,
+        loading: false,
+      },
+      razorpaySaving: false,
+      razorpayWebhookSaving: false,
+      razorpayTest: { busy: false, lastResult: null },
+      zoho: {
+        configured: false,
+        label: 'Not connected',
+        organizationId: null,
+        organizationName: null,
+        clientIdMasked: null,
+        oauthClientConfigured: false,
+        redirectUri: 'https://ecs.benchpc.online/api/integrations/zoho/callback',
+        embedMode: 'popup',
+        note: null,
+        loading: false,
+      },
+      zohoBusy: false,
+      zohoPick: null,
     };
     let toastTimer;
-    let pollTimer;
+    let searchTimer;
 
     const I = {
       menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
-      scale:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="6.2" opacity=".45"/><path d="M12 5.5V12l4 2"/><circle cx="12" cy="12" r="1.35" fill="#25D366" stroke="none"/><path d="m8.2 12.4 2.1 2.1 4.4-4.9" stroke="#25D366" stroke-width="2.2"/>',
+      scale:'<circle cx="12" cy="12" r="9"/><path d="M12 5.5V12l4 2"/><circle cx="12" cy="12" r="1.4" fill="#fff" stroke="none"/>',
       dashboard:'<rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="11" width="7" height="10" rx="1.5"/><rect x="3" y="14" width="8" height="7" rx="1.5"/>',
-      gear:'<circle cx="12" cy="12" r="3"/><path d="M9 3h6l.7 2.5 1.5.7 2.4-1.1 2.4 4.3-2 1.6v2l2 1.6-2.4 4.3-2.4-1.1-1.5.7L15 21H9l-.7-2.5-1.5-.7-2.4 1.1L2 14.6 4 13v-2L2 9.4l2.4-4.3 2.4 1.1 1.5-.7L9 3Z"/>',
-      profile:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
-      down:'<path d="m6 9 6 6 6-6"/>',
-      bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 10h18c0-3-3-3-3-10M10 21h4"/>',
-      calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/>',
       shield:'<path d="M12 2 21 6v6c0 5-4 8-9 10-5-2-9-5-9-10V6l9-4ZM8 12l3 3 5-5"/>',
+      hash:'<path d="M5 9h14M5 15h14M9 4 7 20M17 4l-2 16"/>',
+      package:'<path d="m12 2 9 5v10l-9 5-9-5V7l9-5ZM3 7l9 5 9-5M12 12v10"/>',
+      wallet:'<rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M16 14h2"/>',
+      car:'<path d="M4 14h16l-1.5-5.5A2 2 0 0 0 16.6 7H7.4a2 2 0 0 0-1.9 1.5L4 14Z"/><path d="M6 17h.01M18 17h.01M5 14v3h14v-3"/>',
       building:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M10 21v-5h4v5"/>',
-      server:'<rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M8 6.5h.01M8 17.5h.01M12 6.5h4M12 17.5h4"/>',
-      globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
-      db:'<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>',
       user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
-      refresh:'<path d="M20 7v6h-6M4 17v-6h6M5.5 9A8 8 0 0 1 20 13M18.5 15A8 8 0 0 1 4 11"/>',
-      cpu:'<rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M1 15h4M19 9h4M19 15h4M9 9h6v6H9z"/>',
-      ram:'<rect x="3" y="8" width="18" height="9" rx="1.5"/><path d="M7 8V6M11 8V6M15 8V6M7 17v2M11 17v2M15 17v2"/>',
-      disk:'<ellipse cx="12" cy="7" rx="8" ry="3"/><path d="M4 7v5c0 1.7 3.6 3 8 3s8-1.3 8-3V7M4 12v5c0 1.7 3.6 3 8 3s8-1.3 8-3v-5"/>',
-      bw:'<path d="M4 14h4l2-7 3 12 2-5h5"/>',
-      check:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+      bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 10h18c0-3-3-3-3-10M10 21h4"/>',
+      chart:'<path d="M4 19V5M8 19v-8M12 19V8M16 19v-5M20 19V7"/>',
+      gear:'<circle cx="12" cy="12" r="3"/><path d="M9 3h6l.7 2.5 1.5.7 2.4-1.1 2.4 4.3-2 1.6v2l2 1.6-2.4 4.3-2.4-1.1-1.5.7L15 21H9l-.7-2.5-1.5-.7-2.4 1.1L2 14.6 4 13v-2L2 9.4l2.4-4.3 2.4 1.1 1.5-.7L9 3Z"/>',
+      plug:'<path d="M9 7v4M15 7v4M8 11h8v2a4 4 0 0 1-8 0v-2ZM12 17v4"/>',
+      calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/>',
+      award:'<circle cx="12" cy="8" r="5"/><path d="M8.5 12.5 7 21l5-2 5 2-1.5-8.5"/>',
+      bag:'<path d="M4 9h16l-1 12H5L4 9ZM9 10V7a3 3 0 0 1 6 0v3"/>',
+      cart:'<circle cx="9" cy="20" r="1"/><circle cx="17" cy="20" r="1"/><path d="M3 4h2l2.4 10.4a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 2-1.5L21 8H7"/>',
+      search:'<circle cx="10" cy="10" r="7"/><path d="m15 15 6 6"/>',
+      file:'<path d="M6 3h9l5 5v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2ZM15 3v5h5"/>',
+      alert:'<circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/>',
+      edit:'<path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
+      ban:'<circle cx="12" cy="12" r="9"/><path d="m7 7 10 10"/>',
+      layers:'<path d="m12 3 9 5-9 5-9-5 9-5ZM3 13l9 5 9-5M3 18l9 5 9-5"/>',
+      chev:'<path d="m6 9 6 6 6-6"/>',
+      copy:'<rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>',
+      download:'<path d="M12 3v12M7 10l5 5 5-5M5 21h14"/>',
+      plus:'<path d="M12 5v14M5 12h14"/>',
+      eye:'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/>',
+      flask:'<path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3"/>',
+      info:'<circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/>',
+      power:'<path d="M12 2v10M7.5 5.5a7 7 0 1 0 9 0"/>',
+      cpu:'<rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>',
+      server:'<rect x="4" y="3" width="16" height="7" rx="1.5"/><rect x="4" y="14" width="16" height="7" rx="1.5"/><path d="M8 6.5h.01M8 17.5h.01"/>',
+      mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 7 9-7"/>',
+      lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+      refresh:'<path d="M21 12a9 9 0 1 1-2.6-6.3M21 3v6h-6"/>',
+      arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
     };
-    const icon = (n, cls = '') => `<svg aria-hidden="true" class="i ${cls}" viewBox="0 0 24 24">${I[n] || I.server}</svg>`;
-    const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const icon = (n, cls='') => `<svg aria-hidden="true" class="i ${cls}" viewBox="0 0 24 24">${I[n] || I.dashboard}</svg>`;
+    const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+    const n = (v) => Number(v || 0).toLocaleString();
+    const money = (v) => `₹${Number(v || 0).toLocaleString('en-IN')}`;
+    const fmtDate = (v) => {
+      if (!v) return '—';
+      const d = new Date(v);
+      if (Number.isNaN(d.getTime())) return '—';
+      return d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+    };
+    const fmtDateTime = (v) => {
+      if (!v) return '—';
+      const d = new Date(v);
+      if (Number.isNaN(d.getTime())) return '—';
+      const date = d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+      const time = d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit', hour12: true });
+      return `${date} ${time}`;
+    };
+    const periodLabel = () => ({ today:'Today', month:'This month', quarter:'This Qtr', year:'This Year', all:'Lifetime' }[state.period] || state.period);
+    const statusTone = (status) => {
+      const s = String(status || '').toLowerCase();
+      if (s === 'certified' || s === 'approved' || s === 'completed' || s === 'active' || s === 'verified') return 'ok';
+      if (s === 'submitted' || s === 'pending' || s === 'pending_rc') return 'blue';
+      if (s === 'draft') return 'warn';
+      if (s.includes('fail') || s === 'rejected' || s === 'expired' || s === 'inactive') return 'bad';
+      return 'muted';
+    };
+    const statusBadge = (status) => {
+      const cls = statusTone(status);
+      return `<span class="sa-badge ${cls === 'muted' ? '' : cls}">${esc(status || '—')}</span>`;
+    };
+    const statusLabelText = (r) => {
+      if (r.status_label) return r.status_label;
+      const s = String(r.status || '').toLowerCase();
+      if (s === 'certified' || s === 'approved') return 'Verified';
+      return r.status || '—';
+    };
 
     async function doLogout() {
-      try { await api('/api/v1/auth/logout', { method: 'POST', token: authState.token }); } catch (_) { /* ignore */ }
-      clearInterval(pollTimer);
+      try { await api('/api/v1/auth/logout', { method: 'POST', token: authState.token }); } catch (_) {}
       clearAuth();
       renderLogin({ step: 'credentials' });
     }
 
-    function fmtUptime(sec) {
-      const s = Number(sec) || 0;
-      if (s < 60) return `${s}s`;
-      if (s < 3600) return `${Math.floor(s / 60)}m`;
-      if (s < 86400) return `${Math.floor(s / 3600)}h ${Math.floor((s % 3600) / 60)}m`;
-      return `${Math.floor(s / 86400)}d ${Math.floor((s % 86400) / 3600)}h`;
+    function toast(msg) {
+      state.toast = msg;
+      render(true);
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => { state.toast = null; render(true); }, 2400);
     }
 
-    function fmtChecked(iso) {
-      if (!iso) return '—';
-      const t = Date.parse(iso);
-      if (Number.isNaN(t)) return '—';
-      const mins = Math.max(0, Math.round((Date.now() - t) / 60000));
-      if (mins <= 0) return 'just now';
-      if (mins === 1) return '1 minute ago';
-      if (mins < 60) return `${mins} minutes ago`;
-      return new Date(t).toLocaleString();
+    function onAuthFail(json, res) {
+      if (json.error?.code === 'UNAUTHORIZED' || res.status === 401) {
+        clearAuth();
+        renderLogin({ step: 'credentials', error: 'Session expired. Please sign in again.' });
+        return true;
+      }
+      return false;
     }
 
-    function svcPill(svc) {
-      if (!svc) return `<span class="svc-pill muted"><span class="dot"></span> Unknown</span>`;
-      if (svc.id === 'emaap' || svc.status === 'logged_in' || svc.status === 'not_logged_in') {
-        const ok = svc.loggedIn === true || svc.status === 'logged_in';
-        return `<span class="svc-pill ${ok ? 'ok' : 'bad'}"><span class="dot"></span> ${esc(svc.label || (ok ? 'Logged In' : 'Not Logged In'))}</span>`;
+    async function loadDash(silent) {
+      if (!silent) state.loading = true;
+      const { res, json } = await api(`/api/v1/admin/dashboard?period=${encodeURIComponent(state.period)}`, { token: authState.token });
+      if (!res.ok) {
+        state.loading = false;
+        state.error = json.error?.message || 'Could not load dashboard';
+        if (onAuthFail(json, res)) return;
+        render(true);
+        return;
       }
-      if (svc.online === true || svc.status === 'online') {
-        return `<span class="svc-pill ok"><span class="dot"></span> ${esc(svc.label || 'Online')}</span>`;
+      state.dash = json.data;
+      state.loading = false;
+      state.error = null;
+      render(true);
+    }
+
+    function listPath() {
+      const q = encodeURIComponent(state.q || '');
+      const lim = state.list.limit || listLimitFor(state.page);
+      const off = state.list.offset || 0;
+      const pageNum = Math.floor(off / lim) + 1;
+      if (state.page === 'Verification') {
+        const st = encodeURIComponent(state.statusFilter || '');
+        const ty = encodeURIComponent(state.typeFilter || '');
+        const rc = encodeURIComponent(state.rcFilter || '');
+        const period = encodeURIComponent(state.period || 'month');
+        return `/api/v1/admin/verifications?limit=${lim}&offset=${off}&page=${pageNum}&q=${q}&status=${st}&type=${ty}&rcId=${rc}&rc=${rc}&period=${period}`;
       }
-      if (svc.status === 'inactive' || svc.status === 'unknown' || svc.status === 'unconfigured') {
-        return `<span class="svc-pill warn"><span class="dot"></span> ${esc(svc.label || 'Inactive')}</span>`;
+      if (state.page === 'Regional Centers') return `/api/v1/admin/regional-centers?q=${q}`;
+      if (state.page === 'Products') return `/api/v1/admin/products?limit=${lim}&offset=${off}&q=${q}`;
+      if (state.page === 'VCT') return `/api/v1/admin/users?role=VCT&limit=${lim}&offset=${off}&q=${q}`;
+      if (state.page === 'Customers') return `/api/v1/admin/customers?limit=${lim}&offset=${off}&q=${q}`;
+      return null;
+    }
+
+    function normalizeRcOptions(items) {
+      return (items || [])
+        .map((rc) => ({
+          id: String(rc.id || ''),
+          code: rc.code || '',
+          name: rc.name || rc.company_name || rc.code || 'RC',
+        }))
+        .filter((rc) => rc.id)
+        .sort((a, b) => String(a.name).localeCompare(String(b.name)));
+    }
+
+    async function loadRcOptions(silent) {
+      if (state.rcOptions?.length) return;
+      const fromDash = normalizeRcOptions(state.dash?.regionalCenters);
+      if (fromDash.length) {
+        state.rcOptions = fromDash;
+        return;
       }
-      return `<span class="svc-pill bad"><span class="dot"></span> ${esc(svc.label || 'Offline')}</span>`;
+      const { res, json } = await api('/api/v1/admin/regional-centers', { token: authState.token });
+      if (!res.ok) {
+        if (!silent) state.listError = json.error?.message || 'Could not load regional centres';
+        if (onAuthFail(json, res)) return;
+        return;
+      }
+      state.rcOptions = normalizeRcOptions(json.data?.items);
+    }
+
+    async function loadList(silent) {
+      const path = listPath();
+      if (!path) return;
+      if (!silent) state.listLoading = true;
+      state.listError = null;
+      render(true);
+      const { res, json } = await api(path, { token: authState.token });
+      if (!res.ok) {
+        state.listLoading = false;
+        state.listError = json.error?.message || 'Could not load list';
+        if (onAuthFail(json, res)) return;
+        render(true);
+        return;
+      }
+      const data = json.data || {};
+      state.list = {
+        total: data.total || 0,
+        items: data.items || [],
+        limit: data.limit != null ? data.limit : (state.list.limit || listLimitFor(state.page)),
+        offset: data.offset != null ? data.offset : (state.list.offset || 0),
+      };
+      state.listLoading = false;
+      state.listError = null;
+      render(true);
+    }
+
+    function goPage(page, opts = {}) {
+      const prevPage = state.page;
+      state.page = page;
+      state.drawer = false;
+      state.q = opts.q != null ? opts.q : '';
+      state.statusFilter = opts.statusFilter != null ? opts.statusFilter : '';
+      state.typeFilter = opts.typeFilter != null ? opts.typeFilter : '';
+      // Keep RC filter when switching Verification tabs; clear when leaving the page.
+      state.rcFilter = opts.rcFilter != null
+        ? opts.rcFilter
+        : (page === 'Verification' && prevPage === 'Verification' ? state.rcFilter : '');
+      state.subTab = opts.tab != null ? opts.tab : '';
+      state.list = { total: 0, items: [], limit: listLimitFor(page), offset: 0 };
+      state.listError = null;
+      render();
+      if (LIST_PAGES.has(page)) {
+        if (page === 'Verification') {
+          loadRcOptions(true).finally(() => loadList());
+        } else {
+          loadList();
+        }
+      }
+      else if (page === 'Dashboard') loadDash(true);
+      else if (page === 'Settings' || page === 'Integrations') {
+        loadEmaapStatus(true);
+        loadYesoneStatus(true);
+        loadRazorpayStatus(true);
+        loadZohoStatus(true);
+      }
+    }
+
+    function isNavOn(m) {
+      if (state.page !== m.id) return false;
+      if (m.filter) {
+        return state.typeFilter === (m.filter.typeFilter || '') &&
+          state.statusFilter === (m.filter.statusFilter || '');
+      }
+      if (m.tab != null) {
+        const defaults = { 'RC Wallet': 'balances', Vehicles: 'All', Laboratory: 'menu' };
+        const current = state.subTab || defaults[m.id] || '';
+        return current === m.tab;
+      }
+      return true;
     }
 
     function sidebar() {
-      const uname = escapeHtml(authState.user.username || authState.user.aadhaar || 'Super Admin');
-      const initials = (authState.user.username || 'SA').slice(0, 2).toUpperCase();
-      const nav = [
-        { label: 'VPS Health', ico: 'dashboard' },
-        { label: 'Service Status', ico: 'server' },
-      ];
-      return `<div class="drawer-overlay ${state.drawer ? 'visible' : ''}" data-action="close-drawer"></div>
-      <aside class="sidebar ${state.drawer ? 'open' : ''}" aria-label="Super Admin navigation">
-        <div class="sidebar-top">
-          <div class="logo-row"><div class="logo-mark">${icon('scale', 'lg')}</div><div><div class="logo-title">GATC<em>.</em></div><div class="logo-note">SUPER ADMIN</div></div></div>
-          <div class="workspace"><span class="workspace-icon">${icon('server')}</span><div class="workspace-text"><b>Ops Workspace</b><span>VPS · eMaap session</span></div>${icon('down', 'sm')}</div>
+      const uname = esc(authState.user.username || 'super_admin');
+      const initials = uname.slice(0, 2).toUpperCase();
+      const items = MENUS.map((m) => {
+        const attrs = [`data-page="${esc(m.id)}"`];
+        if (m.filter) {
+          if (m.filter.typeFilter) attrs.push(`data-type-filter="${esc(m.filter.typeFilter)}"`);
+          if (m.filter.statusFilter) attrs.push(`data-status-filter="${esc(m.filter.statusFilter)}"`);
+        }
+        if (m.tab) attrs.push(`data-tab="${esc(m.tab)}"`);
+        return `<button type="button" class="sa-navbtn ${isNavOn(m)?'on':''}" ${attrs.join(' ')}>${icon(m.ico)}<span>${esc(m.label)}</span></button>`;
+      }).join('');
+      return `<div class="sa-overlay ${state.drawer ? 'on' : ''}" data-action="close-drawer"></div>
+      <aside class="sa-side ${state.drawer ? 'open' : ''}">
+        <div class="sa-side-top">
+          <div class="sa-brand">
+            <div class="sa-logo">${icon('shield')}</div>
+            <div><b>GATC</b><small>Government Approved<br>Test Centre</small></div>
+          </div>
         </div>
-        <nav class="sidebar-body"><div class="nav-caption">MONITORING</div>
-          ${nav.map((n) => `<button type="button" class="nav-btn ${state.page === n.label ? 'active' : ''}" data-page="${esc(n.label)}">${icon(n.ico)}<span class="nav-label">${esc(n.label)}</span></button>`).join('')}
+        <nav class="sa-nav">
+          <div class="sa-cap">WORKSPACE</div>
+          ${items}
         </nav>
-        <div class="sidebar-bottom">
-          <button type="button" class="nav-btn ${state.page === 'Profile' ? 'active' : ''}" data-page="Profile">${icon('profile')}<span class="nav-label">Profile</span></button>
-          <div class="account-foot"><div class="avatar">${escapeHtml(initials)}</div><div style="flex:1;min-width:0"><b>${uname}</b><small>ADMIN</small></div>
-          <button type="button" class="logout-btn" data-action="logout" title="Sign out">Sign out</button></div>
+        <div class="sa-foot">
+          <div class="sa-user"><div class="sa-av">${initials}</div><div style="flex:1;min-width:0"><b style="font-size:12px">${uname}</b><span style="display:block;font-size:10px;color:#7b8799">Super Admin</span></div>
+          <button type="button" class="sa-out" data-action="logout">Sign out</button></div>
         </div>
       </aside>`;
     }
 
-    function header() {
-      const updated = state.ops?.checkedAt ? fmtChecked(state.ops.checkedAt) : '—';
-      return `<div class="mobile-status"><span>9:41</span><span>●●● &nbsp;◕ &nbsp;▰</span></div>
-      <header class="topbar">
-        <button class="iconbtn menu-toggle" type="button" aria-label="Open left menu" data-action="open-drawer">${icon('menu')}</button>
-        <div class="crumb">GATC / <strong>${esc(state.page)}</strong></div>
-        <div class="mobile-brand"><b>GATC<em>.</em></b><small>SUPER ADMIN</small></div>
-        <div class="top-spacer"></div>
-        <div class="top-right">
-          <span class="online-pill"><span class="online-dot"></span> Last updated ${esc(updated)}</span>
-          <div class="vps-range" role="group" aria-label="Time range">
-            ${['24H', '7D', '30D'].map((p) => `<button type="button" class="${state.period === p ? 'active' : ''}" data-period="${p}">${p}</button>`).join('')}
-          </div>
-          <button type="button" class="iconbtn" aria-label="Refresh status" data-action="refresh">${icon('refresh', 'sm')}</button>
-          <button type="button" class="avatar" aria-label="Open profile" data-page="Profile">SA</button>
-        </div>
+    function topbar() {
+      return `<header class="sa-top sa-top--minimal">
+        <button type="button" class="sa-menu" data-action="open-drawer" aria-label="Menu">${icon('menu')}</button>
       </header>`;
     }
 
-    function hero() {
-      const sys = state.ops?.system || {};
-      const healthy = sys.healthy !== false;
-      const services = state.ops?.services || {};
-      const emaapOk = services.emaap?.loggedIn === true;
-      const dbOk = services.db?.online === true || services.db?.status === 'online';
-      return `<section class="vps-hero" aria-label="VPS status">
-        <div class="vps-hero-main">
-          <div class="vps-hero-label">VPS STATUS</div>
-          <h2>${healthy ? 'System Healthy' : 'System Degraded'}</h2>
-          <div class="vps-hero-pills">
-            <span class="vps-chip ${healthy ? '' : 'bad'}"><span class="dot"></span> All Systems · ${healthy ? 'Operational' : 'Degraded'}</span>
-            <span class="vps-chip"><span class="dot"></span> Monitoring · Active</span>
-            <span class="vps-chip ${dbOk ? '' : 'warn'}"><span class="dot"></span> DB · ${esc(services.db?.label || 'Checking')}</span>
-            <span class="vps-chip ${emaapOk ? '' : 'bad'}"><span class="dot"></span> eMaap · ${esc(services.emaap?.label || 'Not Logged In')}</span>
-          </div>
-        </div>
-        <div class="vps-hero-side">
-          <div class="vps-uptime">
-            <div class="vps-uptime-ring"><span>${esc(fmtUptime(sys.uptimeSeconds))}<br/>UP</span></div>
-            <small>PROCESS UPTIME</small>
-          </div>
-        </div>
-      </section>`;
+    function initialsOf(name) {
+      const parts = String(name || '').trim().split(/\s+/).filter(Boolean);
+      if (!parts.length) return '—';
+      return ((parts[0][0] || '') + (parts[1]?.[0] || parts[0][1] || '')).toUpperCase();
     }
 
-    function resourceCards() {
-      const cards = [
-        { name: 'CPU', ico: 'cpu', cls: 'cpu', val: '—', sub: 'Host metrics pending' },
-        { name: 'RAM', ico: 'ram', cls: 'ram', val: '—', sub: 'Host metrics pending' },
-        { name: 'Storage', ico: 'disk', cls: 'disk', val: '—', sub: 'Host metrics pending' },
-        { name: 'Bandwidth', ico: 'bw', cls: 'bw', val: '—', sub: `Window ${state.period}` },
-      ];
-      return `<div class="res-grid">${cards.map((c) => `<article class="res-card"><div class="res-top"><span class="res-name">${esc(c.name)}</span><span class="res-ico ${c.cls}">${icon(c.ico, 'sm')}</span></div><div class="res-val">${esc(c.val)}</div><div class="res-sub">${esc(c.sub)}</div></article>`).join('')}</div>`;
+    function avatarHtml(url, name) {
+      const ini = esc(initialsOf(name));
+      if (url) {
+        return `<span class="sa-avimg"><img src="${esc(url)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove();this.parentNode.textContent='${ini}'"/></span>`;
+      }
+      return `<span class="sa-avimg">${ini}</span>`;
     }
 
-    function serviceStatusCard() {
-      const s = state.ops?.services || {};
-      const rows = [
-        { key: 'api', name: 'API', ico: 'globe', hint: 'Backend HTTP API' },
-        { key: 'db', name: 'DB', ico: 'db', hint: 'PostgreSQL' },
-        { key: 'worker', name: 'Worker', ico: 'gear', hint: 'Automation scaffold' },
-        { key: 'emaap', name: 'eMaap', ico: 'user', hint: 'Portal session (operator-assisted)' },
-      ];
-      return `<section class="panel svc-panel">
-        <div class="panel-head"><div><h3>Service Status</h3><p>Live API · DB · Worker · eMaap session</p></div>
-          <button type="button" class="linkbtn" data-action="refresh">Refresh →</button></div>
-        <div class="svc-list">
-          ${rows.map((r) => {
-            const svc = s[r.key] || { id: r.key, label: '…', status: 'unknown' };
-            return `<div class="svc-row"><span class="svc-ico">${icon(r.ico)}</span><div class="svc-meta"><b>${esc(r.name)}</b><small>${esc(r.hint)}</small></div>${svcPill(svc)}</div>`;
-          }).join('')}
-        </div>
-      </section>`;
+    function heading(title, sub, extraRight = '') {
+      const d = new Date().toLocaleDateString(undefined, { day:'numeric', month:'long', year:'numeric' });
+      return `<div class="sa-h-row"><div><div class="eye">SUPER ADMIN</div><h1 style="margin:0;font-family:Outfit,system-ui,sans-serif;font-size:1.7rem;letter-spacing:-.04em">${esc(title)}</h1><p style="margin:4px 0 0;color:var(--muted);font-size:13px">${esc(sub)}</p></div>
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">${extraRight}<div class="sa-date">${icon('calendar')}<span>${esc(d)}</span></div></div></div>`;
     }
 
-    function emaapDetailCard() {
-      const e = state.ops?.emaap || {};
-      const ok = e.loggedIn === true;
-      return `<section class="panel">
-        <div class="panel-head"><div><h3>eMaap session</h3><p>Status file · no CAPTCHA automation</p></div>${svcPill({ id: 'emaap', ...e })}</div>
-        <div style="padding:0 18px 16px">
-          <div class="detail-line"><span>State</span><b>${esc(e.label || 'Not Logged In')}</b></div>
-          <div class="detail-line"><span>Source</span><b>${esc(e.source || 'stub')}</b></div>
-          <div class="detail-line"><span>Updated</span><b>${esc(e.updatedAt ? fmtChecked(e.updatedAt) : '—')}</b></div>
-          <p class="form-note" style="margin-top:12px">${esc(e.note || 'Waiting for operator-assisted session wiring.')}</p>
-          ${ok ? '' : `<p class="ui-note">${icon('shield', 'sm')} Hook: write DATA_ROOT/emaap/session-status.json after manual portal login.</p>`}
-        </div>
-      </section>`;
+    function periodButtons() {
+      const opts = [['today','Today'],['month','This month'],['quarter','This Qtr'],['year','This Year'],['all','Lifetime']];
+      return `<div class="sa-periods" role="group" aria-label="Period">${opts.map(([k,l]) => `<button type="button" class="${state.period===k?'on':''}" data-period="${k}">${l}</button>`).join('')}</div>`;
     }
 
     function dashboard() {
-      if (state.loading && !state.ops) {
-        return `${heading('VPS Health', 'SUPER ADMIN', 'Server monitoring and eMaap session')}<p class="ui-note">Loading ops status…</p>`;
+      const d = state.dash || {};
+      const byType = d.byType || { OV: 0, RV: 0 };
+      const st = d.byStatus || {};
+      const cert = d.certified || {};
+      const totals = d.totals || {};
+      const rcs = d.regionalCenters || [];
+      const vcts = (d.topVcts || []).filter((v) => Number(v.certified) > 0);
+      const periodCount = (byType.OV || 0) + (byType.RV || 0);
+      const stages = [
+        ['submitted', 'Submitted', 'blue', 'file'],
+        ['failed_submit', 'Failed', 'red', 'alert'],
+        ['draft', 'Draft', 'violet', 'edit'],
+        ['certified', 'Certified', 'green', 'award'],
+        ['rejected', 'Rejected', 'gray', 'ban'],
+      ];
+      if (state.loading && !state.dash) {
+        return `${heading('Dashboard', 'Verification overview', periodButtons())}<p class="ui-note">Loading dashboard…</p>`;
       }
-      if (state.error && !state.ops) {
-        return `${heading('VPS Health', 'SUPER ADMIN', 'Server monitoring and eMaap session')}<p class="auth-error" role="alert">${esc(state.error)}</p><button class="btn primary" data-action="refresh">Retry</button>`;
+      if (state.error && !state.dash) {
+        return `${heading('Dashboard', 'Verification overview', periodButtons())}<p class="auth-error" role="alert">${esc(state.error)}</p>
+          <button class="btn primary" data-action="refresh">Retry</button>`;
       }
-      return `${heading('VPS Health', 'SUPER ADMIN', 'Server monitoring and eMaap session')}${hero()}${resourceCards()}
-        <div class="admin-ops-grid">${serviceStatusCard()}${emaapDetailCard()}</div>
-        <p class="ui-note">${icon('shield', 'sm')} eMaap status is file-backed · CAPTCHA and login remain operator-assisted</p>`;
+      return `${heading('Dashboard', 'Verification overview', periodButtons())}
+        <section class="sa-hero" aria-label="Verification types">
+          <button type="button" class="sa-type ov" data-page="Verification" data-type-filter="OV"><span class="top"><span class="badge">OV</span>${icon('layers')}</span><span class="num">${n(byType.OV)}</span><span class="tiny">Original verification</span></button>
+          <button type="button" class="sa-type rv" data-page="Verification" data-type-filter="RV"><span class="top"><span class="badge">RV</span>${icon('shield')}</span><span class="num">${n(byType.RV)}</span><span class="tiny">Re-verification</span></button>
+          <div class="sa-scope">
+            <span class="lbl">Period scope</span>
+            <span class="val">${esc(periodLabel())}</span>
+            <span class="sub">${n(periodCount)} verifications</span>
+          </div>
+        </section>
+        <div class="sa-stage-grid" aria-label="Verification stages">
+          ${stages.map(([key,label,tone,ico]) => {
+            const count = st[key] || (key==='certified' ? (st.certified || cert.lifetime || 0) : 0);
+            return `<div class="sa-stage-card ${tone}"><div class="row"><span class="lbl">${esc(label)}</span><span class="sa-stage-ico ${tone}">${icon(ico,'sm')}</span></div><span class="cnt">${n(count)}</span></div>`;
+          }).join('')}
+        </div>
+        <section class="sa-mid" aria-label="Certified totals">
+          <div class="sa-q orange"><span class="ico">${icon('chart')}</span><div><b>Total Certified</b><strong>${n(cert.last_month)}</strong><small>Last month</small></div></div>
+          <div class="sa-q green"><span class="ico">${icon('award')}</span><div><b>Total Certified</b><strong>${n(cert.this_month)}</strong><small>This month</small></div></div>
+        </section>
+        <div class="sa-stats">
+          <button type="button" class="sa-stat sa-stat-btn" data-page="Regional Centers"><span>Regional Centers</span><b>${n(totals.regional_centers)}</b></button>
+          <button type="button" class="sa-stat sa-stat-btn" data-page="VCT"><span>VCT</span><b>${n(totals.vct)}</b></button>
+          <button type="button" class="sa-stat sa-stat-btn" data-page="Products"><span>Products</span><b>${n(totals.products)}</b></button>
+          <button type="button" class="sa-stat sa-stat-btn" data-page="Customers"><span>Customers</span><b>${n(totals.customers)}</b></button>
+        </div>
+        <div class="sa-lists">
+          <section class="sa-panel">
+            <div class="sa-panel-h"><h2>Regional Centers</h2><button type="button" class="sa-link" data-page="Regional Centers">View All →</button></div>
+            ${rcs.length ? `<ul class="sa-rc">${rcs.map((rc,i)=>`<li><span class="rank">#${i+1}</span>${avatarHtml(rc.logoUrl, rc.name || rc.code)}<div class="body"><b>${esc(rc.name || rc.code || 'RC')}</b><span>${esc(rc.code || rc.district || '—')}</span></div><span class="cnt">${n(rc.certified)}</span></li>`).join('')}</ul>` : `<p class="ui-note">No regional centers yet.</p>`}
+          </section>
+          <section class="sa-panel">
+            <div class="sa-panel-h"><h2>VCT</h2><button type="button" class="sa-link" data-page="VCT">View All →</button></div>
+            ${vcts.length ? `<ul class="sa-vct">${vcts.map((v,i)=>`<li><span class="rank">#${i+1}</span>${avatarHtml(v.photoUrl, v.name)}<div class="body"><b>${esc(v.name || 'VCT')}</b><span>${esc(v.rc_name || v.rc_code || '—')}</span></div><span class="cnt">${n(v.certified)}</span></li>`).join('')}</ul>` : `<p class="ui-note">No VCT performance yet.</p>`}
+          </section>
+        </div>`;
     }
 
-    function heading(title, eyebrow, desc) {
-      return `<div class="page-heading"><div><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(title)}</h1>${desc ? `<p class="page-description">${esc(desc)}</p>` : ''}</div>
-        <div class="date-chip">${icon('calendar', 'sm')}<span>${new Date().toLocaleDateString(undefined, { day: 'numeric', month: 'long', year: 'numeric' })}</span></div></div>`;
+    function listTools(extra = '') {
+      return `<div class="sa-tools">
+        <label class="sa-search">${icon('search','sm')}<input id="sa-q" type="search" placeholder="Search…" value="${esc(state.q)}" aria-label="Search"/></label>
+        ${extra}
+        <button type="button" class="sa-btn" data-action="list-search">Search</button>
+        <button type="button" class="sa-btn ghost" data-action="list-reset">Reset</button>
+      </div>`;
     }
 
-    function content() {
-      if (state.page === 'Service Status') {
-        return `${heading('Service Status', 'SUPER ADMIN', 'API, database, worker, and eMaap')}${serviceStatusCard()}${emaapDetailCard()}`;
-      }
-      if (state.page === 'Profile') {
-        const u = authState.user;
-        return `${heading('Profile', 'SUPER ADMIN', 'Account')}
-          <section class="panel module-panel"><div class="module-icon">${icon('profile', 'lg')}</div>
-          <h2 class="module-title">Super Admin</h2>
-          <div class="detail-line"><span>Username</span><b>${esc(u.username || '—')}</b></div>
-          <div class="detail-line"><span>Role</span><b>ADMIN</b></div>
-          <div class="detail-line"><span>Aadhaar</span><b>${esc(u.aadhaar || '—')}</b></div></section>`;
-      }
-      return dashboard();
+    function pager(placement = '') {
+      const { total, limit, offset } = state.list;
+      const from = total ? offset + 1 : 0;
+      const to = Math.min(offset + limit, total);
+      const canPrev = offset > 0;
+      const canNext = offset + limit < total;
+      const cls = placement === 'top' ? 'sa-pager top' : 'sa-pager';
+      return `<div class="${cls}" role="navigation" aria-label="${placement === 'top' ? 'List pagination top' : 'List pagination'}">
+        <span>Showing ${n(from)}–${n(to)} of ${n(total)}</span>
+        <div style="display:flex;gap:8px">
+          <button type="button" class="sa-btn ghost" data-action="list-prev" ${canPrev?'':'disabled'}>Previous</button>
+          <button type="button" class="sa-btn ghost" data-action="list-next" ${canNext?'':'disabled'}>Next</button>
+        </div>
+      </div>`;
     }
 
-    function render(preserveScroll = false) {
-      const scrollTop = preserveScroll ? (root.querySelector('.scroll')?.scrollTop || 0) : 0;
-      root.innerHTML = `<div class="app">${sidebar()}<div class="main">${header()}<div class="scroll"><div class="content">${content()}</div></div></div>${state.toast ? `<div class="toast" role="status">${esc(state.toast)}</div>` : ''}</div>`;
-      if (preserveScroll) {
-        const scroll = root.querySelector('.scroll');
-        if (scroll) scroll.scrollTop = scrollTop;
-      }
+    function verificationCard(r) {
+      const type = String(r.verification_type || '').toUpperCase();
+      const tone = statusTone(r.status_label || r.status);
+      const label = statusLabelText(r);
+      const ref = r.reference || r.certificate_number || r.application_number || '—';
+      const when = fmtDateTime(r.certified_at || r.submitted_at || r.created_at);
+      const thumb = `${icon('layers')}${r.product_image_url
+        ? `<img src="${esc(r.product_image_url)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
+        : ''}`;
+      const pdfBadge = r.has_signed_pdf || r.signed_pdf_url
+        ? `<span class="sa-vcard-pdf">Signed PDF</span>`
+        : (r.download_url ? `<span class="sa-vcard-pdf">PDF</span>` : '');
+      const rc = r.rc_name || r.rc_code || '';
+      const dlUrl = r.download_url || r.signed_pdf_url || r.certificate_pdf_url || '';
+      const canDl = Boolean(dlUrl);
+      const dlBtn = canDl
+        ? `<a class="sa-vcard-dl" href="${esc(dlUrl)}" target="_blank" rel="noopener noreferrer" download title="Download certificate PDF" aria-label="Download certificate PDF">${icon('download')}</a>
+           <span class="sa-vcard-dl-label">Download</span>`
+        : `<button type="button" class="sa-vcard-dl" disabled aria-disabled="true" title="No PDF available">${icon('download')}</button>
+           <span class="sa-vcard-dl-label off">No PDF</span>`;
+      return `<article class="sa-vcard">
+        <div class="sa-vcard-left">
+          <div class="sa-vcard-thumb">${thumb}</div>
+          <div class="sa-vcard-status ${tone}">${esc(label)}</div>
+        </div>
+        <div class="sa-vcard-main">
+          <div class="sa-vcard-head">
+            <h3 class="sa-vcard-name">${esc(r.customer_name || '—')}</h3>
+            <span class="sa-vcard-type ${type === 'RV' ? 'rv' : ''}">${esc(type || '—')}</span>
+          </div>
+          <div class="sa-vcard-meta">
+            <span class="sa-vcard-ref">${esc(ref)}</span>
+            ${pdfBadge}
+            ${rc ? `<span class="sa-vcard-divider" aria-hidden="true"></span><span class="sa-vcard-rc">${esc(rc)}</span>` : ''}
+          </div>
+          <div class="sa-vcard-specs">
+            <div class="sa-vcard-spec"><span>Max</span><b title="${esc(r.max_display || '')}">${esc(r.max_display || '—')}</b></div>
+            <div class="sa-vcard-spec"><span>Min</span><b title="${esc(r.min_display || '')}">${esc(r.min_display || '—')}</b></div>
+            <div class="sa-vcard-spec"><span>Class</span><b>${esc(r.accuracy_class || '—')}</b></div>
+            <div class="sa-vcard-spec"><span>Serial no.</span><b class="mono" title="${esc(r.serial_number || '')}">${esc(r.serial_number || '—')}</b></div>
+            <div class="sa-vcard-spec"><span>Date</span><b title="${esc(when)}">${esc(when)}</b></div>
+            <div class="sa-vcard-spec"><span>VCT</span><b title="${esc(r.vct_name || '')}">${esc(r.vct_name || '—')}</b></div>
+          </div>
+        </div>
+        <div class="sa-vcard-action">${dlBtn}</div>
+      </article>`;
     }
 
-    function toast(message) {
-      state.toast = message;
+    function verificationList() {
+      const items = state.list.items || [];
+      const tabs = [
+        { label: 'All', typeFilter: '', statusFilter: '' },
+        { label: 'Original (OV)', typeFilter: 'OV', statusFilter: '' },
+        { label: 'Re-Verification (RV)', typeFilter: 'RV', statusFilter: '' },
+        { label: 'Certified', typeFilter: '', statusFilter: 'certified' },
+        { label: 'Drafts', typeFilter: '', statusFilter: 'draft' },
+        { label: 'Failed', typeFilter: '', statusFilter: 'failed_submit' },
+      ];
+      const tabBtns = tabs.map((t) => {
+        const on = state.typeFilter === t.typeFilter && state.statusFilter === t.statusFilter;
+        const attrs = [`data-page="Verification"`];
+        if (t.typeFilter) attrs.push(`data-type-filter="${esc(t.typeFilter)}"`);
+        if (t.statusFilter) attrs.push(`data-status-filter="${esc(t.statusFilter)}"`);
+        return `<button type="button" class="${on ? 'on' : ''}" ${attrs.join(' ')}>${esc(t.label)}</button>`;
+      }).join('');
+      const statusOpts = ['','draft','submitted','pending_rc','certified','rejected','failed_submit'];
+      const rcOpts = state.rcOptions || [];
+      const rcSelect = `<select id="sa-rc" aria-label="Regional Centre"><option value="" ${!state.rcFilter?'selected':''}>All</option>${rcOpts.map((rc)=>{
+        const label = rc.code ? `${esc(rc.name)} (${esc(rc.code)})` : esc(rc.name);
+        return `<option value="${esc(rc.id)}" ${state.rcFilter===rc.id?'selected':''}>${label}</option>`;
+      }).join('')}</select>`;
+      const filters = `<select id="sa-status" aria-label="Status">${statusOpts.map((s)=>`<option value="${esc(s)}" ${state.statusFilter===s?'selected':''}>${s?esc(s):'All status'}</option>`).join('')}</select>
+        <select id="sa-type" aria-label="Type">${['','OV','RV'].map((t)=>`<option value="${esc(t)}" ${state.typeFilter===t?'selected':''}>${t||'All types'}</option>`).join('')}</select>
+        ${rcSelect}`;
+      const cards = items.length
+        ? `<div class="sa-vcards">${items.map(verificationCard).join('')}</div>`
+        : `<p class="sa-empty">No verifications found</p>`;
+      const showPager = !state.listLoading && (state.list.total > 0 || state.list.offset > 0);
+      return `${heading('Verification', 'Manage OV & RV verifications, submissions and certificates', periodButtons())}
+        <div class="sa-tabs" role="tablist" aria-label="Verification filters">${tabBtns}</div>
+        <section class="sa-panel">
+          ${listTools(filters)}
+          <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} records`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
+          ${showPager ? pager('top') : ''}
+          ${cards}
+          ${showPager ? pager('bottom') : ''}
+        </section>`;
+    }
+
+    function rcList() {
+      const items = state.list.items || [];
+      const rows = items.length ? items.map((r,i) => `<tr>
+          <td><span class="primary">#${i+1} ${esc(r.name || r.code)}</span><span class="sub">${esc(r.code || '')}</span></td>
+          <td>${esc(r.district || '—')}${r.state ? `, ${esc(r.state)}` : ''}</td>
+          <td>${esc(r.contact_person || '—')}</td>
+          <td>${n(r.vct_count)}</td>
+          <td>${n(r.verifications)}</td>
+          <td><strong>${n(r.certified)}</strong></td>
+        </tr>`).join('') : `<tr><td colspan="6" class="sa-empty">No regional centers found</td></tr>`;
+      return `${heading('Regional Centres', 'Manage centres, VCTs and certification progress')}
+        <section class="sa-panel">
+          ${listTools()}
+          <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} centres`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
+          <div class="sa-table-wrap"><table class="sa-table"><thead><tr><th>Centre</th><th>Location</th><th>Contact</th><th>VCT</th><th>Jobs</th><th>Certified</th></tr></thead><tbody>${rows}</tbody></table></div>
+        </section>`;
+    }
+
+    function productsList() {
+      const items = state.list.items || [];
+      const rows = items.length ? items.map((r) => `<tr>
+          <td><span class="primary">${esc(r.name || '—')}</span><span class="sub">${esc(r.model_no || r.model_id || '')}</span></td>
+          <td>${esc(r.type_of_instrument || '—')}</td>
+          <td>${esc(r.manufacturer_brand_series || '—')}</td>
+          <td>${esc(r.accuracy_class || '—')}</td>
+          <td>${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge">Inactive</span>'}</td>
+        </tr>`).join('') : `<tr><td colspan="5" class="sa-empty">No products found</td></tr>`;
+      return `${heading('Products', 'Instrument master and specifications')}
+        <section class="sa-panel">
+          ${listTools()}
+          <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} products`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
+          <div class="sa-table-wrap"><table class="sa-table"><thead><tr><th>Product</th><th>Instrument</th><th>Brand / series</th><th>Class</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>
+          ${pager()}
+        </section>`;
+    }
+
+    function vctList() {
+      const items = state.list.items || [];
+      const rows = items.length ? items.map((r) => `<tr>
+          <td><span class="primary">${esc(r.username || '—')}</span><span class="sub">${esc(r.aadhaar || '')}</span></td>
+          <td>${esc(r.rc_name || r.rc_code || '—')}</td>
+          <td>${esc(r.phone || '—')}</td>
+          <td>${esc(r.workflow_mode || '—')}</td>
+          <td>${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge">Inactive</span>'}</td>
+        </tr>`).join('') : `<tr><td colspan="5" class="sa-empty">No VCT users found</td></tr>`;
+      return `${heading('VCT', 'Verification and Calibration Technicians')}
+        <section class="sa-panel">
+          ${listTools()}
+          <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} technicians`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
+          <div class="sa-table-wrap"><table class="sa-table"><thead><tr><th>Name</th><th>Regional Centre</th><th>Phone</th><th>Workflow</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>
+          ${pager()}
+        </section>`;
+    }
+
+    function customersList() {
+      const items = state.list.items || [];
+      const rows = items.length ? items.map((r) => `<tr>
+          <td><span class="primary">${esc(r.name || '—')}</span><span class="sub">${esc(r.phone || '')}</span></td>
+          <td>${esc(r.rc_name || r.rc_code || '—')}</td>
+          <td>${esc(r.district || '—')}${r.state ? `, ${esc(r.state)}` : ''}</td>
+          <td>${esc(fmtDate(r.created_at))}</td>
+        </tr>`).join('') : `<tr><td colspan="4" class="sa-empty">No customers found</td></tr>`;
+      return `${heading('Customers', 'Customer directory')}
+        <section class="sa-panel">
+          ${listTools()}
+          <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} customers`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
+          <div class="sa-table-wrap"><table class="sa-table"><thead><tr><th>Customer</th><th>RC</th><th>Location</th><th>Created</th></tr></thead><tbody>${rows}</tbody></table></div>
+          ${pager()}
+        </section>`;
+    }
+
+    function emptyPolished(title, blurb, ico='file') {
+      return `<div class="sa-empty-polished"><div class="ico">${icon(ico)}</div><h3>${esc(title)}</h3><p>${esc(blurb)}</p></div>`;
+    }
+
+    function quotaPage() {
+      return `${heading('RC Quota', 'Billed instruments and OV allowance', periodButtons())}
+        <div class="sa-kpi">
+          <div class="card"><div class="t">Total allotted<span class="ico">${icon('hash')}</span></div><div class="v">—</div><div class="s">Awaiting Zoho / quota API</div></div>
+          <div class="card"><div class="t">Used<span class="ico green">${icon('shield')}</span></div><div class="v">—</div><div class="s">Period utilization</div></div>
+          <div class="card"><div class="t">Available balance<span class="ico">${icon('award')}</span></div><div class="v">—</div><div class="s">Remaining allowance</div></div>
+          <div class="card"><div class="t">Reserved<span class="ico amber">${icon('calendar')}</span></div><div class="v">—</div><div class="s">Pending bill serials</div></div>
+        </div>
+        <section class="sa-panel">
+          <div class="sa-panel-h"><h2>Quota utilization by Regional Centre</h2><button type="button" class="sa-btn ghost" data-action="noop-export">${icon('download')} Export</button></div>
+          ${emptyPolished('Quota data not connected', 'RC quota allotment, used and balance will appear here once Zoho invoice sync and quota APIs are wired.', 'hash')}
+        </section>`;
+    }
+
+    function walletPage() {
+      const tab = state.subTab || 'balances';
+      return `${heading('RC Wallet', 'Regional centre wallet summary, spends and credits', periodButtons())}
+        <div class="sa-kpi">
+          <div class="card"><div class="t">Total Balance<span class="ico green">${icon('wallet')}</span></div><div class="v">—</div><div class="s">Live wallet API pending</div></div>
+          <div class="card"><div class="t">Total Spend<span class="ico">${icon('download')}</span></div><div class="v">—</div><div class="s">Selected period</div></div>
+          <div class="card"><div class="t">Total Credits<span class="ico green">${icon('plus')}</span></div><div class="v">—</div><div class="s">Selected period</div></div>
+          <div class="card"><div class="t">Regional Centres<span class="ico amber">${icon('building')}</span></div><div class="v">${n((state.dash&&state.dash.totals&&state.dash.totals.regional_centers)||0)}</div><div class="s">Active centres</div></div>
+        </div>
+        <div class="sa-tabs" role="tablist" aria-label="Wallet sections">
+          ${[['balances','Wallet Balances'],['tx','Transactions'],['dues','Payment Dues'],['topup','Top Up / Settlement']].map(([k,l])=>`<button type="button" class="${(tab===k || (!tab && k==='balances'))?'on':''}" data-page="RC Wallet" data-tab="${k}">${l}</button>`).join('')}
+        </div>
+        <section class="sa-panel">
+          <div class="sa-panel-h"><h2>RC Wallet Details</h2><div class="sa-actions"><button type="button" class="sa-btn outline" data-action="noop-settle">Settle Payment Due</button><button type="button" class="sa-btn ghost" data-action="noop-export">${icon('download')} Export</button></div></div>
+          ${emptyPolished(tab==='tx'?'No transactions yet':tab==='dues'?'No payment dues':tab==='topup'?'Top up / settlement ready':'Wallet balances unavailable', 'Wallet ledgers will load here when the RC wallet API is connected. Layout matches the production wallet balances screen.', 'wallet')}
+        </section>`;
+    }
+
+    function vehiclesPage() {
+      const tab = state.subTab || 'All';
+      return `${heading('Car', 'Manage registered vehicles, RC, insurance and pollution', periodButtons())}
+        <div class="sa-kpi">
+          <div class="card"><div class="t">Total Vehicles<span class="ico">${icon('car')}</span></div><div class="v">0</div><div class="s">Register when vehicle API is live</div></div>
+          <div class="card"><div class="t">Regional Centres<span class="ico purple">${icon('building')}</span></div><div class="v">${n((state.dash&&state.dash.totals&&state.dash.totals.regional_centers)||0)}</div><div class="s">Represented</div></div>
+          <div class="card"><div class="t">Active Vehicles<span class="ico green">${icon('shield')}</span></div><div class="v">0</div><div class="s">0% of total</div></div>
+          <div class="card"><div class="t">Inactive Vehicles<span class="ico amber">${icon('power')}</span></div><div class="v">0</div><div class="s">0% of total</div></div>
+        </div>
+        <div class="sa-tabs" role="tablist" aria-label="Car status filters">
+          ${[['All','All Vehicles'],['Active','Active'],['Expired','Expired'],['Inactive','Inactive']].map(([k,l])=>`<button type="button" class="${(tab===k || (tab===''&&k==='All'))?'on':''}" data-page="Vehicles" data-tab="${k}">${l}</button>`).join('')}
+          <div class="spacer" style="flex:1"></div>
+          <button type="button" class="sa-btn" data-action="noop-add">${icon('plus')} Add Vehicle</button>
+        </div>
+        <div class="sa-veh">
+          ${emptyPolished('No vehicles registered', 'Vehicle cards with RC, registration plate, insurance and pollution validity will appear here. Matching the Vehicles management mockup.', 'car')}
+        </div>`;
+    }
+
+    function laboratoryPage() {
+      const tab = state.subTab || 'menu';
+      const labs = [
+        ['Standard Weights','Manage standard and reference weights','package'],
+        ['Environmental Monitoring','Temperature & humidity monitoring and logs','chart'],
+        ['Traceability','Manage traceability to national/international standards','shield'],
+        ['Seal Plier','Manage seal pliers and their verification records','gear'],
+        ['Dies','Manage dies and their verification records','package'],
+        ['Level Monitor','Monitor instrument level accuracy and records','chart'],
+        ['Multimeter','Check electrical parameters of weighing scales','cpu'],
+        ['Car Inverter','Power supply for field verification operations','power'],
+        ['QR Label Printer','Print silver labels with QR code for verification','file'],
+      ];
+      const sealBlock = `<div class="sa-seal">
+          <div class="box">${icon('shield')}<div><small style="color:var(--muted);font-weight:700">Seal ID</small><br><b>IND/GATC/KL/26/04/D26</b></div>
+            <button type="button" class="sa-btn ghost" data-action="copy-seal" title="Copy">${icon('copy')}</button></div>
+          <div class="box">${icon('info')}<div><small style="color:var(--muted);font-weight:700">Seal ID Policy</small><br><span style="font-size:12px;color:#475569">Prefix is fixed · Quarter letters: A Jan–Mar, B Apr–Jun, C Jul–Sep, D Oct–Dec</span></div></div>
+        </div>`;
+      const menuBlock = `<div class="sa-panel-h" style="margin-bottom:10px"><h2>Laboratory Menu</h2></div>
+        <div class="sa-labgrid">
+          ${labs.map((r,i)=>`<button type="button" class="sa-labtile" data-action="lab-item" data-item="${esc(r[0])}"><span class="num">${i+1}</span><span class="thumb">${icon(r[2])}</span><div style="flex:1"><h3>${esc(r[0])}</h3><p>${esc(r[1])}</p>${r[0]==='Seal Plier'?'<span class="sa-badge blue" style="margin-top:6px">Coming Soon</span>':''}</div>${icon('arrow')}</button>`).join('')}
+        </div>
+        <section class="sa-panel">
+          <div class="sa-panel-h"><div style="display:flex;gap:10px;align-items:center">${icon('file')}<div><h2 style="margin:0">Documents &amp; Records</h2><p style="margin:2px 0 0;font-size:12px;color:var(--muted)">Access laboratory documents, calibration records and related files.</p></div></div>
+          <button type="button" class="sa-btn outline" data-action="lab-docs">View All ${icon('arrow')}</button></div>
+        </section>`;
+      return `${heading('LAB', 'Calibration, traceability and test equipment management')}
+        <div class="sa-tabs" role="tablist" aria-label="LAB sections">
+          ${[['menu','Lab Menu'],['seal','Seal ID']].map(([k,l])=>`<button type="button" class="${tab===k?'on':''}" data-page="Laboratory" data-tab="${k}">${l}</button>`).join('')}
+        </div>
+        ${tab === 'seal' ? sealBlock : menuBlock}`;
+    }
+
+    function purchasesPage() {
+      return `${heading('Purchases', 'Purchase register and supplier invoices')}
+        <div class="sa-kpi">
+          <div class="card"><div class="t">Purchase records<span class="ico">${icon('cart')}</span></div><div class="v">0</div><div class="s">Local register</div></div>
+          <div class="card"><div class="t">Imported invoices<span class="ico">${icon('file')}</span></div><div class="v">—</div><div class="s">Zoho import</div></div>
+          <div class="card"><div class="t">Zoho connection<span class="ico amber">${icon('refresh')}</span></div><div class="v" style="font-size:1.1rem">Offline</div><div class="s">Not connected</div></div>
+          <div class="card"><div class="t">This month amount<span class="ico green">${icon('wallet')}</span></div><div class="v">—</div><div class="s">Awaiting data</div></div>
+        </div>
+        <section class="sa-panel">
+          <div class="sa-panel-h"><h2>Purchase register</h2><button type="button" class="sa-btn" data-action="noop-add">${icon('plus')} Add purchase</button></div>
+          ${emptyPolished('No purchases yet', 'Purchase entries will appear in a clean register table. This module does not create Zoho quota until reconciliation is wired.', 'cart')}
+        </section>`;
+    }
+
+    function reportsPage() {
+      const cards = [
+        ['Verification report','Verification records by selected date','shield'],
+        ['RC quota report','Allotted, used and available units','hash'],
+        ['RC wallet report','Current balances and lifetime totals','wallet'],
+        ['Regional centre report','Centre register and certification','building'],
+        ['Technician report','VCT directory and performance','user'],
+        ['Customer report','Customer master export','bag'],
+      ];
+      return `${heading('Reports', 'Verification and operational reports', periodButtons())}
+        <div class="sa-reportgrid">
+          ${cards.map((r)=>`<div class="sa-panel" style="margin:0"><div style="display:flex;gap:12px;align-items:flex-start"><span class="sa-kpi"><span class="ico" style="width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue)">${icon(r[2])}</span></span><div style="flex:1"><h3 style="margin:0 0 4px;font-family:Outfit,system-ui,sans-serif;font-size:15px">${esc(r[0])}</h3><p style="margin:0 0 10px;font-size:12px;color:var(--muted)">${esc(r[1])}</p><button type="button" class="sa-btn outline" data-action="noop-export">${icon('download')} Export CSV</button></div></div></div>`).join('')}
+        </div>`;
+    }
+
+    function applyEmaapStatus(data) {
+      const d = data || {};
+      state.emaap = {
+        configured: Boolean(d.configured),
+        label: d.label || (d.configured ? 'Connected' : 'Not connected'),
+        userIdMasked: d.userIdMasked || null,
+        updatedAt: d.updatedAt || null,
+        loading: false,
+      };
+    }
+
+    function applyYesoneStatus(data) {
+      const d = data || {};
+      state.yesone = {
+        configured: Boolean(d.configured),
+        label: d.label || (d.configured ? 'Connected' : 'Not connected'),
+        userIdMasked: d.userIdMasked || null,
+        baseUrl: d.baseUrl || 'https://yesgatc.in',
+        updatedAt: d.updatedAt || null,
+        loading: false,
+      };
+    }
+
+    function applyRazorpayStatus(data) {
+      const d = data || {};
+      state.razorpay = {
+        configured: Boolean(d.configured),
+        label: d.label || (d.configured ? 'Connected' : 'Not connected'),
+        keyIdMasked: d.keyIdMasked || null,
+        webhookUrl: d.webhookUrl || 'https://gatc.yesweigh.in/api/v1/integrations/razorpay/webhook',
+        webhookSecretSet: Boolean(d.webhookSecretSet),
+        updatedAt: d.updatedAt || null,
+        loading: false,
+      };
+    }
+
+    function applyZohoStatus(data) {
+      const d = data || {};
+      state.zoho = {
+        configured: Boolean(d.configured),
+        label: d.label || (d.configured ? 'Connected' : 'Not connected'),
+        organizationId: d.organizationId || null,
+        organizationName: d.organizationName || null,
+        clientIdMasked: d.clientIdMasked || null,
+        oauthClientConfigured: Boolean(d.oauthClientConfigured),
+        redirectUri: d.redirectUri || 'https://ecs.benchpc.online/api/integrations/zoho/callback',
+        embedMode: d.embedMode || 'popup',
+        connectedVia: d.connectedVia || null,
+        note: d.note || null,
+        updatedAt: d.updatedAt || null,
+        loading: false,
+      };
+    }
+
+    function zohoOrgDisplay(zoho) {
+      const name = String(zoho?.organizationName || '').trim();
+      const id = String(zoho?.organizationId || '').trim();
+      if (name && id) return `${name} · ${id}`;
+      if (name) return name;
+      if (id) return id;
+      return '';
+    }
+
+    async function loadEmaapStatus(silent) {
+      if (!silent) state.emaap = { ...state.emaap, loading: true };
+      const { res, json } = await api('/api/v1/admin/integrations/emaap', { token: authState.token });
+      if (!res.ok) {
+        state.emaap = { ...state.emaap, loading: false };
+        if (onAuthFail(json, res)) return;
+        if (!silent) toast(json.error?.message || 'Could not load eMaap status');
+        return;
+      }
+      applyEmaapStatus(json.data);
+      if (state.page === 'Settings' || state.page === 'Integrations') render(true);
+    }
+
+    async function loadYesoneStatus(silent) {
+      if (!silent) state.yesone = { ...state.yesone, loading: true };
+      const { res, json } = await api('/api/v1/admin/integrations/yesone', { token: authState.token });
+      if (!res.ok) {
+        state.yesone = { ...state.yesone, loading: false };
+        if (onAuthFail(json, res)) return;
+        if (!silent) toast(json.error?.message || 'Could not load Yes One status');
+        return;
+      }
+      applyYesoneStatus(json.data);
+      if (state.page === 'Settings' || state.page === 'Integrations') render(true);
+    }
+
+    async function loadEmaapApis(silent) {
+      if (!silent) state.emaapApis = { ...state.emaapApis, loading: true, error: null };
+      const { res, json } = await api('/api/v1/admin/integrations/emaap/apis', { token: authState.token });
+      if (!res.ok) {
+        state.emaapApis = {
+          ...state.emaapApis,
+          loading: false,
+          error: json.error?.message || 'Could not load eMaap APIs',
+        };
+        if (onAuthFail(json, res)) return;
+        if (state.integrationModal === 'emaap') render(true);
+        return;
+      }
+      const d = json.data || {};
+      state.emaapApis = {
+        loading: false,
+        error: null,
+        baseUrl: d.baseUrl || 'https://emaap.gov.in/gatcapi',
+        counts: d.counts || { v1: (d.v1 || []).length, v2: (d.v2 || []).length },
+        v1: Array.isArray(d.v1) ? d.v1 : [],
+        v2: Array.isArray(d.v2) ? d.v2 : [],
+        source: d.source || null,
+        updatedAt: d.updatedAt || null,
+      };
+      if (state.integrationModal === 'emaap') render(true);
+    }
+
+    async function loadZohoStatus(silent) {
+      if (!silent) state.zoho = { ...state.zoho, loading: true };
+      const { res, json } = await api('/api/v1/admin/integrations/zoho', { token: authState.token });
+      if (!res.ok) {
+        state.zoho = { ...state.zoho, loading: false };
+        if (onAuthFail(json, res)) return;
+        if (!silent) toast(json.error?.message || 'Could not load Zoho status');
+        return;
+      }
+      applyZohoStatus(json.data);
+      if (state.page === 'Settings' || state.page === 'Integrations') render(true);
+    }
+
+    async function loadRazorpayStatus(silent) {
+      if (!silent) state.razorpay = { ...state.razorpay, loading: true };
+      const { res, json } = await api('/api/v1/admin/integrations/razorpay', { token: authState.token });
+      if (!res.ok) {
+        state.razorpay = { ...state.razorpay, loading: false };
+        if (onAuthFail(json, res)) return;
+        if (!silent) toast(json.error?.message || 'Could not load Razorpay status');
+        return;
+      }
+      applyRazorpayStatus(json.data);
+      if (state.page === 'Settings' || state.page === 'Integrations') render(true);
+    }
+
+    async function saveRazorpayCredentialsFromForm() {
+      if (state.razorpaySaving) return;
+      const keyId = (root.querySelector('#razorpay-key-id')?.value || '').trim();
+      const keySecret = (root.querySelector('#razorpay-key-secret')?.value || '').trim();
+      if (!keyId || !keySecret) {
+        toast('Key ID and Key Secret are required');
+        return;
+      }
+      state.razorpaySaving = true;
       render(true);
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => { state.toast = null; render(true); }, 2700);
+      const { res, json } = await api('/api/v1/admin/integrations/razorpay', {
+        method: 'PUT',
+        token: authState.token,
+        body: { keyId, keySecret },
+      });
+      state.razorpaySaving = false;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        toast(json.error?.message || 'Could not save Razorpay credentials');
+        render(true);
+        return;
+      }
+      applyRazorpayStatus(json.data);
+      state.integrationModal = null;
+      toast('Razorpay connected — credentials stored on server');
+      render(true);
     }
 
-    async function loadOps(silent = false) {
-      if (!silent) state.loading = true;
+    function loadRazorpayCheckoutScript() {
+      return new Promise((resolve, reject) => {
+        if (window.Razorpay) {
+          resolve(window.Razorpay);
+          return;
+        }
+        const existing = document.querySelector('script[data-gatc-razorpay-checkout]');
+        if (existing) {
+          existing.addEventListener('load', () => resolve(window.Razorpay));
+          existing.addEventListener('error', () => reject(new Error('Could not load Razorpay Checkout')));
+          return;
+        }
+        const s = document.createElement('script');
+        s.src = 'https://checkout.razorpay.com/v1/checkout.js';
+        s.async = true;
+        s.dataset.gatcRazorpayCheckout = '1';
+        s.onload = () => resolve(window.Razorpay);
+        s.onerror = () => reject(new Error('Could not load Razorpay Checkout'));
+        document.head.appendChild(s);
+      });
+    }
+
+    async function saveRazorpayWebhookSecretFromForm() {
+      if (state.razorpayWebhookSaving) return;
+      const webhookSecret = (root.querySelector('#razorpay-webhook-secret')?.value || '').trim();
+      if (!webhookSecret) {
+        toast('Paste the webhook secret from Razorpay Dashboard');
+        return;
+      }
+      state.razorpayWebhookSaving = true;
+      render(true);
+      const { res, json } = await api('/api/v1/admin/integrations/razorpay', {
+        method: 'PUT',
+        token: authState.token,
+        body: { webhookSecret },
+      });
+      state.razorpayWebhookSaving = false;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        toast(json.error?.message || 'Could not save webhook secret');
+        render(true);
+        return;
+      }
+      applyRazorpayStatus(json.data);
+      toast('Webhook secret saved on server');
+      render(true);
+    }
+
+    function copyRazorpayWebhookUrl() {
+      const url = state.razorpay?.webhookUrl
+        || 'https://gatc.yesweigh.in/api/v1/integrations/razorpay/webhook';
+      if (navigator.clipboard?.writeText) {
+        navigator.clipboard.writeText(url).then(() => toast('Webhook URL copied')).catch(() => toast(url));
+      } else {
+        toast(url);
+      }
+    }
+
+    async function runRazorpayTestPayment() {
+      if (state.razorpayTest?.busy) return;
+      if (!state.razorpay?.configured) {
+        toast('Connect Razorpay before running a test payment');
+        return;
+      }
+      const amountRaw = (root.querySelector('#razorpay-test-amount')?.value || '1').trim();
+      const amountInr = Number(amountRaw);
+      if (!Number.isFinite(amountInr) || amountInr < 1) {
+        toast('Enter a valid amount in INR (minimum ₹1)');
+        return;
+      }
+      const receipt = (root.querySelector('#razorpay-test-receipt')?.value || '').trim();
+      const note = (root.querySelector('#razorpay-test-note')?.value || '').trim();
+      const liveWarn = 'This uses LIVE Razorpay keys and will charge REAL money. Continue with ₹'
+        + amountInr.toFixed(2) + '?';
+      if (!window.confirm(liveWarn)) return;
+
+      state.razorpayTest = { busy: true, lastResult: null };
+      render(true);
       try {
-        const { res, json } = await api('/api/v1/admin/ops-status', { token: authState.token });
+        const { res, json } = await api('/api/v1/admin/integrations/razorpay/test-order', {
+          method: 'POST',
+          token: authState.token,
+          body: { amountInr, receipt: receipt || undefined, note: note || undefined },
+        });
         if (!res.ok) {
-          if (res.status === 401) {
-            clearAuth();
-            clearInterval(pollTimer);
-            renderLogin({ step: 'credentials', error: 'Session expired. Please sign in again.' });
-            return;
-          }
-          state.error = json.error?.message || 'Failed to load ops status';
-          state.loading = false;
+          if (onAuthFail(json, res)) return;
+          state.razorpayTest = { busy: false, lastResult: { ok: false, message: json.error?.message || 'Order failed' } };
+          toast(json.error?.message || 'Could not create test order');
           render(true);
           return;
         }
-        state.ops = json.data;
-        state.error = null;
-        state.loading = false;
-        render(true);
+        const order = json.data || {};
+        const RazorpayCtor = await loadRazorpayCheckoutScript();
+        await new Promise((resolve) => {
+          const rzp = new RazorpayCtor({
+            key: order.keyId,
+            amount: order.amount,
+            currency: order.currency || 'INR',
+            name: 'GATC test payment',
+            description: note || 'Admin Razorpay connectivity test',
+            order_id: order.orderId,
+            theme: { color: '#2563eb' },
+            handler: async (response) => {
+              try {
+                const verify = await api('/api/v1/admin/integrations/razorpay/verify-payment', {
+                  method: 'POST',
+                  token: authState.token,
+                  body: {
+                    razorpay_order_id: response.razorpay_order_id,
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_signature: response.razorpay_signature,
+                  },
+                });
+                if (!verify.res.ok || !verify.json?.data?.verified) {
+                  const httpHint = !verify.res.ok
+                    ? `Verify request failed (HTTP ${verify.res.status})`
+                    : 'Signature verification failed';
+                  state.razorpayTest = {
+                    busy: false,
+                    lastResult: {
+                      ok: false,
+                      message: verify.json?.error?.message || httpHint,
+                      paymentId: response.razorpay_payment_id || null,
+                    },
+                  };
+                  toast(state.razorpayTest.lastResult.message);
+                } else {
+                  state.razorpayTest = {
+                    busy: false,
+                    lastResult: {
+                      ok: true,
+                      message: 'Payment verified',
+                      paymentId: verify.json.data.paymentId,
+                      orderId: verify.json.data.orderId,
+                      amountInr: order.amountInr,
+                    },
+                  };
+                  toast('Test payment success — signature verified');
+                }
+              } catch (err) {
+                state.razorpayTest = {
+                  busy: false,
+                  lastResult: { ok: false, message: err.message || 'Verify failed' },
+                };
+                toast(state.razorpayTest.lastResult.message);
+              }
+              render(true);
+              resolve();
+            },
+            modal: {
+              ondismiss: () => {
+                state.razorpayTest = {
+                  busy: false,
+                  lastResult: { ok: false, message: 'Checkout closed without payment' },
+                };
+                render(true);
+                resolve();
+              },
+            },
+          });
+          rzp.on('payment.failed', (resp) => {
+            const desc = resp?.error?.description || resp?.error?.reason || 'Payment failed';
+            state.razorpayTest = {
+              busy: false,
+              lastResult: { ok: false, message: desc },
+            };
+            toast(desc);
+            render(true);
+            resolve();
+          });
+          rzp.open();
+        });
       } catch (err) {
-        state.error = err.message || 'Network error';
-        state.loading = false;
+        state.razorpayTest = {
+          busy: false,
+          lastResult: { ok: false, message: err.message || 'Test payment failed' },
+        };
+        toast(state.razorpayTest.lastResult.message);
         render(true);
       }
     }
 
-    root.addEventListener('click', (e) => {
-      const btn = e.target.closest('button');
+    async function saveEmaapCredentialsFromForm() {
+      if (state.emaapSaving) return;
+      const userId = (root.querySelector('#emaap-user-id')?.value || '').trim();
+      const password = (root.querySelector('#emaap-password')?.value || '').trim();
+      const masterOtp = (root.querySelector('#emaap-master-otp')?.value || '').trim();
+      if (!userId || !password || !masterOtp) {
+        toast('User ID, Password, and Master OTP are required');
+        return;
+      }
+      state.emaapSaving = true;
+      render(true);
+      const { res, json } = await api('/api/v1/admin/integrations/emaap', {
+        method: 'PUT',
+        token: authState.token,
+        body: { userId, password, masterOtp },
+      });
+      state.emaapSaving = false;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        toast(json.error?.message || 'Could not save eMaap credentials');
+        render(true);
+        return;
+      }
+      applyEmaapStatus(json.data);
+      state.integrationModal = null;
+      toast('eMaap connected — credentials stored on server');
+      render(true);
+    }
+
+    async function saveYesoneCredentialsFromForm() {
+      if (state.yesoneSaving) return;
+      const userId = (root.querySelector('#yesone-user-id')?.value || '').trim();
+      const password = (root.querySelector('#yesone-password')?.value || '').trim();
+      if (!userId || !password) {
+        toast('User ID and Password are required');
+        return;
+      }
+      state.yesoneSaving = true;
+      render(true);
+      const { res, json } = await api('/api/v1/admin/integrations/yesone', {
+        method: 'PUT',
+        token: authState.token,
+        body: { userId, password, baseUrl: 'https://yesgatc.in' },
+      });
+      state.yesoneSaving = false;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        toast(json.error?.message || 'Could not save Yes One credentials');
+        render(true);
+        return;
+      }
+      applyYesoneStatus(json.data);
+      state.integrationModal = null;
+      toast('Yes One connected — credentials stored on server');
+      render(true);
+    }
+
+    async function startZohoOAuthPopup() {
+      if (state.zohoBusy) return;
+      state.zohoBusy = true;
+      render(true);
+      const { res, json } = await api('/api/v1/admin/integrations/zoho/oauth/start', { token: authState.token });
+      state.zohoBusy = false;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        toast(json.error?.message || 'Could not start Zoho sign-in');
+        render(true);
+        return;
+      }
+      const url = json.data?.authorizeUrl;
+      if (!url) {
+        toast('Zoho authorize URL missing');
+        render(true);
+        return;
+      }
+      // Zoho accounts pages set CSP/X-Frame-Options that block iframes — use centered OAuth popup.
+      const w = 520;
+      const h = 720;
+      const left = Math.max(0, Math.round((window.screen.width - w) / 2));
+      const top = Math.max(0, Math.round((window.screen.height - h) / 2));
+      const popup = window.open(
+        url,
+        'gatc-zoho-oauth',
+        `popup=yes,width=${w},height=${h},left=${left},top=${top},resizable=yes,scrollbars=yes`,
+      );
+      if (!popup) {
+        toast('Popup blocked — allow popups for this site, then try again');
+        render(true);
+        return;
+      }
+      toast('Complete Zoho Sign-in in the popup…');
+      render(true);
+      const started = Date.now();
+      const poll = setInterval(() => {
+        if (popup.closed || Date.now() - started > 12 * 60 * 1000) {
+          clearInterval(poll);
+          loadZohoStatus(true);
+        }
+      }, 900);
+    }
+
+    async function saveZohoOrgOrTokenFromForm() {
+      if (state.zohoBusy) return;
+      const organizationId = (root.querySelector('#zoho-org-id')?.value || '').trim();
+      const refreshToken = (root.querySelector('#zoho-refresh-token')?.value || '').trim();
+      if (!refreshToken && !organizationId) {
+        toast('Enter organization ID or a refresh token');
+        return;
+      }
+      state.zohoBusy = true;
+      render(true);
+      const body = refreshToken ? { refreshToken, organizationId: organizationId || undefined } : { organizationId };
+      const { res, json } = await api('/api/v1/admin/integrations/zoho', {
+        method: 'PUT',
+        token: authState.token,
+        body,
+      });
+      state.zohoBusy = false;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        toast(json.error?.message || 'Could not update Zoho');
+        render(true);
+        return;
+      }
+      applyZohoStatus(json.data);
+      if (refreshToken) {
+        state.integrationModal = null;
+        toast('Zoho Books connected — tokens stored encrypted on server');
+      } else {
+        toast('Organization ID saved');
+      }
+      render(true);
+    }
+
+    async function disconnectZoho() {
+      if (state.zohoBusy) return;
+      if (!window.confirm('Disconnect Zoho Books from this VPS? You can Sign in again to choose an organization.')) return;
+      state.zohoBusy = true;
+      state.zohoPick = null;
+      render(true);
+      const { res, json } = await api('/api/v1/admin/integrations/zoho', {
+        method: 'DELETE',
+        token: authState.token,
+      });
+      state.zohoBusy = false;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        toast(json.error?.message || 'Could not disconnect Zoho');
+        render(true);
+        return;
+      }
+      applyZohoStatus(json.data);
+      toast('Zoho Books disconnected');
+      render(true);
+    }
+
+    async function saveZohoOrgPick() {
+      if (state.zohoBusy || !state.zohoPick?.pickState) return;
+      const organizationId = String(state.zohoPick.selectedOrgId || '').trim();
+      if (!organizationId) {
+        toast('Choose an organization');
+        return;
+      }
+      state.zohoBusy = true;
+      render(true);
+      const { res, json } = await api('/api/v1/admin/integrations/zoho/save', {
+        method: 'POST',
+        token: authState.token,
+        body: { pickState: state.zohoPick.pickState, organizationId },
+      });
+      state.zohoBusy = false;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        toast(json.error?.message || 'Could not save organization');
+        render(true);
+        return;
+      }
+      state.zohoPick = null;
+      applyZohoStatus(json.data);
+      state.integrationModal = null;
+      toast('Zoho Books connected');
+      render(true);
+    }
+
+    function settingsPage() {
+      const emaapConfigured = Boolean(state.emaap?.configured);
+      const yesoneConfigured = Boolean(state.yesone?.configured);
+      const razorpayConfigured = Boolean(state.razorpay?.configured);
+      const zohoConfigured = Boolean(state.zoho?.configured);
+      const zohoOrg = zohoConfigured ? zohoOrgDisplay(state.zoho) : '';
+      const connectors = [
+        {
+          id: 'zoho',
+          name: 'Zoho Books',
+          short: 'ZB',
+          logo: 'zoho',
+          logoSrc: '/assets/zoho-books-logo.svg',
+          desc: 'Accounting sync — invoices, RC mapping, and billed instrument quota polling.',
+          status: zohoConfigured ? (state.zoho.label || 'Connected') : (state.zoho?.loading ? 'Checking…' : 'Not connected'),
+          statusCls: zohoConfigured ? 'ok' : (state.zoho?.loading ? 'blue' : 'off'),
+          orgDetail: zohoOrg,
+        },
+        {
+          id: 'razorpay',
+          name: 'Razorpay',
+          short: 'RP',
+          logo: 'razor',
+          logoSrc: '/assets/razorpay-logo.svg',
+          desc: 'Payment gateway for wallet top-ups, settlements, and contractor fee collection.',
+          status: razorpayConfigured ? (state.razorpay.label || 'Connected') : (state.razorpay?.loading ? 'Checking…' : 'Not connected'),
+          statusCls: razorpayConfigured ? 'ok' : (state.razorpay?.loading ? 'blue' : 'off'),
+        },
+        {
+          id: 'emaap',
+          name: 'eMaap',
+          short: 'eM',
+          logo: 'emaap',
+          logoSrc: '/assets/emaap-logo.png',
+          desc: 'Authorized government eMaap connector for verification submissions and acknowledgements.',
+          status: emaapConfigured ? (state.emaap.label || 'Connected') : (state.emaap?.loading ? 'Checking…' : 'Not connected'),
+          statusCls: emaapConfigured ? 'ok' : (state.emaap?.loading ? 'blue' : 'off'),
+        },
+        {
+          id: 'yesone',
+          name: 'Yes One',
+          short: 'Y1',
+          logo: 'yesone',
+          logoSrc: '/assets/yesone-logo.png',
+          desc: 'Yes One / YesWeigh connector for certificates, inbound media, and operational sync.',
+          status: yesoneConfigured ? (state.yesone.label || 'Connected') : (state.yesone?.loading ? 'Checking…' : 'Not connected'),
+          statusCls: yesoneConfigured ? 'ok' : (state.yesone?.loading ? 'blue' : 'off'),
+        },
+      ];
+      const platform = [
+        ['PDF storage','Private signed certificate storage','server'],
+        ['Email','Google Workspace delivery','mail'],
+        ['WhatsApp OTP','Approved messaging provider','lock'],
+        ['Backup & recovery','PostgreSQL and certificate backup','server'],
+        ['Security & sessions','Password policy and device sessions','lock'],
+        ['Workspace profile','Organisation name and branding','building'],
+      ];
+      const modal = state.integrationModal;
+      const modalHtml = modal ? (() => {
+        const c = connectors.find((x) => x.id === modal) || { name: modal, desc: '' };
+        if (modal === 'zoho') {
+          const configured = zohoConfigured;
+          const clientReady = Boolean(state.zoho?.oauthClientConfigured);
+          const pick = state.zohoPick;
+          if (pick && Array.isArray(pick.organizations) && pick.organizations.length) {
+            const selected = pick.selectedOrgId || pick.organizations[0]?.organizationId || '';
+            const orgButtons = pick.organizations.map((org) => (
+              `<button type="button" class="zoho-org-item${selected === org.organizationId ? ' is-selected' : ''}" data-action="zoho-select-org" data-org-id="${esc(org.organizationId)}">`
+              + `<strong>${esc(org.name || org.organizationId)}</strong>`
+              + `<span>${esc(org.organizationId)}${org.contactName ? ` · ${org.contactName}` : ''}</span>`
+              + `</button>`
+            )).join('');
+            return `<div class="sa-int-modal" data-backdrop="integration" role="presentation">
+              <div class="sa-int-dialog" role="dialog" aria-modal="true" aria-label="Choose Zoho organization">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+                  <div><h2>Zoho Books</h2><p style="margin:6px 0 0;font-size:12px;color:var(--muted)">Choose the organization for GATC accounting sync.</p></div>
+                  <button type="button" class="sa-btn ghost" data-action="close-integration-modal" aria-label="Close">✕</button>
+                </div>
+                <div class="zoho-org-list" role="listbox" aria-label="Organizations">${orgButtons}</div>
+                <div class="actions">
+                  <button type="button" class="sa-btn ghost" data-action="close-integration-modal">Cancel</button>
+                  <button type="button" class="sa-btn" data-action="zoho-save-org"${state.zohoBusy ? ' disabled' : ''}>${state.zohoBusy ? 'Saving…' : 'Save'}</button>
+                </div>
+              </div>
+            </div>`;
+          }
+          if (configured) {
+            const orgName = String(state.zoho.organizationName || '').trim();
+            const orgId = String(state.zoho.organizationId || '').trim();
+            const orgBlock = (orgName || orgId)
+              ? `<div style="margin:14px 0;padding:12px 14px;border:1px solid #d1fae5;background:#ecfdf5;border-radius:10px">
+                  <p style="margin:0 0 6px;font-size:12px;font-weight:700;color:#0f8a4b">Connected</p>
+                  ${orgName ? `<p style="margin:0;font-size:13px;font-weight:700;color:#0f172a">${esc(orgName)}</p>` : ''}
+                  ${orgId ? `<p style="margin:${orgName ? '4px' : '0'} 0 0;font-size:12px;color:#475569">Organization ID · ${esc(orgId)}</p>` : ''}
+                  <p style="margin:8px 0 0;font-size:11px;color:#64748b">Tokens stay encrypted on this VPS.</p>
+                </div>`
+              : `<p style="margin:14px 0;font-size:12px;color:#0f8a4b">Connected. Tokens stay encrypted on this VPS.</p>`;
+            return `<div class="sa-int-modal" data-backdrop="integration" role="presentation">
+              <div class="sa-int-dialog" role="dialog" aria-modal="true" aria-label="Zoho Books">
+                <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+                  <div><h2>Zoho Books</h2><p style="margin:6px 0 0;font-size:12px;color:var(--muted)">Accounting sync — invoices, RC mapping, and billed instrument quota polling.</p></div>
+                  <button type="button" class="sa-btn ghost" data-action="close-integration-modal" aria-label="Close">✕</button>
+                </div>
+                ${orgBlock}
+                <div class="actions" style="flex-wrap:wrap">
+                  <button type="button" class="sa-btn ghost" data-action="close-integration-modal">Cancel</button>
+                  <button type="button" class="sa-btn ghost" data-action="disconnect-zoho"${state.zohoBusy ? ' disabled' : ''}>Disconnect</button>
+                  <button type="button" class="sa-btn" data-action="zoho-oauth-start"${(state.zohoBusy || !clientReady) ? ' disabled' : ''}>${icon('plug')} ${state.zohoBusy ? 'Opening Zoho…' : 'Sign in'}</button>
+                </div>
+              </div>
+            </div>`;
+          }
+          const clientNote = clientReady
+            ? `<p style="margin:0 0 14px;font-size:12px;color:var(--muted)">Sign in with your Zoho account (India DC). Zoho opens in a popup — same OAuth flow as ecs.benchpc.online. After consent, tokens are stored encrypted on this VPS.</p>`
+            : `<p style="margin:0 0 14px;font-size:12px;color:#b45309">App credentials missing on VPS. Set <code>ZOHO_CLIENT_ID</code> / <code>ZOHO_CLIENT_SECRET</code>, then restart gatc-api.</p>`;
+          return `<div class="sa-int-modal" data-backdrop="integration" role="presentation">
+            <div class="sa-int-dialog" role="dialog" aria-modal="true" aria-label="Zoho Books">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+                <div><h2>Zoho Books</h2><p style="margin:6px 0 0;font-size:12px;color:var(--muted)">${esc(c.desc)}</p></div>
+                <button type="button" class="sa-btn ghost" data-action="close-integration-modal" aria-label="Close">✕</button>
+              </div>
+              ${clientNote}
+              <div class="actions" style="flex-wrap:wrap">
+                <button type="button" class="sa-btn ghost" data-action="close-integration-modal">Cancel</button>
+                <button type="button" class="sa-btn" data-action="zoho-oauth-start"${(state.zohoBusy || !clientReady) ? ' disabled' : ''}>${icon('plug')} ${state.zohoBusy ? 'Opening Zoho…' : 'Sign in'}</button>
+              </div>
+            </div>
+          </div>`;
+        }
+        if (modal === 'emaap') {
+          const configured = emaapConfigured;
+          const apis = state.emaapApis || {};
+          const fields = configured
+            ? `<div class="fields">
+                <div><label>User ID</label><input value="${esc(state.emaap.userIdMasked || '••••••••')}" readonly disabled autocomplete="off"/></div>
+                <div><label>Password</label><input type="password" value="••••••••" readonly disabled autocomplete="off"/></div>
+                <div><label>Master OTP</label><input type="password" value="••••••••" readonly disabled autocomplete="off"/></div>
+              </div>
+              <p style="margin:0 0 14px;font-size:12px;color:#0f8a4b">Configured on server. Secrets are hidden — enter new values below only to replace them.</p>
+              <details style="margin:0">
+                <summary style="cursor:pointer;font-size:12px;font-weight:700;color:#475569">Replace credentials</summary>
+                <div class="fields" style="margin-top:12px">
+                  <div><label for="emaap-user-id">User ID</label><input id="emaap-user-id" placeholder="Portal user ID" autocomplete="off"/></div>
+                  <div><label for="emaap-password">Password</label><input id="emaap-password" type="password" placeholder="••••••••" autocomplete="new-password"/></div>
+                  <div><label for="emaap-master-otp">Master OTP</label><input id="emaap-master-otp" type="password" placeholder="••••••••" autocomplete="one-time-code"/></div>
+                </div>
+              </details>`
+            : `<div class="fields">
+                <div><label for="emaap-user-id">User ID</label><input id="emaap-user-id" placeholder="Portal user ID" autocomplete="off"/></div>
+                <div><label for="emaap-password">Password</label><input id="emaap-password" type="password" placeholder="••••••••" autocomplete="new-password"/></div>
+                <div><label for="emaap-master-otp">Master OTP</label><input id="emaap-master-otp" type="password" placeholder="••••••••" autocomplete="one-time-code"/></div>
+              </div>
+              <p style="margin:0;font-size:11px;color:#94a3b8">Saved encrypted on the VPS. Secrets are never shown again after save.</p>`;
+          const apiRows = (list) => (list || []).map((row) => {
+            const method = String(row.method || 'GET').toUpperCase();
+            const methodCls = method.toLowerCase();
+            return `<tr>
+              <td><span class="sa-emaap-method ${esc(methodCls)}">${esc(method)}</span></td>
+              <td><span class="sa-emaap-path">${esc(row.path || '')}</span></td>
+              <td style="color:#475569">${esc(row.description || '')}</td>
+            </tr>`;
+          }).join('');
+          const apiTable = (title, list) => `<div class="sa-emaap-api-group">
+              <h4>${esc(title)} · ${(list || []).length}</h4>
+              <div style="overflow:auto;border:1px solid #eef2f7;border-radius:10px">
+                <table class="sa-emaap-api-table">
+                  <thead><tr><th style="width:72px">Method</th><th>Path</th><th>Description</th></tr></thead>
+                  <tbody>${apiRows(list) || `<tr><td colspan="3" style="color:#94a3b8">No endpoints</td></tr>`}</tbody>
+                </table>
+              </div>
+            </div>`;
+          const apisBody = apis.loading
+            ? `<p style="margin:0;font-size:12px;color:var(--muted)">Loading API catalog…</p>`
+            : (apis.error
+              ? `<p style="margin:0;font-size:12px;color:#b91c1c">${esc(apis.error)}</p>`
+              : `${apiTable('API v1', apis.v1)}${apiTable('API v2', apis.v2)}`);
+          const v1n = apis.counts?.v1 ?? (apis.v1 || []).length;
+          const v2n = apis.counts?.v2 ?? (apis.v2 || []).length;
+          return `<div class="sa-int-modal sa-int-modal--fs" data-backdrop="integration" role="presentation">
+            <div class="sa-int-dialog sa-int-dialog--fs" role="dialog" aria-modal="true" aria-label="Configure eMaap">
+              <div class="sa-emaap-head">
+                <div>
+                  <h2>Configure eMaap</h2>
+                  <p style="margin:6px 0 0;font-size:12px;color:var(--muted)">${esc(c.desc)}</p>
+                </div>
+                <div style="display:flex;gap:8px;align-items:center;flex:none">
+                  <span class="sa-badge ${configured ? 'ok' : 'off'}">${esc(configured ? (state.emaap.label || 'Connected') : 'Not connected')}</span>
+                  <button type="button" class="sa-btn ghost" data-action="close-integration-modal" aria-label="Close">✕</button>
+                </div>
+              </div>
+              <div class="sa-emaap-body">
+                <section class="sa-emaap-card">
+                  <h3>Credentials</h3>
+                  <p class="sa-emaap-sub">Portal User ID, Password, and Master OTP — never shown in the API list below.</p>
+                  ${fields}
+                </section>
+                <section class="sa-emaap-card">
+                  <h3>APIs</h3>
+                  <p class="sa-emaap-sub">Government gatcapi endpoints used by eMaap / CertificateWorker / EmaapEngine · ${v1n} v1 · ${v2n} v2</p>
+                  <div class="sa-emaap-base">
+                    <code id="emaap-base-url">${esc(apis.baseUrl || 'https://emaap.gov.in/gatcapi')}</code>
+                    <button type="button" class="sa-btn outline" data-action="copy-emaap-base">Copy base URL</button>
+                  </div>
+                  ${apisBody}
+                </section>
+              </div>
+              <div class="sa-emaap-foot">
+                <button type="button" class="sa-btn ghost" data-action="close-integration-modal">Cancel</button>
+                <button type="button" class="sa-btn" data-action="save-emaap-credentials"${state.emaapSaving ? ' disabled' : ''}>${state.emaapSaving ? 'Saving…' : (configured ? 'Update' : 'Save')}</button>
+              </div>
+            </div>
+          </div>`;
+        }
+        if (modal === 'razorpay') {
+          const configured = razorpayConfigured;
+          const testBusy = Boolean(state.razorpayTest?.busy);
+          const testResult = state.razorpayTest?.lastResult;
+          const testResultHtml = testResult
+            ? `<p style="margin:10px 0 0;font-size:12px;color:${testResult.ok ? '#0f8a4b' : '#b91c1c'}">${esc(testResult.message)}${testResult.paymentId ? ` · pay ${esc(testResult.paymentId)}` : ''}${testResult.amountInr != null ? ` · ₹${esc(String(testResult.amountInr))}` : ''}</p>`
+            : '';
+          const fields = configured
+            ? `<div class="fields">
+                <div><label>Key ID</label><input value="${esc(state.razorpay.keyIdMasked || '••••••••')}" readonly disabled autocomplete="off"/></div>
+                <div><label>Key Secret</label><input type="password" value="••••••••" readonly disabled autocomplete="off"/></div>
+              </div>
+              <p style="margin:0 0 14px;font-size:12px;color:#0f8a4b">Configured on server. Key secret is hidden — enter new values below only to replace them.</p>
+              <details style="margin:0 0 14px">
+                <summary style="cursor:pointer;font-size:12px;font-weight:700;color:#475569">Replace credentials</summary>
+                <div class="fields" style="margin-top:12px">
+                  <div><label for="razorpay-key-id">Key ID</label><input id="razorpay-key-id" placeholder="rzp_live_…" autocomplete="off"/></div>
+                  <div><label for="razorpay-key-secret">Key Secret</label><input id="razorpay-key-secret" type="password" placeholder="••••••••" autocomplete="new-password"/></div>
+                </div>
+              </details>
+              <div style="margin:0 0 14px;padding:12px;border:1px solid #fecaca;border-radius:12px;background:#fff7f7">
+                <div style="display:flex;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:8px">
+                  <strong style="font-size:13px">Test payment</strong>
+                  <span class="sa-badge ok">${esc(state.razorpay.label || 'Connected')}</span>
+                </div>
+                <p style="margin:0 0 10px;font-size:11px;color:#9a3412;line-height:1.45"><strong>LIVE keys / real money.</strong> Default is ₹1. Confirm before Checkout opens. Server verifies the payment signature after success.</p>
+                <div class="fields">
+                  <div><label for="razorpay-test-amount">Amount (INR)</label><input id="razorpay-test-amount" type="number" min="1" max="100" step="1" value="1" inputmode="decimal"/></div>
+                  <div><label for="razorpay-test-note">Note (optional)</label><input id="razorpay-test-note" placeholder="Admin connectivity test" autocomplete="off"/></div>
+                </div>
+                <div class="actions" style="margin-top:10px">
+                  <button type="button" class="sa-btn" data-action="razorpay-test-pay"${testBusy ? ' disabled' : ''}>${testBusy ? 'Opening Checkout…' : 'Pay test'}</button>
+                </div>
+                ${testResultHtml}
+              </div>
+              <div style="margin:0 0 14px;padding:12px;border:1px solid #bfdbfe;border-radius:12px;background:#f8fbff">
+                <strong style="font-size:13px">Webhook callback URL</strong>
+                <p style="margin:6px 0 10px;font-size:11px;color:#475569;line-height:1.45">Paste this into Razorpay Dashboard → Settings → Webhooks. Events <code>payment.captured</code> / <code>order.paid</code> are verified and stored on the VPS.</p>
+                <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                  <input id="razorpay-webhook-url" readonly value="${esc(state.razorpay.webhookUrl || 'https://gatc.yesweigh.in/api/v1/integrations/razorpay/webhook')}" style="flex:1;min-width:220px;font-size:12px" autocomplete="off"/>
+                  <button type="button" class="sa-btn outline" data-action="copy-razorpay-webhook">Copy</button>
+                </div>
+                <div class="fields" style="margin-top:12px">
+                  <div style="grid-column:1/-1"><label for="razorpay-webhook-secret">Webhook secret ${state.razorpay.webhookSecretSet ? '(saved — enter to replace)' : ''}</label><input id="razorpay-webhook-secret" type="password" placeholder="${state.razorpay.webhookSecretSet ? '••••••••' : 'From Razorpay after creating webhook'}" autocomplete="new-password"/></div>
+                </div>
+                <div class="actions" style="margin-top:10px">
+                  <button type="button" class="sa-btn outline" data-action="save-razorpay-webhook"${state.razorpayWebhookSaving ? ' disabled' : ''}>${state.razorpayWebhookSaving ? 'Saving…' : 'Save webhook secret'}</button>
+                </div>
+              </div>`
+            : `<div class="fields">
+                <div><label for="razorpay-key-id">Key ID</label><input id="razorpay-key-id" placeholder="rzp_live_…" autocomplete="off"/></div>
+                <div><label for="razorpay-key-secret">Key Secret</label><input id="razorpay-key-secret" type="password" placeholder="••••••••" autocomplete="new-password"/></div>
+              </div>
+              <p style="margin:0 0 14px;font-size:11px;color:#94a3b8">Saved encrypted on the VPS. Key secret is never shown again after save. Test payment appears once Connected.</p>`;
+          return `<div class="sa-int-modal" data-backdrop="integration" role="presentation">
+            <div class="sa-int-dialog" role="dialog" aria-modal="true" aria-label="Configure Razorpay">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+                <div><h2>Configure Razorpay</h2><p style="margin:6px 0 0;font-size:12px;color:var(--muted)">${esc(c.desc)}</p></div>
+                <button type="button" class="sa-btn ghost" data-action="close-integration-modal" aria-label="Close">✕</button>
+              </div>
+              ${fields}
+              <div class="actions">
+                <button type="button" class="sa-btn ghost" data-action="close-integration-modal">Cancel</button>
+                <button type="button" class="sa-btn" data-action="save-razorpay-credentials"${state.razorpaySaving ? ' disabled' : ''}>${state.razorpaySaving ? 'Saving…' : (configured ? 'Update' : 'Save')}</button>
+              </div>
+            </div>
+          </div>`;
+        }
+        if (modal === 'yesone') {
+          const configured = yesoneConfigured;
+          const baseUrl = state.yesone?.baseUrl || 'https://yesgatc.in';
+          const fields = configured
+            ? `<div class="fields">
+                <div><label>URL base</label><input value="${esc(baseUrl)}" readonly onclick="this.select()" autocomplete="off"/></div>
+                <div><label>User ID</label><input value="${esc(state.yesone.userIdMasked || 'Configured')}" readonly disabled autocomplete="off"/></div>
+                <div><label>Password</label><input type="password" value="••••••••" readonly disabled autocomplete="off"/></div>
+              </div>
+              <p style="margin:0 0 14px;font-size:12px;color:#0f8a4b">Configured on server. Secrets are hidden — enter new values below only to replace them.</p>
+              <details style="margin:0">
+                <summary style="cursor:pointer;font-size:12px;font-weight:700;color:#475569">Replace credentials</summary>
+                <div class="fields" style="margin-top:12px">
+                  <div><label for="yesone-user-id">User ID</label><input id="yesone-user-id" placeholder="Portal user ID" autocomplete="off"/></div>
+                  <div><label for="yesone-password">Password</label><input id="yesone-password" type="password" placeholder="••••••••" autocomplete="new-password"/></div>
+                </div>
+              </details>`
+            : `<div class="fields">
+                <div><label>URL base</label><input value="${esc(baseUrl)}" readonly onclick="this.select()" autocomplete="off"/></div>
+                <div><label for="yesone-user-id">User ID</label><input id="yesone-user-id" placeholder="Portal user ID" autocomplete="off"/></div>
+                <div><label for="yesone-password">Password</label><input id="yesone-password" type="password" placeholder="••••••••" autocomplete="new-password"/></div>
+              </div>
+              <p style="margin:0;font-size:11px;color:#94a3b8">Saved encrypted on the VPS. Secrets are never shown again after save.</p>`;
+          return `<div class="sa-int-modal" data-backdrop="integration" role="presentation">
+            <div class="sa-int-dialog" role="dialog" aria-modal="true" aria-label="Configure Yes One">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+                <div><h2>Configure Yes One</h2><p style="margin:6px 0 0;font-size:12px;color:var(--muted)">${esc(c.desc)}</p></div>
+                <div style="display:flex;gap:8px;align-items:center;flex:none">
+                  <span class="sa-badge ${configured ? 'ok' : 'off'}">${esc(configured ? (state.yesone.label || 'Connected') : 'Not connected')}</span>
+                  <button type="button" class="sa-btn ghost" data-action="close-integration-modal" aria-label="Close">✕</button>
+                </div>
+              </div>
+              ${fields}
+              <div class="actions" style="margin-top:14px">
+                <button type="button" class="sa-btn ghost" data-action="close-integration-modal">Cancel</button>
+                <button type="button" class="sa-btn" data-action="save-yesone-credentials"${state.yesoneSaving ? ' disabled' : ''}>${state.yesoneSaving ? 'Saving…' : (configured ? 'Update' : 'Save')}</button>
+              </div>
+            </div>
+          </div>`;
+        }
+        return `<div class="sa-int-modal" data-backdrop="integration" role="presentation">
+          <div class="sa-int-dialog" role="dialog" aria-modal="true" aria-label="Configure ${esc(c.name)}">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
+              <div><h2>Configure ${esc(c.name)}</h2><p style="margin:6px 0 0;font-size:12px;color:var(--muted)">${esc(c.desc || 'Connector settings stub — credentials are not saved yet.')}</p></div>
+              <button type="button" class="sa-btn ghost" data-action="close-integration-modal" aria-label="Close">✕</button>
+            </div>
+            <div class="fields">
+              <div><label for="int-org">Organization / account ID</label><input id="int-org" placeholder="Optional identifier" autocomplete="off"/></div>
+              <div><label for="int-key">API key / client ID</label><input id="int-key" placeholder="Not stored — UI stub only" autocomplete="off"/></div>
+              <div><label for="int-secret">Secret / client secret</label><input id="int-secret" type="password" placeholder="••••••••" autocomplete="off"/></div>
+              <div><label for="int-env">Environment</label><select id="int-env"><option>Sandbox</option><option>Production</option></select></div>
+            </div>
+            <p style="margin:0 0 14px;font-size:11px;color:#94a3b8">UI-only stub. Backend connector wiring is handled separately — nothing is sent to the server from this form.</p>
+            <div class="actions">
+              <button type="button" class="sa-btn ghost" data-action="close-integration-modal">Cancel</button>
+              <button type="button" class="sa-btn" data-action="save-integration-stub" data-item="${esc(c.name)}">Save stub</button>
+            </div>
+          </div>
+        </div>`;
+      })() : '';
+      return `${heading('Settings', 'Connectors, platform services and workspace configuration')}
+        <div class="sa-panel-h" style="margin:0 0 10px"><h2>External connectors</h2></div>
+        <div class="sa-intgrid">
+          ${connectors.map((c) => {
+            const logoInner = c.logoSrc
+              ? `<img src="${esc(c.logoSrc)}" alt="" width="38" height="38" loading="lazy" decoding="async"/>`
+              : esc(c.short);
+            const logoCls = c.logoSrc ? 'logo' : `logo fallback ${esc(c.logo)}`;
+            const orgDetail = c.orgDetail
+              ? `<span style="display:block;margin-top:4px;font-size:11px;font-weight:600;color:#475569;line-height:1.35;word-break:break-word">${esc(c.orgDetail)}</span>`
+              : '';
+            return `<article class="sa-intcard">
+            <div class="top">
+              <div class="${logoCls}" aria-hidden="true">${logoInner}</div>
+              <div style="flex:1;min-width:0">
+                <h3>${esc(c.name)}</h3>
+                <p>${esc(c.desc)}</p>
+              </div>
+            </div>
+            <div class="foot">
+              <div style="min-width:0;flex:1">
+                <span class="sa-badge ${esc(c.statusCls)}">${esc(c.status)}</span>
+                ${orgDetail}
+              </div>
+              <button type="button" class="sa-btn" data-action="configure-integration" data-item="${esc(c.id)}">${icon('plug')} Configure</button>
+            </div>
+          </article>`;
+          }).join('')}
+        </div>
+        <div class="sa-panel-h" style="margin:18px 0 10px"><h2>Platform / workspace</h2></div>
+        <div class="sa-labgrid">
+          ${platform.map((r)=>`<button type="button" class="sa-labtile" data-action="settings-item" data-item="${esc(r[0])}"><span class="thumb">${icon(r[2])}</span><div style="flex:1"><h3>${esc(r[0])}</h3><p>${esc(r[1])}</p><span class="sa-badge off" style="margin-top:8px">Not connected</span></div>${icon('arrow')}</button>`).join('')}
+        </div>
+        ${modalHtml}`;
+    }
+
+    function modulePage() {
+      if (state.page === 'Verification') return verificationList();
+      if (state.page === 'Regional Centers') return rcList();
+      if (state.page === 'Products') return productsList();
+      if (state.page === 'VCT') return vctList();
+      if (state.page === 'Customers') return customersList();
+      if (state.page === 'RC Quota') return quotaPage();
+      if (state.page === 'RC Wallet') return walletPage();
+      if (state.page === 'Vehicles') return vehiclesPage();
+      if (state.page === 'Laboratory') return laboratoryPage();
+      if (state.page === 'Purchases') return purchasesPage();
+      if (state.page === 'Reports') return reportsPage();
+      if (state.page === 'Settings' || state.page === 'Integrations') return settingsPage();
+      return `${heading(state.page, 'Module workspace')}${emptyPolished('Coming soon', 'This module is not wired yet.', 'file')}`;
+    }
+
+    function syncFiltersFromDom() {
+      const qEl = root.querySelector('#sa-q');
+      const stEl = root.querySelector('#sa-status');
+      const tyEl = root.querySelector('#sa-type');
+      const rcEl = root.querySelector('#sa-rc');
+      if (qEl) state.q = qEl.value.trim();
+      if (stEl) state.statusFilter = stEl.value;
+      if (tyEl) state.typeFilter = tyEl.value;
+      if (rcEl) state.rcFilter = rcEl.value;
+    }
+
+    function render(preserve) {
+      const scrollTop = preserve ? (root.querySelector('.sa-scroll')?.scrollTop || 0) : 0;
+      root.innerHTML = `<div class="sa-shell">${sidebar()}<div class="sa-main">${topbar()}<div class="sa-scroll"><div class="sa-content">${state.page==='Dashboard'?dashboard():modulePage()}</div></div></div>${state.toast?`<div class="toast" role="status">${esc(state.toast)}</div>`:''}</div>`;
+      if (preserve) {
+        const sc = root.querySelector('.sa-scroll');
+        if (sc) sc.scrollTop = scrollTop;
+      }
+      const qEl = root.querySelector('#sa-q');
+      if (qEl) {
+        qEl.onkeydown = (ev) => {
+          if (ev.key === 'Enter') {
+            syncFiltersFromDom();
+            state.list.offset = 0;
+            loadList();
+          }
+        };
+        qEl.oninput = () => {
+          clearTimeout(searchTimer);
+          searchTimer = setTimeout(() => {
+            syncFiltersFromDom();
+            state.list.offset = 0;
+            loadList(true);
+          }, 350);
+        };
+      }
+      const stEl = root.querySelector('#sa-status');
+      const tyEl = root.querySelector('#sa-type');
+      const rcEl = root.querySelector('#sa-rc');
+      if (stEl) stEl.onchange = () => { syncFiltersFromDom(); state.list.offset = 0; loadList(); };
+      if (tyEl) tyEl.onchange = () => { syncFiltersFromDom(); state.list.offset = 0; loadList(); };
+      if (rcEl) rcEl.onchange = () => { syncFiltersFromDom(); state.list.offset = 0; loadList(); };
+    }
+
+    function closeIntegrationModal() {
+      if (!state.integrationModal) return;
+      state.integrationModal = null;
+      state.zohoPick = null;
+      render(true);
+    }
+
+    root.onclick = (e) => {
+      // Backdrop click (dimmed overlay only — not dialog internals).
+      if (e.target.classList?.contains('sa-int-modal') && e.target.dataset.backdrop === 'integration') {
+        closeIntegrationModal();
+        return;
+      }
+      const btn = e.target.closest('button,[data-page],[data-action]');
       if (!btn) return;
       if (btn.dataset.page) {
-        state.page = btn.dataset.page;
-        state.drawer = false;
-        render();
+        goPage(btn.dataset.page, {
+          typeFilter: btn.dataset.typeFilter || '',
+          statusFilter: btn.dataset.statusFilter || '',
+          tab: btn.dataset.tab || '',
+        });
         return;
       }
       if (btn.dataset.period) {
         state.period = btn.dataset.period;
-        render(true);
+        if (LIST_PAGES.has(state.page)) {
+          state.list.offset = 0;
+          loadList();
+        } else {
+          loadDash();
+        }
         return;
       }
       const action = btn.dataset.action;
       if (action === 'open-drawer') { state.drawer = true; render(true); }
       else if (action === 'close-drawer') { state.drawer = false; render(true); }
-      else if (action === 'refresh') { toast('Refreshing status…'); loadOps(true); }
+      else if (action === 'refresh') { toast('Refreshing…'); loadDash(); }
       else if (action === 'logout') { doLogout(); }
+      else if (action === 'list-search') { syncFiltersFromDom(); state.list.offset = 0; loadList(); }
+      else if (action === 'list-reset') {
+        state.q = ''; state.statusFilter = ''; state.typeFilter = ''; state.rcFilter = '';
+        state.list.offset = 0; loadList();
+      }
+      else if (action === 'list-prev') {
+        const lim = state.list.limit || listLimitFor(state.page);
+        state.list.offset = Math.max(0, (state.list.offset || 0) - lim);
+        loadList();
+      }
+      else if (action === 'list-next') {
+        const lim = state.list.limit || listLimitFor(state.page);
+        state.list.offset = (state.list.offset || 0) + lim;
+        loadList();
+      }
+      else if (action === 'copy-seal') {
+        const seal = 'IND/GATC/KL/26/04/D26';
+        if (navigator.clipboard?.writeText) navigator.clipboard.writeText(seal).then(() => toast('Seal ID copied')).catch(() => toast(seal));
+        else toast(seal);
+      }
+      else if (action === 'configure-integration') {
+        state.integrationModal = btn.dataset.item || null;
+        render(true);
+        if (state.integrationModal === 'emaap') {
+          loadEmaapStatus(true);
+          loadEmaapApis(true);
+        }
+        if (state.integrationModal === 'yesone') loadYesoneStatus(true);
+        if (state.integrationModal === 'razorpay') loadRazorpayStatus(true);
+        if (state.integrationModal === 'zoho') loadZohoStatus(true);
+      }
+      else if (action === 'copy-emaap-base') {
+        const base = state.emaapApis?.baseUrl || root.querySelector('#emaap-base-url')?.textContent || 'https://emaap.gov.in/gatcapi';
+        if (navigator.clipboard?.writeText) navigator.clipboard.writeText(base).then(() => toast('Base URL copied')).catch(() => toast(base));
+        else toast(base);
+      }
+      else if (action === 'close-integration-modal') {
+        e.preventDefault();
+        e.stopPropagation();
+        closeIntegrationModal();
+      }
+      else if (action === 'save-emaap-credentials') {
+        saveEmaapCredentialsFromForm();
+      }
+      else if (action === 'save-yesone-credentials') {
+        saveYesoneCredentialsFromForm();
+      }
+      else if (action === 'save-razorpay-credentials') {
+        saveRazorpayCredentialsFromForm();
+      }
+      else if (action === 'razorpay-test-pay') {
+        runRazorpayTestPayment();
+      }
+      else if (action === 'copy-razorpay-webhook') {
+        copyRazorpayWebhookUrl();
+      }
+      else if (action === 'save-razorpay-webhook') {
+        saveRazorpayWebhookSecretFromForm();
+      }
+      else if (action === 'zoho-oauth-start') {
+        startZohoOAuthPopup();
+      }
+      else if (action === 'zoho-select-org') {
+        if (state.zohoPick) {
+          state.zohoPick = { ...state.zohoPick, selectedOrgId: btn.dataset.orgId || '' };
+          render(true);
+        }
+      }
+      else if (action === 'zoho-save-org') {
+        saveZohoOrgPick();
+      }
+      else if (action === 'save-zoho-settings') {
+        saveZohoOrgOrTokenFromForm();
+      }
+      else if (action === 'disconnect-zoho') {
+        disconnectZoho();
+      }
+      else if (action === 'save-integration-stub') {
+        const name = btn.dataset.item || 'Integration';
+        state.integrationModal = null;
+        toast(`${name} settings stub saved locally — not connected to backend`);
+      }
+      else if (action === 'lab-item' || action === 'lab-docs' || action === 'settings-item') {
+        toast(`${btn.dataset.item || 'Module'} — coming soon`);
+      }
+      else if (action === 'noop-export' || action === 'noop-settle' || action === 'noop-add') {
+        toast('Available when this module API is connected');
+      }
+    };
+
+    root.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && state.integrationModal) {
+        e.preventDefault();
+        closeIntegrationModal();
+      }
+    });
+
+    window.addEventListener('message', (ev) => {
+      const allowedOrigins = new Set([
+        window.location.origin,
+        'https://gatc.yesweigh.in',
+        'https://www.gatc.yesweigh.in',
+        'https://ecs.benchpc.online',
+      ]);
+      if (!allowedOrigins.has(ev.origin)) return;
+      const data = ev.data;
+      if (!data || (data.source !== 'gatc-zoho-oauth' && data.type !== 'zoho-oauth')) return;
+      // Always show org picker after consent — never auto-connect.
+      if (data.ok && data.pickState && Array.isArray(data.organizations) && data.organizations.length) {
+        state.integrationModal = 'zoho';
+        state.zohoPick = {
+          pickState: data.pickState,
+          organizations: data.organizations,
+          selectedOrgId: data.organizations[0]?.organizationId || '',
+        };
+        toast('Choose a Zoho Books organization');
+        render(true);
+        return;
+      }
+      if (data.ok && data.configured) {
+        state.zohoPick = null;
+        state.integrationModal = null;
+        toast('Zoho Books connected');
+      } else if (!data.ok && data.message) {
+        toast(data.message);
+      }
+      loadZohoStatus(true);
     });
 
     render();
-    loadOps();
-    pollTimer = setInterval(() => loadOps(true), 60_000);
+    loadDash();
+    loadEmaapStatus(true);
+    loadYesoneStatus(true);
+    loadRazorpayStatus(true);
+    loadZohoStatus(true);
   }
 
   function bootApp(authToken, authUser) {
