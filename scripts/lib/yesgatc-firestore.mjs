@@ -98,15 +98,27 @@ export function resolveSuperAdminCreds() {
   );
 }
 
-export async function signInSuperAdmin() {
-  const { aadhar, password, credPath } = resolveSuperAdminCreds();
+/**
+ * Sign in to yesgatc Firebase Auth with Aadhaar (or `{aadhar}@yesgatc.auth` email) + password.
+ * Used by hourly sync with Yes One stored credentials.
+ */
+export async function signInWithAadhaarPassword(userId, password, { credPath = 'yesone' } = {}) {
+  const aadhar = String(userId || '').replace(/\D/g, '');
+  const email = String(userId || '').includes('@')
+    ? String(userId).trim()
+    : aadhar.length === 12
+      ? `${aadhar}@yesgatc.auth`
+      : '';
+  if (!email || !password) {
+    throw new Error('Yes One / Firebase login requires userId (aadhaar) and password');
+  }
   const response = await fetch(
     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${WEB_API_KEY}`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        email: `${aadhar}@yesgatc.auth`,
+        email,
         password,
         returnSecureToken: true,
       }),
@@ -119,6 +131,109 @@ export async function signInSuperAdmin() {
     );
   }
   return { idToken: body.idToken, uid: body.localId, credPath };
+}
+
+export async function signInSuperAdmin() {
+  const { aadhar, password, credPath } = resolveSuperAdminCreds();
+  return signInWithAadhaarPassword(aadhar, password, { credPath });
+}
+
+/**
+ * Incremental list via structured query on an ISO string field (yesgatc stores updatedAt as string).
+ * Returns documents where field >= sinceIso (lexicographic ISO-8601).
+ * Paginates with startAfter cursors on [field, __name__].
+ */
+export async function queryCollectionSince(
+  idToken,
+  collectionId,
+  {
+    field = 'updatedAt',
+    sinceIso,
+    pageSize = 300,
+    onPage,
+  } = {},
+) {
+  if (!sinceIso) {
+    throw new Error('queryCollectionSince requires sinceIso');
+  }
+  const out = [];
+  let cursor = null;
+  for (;;) {
+    const structuredQuery = {
+      from: [{ collectionId }],
+      where: {
+        fieldFilter: {
+          field: { fieldPath: field },
+          op: 'GREATER_THAN_OR_EQUAL',
+          value: { stringValue: String(sinceIso) },
+        },
+      },
+      orderBy: [
+        { field: { fieldPath: field }, direction: 'ASCENDING' },
+        { field: { fieldPath: '__name__' }, direction: 'ASCENDING' },
+      ],
+      limit: pageSize,
+    };
+    if (cursor) {
+      structuredQuery.startAt = {
+        values: [
+          { stringValue: cursor.fieldValue },
+          { referenceValue: cursor.name },
+        ],
+        before: false,
+      };
+    }
+    const response = await fetch(
+      `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents:runQuery`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${idToken}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ structuredQuery }),
+      },
+    );
+    const rows = await response.json();
+    if (!response.ok) {
+      const msg = rows?.error?.message || (Array.isArray(rows) ? null : JSON.stringify(rows));
+      throw new Error(`query ${collectionId} since ${sinceIso} failed: ${msg || response.status}`);
+    }
+    if (!Array.isArray(rows)) {
+      throw new Error(`query ${collectionId}: unexpected response`);
+    }
+    const batch = [];
+    for (const row of rows) {
+      if (row.document) batch.push(row.document);
+    }
+    for (const doc of batch) {
+      out.push(decodeFirestoreDocument(doc));
+    }
+    if (typeof onPage === 'function') onPage({ collectionId, soFar: out.length });
+    if (batch.length < pageSize) break;
+    const last = batch[batch.length - 1];
+    const decoded = decodeFirestoreDocument(last);
+    const fieldValue = decoded[field];
+    if (fieldValue == null || !last.name) break;
+    cursor = { fieldValue: String(fieldValue), name: last.name };
+  }
+  return out;
+}
+
+/** Fetch a single document by id (or null if missing). */
+export async function fetchDocument(idToken, collectionId, docId) {
+  const response = await fetch(
+    `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/${collectionId}/${docId}`,
+    { headers: { Authorization: `Bearer ${idToken}` } },
+  );
+  if (response.status === 404) return null;
+  const body = await response.json();
+  if (!response.ok) {
+    throw new Error(
+      `fetch ${collectionId}/${docId} failed: ${body.error?.message || response.status}`,
+    );
+  }
+  return decodeFirestoreDocument(body);
 }
 
 export async function fetchUserDoc(idToken, uid) {

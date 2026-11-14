@@ -228,7 +228,16 @@ export function createAuthMiddleware({ config, pool, logger }) {
     }
 
     const header = req.headers.authorization || '';
-    const [scheme, token] = header.split(' ');
+    let [scheme, token] = header.split(' ');
+    // Allow ?access_token= for <img src> / media embeds (Bearer still preferred for XHR).
+    if (scheme !== 'Bearer' || !token) {
+      const qRaw = req.query?.access_token ?? req.query?.token;
+      const qToken = Array.isArray(qRaw) ? String(qRaw[0] || '') : String(qRaw || '');
+      if (qToken.trim()) {
+        scheme = 'Bearer';
+        token = qToken.trim();
+      }
+    }
     if (scheme !== 'Bearer' || !token) {
       return res.status(401).json({
         error: { code: 'UNAUTHORIZED', message: 'Bearer token required' },
@@ -312,7 +321,7 @@ export function mountAuthRoutes(app, { config, pool, logger }) {
   const { requireAuth } = createAuthMiddleware({ config, pool, logger });
 
   /**
-   * Step 1: user id + password → OTP challenge (no JWT yet).
+   * User id + password → session + JWT (no WhatsApp OTP).
    * Accepts aadhaar / userId / username for the login id field.
    */
   app.post('/api/v1/auth/login', async (req, res) => {
@@ -321,7 +330,7 @@ export function mountAuthRoutes(app, { config, pool, logger }) {
     try {
       const loginId = req.body?.userId ?? req.body?.aadhaar ?? req.body?.aadhar ?? req.body?.username;
       const password = req.body?.password;
-      // Client-sent role is ignored; workspace uses stored user.role after OTP.
+      // Client-sent role is ignored; workspace uses stored user.role.
       const result = await authenticateUser(pool, { userId: loginId, password });
       if (!result.ok) {
         const status = result.code === 'VALIDATION_ERROR' ? 400 : 401;
@@ -330,25 +339,27 @@ export function mountAuthRoutes(app, { config, pool, logger }) {
         });
       }
 
-      const challenge = await issueOtpChallenge({
-        pool,
-        config,
-        logger,
-        user: result.user,
+      const ttlSeconds = expiresInToSeconds(config.jwtExpiresIn);
+      const meta = clientMeta(req);
+      const session = await createSession(pool, {
+        userId: result.user.id,
+        ttlSeconds,
+        userAgent: meta.userAgent,
+        ip: meta.ip,
       });
-      if (!challenge.ok) {
-        const status = challenge.code === 'PHONE_REQUIRED' ? 400 : 502;
-        return res.status(status).json({
-          error: { code: challenge.code, message: challenge.message },
-        });
-      }
+
+      const user = publicUser(result.user);
+      const token = signAccessToken(
+        { id: user.id, role: user.role, rcId: user.rcId, sessionId: session.id },
+        config,
+      );
 
       return res.json({
         data: {
-          otpRequired: true,
-          challengeId: challenge.challengeId,
-          phoneHint: challenge.phoneHint,
-          expiresInSeconds: challenge.expiresInSeconds,
+          otpRequired: false,
+          token,
+          user,
+          sessionId: session.id,
         },
       });
     } catch (error) {

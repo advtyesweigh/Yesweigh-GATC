@@ -1,0 +1,13 @@
+[Unit]
+Description=Run GATC yesgatc sync every hour
+Requires=gatc-yesgatc-sync.service
+
+[Timer]
+OnCalendar=hourly
+OnBootSec=3min
+AccuracySec=1min
+Persistent=true
+Unit=gatc-yesgatc-sync.service
+
+[Install]
+WantedBy=timers.target

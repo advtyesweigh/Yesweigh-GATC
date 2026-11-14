@@ -198,14 +198,23 @@ async function upsertProduct(client, doc) {
     specifications: doc.specifications || [],
     yesoneSku: doc.yesoneSku || null,
   };
+  const imageUrl =
+    typeof doc.productImageUrl === 'string' && /^https?:\/\//i.test(doc.productImageUrl.trim())
+      ? doc.productImageUrl.trim()
+      : null;
+  const approvalDocUrl =
+    typeof doc.modelApprovalDocUrl === 'string'
+    && /^https?:\/\//i.test(doc.modelApprovalDocUrl.trim())
+      ? doc.modelApprovalDocUrl.trim()
+      : null;
   const result = await client.query(
     `INSERT INTO products (
        model_id, model_no, name, type_of_instrument, manufacturer_brand_series,
        accuracy_class, capacities, unit_of_measurement, model_approval_no,
        supply_voltage, pas_pre_allotted, active, sort_order,
-       approval_doc_path, image_path, source_firebase_id
+       approval_doc_path, approval_doc_url, image_path, image_url, source_firebase_id
      ) VALUES (
-       $1,$2,$3,$4,$5,$6,$7::jsonb,$8,$9,$10,$11,$12,$13,$14,$15,$16
+       $1,$2,$3,$4,$5,$6,$7::jsonb,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18
      )
      ON CONFLICT (model_id) DO UPDATE SET
        model_no = EXCLUDED.model_no,
@@ -220,8 +229,16 @@ async function upsertProduct(client, doc) {
        pas_pre_allotted = EXCLUDED.pas_pre_allotted,
        active = EXCLUDED.active,
        sort_order = EXCLUDED.sort_order,
-       approval_doc_path = COALESCE(EXCLUDED.approval_doc_path, products.approval_doc_path),
-       image_path = COALESCE(EXCLUDED.image_path, products.image_path),
+       approval_doc_path = CASE
+         WHEN products.approval_doc_path LIKE 'media/yesgatc/%' THEN products.approval_doc_path
+         ELSE COALESCE(EXCLUDED.approval_doc_path, products.approval_doc_path)
+       END,
+       approval_doc_url = COALESCE(EXCLUDED.approval_doc_url, products.approval_doc_url),
+       image_path = CASE
+         WHEN products.image_path LIKE 'media/yesgatc/%' THEN products.image_path
+         ELSE COALESCE(EXCLUDED.image_path, products.image_path)
+       END,
+       image_url = COALESCE(EXCLUDED.image_url, products.image_url),
        source_firebase_id = EXCLUDED.source_firebase_id,
        updated_at = NOW()
      RETURNING id`,
@@ -240,7 +257,9 @@ async function upsertProduct(client, doc) {
       doc.active !== false,
       Number.isFinite(Number(doc.sortOrder)) ? Number(doc.sortOrder) : 0,
       doc.modelApprovalDocPath || null,
+      approvalDocUrl,
       doc.productImagePath || null,
+      imageUrl,
       doc.id,
     ],
   );

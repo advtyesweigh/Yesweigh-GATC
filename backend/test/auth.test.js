@@ -371,28 +371,13 @@ describe('auth login OTP + single session', () => {
       });
       assert.equal(loginRes.status, 200);
       const loginBody = await loginRes.json();
-      assert.equal(loginBody.data.otpRequired, true);
-      assert.ok(loginBody.data.challengeId);
-      assert.equal(loginBody.data.token, undefined);
-      assert.match(loginBody.data.phoneHint, /3210$/);
-
-      const otpLog = logs.find((l) => l.meta?.otp);
-      assert.ok(otpLog, 'log provider should expose OTP in non-production logs');
-      const otp = otpLog.meta.otp;
-
-      const verifyRes = await fetch(`http://127.0.0.1:${port}/api/v1/auth/otp/verify`, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ challengeId: loginBody.data.challengeId, otp }),
-      });
-      assert.equal(verifyRes.status, 200);
-      const verifyBody = await verifyRes.json();
-      assert.ok(verifyBody.data.token);
-      assert.equal(verifyBody.data.user.role, 'ADMIN');
-      const sessionId1 = verifyBody.data.sessionId;
+      assert.equal(loginBody.data.otpRequired, false);
+      assert.ok(loginBody.data.token);
+      assert.equal(loginBody.data.user.role, 'ADMIN');
+      const token1 = loginBody.data.token;
 
       const meRes = await fetch(`http://127.0.0.1:${port}/api/v1/auth/me`, {
-        headers: { authorization: `Bearer ${verifyBody.data.token}` },
+        headers: { authorization: `Bearer ${token1}` },
       });
       assert.equal(meRes.status, 200);
 
@@ -403,18 +388,11 @@ describe('auth login OTP + single session', () => {
         body: JSON.stringify({ aadhaar: '999999999901', password: 'TestSeedPass1' }),
       });
       assert.equal(login2.status, 200);
-      const login2Body = await login2.json();
-      const otp2 = logs.filter((l) => l.meta?.otp).at(-1).meta.otp;
-      const verify2 = await fetch(`http://127.0.0.1:${port}/api/v1/auth/otp/verify`, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ challengeId: login2Body.data.challengeId, otp: otp2 }),
-      });
-      assert.equal(verify2.status, 200);
-      const token2 = (await verify2.json()).data.token;
+      const token2 = (await login2.json()).data.token;
+      assert.ok(token2);
 
       const stale = await fetch(`http://127.0.0.1:${port}/api/v1/auth/me`, {
-        headers: { authorization: `Bearer ${verifyBody.data.token}` },
+        headers: { authorization: `Bearer ${token1}` },
       });
       assert.equal(stale.status, 401);
       const staleBody = await stale.json();
@@ -424,9 +402,6 @@ describe('auth login OTP + single session', () => {
         headers: { authorization: `Bearer ${token2}` },
       });
       assert.equal(me2.status, 200);
-
-      assert.ok(sessionId1);
-      assert.ok(pool.getSession(sessionId1)?.revoked_at);
     } finally {
       await new Promise((resolve) => server.close(resolve));
     }
@@ -466,15 +441,9 @@ describe('auth login OTP + single session', () => {
         body: JSON.stringify({ aadhaar: '718835126130', password: 'TestSeedPass1' }),
       });
       assert.equal(loginRes.status, 200);
-      const { challengeId } = (await loginRes.json()).data;
-      const verifyRes = await fetch(`http://127.0.0.1:${port}/api/v1/auth/otp/verify`, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ challengeId, otp: '546054' }),
-      });
-      assert.equal(verifyRes.status, 200);
-      const body = await verifyRes.json();
+      const body = await loginRes.json();
       assert.ok(body.data.token);
+      assert.equal(body.data.otpRequired, false);
       assert.equal(body.data.user.role, 'ADMIN');
       assert.equal(body.data.user.username, 'faisal');
     } finally {
@@ -511,9 +480,10 @@ describe('auth login OTP + single session', () => {
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify({ userId: '999999999902', password: 'TestSeedPass1' }),
       });
-      assert.equal(res.status, 400);
+      assert.equal(res.status, 200);
       const body = await res.json();
-      assert.equal(body.error.code, 'PHONE_REQUIRED');
+      assert.ok(body.data.token);
+      assert.equal(body.data.user.username, 'nophone');
     } finally {
       await new Promise((resolve) => server.close(resolve));
     }

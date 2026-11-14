@@ -70,6 +70,17 @@ const PROFILE_KEEP = [
   'allowedJobKinds',
   'createdAt',
   'createdByUid',
+  // Media URLs (Firebase Storage) — used by Super Admin dashboard avatars
+  'logoUrl',
+  'logoPath',
+  'logoName',
+  'logoContentType',
+  'profilePhotoUrl',
+  'profilePhotoPath',
+  'profilePhotoName',
+  'profilePhotoContentType',
+  'sealUrl',
+  'sealPath',
 ];
 
 function argValue(flag) {
@@ -160,6 +171,12 @@ async function upsertRegionalCenter(client, doc) {
     ...(doc.feesStructure && typeof doc.feesStructure === 'object' ? { feesStructure: doc.feesStructure } : {}),
     firebaseUid: doc.uid,
   };
+  if (doc.logoUrl) fees.logoUrl = doc.logoUrl;
+  if (doc.logoPath) fees.logoPath = doc.logoPath;
+  if (doc.logoName) fees.logoName = doc.logoName;
+  if (doc.logoContentType) fees.logoContentType = doc.logoContentType;
+  if (doc.sealUrl) fees.sealUrl = doc.sealUrl;
+  if (doc.sealPath) fees.sealPath = doc.sealPath;
   const result = await client.query(
     `INSERT INTO regional_centers (
        code, company_name, contact_person, phone, email, address,

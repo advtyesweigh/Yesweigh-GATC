@@ -8,13 +8,24 @@ import { listMigrationFiles, MIGRATIONS_DIR } from '../src/migrate.js';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 describe('migrations', () => {
-  it('lists ordered SQL migration files for M1 tables', async () => {
+  it('lists ordered SQL migration files including domain parity', async () => {
     const files = await listMigrationFiles(MIGRATIONS_DIR);
     assert.ok(files.length >= 1);
     assert.deepEqual([...files].sort(), files);
     assert.ok(files.includes('001_m1_core.sql'));
     assert.ok(files.includes('002_yesgatc_import.sql'));
     assert.ok(files.includes('003_auth_sessions_otp.sql'));
+    assert.ok(files.includes('004_domain_parity.sql'));
+    assert.ok(files.includes('005_product_media_urls.sql'));
+  });
+
+  it('005 migration adds product media URL columns', async () => {
+    const sql = await fs.readFile(
+      path.join(MIGRATIONS_DIR, '005_product_media_urls.sql'),
+      'utf8',
+    );
+    assert.match(sql, /image_url/);
+    assert.match(sql, /approval_doc_url/);
   });
 
   it('M1 migration SQL defines required tables', async () => {

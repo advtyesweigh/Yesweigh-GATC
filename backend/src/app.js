@@ -5,6 +5,8 @@ import cors from 'cors';
 import { checkDb } from './db.js';
 import { mountAuthRoutes, createAuthMiddleware } from './auth.js';
 import { mountAdminRoutes } from './admin.js';
+import { mountDomainRoutes } from './domainRoutes.js';
+import { mountIntegrationsRoutes } from './integrationsRoutes.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const defaultPublicDir = path.resolve(__dirname, '../../public');
@@ -14,7 +16,16 @@ export function createApp({ config, logger, pool = null, publicDir = defaultPubl
   const startedAt = new Date();
 
   app.use(cors({ origin: config.corsOrigin }));
-  app.use(express.json({ limit: '100kb' }));
+  // Capture raw body for Razorpay webhook HMAC (X-Razorpay-Signature).
+  app.use(express.json({
+    limit: '100kb',
+    verify: (req, _res, buf) => {
+      const url = String(req.originalUrl || req.url || '');
+      if (url.includes('razorpay') && url.includes('webhook')) {
+        req.rawBody = Buffer.from(buf);
+      }
+    },
+  }));
 
   app.get('/health', async (_req, res) => {
     const body = {
@@ -59,6 +70,10 @@ export function createApp({ config, logger, pool = null, publicDir = defaultPubl
   app.locals.auth = createAuthMiddleware({ config, pool, logger });
   // Super Admin ops (eMaap session status, service health) — ADMIN only.
   mountAdminRoutes(app, { config, pool, logger, startedAt });
+  // RC-scoped domain APIs ported from yesgatc (customers, verifications, vehicles, …).
+  mountDomainRoutes(app, { config, pool, logger });
+  // Public cert lookup + Cloud Function webhook mirrors / stubs.
+  mountIntegrationsRoutes(app, { config, pool, logger });
 
   // RC Admin reference UI (and other static assets). API routes above take precedence.
   app.use(express.static(publicDir, { index: 'index.html', fallthrough: true }));

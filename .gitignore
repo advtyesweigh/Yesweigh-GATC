@@ -50,6 +50,13 @@ temp/
 # One-off Firebase→Postgres dumps (may contain PII; never commit)
 **/*users-export*.json
 **/yesgatc-*-export.json
+docs/emaap_gatc_user_list.json
+docs/emaap_gatc_user_list.csv
+
+# Runtime credential blobs under DATA_ROOT (never commit)
+**/integrations/*.enc
+**/integrations/*.json
+!backend/data/emaap/api-catalog.json
 
 # Dependencies and build
 node_modules/

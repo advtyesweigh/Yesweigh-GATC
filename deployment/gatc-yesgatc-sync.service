@@ -1,0 +1,16 @@
+[Unit]
+Description=GATC yesgatc → Postgres incremental sync (oneshot)
+After=network-online.target gatc-api.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/gatc-vps
+EnvironmentFile=/opt/gatc-vps/.env
+ExecStart=/usr/bin/node /opt/gatc-vps/scripts/sync-yesgatc.mjs --trigger=timer --download-media=certs
+Nice=10
+TimeoutStartSec=3600
+User=root
+
+[Install]
+WantedBy=multi-user.target

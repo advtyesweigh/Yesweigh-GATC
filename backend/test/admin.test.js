@@ -189,27 +189,20 @@ function createAuthMockPool(userRow) {
   return pool;
 }
 
-async function loginGetToken(port, userRow, password, role, logs) {
+async function loginGetToken(port, userRow, password) {
   const loginRes = await fetch(`http://127.0.0.1:${port}/api/v1/auth/login`, {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ aadhaar: userRow.aadhaar, password, role }),
+    body: JSON.stringify({ aadhaar: userRow.aadhaar, password }),
   });
   assert.equal(loginRes.status, 200);
   const loginBody = await loginRes.json();
-  const otp = logs.find((l) => l.meta?.otp)?.meta?.otp;
-  assert.ok(otp, 'expected OTP in logs');
-  const verifyRes = await fetch(`http://127.0.0.1:${port}/api/v1/auth/otp/verify`, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({ challengeId: loginBody.data.challengeId, otp }),
-  });
-  assert.equal(verifyRes.status, 200);
-  return (await verifyRes.json()).data.token;
+  assert.ok(loginBody.data?.token, 'expected session token from password login');
+  return loginBody.data.token;
 }
 
 describe('admin ops status', () => {
-  it('requires auth and ADMIN role; returns eMaap not_logged_in stub', async () => {
+  it('requires auth and ADMIN role; returns API/DB ops status', async () => {
     const passwordHash = await hashPassword('TestSeedPass1');
     const userRow = {
       id: '55555555-5555-5555-5555-555555555555',
@@ -247,40 +240,18 @@ describe('admin ops status', () => {
       const unauth = await fetch(`http://127.0.0.1:${port}/api/v1/admin/ops-status`);
       assert.equal(unauth.status, 401);
 
-      const token = await loginGetToken(port, userRow, 'TestSeedPass1', 'ADMIN', logs);
+      const token = await loginGetToken(port, userRow, 'TestSeedPass1');
 
       const opsRes = await fetch(`http://127.0.0.1:${port}/api/v1/admin/ops-status`, {
         headers: { authorization: `Bearer ${token}` },
       });
       assert.equal(opsRes.status, 200);
       const ops = await opsRes.json();
-      assert.equal(ops.data.emaap.status, 'not_logged_in');
-      assert.equal(ops.data.emaap.label, 'Not Logged In');
-      assert.equal(ops.data.emaap.loggedIn, false);
-      assert.equal(ops.data.services.emaap.label, 'Not Logged In');
       assert.equal(ops.data.services.api.status, 'online');
-      assert.ok(ops.data.emaap.hook);
-
-      const narrow = await fetch(`http://127.0.0.1:${port}/api/v1/admin/emaap-status`, {
-        headers: { authorization: `Bearer ${token}` },
-      });
-      assert.equal(narrow.status, 200);
-      const emaap = await narrow.json();
-      assert.equal(emaap.data.status, 'not_logged_in');
-
-      const statusDir = path.join(tmp, 'emaap');
-      fs.mkdirSync(statusDir, { recursive: true });
-      fs.writeFileSync(
-        path.join(statusDir, 'session-status.json'),
-        JSON.stringify({ loggedIn: true, updatedAt: '2026-10-31T12:00:00.000Z' }),
-        'utf8',
-      );
-      const loggedInRes = await fetch(`http://127.0.0.1:${port}/api/v1/admin/emaap-status`, {
-        headers: { authorization: `Bearer ${token}` },
-      });
-      const loggedInBody = await loggedInRes.json();
-      assert.equal(loggedInBody.data.status, 'logged_in');
-      assert.equal(loggedInBody.data.label, 'Logged In');
+      assert.ok(ops.data.services.db);
+      assert.equal(ops.data.services.worker, undefined);
+      assert.equal(ops.data.services.emaap, undefined);
+      assert.equal(ops.data.emaap, undefined);
     } finally {
       await new Promise((resolve) => server.close(resolve));
       fs.rmSync(tmp, { recursive: true, force: true });
@@ -321,7 +292,7 @@ describe('admin ops status', () => {
     const { port } = server.address();
 
     try {
-      const token = await loginGetToken(port, userRow, 'TestSeedPass1', 'RC_ADMIN', logs);
+      const token = await loginGetToken(port, userRow, 'TestSeedPass1');
       const opsRes = await fetch(`http://127.0.0.1:${port}/api/v1/admin/ops-status`, {
         headers: { authorization: `Bearer ${token}` },
       });

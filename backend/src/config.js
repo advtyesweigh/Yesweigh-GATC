@@ -73,6 +73,20 @@ export function loadConfig() {
     whatsappGraphVersion: process.env.WHATSAPP_GRAPH_VERSION
       || String(waFile.graphApiVersion || 'v21.0').trim()
       || 'v21.0',
+    // Zoho Books OAuth (India DC by default — matches yesgatc). Never invent production secrets.
+    publicApiUrl: String(process.env.PUBLIC_API_URL || '').trim().replace(/\/+$/, ''),
+    zohoClientId: String(process.env.ZOHO_CLIENT_ID || '').trim(),
+    zohoClientSecret: String(process.env.ZOHO_CLIENT_SECRET || '').trim(),
+    zohoRefreshToken: String(process.env.ZOHO_REFRESH_TOKEN || '').trim(),
+    zohoOrganizationId: String(process.env.ZOHO_ORGANIZATION_ID || '').trim(),
+    zohoAccountsBase: String(process.env.ZOHO_ACCOUNTS_BASE || 'https://accounts.zoho.in').trim()
+      .replace(/\/+$/, ''),
+    zohoRedirectUri: String(process.env.ZOHO_REDIRECT_URI || '').trim(),
+    zohoScopes: String(process.env.ZOHO_SCOPES || '').trim(),
+    // Razorpay (optional env bootstrap → encrypted $DATA_ROOT/razorpay/credentials.enc.json)
+    razorpayKeyId: String(process.env.RAZORPAY_KEY_ID || '').trim(),
+    razorpayKeySecret: String(process.env.RAZORPAY_KEY_SECRET || '').trim(),
+    razorpayWebhookSecret: String(process.env.RAZORPAY_WEBHOOK_SECRET || '').trim(),
   };
 
   if (config.port < 1 || config.port > 65535) {
