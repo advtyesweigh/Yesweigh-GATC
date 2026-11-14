@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"/>
-<meta name="gatc-build" content="sa-pdf-certname-20261114-1"/>
+<meta name="gatc-build" content="sa-products-detail-20261114-1"/>
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <script>
@@ -17,7 +17,7 @@
   } catch (e) {}
 })();
 </script><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<!-- deploy-tag: sa-ov-rv-align-20261114-1 -->
+<!-- deploy-tag: sa-products-detail-20261114-1 -->
 <title>GATC Calibration &amp; Verification System</title>
 <link rel="icon" href="/assets/favicon.ico" sizes="any"/>
 <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32"/>
@@ -158,14 +158,45 @@
 .sa-labtile h3{margin:0 0 4px;font-size:14px;font-family:Outfit,system-ui,sans-serif}
 .sa-labtile p{margin:0;font-size:12px;color:var(--muted);line-height:1.35}
 .sa-veh{display:flex;flex-direction:column;gap:12px}
-.sa-vehcard{display:grid;grid-template-columns:140px 1fr auto;gap:14px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--white);box-shadow:0 6px 16px rgba(20,40,80,.04)}
-.sa-vehcard .ph{width:140px;height:96px;border-radius:10px;background:linear-gradient(135deg,#e2e8f0,#cbd5e1);display:grid;place-items:center;color:#64748b}
-.sa-vehcard h3{margin:0 0 6px;font-size:15px;font-family:Outfit,system-ui,sans-serif}
-.sa-tags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
-.sa-tag{background:#eef2ff;color:#334155;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700}
+.sa-vehcard{display:grid;grid-template-columns:140px minmax(0,1fr) auto;gap:14px;align-items:stretch;border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--white);box-shadow:0 6px 16px rgba(20,40,80,.04);cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%}
+.sa-vehcard:hover{border-color:#93c5fd;box-shadow:0 8px 22px rgba(37,99,235,.1)}
+.sa-vehcard:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.sa-vehcard .ph{width:140px;height:96px;border-radius:10px;background:linear-gradient(135deg,#e2e8f0,#cbd5e1);display:grid;place-items:center;color:#64748b;overflow:hidden;position:relative;flex:none}
+.sa-vehcard .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.sa-vehcard .ph .i{width:36px;height:36px}
+.sa-vehcard-main{min-width:0;display:flex;flex-direction:column;gap:8px}
+.sa-vehcard-head{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}
+.sa-vehcard h3{margin:0;font-size:15px;font-family:Outfit,system-ui,sans-serif;font-weight:800;letter-spacing:-.01em;text-transform:uppercase;line-height:1.25;flex:1;min-width:0}
+.sa-vehcard-actions{display:flex;align-items:center;gap:6px;flex:none}
+.sa-vehcard-ico{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:#f8fafc;color:#475569;display:grid;place-items:center;cursor:pointer;padding:0}
+.sa-vehcard-ico:hover{border-color:#93c5fd;color:var(--blue);background:#eff6ff}
+.sa-vehcard-ico .i{width:16px;height:16px}
+.sa-tags{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+.sa-tag{display:inline-flex;align-items:center;gap:5px;background:#eef2ff;color:#334155;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700}
+.sa-tag .i{width:12px;height:12px}
 .sa-tag.plate{background:#dbeafe;color:#1d4ed8}
-.sa-docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-.sa-docs small{display:block;font-size:10px;color:var(--muted)}.sa-docs b{font-size:12px}
+.sa-tag.plate .ind{display:inline-flex;align-items:center;justify-content:center;background:#1d4ed8;color:#fff;font-size:8px;font-weight:800;letter-spacing:.04em;border-radius:3px;padding:1px 3px;line-height:1.2}
+.sa-docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding-top:8px;border-top:1px solid #eef2f7;margin-top:2px}
+.sa-docs>div{min-width:0;display:flex;gap:8px;align-items:flex-start}
+.sa-docs .di{width:28px;height:28px;border-radius:8px;background:#f1f5f9;color:#64748b;display:grid;place-items:center;flex:none}
+.sa-docs .di .i{width:14px;height:14px}
+.sa-docs small{display:block;font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.02em}.sa-docs b{display:block;font-size:12px;font-weight:780;color:var(--ink)}
+.sa-docs b.exp{color:#dc2626;text-decoration:underline;text-underline-offset:2px}
+.sa-veh-detail-back{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--white);border-radius:10px;height:36px;padding:0 12px;font-size:12px;font-weight:800;color:#334155;cursor:pointer;margin-bottom:12px}
+.sa-veh-detail-back:hover{border-color:#93c5fd;color:var(--blue);background:#f8fbff}
+.sa-veh-detail{display:grid;gap:16px}
+.sa-veh-detail-hero{display:grid;grid-template-columns:180px minmax(0,1fr);gap:18px;align-items:center}
+.sa-veh-detail-photo{width:180px;height:130px;border-radius:12px;background:linear-gradient(135deg,#e2e8f0,#cbd5e1);overflow:hidden;position:relative;display:grid;place-items:center;color:#64748b;border:1px solid var(--line)}
+.sa-veh-detail-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.sa-veh-detail-photo .i{width:40px;height:40px}
+.sa-veh-detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.sa-veh-detail-grid .cell{border:1px solid #eef2f7;border-radius:10px;padding:10px 12px;background:#fafbfc;min-width:0}
+.sa-veh-detail-grid .cell span{display:block;font-size:10px;font-weight:700;color:#94a3b8;margin-bottom:4px;letter-spacing:.02em}
+.sa-veh-detail-grid .cell b{display:block;font-size:13px;font-weight:780;color:var(--ink);word-break:break-word}
+.sa-veh-detail-docs{display:flex;flex-wrap:wrap;gap:8px}
+.sa-veh-detail-docs a{display:inline-flex;align-items:center;gap:6px;border:1px solid #bfdbfe;background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:6px 12px;font-size:12px;font-weight:800;text-decoration:none}
+.sa-veh-detail-docs a:hover{background:#dbeafe}
+.sa-veh-detail-docs .miss{display:inline-flex;align-items:center;gap:6px;border:1px dashed #cbd5e1;background:#f8fafc;color:#94a3b8;border-radius:999px;padding:6px 12px;font-size:12px;font-weight:700}
 .sa-reportgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .sa-empty-polished{text-align:center;padding:48px 20px;color:var(--muted)}
 .sa-empty-polished .ico{width:56px;height:56px;border-radius:16px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;margin:0 auto 14px}
@@ -174,7 +205,7 @@
 @media(max-width:960px){
 .sa-hero{grid-template-columns:1fr 1fr}.sa-stage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 .sa-lists{grid-template-columns:1fr}.sa-stats{grid-template-columns:1fr 1fr}.sa-kpi{grid-template-columns:1fr 1fr}
-.sa-labgrid,.sa-reportgrid,.sa-seal{grid-template-columns:1fr}.sa-vehcard{grid-template-columns:1fr}.sa-vehcard .ph{width:100%;height:120px}
+.sa-labgrid,.sa-reportgrid,.sa-seal{grid-template-columns:1fr}.sa-vehcard{grid-template-columns:1fr}.sa-vehcard .ph{width:100%;height:120px}.sa-docs{grid-template-columns:1fr}.sa-veh-detail-hero{grid-template-columns:1fr}.sa-veh-detail-photo{width:100%;height:160px}.sa-veh-detail-grid{grid-template-columns:1fr 1fr}
 .sa-side{position:fixed;inset:0 auto 0 0;transform:translateX(-105%);z-index:40;transition:transform .2s}
 .sa-side.open{transform:none}.sa-menu{display:grid}.sa-overlay{display:none;position:fixed;inset:0;background:rgba(10,20,40,.45);z-index:30}
 .sa-overlay.on{display:block}
@@ -198,6 +229,40 @@
 .sa-table tr:nth-child(even) td{background:#fbfdff}
 .sa-table .primary{display:block;font-weight:780;color:#0a0a0a;margin-bottom:3px}
 .sa-table .sub{display:block;font-size:11px;color:#8a96a8}
+.sa-table tr[data-action="open-product"]{cursor:pointer}
+.sa-table tr[data-action="open-product"]:hover td{background:#f0f7ff}
+.sa-pthumb{width:48px;height:48px;border-radius:10px;border:1px solid #e8eef5;background:#f8fafc;display:grid;place-items:center;overflow:hidden;color:var(--blue);padding:0;flex:none}
+.sa-pthumb.has-img{background:#fff}
+.sa-pthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.sa-pback{display:inline-flex;align-items:center;gap:8px;border:0;background:none;color:var(--blue);font-size:13px;font-weight:800;cursor:pointer;padding:0;margin-bottom:14px}
+.sa-pback:hover{color:var(--blue-deep)}
+.sa-pdetail{display:flex;flex-direction:column;gap:16px}
+.sa-pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.sa-pgrid .span2{grid-column:span 2}
+.sa-pgrid .span3{grid-column:1 / -1}
+.sa-pfield{display:flex;flex-direction:column;gap:6px;min-width:0}
+.sa-pfield label{font-size:11px;font-weight:800;color:#64748b;letter-spacing:.02em}
+.sa-pfield .val,.sa-pfield input,.sa-pfield select{width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;padding:11px 12px;font-size:13px;color:var(--ink);min-height:42px}
+.sa-pfield input[readonly],.sa-pfield select:disabled{background:#f8fafc;color:#0f172a}
+.sa-pserial{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#f1f5f9}
+.sa-pserial span{padding:9px 14px;font-size:12px;font-weight:800;color:#64748b}
+.sa-pserial span.on{background:var(--blue);color:#fff}
+.sa-pspecs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px}
+.sa-pspecs .sa-pfield .val{font-variant-numeric:tabular-nums}
+.sa-pspecs .blue .val{color:#1d4ed8;font-weight:750}
+.sa-pspecs .green .val{color:#15803d;font-weight:750}
+.sa-pfiles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sa-pfile{border:1px dashed #cbd5e1;border-radius:14px;background:#f8fafc;padding:14px;min-height:180px;display:flex;flex-direction:column;gap:10px}
+.sa-pfile h3{margin:0;font-size:13px;font-family:Outfit,system-ui,sans-serif}
+.sa-pfile .hint{font-size:11px;color:var(--muted)}
+.sa-pfile .preview{flex:1;display:flex;align-items:center;justify-content:center;border-radius:10px;background:#fff;border:1px solid var(--line);overflow:hidden;min-height:120px}
+.sa-pfile .preview img{max-width:100%;max-height:220px;object-fit:contain;display:block}
+.sa-pfile .preview a{color:var(--blue);font-weight:750;font-size:13px;text-decoration:none}
+.sa-pmeta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:4px}
+@media(max-width:900px){
+.sa-pgrid{grid-template-columns:1fr 1fr}.sa-pgrid .span2,.sa-pgrid .span3{grid-column:1 / -1}
+.sa-pspecs{grid-template-columns:repeat(3,minmax(0,1fr))}.sa-pfiles{grid-template-columns:1fr}
+}
 .sa-badge{display:inline-flex;align-items:center;padding:4px 8px;border-radius:999px;font-size:10px;font-weight:750;white-space:nowrap;background:#eef1f5;color:#526072}
 .sa-badge.ok{background:#e9f7f0;color:#0f8a4b}.sa-badge.warn{background:#fff4e6;color:#b45309}
 .sa-badge.bad{background:#fdecec;color:#c62828}.sa-badge.blue{background:#e8f1ff;color:#2563eb}
@@ -215,9 +280,32 @@
 .sa-vcards{display:flex;flex-direction:column;gap:10px}
 .sa-vcard{display:grid;grid-template-columns:88px minmax(0,1fr) auto;gap:16px;align-items:stretch;background:var(--white);border:1px solid var(--line);border-radius:14px;padding:14px 16px;box-shadow:0 6px 18px rgba(20,40,80,.04)}
 .sa-vcard-left{display:flex;flex-direction:column;align-items:center;gap:8px;justify-content:center}
-.sa-vcard-thumb{width:72px;height:72px;border-radius:12px;background:#fff;border:1px solid #e8eef5;display:grid;place-items:center;overflow:hidden;color:var(--blue);flex:none;position:relative}
+.sa-vcard-thumb{width:72px;height:72px;border-radius:12px;background:#fff;border:1px solid #e8eef5;display:grid;place-items:center;overflow:hidden;color:var(--blue);flex:none;position:relative;padding:0;cursor:default}
+button.sa-vcard-thumb{appearance:none;-webkit-appearance:none;font:inherit;cursor:pointer}
+button.sa-vcard-thumb:hover{border-color:#93c5fd;box-shadow:0 0 0 3px rgba(37,99,235,.12)}
+button.sa-vcard-thumb:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .sa-vcard-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:#fff}
 .sa-vcard-thumb .i{width:32px;height:32px}
+/* Verification image gallery modal */
+.sa-gallery{position:fixed;inset:0;z-index:90;background:rgba(7,12,24,.88);display:flex;flex-direction:column;align-items:stretch;justify-content:stretch;padding:0;backdrop-filter:blur(2px)}
+.sa-gallery-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;color:#e2e8f0;flex:none}
+.sa-gallery-bar h2{margin:0;font-family:Outfit,system-ui,sans-serif;font-size:1rem;font-weight:750;letter-spacing:-.02em;color:#fff}
+.sa-gallery-bar .meta{font-size:12px;color:#94a3b8;margin-top:2px}
+.sa-gallery-x{width:40px;height:40px;border:0;border-radius:10px;background:rgba(255,255,255,.1);color:#fff;font-size:20px;cursor:pointer;display:grid;place-items:center;flex:none}
+.sa-gallery-x:hover{background:rgba(255,255,255,.18)}
+.sa-gallery-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;gap:10px;padding:8px 12px 18px;position:relative}
+.sa-gallery-nav{width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;font-size:22px;cursor:pointer;flex:none;display:grid;place-items:center}
+.sa-gallery-nav:hover{background:rgba(255,255,255,.22)}
+.sa-gallery-nav[disabled]{opacity:.35;cursor:not-allowed}
+.sa-gallery-frame{flex:1;min-width:0;max-width:min(960px,100%);height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.sa-gallery-frame img{max-width:100%;max-height:calc(100% - 48px);width:auto;height:auto;object-fit:contain;border-radius:10px;background:#0b1220;box-shadow:0 18px 50px rgba(0,0,0,.35)}
+.sa-gallery-label{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.1);color:#e2e8f0;font-size:12px;font-weight:750;letter-spacing:.02em}
+.sa-gallery-label .idx{color:#94a3b8;font-weight:650}
+.sa-gallery-strip{flex:none;display:flex;gap:8px;overflow-x:auto;padding:0 16px 16px;scrollbar-width:thin}
+.sa-gallery-strip button{flex:none;width:64px;height:64px;padding:0;border:2px solid transparent;border-radius:10px;overflow:hidden;background:#1e293b;cursor:pointer;position:relative}
+.sa-gallery-strip button.on{border-color:#60a5fa}
+.sa-gallery-strip button img{width:100%;height:100%;object-fit:cover;display:block}
+.sa-gallery-empty,.sa-gallery-loading{color:#94a3b8;font-size:14px;text-align:center;padding:40px 16px}
 .sa-vcard-status{font-size:12px;font-weight:800;letter-spacing:.01em;text-align:center;line-height:1.2}
 .sa-vcard-status.ok{color:var(--ok)}.sa-vcard-status.warn{color:var(--warn)}.sa-vcard-status.bad{color:var(--bad)}.sa-vcard-status.blue{color:var(--blue)}.sa-vcard-status.muted{color:var(--muted)}
 .sa-vcard-main{min-width:0;display:flex;flex-direction:column;gap:10px}
@@ -694,6 +782,11 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       rcOptions: [],
       subTab: '',
       integrationModal: null,
+      gallery: null,
+      productDetail: null,
+      productDetailLoading: false,
+      productDetailError: null,
+      vehicleDetail: null,
       emaap: { configured: false, label: 'Not connected', userIdMasked: null, loading: false },
       emaapSaving: false,
       emaapApis: { loading: false, error: null, baseUrl: 'https://emaap.gov.in/gatcapi', counts: { v1: 0, v2: 0 }, v1: [], v2: [] },
@@ -768,6 +861,9 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
       refresh:'<path d="M21 12a9 9 0 1 1-2.6-6.3M21 3v6h-6"/>',
       arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
+      back:'<path d="m14 5-7 7 7 7M7 12h14"/>',
+      wind:'<path d="M4 12h12a3 3 0 1 0-3-3M4 7h8a2.5 2.5 0 1 0-2.5-2.5M4 17h14a2.5 2.5 0 1 1-2.5 2.5"/>',
+      more:'<circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/>',
     };
     const icon = (n, cls='') => `<svg aria-hidden="true" class="i ${cls}" viewBox="0 0 24 24">${I[n] || I.dashboard}</svg>`;
     const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
@@ -931,6 +1027,10 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       const prevPage = state.page;
       state.page = page;
       state.drawer = false;
+      state.productDetail = null;
+      state.productDetailLoading = false;
+      state.productDetailError = null;
+      state.vehicleDetail = null;
       state.q = opts.q != null ? opts.q : '';
       state.statusFilter = opts.statusFilter != null ? opts.statusFilter : '';
       state.typeFilter = opts.typeFilter != null ? opts.typeFilter : '';
@@ -1124,14 +1224,23 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       </div>`;
     }
 
+    function withAuthMediaUrl(url) {
+      if (!url) return '';
+      const u = String(url);
+      if (!u.startsWith('/api/')) return u;
+      const sep = u.includes('?') ? '&' : '?';
+      return `${u}${sep}access_token=${encodeURIComponent(authState.token || '')}`;
+    }
+
     function verificationCard(r) {
       const type = String(r.verification_type || '').toUpperCase();
       const tone = statusTone(r.status_label || r.status);
       const label = statusLabelText(r);
       const ref = r.reference || r.certificate_number || r.application_number || '—';
       const when = fmtDateTime(r.certified_at || r.submitted_at || r.created_at);
-      const thumb = `${icon('layers')}${r.product_image_url
-        ? `<img src="${esc(r.product_image_url)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
+      const thumbSrc = r.product_image_url ? withAuthMediaUrl(r.product_image_url) : '';
+      const thumb = `${icon('layers')}${thumbSrc
+        ? `<img src="${esc(thumbSrc)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
         : ''}`;
       const dlUrl = r.download_url || r.signed_pdf_url || r.certificate_pdf_url || '';
       const viewUrl = r.signed_pdf_url || r.download_url || r.certificate_pdf_url || '';
@@ -1153,7 +1262,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         : `<button type="button" class="sa-vcard-dl" disabled aria-disabled="true" title="No PDF available">${pdfIco}<span>No PDF</span></button>`;
       return `<article class="sa-vcard">
         <div class="sa-vcard-left">
-          <div class="sa-vcard-thumb">${thumb}</div>
+          <button type="button" class="sa-vcard-thumb${thumbSrc ? ' has-img' : ''}" data-action="open-gallery" data-id="${esc(r.id)}" data-ref="${esc(ref)}" data-name="${esc(r.customer_name || '')}" title="${thumbSrc ? 'View images' : 'View images (thumbnail unavailable)'}" aria-label="Open image gallery for ${esc(ref)}">${thumb}</button>
           <div class="sa-vcard-status ${tone}">${esc(label)}</div>
         </div>
         <div class="sa-vcard-main">
@@ -1239,20 +1348,147 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         </section>`;
     }
 
+    function productThumbHtml(r, sizeClass = '') {
+      const src = r.image_url ? withAuthMediaUrl(r.image_url) : '';
+      return `<span class="sa-pthumb${src ? ' has-img' : ''}${sizeClass ? ` ${sizeClass}` : ''}" aria-hidden="true">${icon('package')}${
+        src
+          ? `<img src="${esc(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
+          : ''
+      }</span>`;
+    }
+
+    function fmtSpec(v) {
+      if (v == null || v === '') return '—';
+      return String(v);
+    }
+
+    async function openProductDetail(id) {
+      if (!id) return;
+      const fromList = (state.list.items || []).find((p) => String(p.id) === String(id));
+      state.productDetail = fromList || { id };
+      state.productDetailLoading = true;
+      state.productDetailError = null;
+      render(true);
+      const { res, json } = await api(`/api/v1/admin/products/${encodeURIComponent(id)}`, {
+        token: authState.token,
+      });
+      if (!state.productDetail || String(state.productDetail.id) !== String(id)) return;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        state.productDetailLoading = false;
+        state.productDetailError = json.error?.message || 'Could not load product';
+        toast(state.productDetailError);
+        render(true);
+        return;
+      }
+      state.productDetail = json.data || fromList || { id };
+      state.productDetailLoading = false;
+      state.productDetailError = null;
+      render(true);
+    }
+
+    function closeProductDetail() {
+      state.productDetail = null;
+      state.productDetailLoading = false;
+      state.productDetailError = null;
+      render(true);
+      if (!(state.list.items || []).length) loadList(true);
+    }
+
+    function productDetailPage() {
+      const p = state.productDetail || {};
+      const loading = state.productDetailLoading;
+      const specs = Array.isArray(p.specifications) && p.specifications.length
+        ? p.specifications
+        : [{
+          maximum_capacity: p.maximum_capacity,
+          verification_scale_interval: p.verification_scale_interval,
+          maximum_permissible_error: p.maximum_permissible_error,
+          minimum_capacity: p.minimum_capacity,
+          actual_scale_interval: p.actual_scale_interval,
+          no_of_verification_intervals: p.no_of_verification_intervals,
+        }];
+      const imgSrc = p.image_url ? withAuthMediaUrl(p.image_url) : '';
+      const docUrl = p.approval_doc_url ? withAuthMediaUrl(p.approval_doc_url) : '';
+      const isPas = Boolean(p.pas_pre_allotted) || p.serial_pool === 'PAS';
+      const specBlocks = specs.map((row, index) => `
+        <div class="sa-pspecs" aria-label="${specs.length > 1 ? `Specification ${index + 1}` : 'Specifications'}">
+          ${specs.length > 1 ? `<div class="sa-pfield span3" style="grid-column:1/-1"><label>Spec ${index + 1}</label></div>` : ''}
+          <div class="sa-pfield blue"><label>Max</label><div class="val">${esc(fmtSpec(row.maximum_capacity))}</div></div>
+          <div class="sa-pfield blue"><label>e</label><div class="val">${esc(fmtSpec(row.verification_scale_interval))}</div></div>
+          <div class="sa-pfield blue"><label>MPE</label><div class="val">${esc(fmtSpec(row.maximum_permissible_error))}</div></div>
+          <div class="sa-pfield green"><label>Min</label><div class="val">${esc(fmtSpec(row.minimum_capacity))}</div></div>
+          <div class="sa-pfield green"><label>d</label><div class="val">${esc(fmtSpec(row.actual_scale_interval))}</div></div>
+          <div class="sa-pfield green"><label>n</label><div class="val">${esc(fmtSpec(row.no_of_verification_intervals))}</div></div>
+        </div>`).join('');
+      return `${heading(p.name || 'Product', 'Product details')}
+        <button type="button" class="sa-pback" data-action="close-product">${icon('back')} Back to list</button>
+        <section class="sa-panel sa-pdetail">
+          ${loading ? `<p class="sa-meta">Loading product…</p>` : ''}
+          ${state.productDetailError ? `<p class="sa-meta" style="color:var(--bad)">${esc(state.productDetailError)}</p>` : ''}
+          <div class="sa-pmeta">
+            ${p.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge">Inactive</span>'}
+            <span class="sa-badge ${isPas ? 'warn' : 'blue'}">${isPas ? 'PAS' : 'GAS'}</span>
+            ${p.accuracy_class ? `<span class="sa-badge">Class ${esc(p.accuracy_class)}</span>` : ''}
+            ${p.type_of_instrument ? `<span class="sa-badge">${esc(p.type_of_instrument)}</span>` : ''}
+          </div>
+          <div class="sa-pgrid">
+            <div class="sa-pfield"><label>Model ID *</label><input type="text" readonly value="${esc(p.model_id || '')}"/></div>
+            <div class="sa-pfield"><label>Model No</label><input type="text" readonly value="${esc(p.model_no || '')}"/></div>
+            <div class="sa-pfield"><label>Yesone SKU</label><input type="text" readonly value="${esc(p.yesone_sku || '')}" placeholder="Yesone SKU"/></div>
+            <div class="sa-pfield"><label>Serial pool</label>
+              <div class="sa-pserial" aria-label="Serial pool">
+                <span class="${isPas ? '' : 'on'}">GAS</span>
+                <span class="${isPas ? 'on' : ''}">PAS</span>
+              </div>
+              <span class="hint" style="font-size:11px;color:var(--muted);margin-top:4px">${isPas ? 'Pre-allotted serials (Yesone bank).' : 'General allotted serials (default).'}</span>
+            </div>
+            <div class="sa-pfield span2"><label>Product Name *</label><input type="text" readonly value="${esc(p.name || '')}"/></div>
+            <div class="sa-pfield"><label>Unit</label><input type="text" readonly value="${esc(p.unit_of_measurement || 'kg')}"/></div>
+            <div class="sa-pfield span2"><label>Approval No</label><input type="text" readonly value="${esc(p.model_approval_no || '')}"/></div>
+            <div class="sa-pfield"><label>Brand / series</label><input type="text" readonly value="${esc(p.manufacturer_brand_series || '')}"/></div>
+            <div class="sa-pfield"><label>Instrument</label><input type="text" readonly value="${esc(p.type_of_instrument || '')}"/></div>
+            <div class="sa-pfield"><label>Supply voltage</label><input type="text" readonly value="${esc(p.supply_voltage || '')}"/></div>
+          </div>
+          <div>
+            <div class="sa-panel-h" style="margin-bottom:10px"><h2>Specifications</h2></div>
+            ${specBlocks}
+          </div>
+          <div class="sa-pfiles">
+            <div class="sa-pfile">
+              <div><h3>Image</h3><div class="hint">Optional</div></div>
+              <div class="preview">${imgSrc
+                ? `<img src="${esc(imgSrc)}" alt="${esc(p.name || 'Product')}" loading="lazy" referrerpolicy="no-referrer"/>`
+                : `<span class="sa-meta">No image</span>`}</div>
+            </div>
+            <div class="sa-pfile">
+              <div><h3>Approval doc</h3><div class="hint">PDF / image</div></div>
+              <div class="preview">${docUrl
+                ? (/\.pdf(\?|$)/i.test(String(p.approval_doc_url || '')) || /pdf/i.test(String(p.approval_doc_path || ''))
+                  ? `<a href="${esc(docUrl)}" target="_blank" rel="noopener noreferrer" data-action="open-pdf" data-url="${esc(docUrl)}" data-disposition="inline" data-filename="approval-doc.pdf">Open approval document</a>`
+                  : `<img src="${esc(docUrl)}" alt="Approval document" loading="lazy" referrerpolicy="no-referrer"/>`)
+                : `<span class="sa-meta">No document</span>`}</div>
+            </div>
+          </div>
+        </section>`;
+    }
+
     function productsList() {
+      if (state.productDetail) return productDetailPage();
       const items = state.list.items || [];
-      const rows = items.length ? items.map((r) => `<tr>
+      const rows = items.length ? items.map((r) => `<tr data-action="open-product" data-id="${esc(r.id)}" title="Open product details">
+          <td>${productThumbHtml(r)}</td>
           <td><span class="primary">${esc(r.name || '—')}</span><span class="sub">${esc(r.model_no || r.model_id || '')}</span></td>
           <td>${esc(r.type_of_instrument || '—')}</td>
           <td>${esc(r.manufacturer_brand_series || '—')}</td>
           <td>${esc(r.accuracy_class || '—')}</td>
           <td>${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge">Inactive</span>'}</td>
-        </tr>`).join('') : `<tr><td colspan="5" class="sa-empty">No products found</td></tr>`;
+        </tr>`).join('') : `<tr><td colspan="6" class="sa-empty">No products found</td></tr>`;
       return `${heading('Products', 'Instrument master and specifications')}
         <section class="sa-panel">
           ${listTools()}
           <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} products`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
-          <div class="sa-table-wrap"><table class="sa-table"><thead><tr><th>Product</th><th>Instrument</th><th>Brand / series</th><th>Class</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>
+          <div class="sa-table-wrap"><table class="sa-table"><thead><tr><th style="width:64px">Thumb</th><th>Product</th><th>Instrument</th><th>Brand / series</th><th>Class</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>
           ${pager()}
         </section>`;
     }
@@ -1380,7 +1616,160 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         </section>`;
     }
 
+    function isDateExpired(v) {
+      if (!v) return false;
+      const d = new Date(v);
+      if (Number.isNaN(d.getTime())) return false;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      return d < today;
+    }
+
+    function vehicleTitle(r) {
+      return `${r.brand || ''} ${r.model || ''}`.trim().toUpperCase() || 'VEHICLE';
+    }
+
+    function vehiclePhotoSrc(r) {
+      return withAuthMediaUrl(r.photo_url || r.vehicle_photo_url || '');
+    }
+
+    function vehicleDateCell(label, value, ico) {
+      const expired = isDateExpired(value);
+      return `<div><span class="di">${icon(ico)}</span><div><small>${esc(label)}</small><b class="${expired ? 'exp' : ''}">${esc(fmtDate(value))}</b></div></div>`;
+    }
+
+    function vehicleCard(r) {
+      const title = vehicleTitle(r);
+      const photo = vehiclePhotoSrc(r);
+      const plate = String(r.reg_number || '').trim();
+      const rc = r.rc_name || r.rc_code || '—';
+      const thumb = `${icon('car')}${photo
+        ? `<img src="${esc(photo)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
+        : ''}`;
+      return `<article class="sa-vehcard" role="button" tabindex="0" data-action="open-vehicle" data-id="${esc(r.id)}" aria-label="View ${esc(title)}">
+        <div class="ph">${thumb}</div>
+        <div class="sa-vehcard-main">
+          <div class="sa-vehcard-head">
+            <h3>${esc(title)}</h3>
+            ${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge off">Inactive</span>'}
+          </div>
+          <div class="sa-tags">
+            <span class="sa-tag">${icon('building')}${esc(rc)}</span>
+            ${plate ? `<span class="sa-tag plate"><span class="ind">IND</span>${esc(plate)}</span>` : ''}
+            ${r.year ? `<span class="sa-tag">${icon('calendar')}${esc(r.year)}</span>` : ''}
+          </div>
+          <div class="sa-docs">
+            ${vehicleDateCell('RC Valid Till', r.rc_validity, 'calendar')}
+            ${vehicleDateCell('Insurance Valid Till', r.insurance_validity, 'shield')}
+            ${vehicleDateCell('Pollution Valid Till', r.pollution_validity, 'wind')}
+          </div>
+        </div>
+        <div class="sa-vehcard-actions">
+          <button type="button" class="sa-vehcard-ico" data-action="open-vehicle" data-id="${esc(r.id)}" title="View vehicle" aria-label="View ${esc(title)}">${icon('eye')}</button>
+        </div>
+      </article>`;
+    }
+
+    function closeVehicleDetail() {
+      state.vehicleDetail = null;
+      render(true);
+    }
+
+    async function openVehicleDetail(id) {
+      if (!id) return;
+      const fromList = (state.list.items || []).find((x) => String(x.id) === String(id));
+      state.vehicleDetail = {
+        id,
+        loading: true,
+        error: null,
+        data: fromList || null,
+      };
+      render(true);
+      const { res, json } = await api(`/api/v1/admin/vehicles/${encodeURIComponent(id)}`, {
+        token: authState.token,
+      });
+      if (!state.vehicleDetail || String(state.vehicleDetail.id) !== String(id)) return;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        state.vehicleDetail = {
+          id,
+          loading: false,
+          error: json.error?.message || 'Could not load vehicle',
+          data: fromList || null,
+        };
+        toast(state.vehicleDetail.error);
+        render(true);
+        return;
+      }
+      state.vehicleDetail = {
+        id,
+        loading: false,
+        error: null,
+        data: json.data || fromList || null,
+      };
+      render(true);
+    }
+
+    function vehicleDetailPage() {
+      const detail = state.vehicleDetail || {};
+      const r = detail.data || {};
+      const title = vehicleTitle(r);
+      const photo = vehiclePhotoSrc(r);
+      const docs = r.docs || {};
+      const docLinks = [
+        ['RC', docs.rc_url],
+        ['Insurance', docs.insurance_url],
+        ['Pollution', docs.pollution_url],
+        ['F2 weight', docs.f2_weight_url],
+      ];
+      const cells = [
+        ['Brand', r.brand || '—'],
+        ['Model', r.model || '—'],
+        ['Year', r.year || '—'],
+        ['Registration', r.reg_number || '—'],
+        ['Regional Centre', r.rc_name || r.rc_code || '—'],
+        ['Status', r.active ? 'Active' : 'Inactive'],
+        ['RC validity', fmtDate(r.rc_validity)],
+        ['Insurance validity', fmtDate(r.insurance_validity)],
+        ['Pollution validity', fmtDate(r.pollution_validity)],
+        ['F2 weight validity', fmtDate(r.f2_weight_validity)],
+        ['Approval', r.approval_status || '—'],
+        ['Updated', fmtDateTime(r.updated_at)],
+      ];
+      return `${heading('Car', 'Vehicle details')}
+        <button type="button" class="sa-veh-detail-back" data-action="close-vehicle">${icon('back')} Back to list</button>
+        <section class="sa-panel">
+          ${detail.loading && !detail.data ? '<p class="sa-meta">Loading vehicle…</p>' : ''}
+          ${detail.error ? `<p class="sa-meta">${esc(detail.error)}</p>` : ''}
+          <div class="sa-veh-detail">
+            <div class="sa-veh-detail-hero">
+              <div class="sa-veh-detail-photo">${icon('car')}${photo
+                ? `<img src="${esc(photo)}" alt="${esc(title)}" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
+                : ''}</div>
+              <div>
+                <h2 style="margin:0 0 6px;font-family:Outfit,system-ui,sans-serif;font-size:20px;letter-spacing:-.02em">${esc(title)}</h2>
+                <p style="margin:0 0 10px;font-size:13px;color:var(--muted)">${esc(r.reg_number || '—')} · ${esc(r.rc_name || r.rc_code || '—')}</p>
+                ${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge off">Inactive</span>'}
+                ${detail.loading ? '<span class="sa-badge blue" style="margin-left:6px">Refreshing…</span>' : ''}
+              </div>
+            </div>
+            <div class="sa-veh-detail-grid">
+              ${cells.map(([k, v]) => `<div class="cell"><span>${esc(k)}</span><b>${esc(v)}</b></div>`).join('')}
+            </div>
+            <div>
+              <h3 style="margin:0 0 10px;font-size:14px;font-family:Outfit,system-ui,sans-serif">Documents</h3>
+              <div class="sa-veh-detail-docs">
+                ${docLinks.map(([label, url]) => (url
+                  ? `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${icon('file')} ${esc(label)}</a>`
+                  : `<span class="miss">${esc(label)} · not uploaded</span>`)).join('')}
+              </div>
+            </div>
+          </div>
+        </section>`;
+    }
+
     function vehiclesPage() {
+      if (state.vehicleDetail) return vehicleDetailPage();
       const tab = state.subTab || 'All';
       const items = state.list.items || [];
       const sum = state.list.summary || {};
@@ -1389,15 +1778,9 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       const inactive = Number(sum.inactive) || 0;
       const activePct = total ? Math.round((active / total) * 100) : 0;
       const inactivePct = total ? Math.round((inactive / total) * 100) : 0;
-      const rows = items.length ? items.map((r) => `<tr>
-          <td><span class="primary">${esc(r.brand || '—')} ${esc(r.model || '')}</span><span class="sub">${esc(r.year || '')}</span></td>
-          <td>${esc(r.reg_number || '—')}</td>
-          <td>${esc(r.rc_name || r.rc_code || '—')}</td>
-          <td>${esc(fmtDate(r.rc_validity))}</td>
-          <td>${esc(fmtDate(r.insurance_validity))}</td>
-          <td>${esc(fmtDate(r.pollution_validity))}</td>
-          <td>${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge off">Inactive</span>'}</td>
-        </tr>`).join('') : `<tr><td colspan="7" class="sa-empty">${state.listLoading ? 'Loading…' : 'No vehicles registered'}</td></tr>`;
+      const cards = items.length
+        ? `<div class="sa-veh">${items.map(vehicleCard).join('')}</div>`
+        : `<div class="sa-empty-polished"><div class="ico">${icon('car')}</div><h3>${state.listLoading ? 'Loading…' : 'No vehicles registered'}</h3><p>${state.listLoading ? 'Fetching vehicles from VPS.' : 'Synced vehicles from yesgatc will appear here.'}</p></div>`;
       return `${heading('Car', 'Manage registered vehicles, RC, insurance and pollution')}
         <div class="sa-kpi">
           <div class="card"><div class="t">Total Vehicles<span class="ico">${icon('car')}</span></div><div class="v">${state.listLoading ? '…' : n(total)}</div><div class="s">Synced from yesgatc</div></div>
@@ -1411,7 +1794,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         <section class="sa-panel">
           ${listTools()}
           <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} vehicles`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
-          <div class="sa-table-wrap"><table class="sa-table"><thead><tr><th>Vehicle</th><th>Reg. no.</th><th>RC</th><th>RC validity</th><th>Insurance</th><th>Pollution</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>
+          ${cards}
           ${pager()}
         </section>`;
     }
@@ -2480,9 +2863,101 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       if (rcEl) state.rcFilter = rcEl.value;
     }
 
+    function galleryModalHtml() {
+      const g = state.gallery;
+      if (!g) return '';
+      const title = g.title || g.reference || 'Images';
+      const sub = [g.customerName, g.reference].filter(Boolean).join(' · ');
+      if (g.loading) {
+        return `<div class="sa-gallery" data-action="close-gallery" role="dialog" aria-modal="true" aria-label="Image gallery">
+          <div class="sa-gallery-bar"><div><h2>${esc(title)}</h2>${sub ? `<div class="meta">${esc(sub)}</div>` : ''}</div>
+          <button type="button" class="sa-gallery-x" data-action="close-gallery" aria-label="Close">✕</button></div>
+          <div class="sa-gallery-loading">Loading images…</div>
+        </div>`;
+      }
+      const images = Array.isArray(g.images) ? g.images : [];
+      if (!images.length) {
+        return `<div class="sa-gallery" data-action="close-gallery" role="dialog" aria-modal="true" aria-label="Image gallery">
+          <div class="sa-gallery-bar"><div><h2>${esc(title)}</h2>${sub ? `<div class="meta">${esc(sub)}</div>` : ''}</div>
+          <button type="button" class="sa-gallery-x" data-action="close-gallery" aria-label="Close">✕</button></div>
+          <div class="sa-gallery-empty">No images available for this verification</div>
+        </div>`;
+      }
+      const idx = Math.max(0, Math.min(g.index || 0, images.length - 1));
+      const cur = images[idx];
+      const src = withAuthMediaUrl(cur.url);
+      const canPrev = idx > 0;
+      const canNext = idx < images.length - 1;
+      const strip = images.map((img, i) => {
+        const t = withAuthMediaUrl(img.url);
+        return `<button type="button" class="${i === idx ? 'on' : ''}" data-action="gallery-goto" data-index="${i}" title="${esc(img.label || img.kind || '')}" aria-label="${esc(img.label || img.kind || `Image ${i + 1}`)}"><img src="${esc(t)}" alt="" loading="lazy" referrerpolicy="no-referrer"/></button>`;
+      }).join('');
+      return `<div class="sa-gallery" data-action="close-gallery" role="dialog" aria-modal="true" aria-label="Image gallery">
+        <div class="sa-gallery-bar" data-stop="1"><div><h2>${esc(title)}</h2>${sub ? `<div class="meta">${esc(sub)}</div>` : ''}</div>
+        <button type="button" class="sa-gallery-x" data-action="close-gallery" aria-label="Close">✕</button></div>
+        <div class="sa-gallery-stage" data-stop="1">
+          <button type="button" class="sa-gallery-nav" data-action="gallery-prev" ${canPrev ? '' : 'disabled'} aria-label="Previous image">‹</button>
+          <div class="sa-gallery-frame">
+            <img src="${esc(src)}" alt="${esc(cur.label || cur.kind || '')}" referrerpolicy="no-referrer"/>
+            <div class="sa-gallery-label"><span>${esc(cur.label || cur.kind || 'Image')}</span><span class="idx">${idx + 1} / ${images.length}</span></div>
+          </div>
+          <button type="button" class="sa-gallery-nav" data-action="gallery-next" ${canNext ? '' : 'disabled'} aria-label="Next image">›</button>
+        </div>
+        <div class="sa-gallery-strip" data-stop="1">${strip}</div>
+      </div>`;
+    }
+
+    function closeGallery() {
+      if (!state.gallery) return;
+      state.gallery = null;
+      render(true);
+    }
+
+    async function openGallery(id, meta = {}) {
+      if (!id) return;
+      state.gallery = {
+        id,
+        loading: true,
+        index: 0,
+        images: [],
+        reference: meta.ref || '',
+        customerName: meta.name || '',
+        title: meta.name || meta.ref || 'Images',
+      };
+      render(true);
+      const { res, json } = await api(`/api/v1/admin/verifications/${encodeURIComponent(id)}/images`, {
+        token: authState.token,
+      });
+      if (!state.gallery || state.gallery.id !== id) return;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        state.gallery = {
+          ...state.gallery,
+          loading: false,
+          images: [],
+          error: json.error?.message || 'Could not load images',
+        };
+        toast(state.gallery.error);
+        render(true);
+        return;
+      }
+      const data = json.data || {};
+      const images = Array.isArray(data.images) ? data.images : [];
+      state.gallery = {
+        id,
+        loading: false,
+        index: 0,
+        images,
+        reference: data.reference || meta.ref || '',
+        customerName: data.customer_name || meta.name || '',
+        title: data.customer_name || data.reference || meta.name || 'Images',
+      };
+      render(true);
+    }
+
     function render(preserve) {
       const scrollTop = preserve ? (root.querySelector('.sa-scroll')?.scrollTop || 0) : 0;
-      root.innerHTML = `<div class="sa-shell">${sidebar()}<div class="sa-main">${topbar()}<div class="sa-scroll"><div class="sa-content">${state.page==='Dashboard'?dashboard():modulePage()}</div></div></div>${state.toast?`<div class="toast" role="status">${esc(state.toast)}</div>`:''}</div>`;
+      root.innerHTML = `<div class="sa-shell">${sidebar()}<div class="sa-main">${topbar()}<div class="sa-scroll"><div class="sa-content">${state.page==='Dashboard'?dashboard():modulePage()}</div></div></div>${state.toast?`<div class="toast" role="status">${esc(state.toast)}</div>`:''}</div>${galleryModalHtml()}`;
       if (preserve) {
         const sc = root.querySelector('.sa-scroll');
         if (sc) sc.scrollTop = scrollTop;
@@ -2586,8 +3061,68 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         closeIntegrationModal();
         return;
       }
+      if (e.target.classList?.contains('sa-gallery') && e.target.dataset.action === 'close-gallery') {
+        closeGallery();
+        return;
+      }
       const btn = e.target.closest('button,[data-page],[data-action]');
       if (!btn) return;
+      if (btn.dataset.action === 'close-gallery') {
+        e.preventDefault();
+        closeGallery();
+        return;
+      }
+      if (btn.dataset.action === 'open-gallery') {
+        e.preventDefault();
+        if (btn.disabled) return;
+        openGallery(btn.dataset.id, { ref: btn.dataset.ref || '', name: btn.dataset.name || '' });
+        return;
+      }
+      if (btn.dataset.action === 'open-product') {
+        e.preventDefault();
+        openProductDetail(btn.dataset.id);
+        return;
+      }
+      if (btn.dataset.action === 'close-product') {
+        e.preventDefault();
+        closeProductDetail();
+        return;
+      }
+      if (btn.dataset.action === 'open-vehicle') {
+        e.preventDefault();
+        openVehicleDetail(btn.dataset.id);
+        return;
+      }
+      if (btn.dataset.action === 'close-vehicle') {
+        e.preventDefault();
+        closeVehicleDetail();
+        return;
+      }
+      if (btn.dataset.action === 'gallery-prev') {
+        e.preventDefault();
+        if (state.gallery && (state.gallery.index || 0) > 0) {
+          state.gallery = { ...state.gallery, index: state.gallery.index - 1 };
+          render(true);
+        }
+        return;
+      }
+      if (btn.dataset.action === 'gallery-next') {
+        e.preventDefault();
+        if (state.gallery && state.gallery.images && state.gallery.index < state.gallery.images.length - 1) {
+          state.gallery = { ...state.gallery, index: state.gallery.index + 1 };
+          render(true);
+        }
+        return;
+      }
+      if (btn.dataset.action === 'gallery-goto') {
+        e.preventDefault();
+        const i = Number(btn.dataset.index);
+        if (state.gallery && Number.isFinite(i)) {
+          state.gallery = { ...state.gallery, index: i };
+          render(true);
+        }
+        return;
+      }
       if (btn.dataset.action === 'open-pdf') {
         e.preventDefault();
         openCertificatePdf(
@@ -2714,6 +3249,29 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
     };
 
     root.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && state.gallery) {
+        e.preventDefault();
+        closeGallery();
+        return;
+      }
+      if (state.gallery && !state.gallery.loading && state.gallery.images?.length) {
+        if (e.key === 'ArrowLeft') {
+          e.preventDefault();
+          if ((state.gallery.index || 0) > 0) {
+            state.gallery = { ...state.gallery, index: state.gallery.index - 1 };
+            render(true);
+          }
+          return;
+        }
+        if (e.key === 'ArrowRight') {
+          e.preventDefault();
+          if (state.gallery.index < state.gallery.images.length - 1) {
+            state.gallery = { ...state.gallery, index: state.gallery.index + 1 };
+            render(true);
+          }
+          return;
+        }
+      }
       if (e.key === 'Escape' && state.integrationModal) {
         e.preventDefault();
         closeIntegrationModal();

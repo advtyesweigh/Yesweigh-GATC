@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import { checkDb } from './db.js';
 import { createAuthMiddleware } from './auth.js';
 import {
@@ -9,6 +11,11 @@ import {
   getYesoneCredentialsStatus,
   saveYesoneCredentials,
 } from './yesoneCredentials.js';
+import {
+  readYesoneSyncStatus,
+  publicYesoneSyncStatus,
+  triggerYesoneSyncNow,
+} from './yesoneSync.js';
 import {
   getRazorpayCredentialsStatus,
   saveRazorpayCredentials,
@@ -144,8 +151,195 @@ function formatMinCapacity(min) {
   return `${rounded} g`;
 }
 
-function mediaHttpUrl(sourceUrl, filePath) {
-  return pickHttpUrl(sourceUrl, filePath);
+function isLocalMediaPath(filePath) {
+  if (typeof filePath !== 'string') return false;
+  const trimmed = filePath.trim().replace(/\\/g, '/');
+  return trimmed.startsWith('media/yesgatc/');
+}
+
+/**
+ * Media retention (VPS): see scripts/lib/media-retention.mjs
+ * OV post-cert keeps only scale_image (+ PDFs); RV keeps all images; PDFs always.
+ * SA list thumbnails use the kept scale/product image via local media API when present.
+ */
+const ADMIN_IMAGE_MEDIA_KINDS = new Set([
+  'scale_image',
+  'instrument_rear',
+  'stamping',
+  'standard_weight',
+  'verification_seal',
+  'installation',
+  'performer_selfie_id',
+  'performer_id_aadhaar',
+  'old_invoice',
+]);
+
+/** Display order + labels for SA image gallery. */
+const ADMIN_IMAGE_GALLERY_ORDER = [
+  'scale_image',
+  'stamping',
+  'standard_weight',
+  'instrument_rear',
+  'verification_seal',
+  'installation',
+  'performer_selfie_id',
+  'performer_id_aadhaar',
+  'old_invoice',
+];
+
+const ADMIN_IMAGE_KIND_LABELS = {
+  scale_image: 'Scale',
+  instrument_rear: 'Rear',
+  stamping: 'Stamping',
+  standard_weight: 'Weight',
+  verification_seal: 'Seal',
+  installation: 'Installation',
+  performer_selfie_id: 'Selfie ID',
+  performer_id_aadhaar: 'Aadhaar',
+  old_invoice: 'Old invoice',
+};
+
+function imageKindLabel(kind) {
+  const k = String(kind || '');
+  return ADMIN_IMAGE_KIND_LABELS[k] || k.replace(/_/g, ' ') || 'Image';
+}
+
+/**
+ * Same-origin media API URL when we can serve/redirect via admin media routes.
+ * Prefer this over raw Firebase URLs so <img> uses access_token and local disk when present.
+ */
+function mediaHttpUrl(sourceUrl, filePath, { verificationId, kind } = {}) {
+  const remote = pickHttpUrl(sourceUrl, filePath);
+  const local = isLocalMediaPath(filePath);
+  if (verificationId && kind && (local || remote)) {
+    const q = new URLSearchParams({ kind: String(kind) });
+    const endpoint =
+      ADMIN_IMAGE_MEDIA_KINDS.has(String(kind))
+        ? `/api/v1/admin/verifications/${verificationId}/media`
+        : `/api/v1/admin/verifications/${verificationId}/pdf`;
+    return `${endpoint}?${q.toString()}`;
+  }
+  if (local && verificationId) {
+    return `/api/v1/admin/verifications/${verificationId}/pdf`;
+  }
+  return remote;
+}
+
+function resolveSafeMediaPath(dataRoot, relPath) {
+  if (!dataRoot || !isLocalMediaPath(relPath)) return null;
+  const normalized = String(relPath).trim().replace(/\\/g, '/');
+  if (normalized.includes('..')) return null;
+  const abs = path.resolve(dataRoot, normalized);
+  const root = path.resolve(dataRoot);
+  if (abs !== root && !abs.startsWith(`${root}${path.sep}`)) return null;
+  return abs;
+}
+
+/** Sanitize certificate/application/GATC number for Content-Disposition filename. */
+function pdfDownloadFileName({ certificateNumber, applicationNumber, fallbackId } = {}) {
+  const raw = firstNonEmptyString(certificateNumber, applicationNumber, fallbackId) || 'certificate';
+  let base = String(raw)
+    .trim()
+    .replace(/\.pdf$/i, '')
+    .replace(/[\\/]+/g, '-')
+    .replace(/[^\w.\-]+/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^[\s._-]+|[\s._-]+$/g, '');
+  if (!base) base = 'certificate';
+  // Cap length for common FS limits while keeping the meaningful tail (cert suffix).
+  if (base.length > 180) base = base.slice(-180);
+  return `${base}.pdf`;
+}
+
+function productSpecRowsFromCapacities(capacities) {
+  const caps = asObject(capacities);
+  const specs = Array.isArray(caps.specifications) ? caps.specifications : [];
+  if (specs.length) {
+    return specs.map((spec, index) => {
+      const s = asObject(spec);
+      return {
+        id: firstNonEmptyString(s.id, `spec-${index + 1}`),
+        maximum_capacity: firstFiniteNumber(s.maximumCapacity, s.max),
+        verification_scale_interval: firstFiniteNumber(s.verificationScaleInterval, s.e),
+        maximum_permissible_error: firstFiniteNumber(s.maximumPermissibleError, s.mpe),
+        minimum_capacity: firstFiniteNumber(s.minimumCapacity, s.min),
+        actual_scale_interval: firstFiniteNumber(s.actualScaleInterval, s.d),
+        no_of_verification_intervals: firstFiniteNumber(s.noOfVerificationIntervals, s.n),
+      };
+    });
+  }
+  return [{
+    id: 'primary',
+    maximum_capacity: firstFiniteNumber(caps.maximumCapacity),
+    verification_scale_interval: firstFiniteNumber(caps.verificationScaleInterval),
+    maximum_permissible_error: firstFiniteNumber(caps.maximumPermissibleError),
+    minimum_capacity: firstFiniteNumber(caps.minimumCapacity),
+    actual_scale_interval: firstFiniteNumber(caps.actualScaleInterval),
+    no_of_verification_intervals: firstFiniteNumber(caps.noOfVerificationIntervals),
+  }];
+}
+
+/**
+ * Prefer same-origin product media API when local disk path exists under media/yesgatc/;
+ * else Firebase/http download URL. Mirrors verification mediaHttpUrl behaviour.
+ */
+function productMediaHttpUrl(productId, kind, filePath, sourceUrl) {
+  const remote = pickHttpUrl(sourceUrl, filePath);
+  const local = isLocalMediaPath(filePath);
+  if (productId && kind && (local || remote)) {
+    const q = new URLSearchParams({ kind: String(kind) });
+    return `/api/v1/admin/products/${productId}/media?${q.toString()}`;
+  }
+  return remote;
+}
+
+function shapeAdminProductRow(row) {
+  const capacities = asObject(row.capacities);
+  const specs = productSpecRowsFromCapacities(capacities);
+  const primary = specs[0] || {};
+  const imageUrl = productMediaHttpUrl(row.id, 'image', row.image_path, row.image_url);
+  const approvalDocUrl = productMediaHttpUrl(
+    row.id,
+    'approval_doc',
+    row.approval_doc_path,
+    row.approval_doc_url,
+  );
+  return {
+    id: row.id,
+    model_id: row.model_id,
+    model_no: row.model_no,
+    name: row.name,
+    yesone_sku: firstNonEmptyString(capacities.yesoneSku, row.yesone_sku),
+    type_of_instrument: row.type_of_instrument,
+    manufacturer_brand_series: row.manufacturer_brand_series,
+    accuracy_class: row.accuracy_class,
+    unit_of_measurement: row.unit_of_measurement,
+    model_approval_no: row.model_approval_no,
+    supply_voltage: row.supply_voltage,
+    pas_pre_allotted: Boolean(row.pas_pre_allotted),
+    serial_pool: row.pas_pre_allotted ? 'PAS' : 'GAS',
+    active: Boolean(row.active),
+    sort_order: row.sort_order,
+    capacities,
+    specifications: specs,
+    maximum_capacity: primary.maximum_capacity ?? null,
+    verification_scale_interval: primary.verification_scale_interval ?? null,
+    maximum_permissible_error: primary.maximum_permissible_error ?? null,
+    minimum_capacity: primary.minimum_capacity ?? null,
+    actual_scale_interval: primary.actual_scale_interval ?? null,
+    no_of_verification_intervals: primary.no_of_verification_intervals ?? null,
+    image_path: row.image_path || null,
+    image_url: imageUrl,
+    image_storage: isLocalMediaPath(row.image_path) ? 'local' : (imageUrl ? 'remote' : null),
+    approval_doc_path: row.approval_doc_path || null,
+    approval_doc_url: approvalDocUrl,
+    approval_doc_storage: isLocalMediaPath(row.approval_doc_path)
+      ? 'local'
+      : (approvalDocUrl ? 'remote' : null),
+    source_firebase_id: row.source_firebase_id || null,
+    created_at: row.created_at || null,
+    updated_at: row.updated_at || null,
+  };
 }
 
 function shapeAdminVerificationRow(row) {
@@ -182,14 +376,29 @@ function shapeAdminVerificationRow(row) {
     row.performer_username,
     row.performed_by && row.performed_by.toLowerCase() !== 'vct' ? row.performed_by : null,
   );
-  const signedPdfUrl = mediaHttpUrl(row.signed_pdf_source_url, row.signed_pdf_file_path);
-  const certificatePdfUrl = mediaHttpUrl(row.cert_pdf_source_url, row.cert_pdf_file_path);
+  const signedPdfUrl = mediaHttpUrl(row.signed_pdf_source_url, row.signed_pdf_file_path, {
+    verificationId: row.id,
+    kind: 'signed',
+  });
+  const certificatePdfUrl = mediaHttpUrl(row.cert_pdf_source_url, row.cert_pdf_file_path, {
+    verificationId: row.id,
+    kind: 'certificate',
+  });
   const downloadUrl = signedPdfUrl || certificatePdfUrl;
-  const productImageUrl = pickHttpUrl(
-    row.scale_image_source_url,
-    row.scale_image_file_path,
-    row.product_image_path,
-  );
+  const pdfStorage =
+    isLocalMediaPath(row.signed_pdf_file_path) || isLocalMediaPath(row.cert_pdf_file_path)
+      ? 'local'
+      : downloadUrl
+        ? 'remote'
+        : null;
+  // Scale/product thumb for all statuses (submitted/draft/pending_rc/certified…).
+  // Prefer same-origin media API (local file or Firebase redirect); catalog path last.
+  const productImageUrl =
+    mediaHttpUrl(row.scale_image_source_url, row.scale_image_file_path, {
+      verificationId: row.id,
+      kind: 'scale_image',
+    })
+    || pickHttpUrl(row.product_image_path);
   const status = String(row.status || '');
   const statusLabel =
     status.toLowerCase() === 'certified' || status.toLowerCase() === 'approved'
@@ -227,6 +436,7 @@ function shapeAdminVerificationRow(row) {
     signed_pdf_url: signedPdfUrl,
     certificate_pdf_url: certificatePdfUrl,
     download_url: downloadUrl,
+    pdf_storage: pdfStorage,
   };
 }
 
@@ -444,7 +654,22 @@ export function mountAdminRoutes(app, { config, pool, logger, startedAt = new Da
     try {
       const where = [];
       const params = [];
-      if (status) {
+      const statusKey = status.toLowerCase();
+      // Signed / unsigned: match list shaping (verification_media kind=signed_certificate_pdf).
+      const signedPdfExistsSql = `EXISTS (
+          SELECT 1 FROM verification_media m
+          WHERE m.verification_id = v.id
+            AND m.kind = 'signed_certificate_pdf'
+            AND (
+              NULLIF(BTRIM(COALESCE(m.file_path, '')), '') IS NOT NULL
+              OR NULLIF(BTRIM(COALESCE(m.source_url, '')), '') IS NOT NULL
+            )
+        )`;
+      if (statusKey === 'signed') {
+        where.push(signedPdfExistsSql);
+      } else if (statusKey === 'unsigned') {
+        where.push(`NOT ${signedPdfExistsSql}`);
+      } else if (status) {
         params.push(status);
         where.push(`v.status = $${params.length}`);
       }
@@ -553,6 +778,191 @@ export function mountAdminRoutes(app, { config, pool, logger, startedAt = new Da
     }
   });
 
+  /**
+   * Stream verification media from DATA_ROOT when local, else redirect to Firebase/http.
+   * PDF aliases: kind=signed|certificate (default signed → certificate fallback).
+   * Image kinds (e.g. scale_image): exact kind match — used for SA product thumbnails.
+   */
+  async function serveVerificationMedia(req, res, { defaultToPdf = true } = {}) {
+    if (!requireDb(res, pool, config)) return;
+    const id = String(req.params.id || '').trim();
+    if (!id) {
+      return res.status(400).json({ error: { code: 'BAD_REQUEST', message: 'id required' } });
+    }
+    const kindRaw = String(req.query.kind || '').trim().toLowerCase();
+    const disposition =
+      String(req.query.disposition || '').toLowerCase() === 'attachment' ? 'attachment' : 'inline';
+
+    let kindOrder;
+    if (ADMIN_IMAGE_MEDIA_KINDS.has(kindRaw) || kindRaw === 'old_verification_certificate') {
+      kindOrder = [kindRaw];
+    } else if (kindRaw === 'certificate' || kindRaw === 'cert' || kindRaw === 'unsigned') {
+      kindOrder = ['certificate_pdf', 'emaap_certificate_pdf', 'signed_certificate_pdf'];
+    } else if (kindRaw === 'signed' || kindRaw === 'signed_certificate_pdf') {
+      kindOrder = ['signed_certificate_pdf', 'certificate_pdf', 'emaap_certificate_pdf'];
+    } else if (kindRaw && kindRaw.endsWith('_pdf')) {
+      kindOrder = [kindRaw];
+    } else if (defaultToPdf) {
+      kindOrder = ['signed_certificate_pdf', 'certificate_pdf', 'emaap_certificate_pdf'];
+    } else {
+      return res.status(400).json({
+        error: { code: 'BAD_REQUEST', message: 'kind query required for media' },
+      });
+    }
+
+    try {
+      const media = await pool.query(
+        `SELECT m.kind, m.file_path, m.source_url, m.content_type, v.certificate_number, v.application_number
+         FROM verification_media m
+         JOIN verifications v ON v.id = m.verification_id
+         WHERE m.verification_id = $1
+           AND m.kind = ANY($2::text[])
+         ORDER BY array_position($2::text[], m.kind), m.created_at DESC NULLS LAST
+         LIMIT 1`,
+        [id, kindOrder],
+      );
+      const row = media.rows[0];
+      if (!row) {
+        return res.status(404).json({
+          error: {
+            code: 'NOT_FOUND',
+            message: defaultToPdf
+              ? 'No certificate PDF for this verification'
+              : 'No media for this verification',
+          },
+        });
+      }
+
+      const isImage = ADMIN_IMAGE_MEDIA_KINDS.has(String(row.kind || ''));
+      const fileName = isImage
+        ? `${firstNonEmptyString(row.certificate_number, row.application_number, id) || 'media'}-${row.kind}`
+        : pdfDownloadFileName({
+            certificateNumber: row.certificate_number,
+            applicationNumber: row.application_number,
+            fallbackId: id,
+          });
+      const abs = resolveSafeMediaPath(config.dataRoot, row.file_path);
+      if (abs && fs.existsSync(abs)) {
+        const ct =
+          row.content_type ||
+          (isImage ? 'image/jpeg' : 'application/pdf');
+        res.setHeader('Content-Type', ct);
+        res.setHeader(
+          'Content-Disposition',
+          `${disposition}; filename="${String(fileName).replace(/"/g, '')}"`,
+        );
+        res.setHeader('Cache-Control', 'private, max-age=300');
+        return fs.createReadStream(abs).pipe(res);
+      }
+
+      const remote = pickHttpUrl(row.source_url, row.file_path);
+      if (remote) {
+        return res.redirect(302, remote);
+      }
+      return res.status(404).json({
+        error: {
+          code: 'NOT_FOUND',
+          message: isImage
+            ? 'Image not available locally or remotely'
+            : 'PDF file not available locally or remotely',
+        },
+      });
+    } catch (error) {
+      logger.error?.('Admin verification media failed', { error: error.message, id });
+      return res.status(500).json({
+        error: { code: 'INTERNAL', message: 'Could not serve verification media' },
+      });
+    }
+  }
+
+  app.get('/api/v1/admin/verifications/:id/pdf', ...adminOnly, (req, res) =>
+    serveVerificationMedia(req, res, { defaultToPdf: true }),
+  );
+
+  app.get('/api/v1/admin/verifications/:id/media', ...adminOnly, (req, res) =>
+    serveVerificationMedia(req, res, { defaultToPdf: false }),
+  );
+
+  /**
+   * List all available evidence images for a verification (gallery).
+   * Prefers local VPS media API URLs when file_path is under media/yesgatc/; else Firebase/http.
+   */
+  app.get('/api/v1/admin/verifications/:id/images', ...adminOnly, async (req, res) => {
+    if (!requireDb(res, pool, config)) return;
+    const id = String(req.params.id || '').trim();
+    if (!id) {
+      return res.status(400).json({ error: { code: 'BAD_REQUEST', message: 'id required' } });
+    }
+    try {
+      const ver = await pool.query(
+        `SELECT id, application_number, certificate_number, verification_type, status,
+                customer_name, serial_number
+         FROM verifications WHERE id = $1 LIMIT 1`,
+        [id],
+      );
+      if (!ver.rowCount) {
+        return res.status(404).json({
+          error: { code: 'NOT_FOUND', message: 'Verification not found' },
+        });
+      }
+      const v = ver.rows[0];
+      const media = await pool.query(
+        `SELECT kind, file_path, source_url, content_type
+         FROM verification_media
+         WHERE verification_id = $1
+           AND kind = ANY($2::text[])
+         ORDER BY created_at NULLS LAST`,
+        [id, [...ADMIN_IMAGE_GALLERY_ORDER]],
+      );
+
+      const byKind = new Map();
+      for (const row of media.rows) {
+        const kind = String(row.kind || '');
+        if (!ADMIN_IMAGE_MEDIA_KINDS.has(kind)) continue;
+        const url = mediaHttpUrl(row.source_url, row.file_path, {
+          verificationId: id,
+          kind,
+        });
+        if (!url) continue;
+        // Keep first usable row per kind (stable gallery order later).
+        if (!byKind.has(kind)) {
+          byKind.set(kind, {
+            kind,
+            label: imageKindLabel(kind),
+            url,
+            storage: isLocalMediaPath(row.file_path) ? 'local' : 'remote',
+            content_type: row.content_type || null,
+          });
+        }
+      }
+
+      const images = ADMIN_IMAGE_GALLERY_ORDER.map((k) => byKind.get(k)).filter(Boolean);
+      // Any unexpected image kinds still included at the end.
+      for (const [k, item] of byKind) {
+        if (!ADMIN_IMAGE_GALLERY_ORDER.includes(k)) images.push(item);
+      }
+
+      return res.json({
+        data: {
+          id: v.id,
+          application_number: v.application_number,
+          certificate_number: v.certificate_number,
+          reference: firstNonEmptyString(v.certificate_number, v.application_number),
+          verification_type: v.verification_type,
+          status: v.status,
+          customer_name: v.customer_name,
+          serial_number: v.serial_number,
+          images,
+        },
+      });
+    } catch (error) {
+      logger.error?.('Admin verification images failed', { error: error.message, id });
+      return res.status(500).json({
+        error: { code: 'INTERNAL', message: 'Could not list verification images' },
+      });
+    }
+  });
+
   app.get('/api/v1/admin/regional-centers', ...adminOnly, async (req, res) => {
     if (!requireDb(res, pool, config)) return;
     const q = String(req.query.q || '').trim();
@@ -597,7 +1007,7 @@ export function mountAdminRoutes(app, { config, pool, logger, startedAt = new Da
       const where = [];
       if (q) {
         params.push(`%${q}%`);
-        where.push(`(name ILIKE $1 OR model_no ILIKE $1 OR model_id ILIKE $1 OR manufacturer_brand_series ILIKE $1)`);
+        where.push(`(name ILIKE $1 OR model_no ILIKE $1 OR model_id ILIKE $1 OR manufacturer_brand_series ILIKE $1 OR model_approval_no ILIKE $1 OR COALESCE(capacities->>'yesoneSku','') ILIKE $1)`);
       }
       const whereSql = where.length ? `WHERE ${where.join(' AND ')}` : '';
       const total = await pool.query(`SELECT COUNT(*)::int AS total FROM products ${whereSql}`, params);
@@ -605,7 +1015,9 @@ export function mountAdminRoutes(app, { config, pool, logger, startedAt = new Da
       const rows = await pool.query(
         `SELECT id, model_id, model_no, name, type_of_instrument, manufacturer_brand_series,
                 accuracy_class, capacities, unit_of_measurement, model_approval_no,
-                pas_pre_allotted, active, sort_order
+                supply_voltage, pas_pre_allotted, active, sort_order,
+                approval_doc_path, approval_doc_url, image_path, image_url,
+                source_firebase_id, created_at, updated_at
          FROM products
          ${whereSql}
          ORDER BY sort_order ASC, name ASC
@@ -613,12 +1025,116 @@ export function mountAdminRoutes(app, { config, pool, logger, startedAt = new Da
         params,
       );
       return res.json({
-        data: { total: total.rows[0]?.total || 0, limit, offset, items: rows.rows },
+        data: {
+          total: total.rows[0]?.total || 0,
+          limit,
+          offset,
+          items: rows.rows.map(shapeAdminProductRow),
+        },
       });
     } catch (error) {
       logger.error?.('Admin products list failed', { error: error.message });
       return res.status(500).json({
         error: { code: 'INTERNAL', message: 'Could not list products' },
+      });
+    }
+  });
+
+  app.get('/api/v1/admin/products/:id', ...adminOnly, async (req, res) => {
+    if (!requireDb(res, pool, config)) return;
+    const id = String(req.params.id || '').trim();
+    if (!id) {
+      return res.status(400).json({ error: { code: 'BAD_REQUEST', message: 'Product id required' } });
+    }
+    try {
+      const rows = await pool.query(
+        `SELECT id, model_id, model_no, name, type_of_instrument, manufacturer_brand_series,
+                accuracy_class, capacities, unit_of_measurement, model_approval_no,
+                supply_voltage, pas_pre_allotted, active, sort_order,
+                approval_doc_path, approval_doc_url, image_path, image_url,
+                source_firebase_id, created_at, updated_at
+         FROM products
+         WHERE id::text = $1 OR model_id = $1 OR source_firebase_id = $1
+         LIMIT 1`,
+        [id],
+      );
+      if (!rows.rowCount) {
+        return res.status(404).json({ error: { code: 'NOT_FOUND', message: 'Product not found' } });
+      }
+      return res.json({ data: shapeAdminProductRow(rows.rows[0]) });
+    } catch (error) {
+      logger.error?.('Admin product detail failed', { error: error.message });
+      return res.status(500).json({
+        error: { code: 'INTERNAL', message: 'Could not load product' },
+      });
+    }
+  });
+
+  /**
+   * Stream product image / approval doc from DATA_ROOT when local, else redirect to Firebase/http.
+   * kind=image|approval_doc (default image).
+   */
+  app.get('/api/v1/admin/products/:id/media', ...adminOnly, async (req, res) => {
+    if (!requireDb(res, pool, config)) return;
+    const id = String(req.params.id || '').trim();
+    if (!id) {
+      return res.status(400).json({ error: { code: 'BAD_REQUEST', message: 'Product id required' } });
+    }
+    const kindRaw = String(req.query.kind || 'image').trim().toLowerCase();
+    const kind = kindRaw === 'approval' || kindRaw === 'approval_doc' || kindRaw === 'doc'
+      ? 'approval_doc'
+      : 'image';
+    const disposition =
+      String(req.query.disposition || '').toLowerCase() === 'attachment' ? 'attachment' : 'inline';
+    try {
+      const rows = await pool.query(
+        `SELECT id, model_id, name, image_path, image_url, approval_doc_path, approval_doc_url
+         FROM products
+         WHERE id::text = $1 OR model_id = $1 OR source_firebase_id = $1
+         LIMIT 1`,
+        [id],
+      );
+      const row = rows.rows[0];
+      if (!row) {
+        return res.status(404).json({ error: { code: 'NOT_FOUND', message: 'Product not found' } });
+      }
+      const filePath = kind === 'approval_doc' ? row.approval_doc_path : row.image_path;
+      const sourceUrl = kind === 'approval_doc' ? row.approval_doc_url : row.image_url;
+      const abs = resolveSafeMediaPath(config.dataRoot, filePath);
+      if (abs && fs.existsSync(abs)) {
+        const lower = abs.toLowerCase();
+        let ct = 'application/octet-stream';
+        if (/\.(jpe?g)$/.test(lower)) ct = 'image/jpeg';
+        else if (lower.endsWith('.png')) ct = 'image/png';
+        else if (lower.endsWith('.webp')) ct = 'image/webp';
+        else if (lower.endsWith('.gif')) ct = 'image/gif';
+        else if (lower.endsWith('.pdf')) ct = 'application/pdf';
+        const baseName = String(row.model_id || row.name || row.id || kind)
+          .replace(/[^\w.\-]+/g, '_')
+          .slice(0, 80);
+        const ext = path.extname(abs) || (ct === 'application/pdf' ? '.pdf' : '.jpg');
+        res.setHeader('Content-Type', ct);
+        res.setHeader(
+          'Content-Disposition',
+          `${disposition}; filename="${baseName}-${kind}${ext}"`,
+        );
+        res.setHeader('Cache-Control', 'private, max-age=300');
+        return fs.createReadStream(abs).pipe(res);
+      }
+      const remote = pickHttpUrl(sourceUrl, filePath);
+      if (remote) {
+        return res.redirect(302, remote);
+      }
+      return res.status(404).json({
+        error: {
+          code: 'NOT_FOUND',
+          message: kind === 'approval_doc' ? 'Approval document not available' : 'Product image not available',
+        },
+      });
+    } catch (error) {
+      logger.error?.('Admin product media failed', { error: error.message, id });
+      return res.status(500).json({
+        error: { code: 'INTERNAL', message: 'Could not serve product media' },
       });
     }
   });
@@ -739,6 +1255,10 @@ export function mountAdminRoutes(app, { config, pool, logger, startedAt = new Da
   });
 
   function yesonePublicData(status) {
+    const sync = publicYesoneSyncStatus(
+      readYesoneSyncStatus({ dataRoot: config.dataRoot }),
+      { dataRoot: config.dataRoot },
+    );
     return {
       configured: status.configured,
       status: status.status,
@@ -747,6 +1267,7 @@ export function mountAdminRoutes(app, { config, pool, logger, startedAt = new Da
       passwordSet: status.passwordSet,
       baseUrl: status.baseUrl,
       updatedAt: status.updatedAt,
+      sync,
     };
   }
 
@@ -794,6 +1315,49 @@ export function mountAdminRoutes(app, { config, pool, logger, startedAt = new Da
       logger.error?.('Yes One credentials save failed', { error: error.message });
       return res.status(500).json({
         error: { code: 'INTERNAL', message: 'Could not save Yes One credentials' },
+      });
+    }
+  });
+
+  app.post('/api/v1/admin/integrations/yesone/sync', ...adminOnly, async (_req, res) => {
+    if (!config.jwtSecret) {
+      return res.status(503).json({
+        error: { code: 'AUTH_MISCONFIGURED', message: 'JWT_SECRET is not configured' },
+      });
+    }
+    const creds = getYesoneCredentialsStatus({
+      dataRoot: config.dataRoot,
+      jwtSecret: config.jwtSecret,
+    });
+    if (!creds.configured) {
+      return res.status(400).json({
+        error: {
+          code: 'YESONE_NOT_CONFIGURED',
+          message: 'Connect Yes One credentials before syncing',
+        },
+      });
+    }
+    try {
+      const syncStatus = triggerYesoneSyncNow({
+        dataRoot: config.dataRoot,
+        trigger: 'manual',
+      });
+      logger.info?.('Yes One sync triggered', {
+        running: syncStatus.running,
+        trigger: 'manual',
+      });
+      return res.json({
+        data: yesonePublicData(creds),
+      });
+    } catch (error) {
+      if (error.code === 'SYNC_BUSY') {
+        return res.status(409).json({
+          error: { code: 'SYNC_BUSY', message: error.message },
+        });
+      }
+      logger.error?.('Yes One sync trigger failed', { error: error.message });
+      return res.status(500).json({
+        error: { code: 'INTERNAL', message: 'Could not start yesgatc sync' },
       });
     }
   });
@@ -1286,6 +1850,547 @@ export function mountAdminRoutes(app, { config, pool, logger, startedAt = new Da
       logger.error?.('Admin customers list failed', { error: error.message });
       return res.status(500).json({
         error: { code: 'INTERNAL', message: 'Could not list customers' },
+      });
+    }
+  });
+
+  app.get('/api/v1/admin/quota', ...adminOnly, async (req, res) => {
+    if (!requireDb(res, pool, config)) return;
+    const { limit, offset } = parsePaging(req.query);
+    const q = String(req.query.q || '').trim();
+    try {
+      const params = [];
+      const clauses = [`rc.code <> 'DEMO-RC'`, 'rc.active = TRUE'];
+      if (q) {
+        params.push(`%${q}%`);
+        const i = params.length;
+        clauses.push(`(rc.code ILIKE $${i} OR rc.company_name ILIKE $${i} OR rc.district ILIKE $${i})`);
+      }
+      const whereSql = `WHERE ${clauses.join(' AND ')}`;
+      const total = await pool.query(
+        `SELECT COUNT(*)::int AS total FROM regional_centers rc ${whereSql}`,
+        params,
+      );
+      params.push(limit, offset);
+      const rows = await pool.query(
+        `SELECT rc.id, rc.code, rc.company_name AS name, rc.district, rc.state, rc.fees_json,
+                COALESCE((rc.fees_json->>'ovQuota')::numeric, 0)::int AS allotted,
+                COALESCE((rc.fees_json->>'ovQuotaUsed')::numeric, 0)::int AS used,
+                COALESCE((rc.fees_json->>'ovQuotaReserved')::numeric, 0)::int AS reserved,
+                rc.fees_json->>'ovQuotaPeriod' AS period,
+                rc.fees_json->>'ovQuotaUpdatedAt' AS quota_updated_at
+         FROM regional_centers rc
+         ${whereSql}
+         ORDER BY rc.company_name ASC
+         LIMIT $${params.length - 1} OFFSET $${params.length}`,
+        params,
+      );
+      const items = rows.rows.map((row) => {
+        const allotted = Number(row.allotted) || 0;
+        const used = Number(row.used) || 0;
+        const reserved = Number(row.reserved) || 0;
+        const available = Math.max(0, allotted - used);
+        const { fees_json, ...rest } = row;
+        return {
+          ...rest,
+          allotted,
+          used,
+          reserved,
+          available,
+          utilization_pct: allotted > 0 ? Math.round((used / allotted) * 1000) / 10 : 0,
+        };
+      });
+      const summary = items.reduce(
+        (acc, row) => {
+          acc.allotted += row.allotted;
+          acc.used += row.used;
+          acc.reserved += row.reserved;
+          acc.available += row.available;
+          return acc;
+        },
+        { allotted: 0, used: 0, reserved: 0, available: 0 },
+      );
+      return res.json({
+        data: {
+          total: total.rows[0]?.total || 0,
+          limit,
+          offset,
+          items,
+          summary,
+        },
+      });
+    } catch (error) {
+      logger.error?.('Admin quota list failed', { error: error.message });
+      return res.status(500).json({
+        error: { code: 'INTERNAL', message: 'Could not list RC quota' },
+      });
+    }
+  });
+
+  const VEHICLE_MEDIA_KINDS = {
+    photo: {
+      localKeys: ['vehiclePhotoLocalPath', 'vehiclePhotoPath'],
+      remoteKeys: ['vehiclePhotoUrl', 'photoUrl', 'photo_url'],
+      contentType: 'image/jpeg',
+    },
+    rc: {
+      localKeys: ['rcDocLocalPath', 'rcDocPath'],
+      remoteKeys: ['rcDocUrl', 'rc_url'],
+      contentType: 'application/pdf',
+    },
+    insurance: {
+      localKeys: ['insuranceDocLocalPath', 'insuranceDocPath'],
+      remoteKeys: ['insuranceDocUrl', 'insurance_url'],
+      contentType: 'application/pdf',
+    },
+    pollution: {
+      localKeys: ['pollutionDocLocalPath', 'pollutionDocPath'],
+      remoteKeys: ['pollutionDocUrl', 'pollution_url'],
+      contentType: 'application/pdf',
+    },
+    f2_weight: {
+      localKeys: ['f2WeightDocLocalPath', 'f2WeightDocPath'],
+      remoteKeys: ['f2WeightDocUrl', 'f2_weight_url'],
+      contentType: 'application/pdf',
+    },
+  };
+
+  function vehicleLocalPathFromDocs(docs, localKeys = []) {
+    for (const key of localKeys) {
+      const value = docs?.[key];
+      if (isLocalMediaPath(value)) return String(value).trim().replace(/\\/g, '/');
+    }
+    return null;
+  }
+
+  function vehicleRemoteUrlFromDocs(docs, remoteKeys = []) {
+    return pickHttpUrl(...remoteKeys.map((k) => docs?.[k]));
+  }
+
+  function vehicleMediaApiUrl(vehicleId, kind) {
+    if (!vehicleId || !kind) return null;
+    return `/api/v1/admin/vehicles/${encodeURIComponent(vehicleId)}/media?kind=${encodeURIComponent(kind)}`;
+  }
+
+  function resolveVehicleMediaUrl(docs, vehicleId, kind) {
+    const meta = VEHICLE_MEDIA_KINDS[kind];
+    if (!meta) return null;
+    const localPath = vehicleLocalPathFromDocs(docs, meta.localKeys);
+    if (localPath && vehicleId) return vehicleMediaApiUrl(vehicleId, kind);
+    return vehicleRemoteUrlFromDocs(docs, meta.remoteKeys);
+  }
+
+  function mapVehicleDocs(docsJson, vehicleId) {
+    const docs = docsJson && typeof docsJson === 'object' ? docsJson : {};
+    const photoUrl = resolveVehicleMediaUrl(docs, vehicleId, 'photo');
+    const photoLocal = vehicleLocalPathFromDocs(docs, VEHICLE_MEDIA_KINDS.photo.localKeys);
+    return {
+      photo_url: photoUrl,
+      vehicle_photo_url: photoUrl,
+      photo_path: photoLocal,
+      photo_storage: photoLocal ? 'local' : (photoUrl ? 'remote' : null),
+      docs: {
+        rc_url: resolveVehicleMediaUrl(docs, vehicleId, 'rc'),
+        insurance_url: resolveVehicleMediaUrl(docs, vehicleId, 'insurance'),
+        pollution_url: resolveVehicleMediaUrl(docs, vehicleId, 'pollution'),
+        f2_weight_url: resolveVehicleMediaUrl(docs, vehicleId, 'f2_weight'),
+      },
+      approval_status: docs.approvalStatus || docs.approval_status || null,
+      source_firebase_id: docs.sourceFirebaseId || null,
+    };
+  }
+
+  function shapeVehicleRow(row, { includeDocsJson = false } = {}) {
+    const mapped = mapVehicleDocs(row.docs_json, row.id);
+    const out = {
+      id: row.id,
+      rc_id: row.rc_id,
+      brand: row.brand,
+      model: row.model,
+      year: row.year,
+      reg_number: row.reg_number,
+      rc_validity: row.rc_validity,
+      insurance_validity: row.insurance_validity,
+      pollution_validity: row.pollution_validity,
+      f2_weight_validity: row.f2_weight_validity,
+      active: row.active,
+      created_at: row.created_at,
+      updated_at: row.updated_at,
+      source_firebase_id: row.source_firebase_id || mapped.source_firebase_id,
+      rc_code: row.rc_code,
+      rc_name: row.rc_name,
+      photo_url: mapped.photo_url,
+      vehicle_photo_url: mapped.vehicle_photo_url,
+      photo_path: mapped.photo_path,
+      photo_storage: mapped.photo_storage,
+      docs: mapped.docs,
+      approval_status: mapped.approval_status,
+    };
+    if (includeDocsJson) out.docs_json = row.docs_json || {};
+    return out;
+  }
+
+  app.get('/api/v1/admin/vehicles', ...adminOnly, async (req, res) => {
+    if (!requireDb(res, pool, config)) return;
+    const { limit, offset } = parsePaging(req.query);
+    const q = String(req.query.q || '').trim();
+    const tab = String(req.query.tab || req.query.status || 'All').trim();
+    try {
+      const params = [];
+      const clauses = [];
+      if (q) {
+        params.push(`%${q}%`);
+        const i = params.length;
+        clauses.push(
+          `(v.brand ILIKE $${i} OR v.model ILIKE $${i} OR v.reg_number ILIKE $${i} OR rc.company_name ILIKE $${i} OR rc.code ILIKE $${i})`,
+        );
+      }
+      if (tab === 'Active') clauses.push('v.active = TRUE');
+      else if (tab === 'Inactive') clauses.push('v.active = FALSE');
+      else if (tab === 'Expired') {
+        clauses.push(`(
+          (v.rc_validity IS NOT NULL AND v.rc_validity < CURRENT_DATE)
+          OR (v.insurance_validity IS NOT NULL AND v.insurance_validity < CURRENT_DATE)
+          OR (v.pollution_validity IS NOT NULL AND v.pollution_validity < CURRENT_DATE)
+          OR (v.f2_weight_validity IS NOT NULL AND v.f2_weight_validity < CURRENT_DATE)
+        )`);
+      }
+      const whereSql = clauses.length ? `WHERE ${clauses.join(' AND ')}` : '';
+      const total = await pool.query(
+        `SELECT COUNT(*)::int AS total
+         FROM vehicles v
+         LEFT JOIN regional_centers rc ON rc.id = v.rc_id
+         ${whereSql}`,
+        params,
+      );
+      const counts = await pool.query(
+        `SELECT
+           COUNT(*)::int AS total,
+           COUNT(*) FILTER (WHERE active)::int AS active,
+           COUNT(*) FILTER (WHERE NOT active)::int AS inactive,
+           COUNT(*) FILTER (WHERE
+             (rc_validity IS NOT NULL AND rc_validity < CURRENT_DATE)
+             OR (insurance_validity IS NOT NULL AND insurance_validity < CURRENT_DATE)
+             OR (pollution_validity IS NOT NULL AND pollution_validity < CURRENT_DATE)
+             OR (f2_weight_validity IS NOT NULL AND f2_weight_validity < CURRENT_DATE)
+           )::int AS expired
+         FROM vehicles`,
+      );
+      params.push(limit, offset);
+      const rows = await pool.query(
+        `SELECT v.id, v.rc_id, v.brand, v.model, v.year, v.reg_number,
+                v.rc_validity, v.insurance_validity, v.pollution_validity, v.f2_weight_validity,
+                v.active, v.created_at, v.updated_at, v.source_firebase_id, v.docs_json,
+                rc.code AS rc_code, rc.company_name AS rc_name
+         FROM vehicles v
+         LEFT JOIN regional_centers rc ON rc.id = v.rc_id
+         ${whereSql}
+         ORDER BY v.updated_at DESC NULLS LAST, v.created_at DESC
+         LIMIT $${params.length - 1} OFFSET $${params.length}`,
+        params,
+      );
+      return res.json({
+        data: {
+          total: total.rows[0]?.total || 0,
+          limit,
+          offset,
+          tab,
+          items: rows.rows.map((row) => shapeVehicleRow(row)),
+          summary: counts.rows[0] || { total: 0, active: 0, inactive: 0, expired: 0 },
+        },
+      });
+    } catch (error) {
+      if (String(error.message || '').includes('vehicles')) {
+        return res.json({
+          data: {
+            total: 0,
+            limit,
+            offset,
+            items: [],
+            summary: { total: 0, active: 0, inactive: 0, expired: 0 },
+            note: 'Run migration 004_domain_parity.sql',
+          },
+        });
+      }
+      logger.error?.('Admin vehicles list failed', { error: error.message });
+      return res.status(500).json({
+        error: { code: 'INTERNAL', message: 'Could not list vehicles' },
+      });
+    }
+  });
+
+  app.get('/api/v1/admin/vehicles/:id', ...adminOnly, async (req, res) => {
+    if (!requireDb(res, pool, config)) return;
+    const id = String(req.params.id || '').trim();
+    if (!id) {
+      return res.status(400).json({
+        error: { code: 'VALIDATION', message: 'Vehicle id is required' },
+      });
+    }
+    try {
+      const result = await pool.query(
+        `SELECT v.id, v.rc_id, v.brand, v.model, v.year, v.reg_number,
+                v.rc_validity, v.insurance_validity, v.pollution_validity, v.f2_weight_validity,
+                v.active, v.created_at, v.updated_at, v.source_firebase_id, v.docs_json,
+                rc.code AS rc_code, rc.company_name AS rc_name
+         FROM vehicles v
+         LEFT JOIN regional_centers rc ON rc.id = v.rc_id
+         WHERE v.id::text = $1 OR v.source_firebase_id = $1
+         LIMIT 1`,
+        [id],
+      );
+      if (!result.rows.length) {
+        return res.status(404).json({
+          error: { code: 'NOT_FOUND', message: 'Vehicle not found' },
+        });
+      }
+      return res.json({ data: shapeVehicleRow(result.rows[0], { includeDocsJson: true }) });
+    } catch (error) {
+      if (String(error.message || '').includes('vehicles')) {
+        return res.status(404).json({
+          error: { code: 'NOT_FOUND', message: 'Vehicle not found' },
+        });
+      }
+      logger.error?.('Admin vehicle detail failed', { error: error.message, id });
+      return res.status(500).json({
+        error: { code: 'INTERNAL', message: 'Could not load vehicle' },
+      });
+    }
+  });
+
+  app.get('/api/v1/admin/vehicles/:id/media', ...adminOnly, async (req, res) => {
+    if (!requireDb(res, pool, config)) return;
+    const id = String(req.params.id || '').trim();
+    const kind = String(req.query.kind || 'photo').trim().toLowerCase();
+    const meta = VEHICLE_MEDIA_KINDS[kind];
+    if (!id) {
+      return res.status(400).json({ error: { code: 'VALIDATION', message: 'Vehicle id is required' } });
+    }
+    if (!meta) {
+      return res.status(400).json({
+        error: { code: 'VALIDATION', message: 'kind must be photo|rc|insurance|pollution|f2_weight' },
+      });
+    }
+    const disposition =
+      String(req.query.disposition || '').toLowerCase() === 'attachment' ? 'attachment' : 'inline';
+    try {
+      const result = await pool.query(
+        `SELECT id, reg_number, docs_json
+         FROM vehicles
+         WHERE id::text = $1 OR source_firebase_id = $1
+         LIMIT 1`,
+        [id],
+      );
+      if (!result.rows.length) {
+        return res.status(404).json({ error: { code: 'NOT_FOUND', message: 'Vehicle not found' } });
+      }
+      const row = result.rows[0];
+      const docs = row.docs_json && typeof row.docs_json === 'object' ? row.docs_json : {};
+      const localPath = vehicleLocalPathFromDocs(docs, meta.localKeys);
+      const abs = localPath ? resolveSafeMediaPath(config.dataRoot, localPath) : null;
+      const fileBase = firstNonEmptyString(row.reg_number, row.id) || 'vehicle';
+      if (abs && fs.existsSync(abs)) {
+        const ext = path.extname(abs) || '';
+        res.setHeader('Content-Type', meta.contentType);
+        res.setHeader(
+          'Content-Disposition',
+          `${disposition}; filename="${String(`${fileBase}-${kind}${ext}`).replace(/"/g, '')}"`,
+        );
+        res.setHeader('Cache-Control', 'private, max-age=300');
+        return fs.createReadStream(abs).pipe(res);
+      }
+      const remote = vehicleRemoteUrlFromDocs(docs, meta.remoteKeys);
+      if (remote) return res.redirect(302, remote);
+      return res.status(404).json({
+        error: { code: 'NOT_FOUND', message: 'Vehicle media not available locally or remotely' },
+      });
+    } catch (error) {
+      logger.error?.('Admin vehicle media failed', { error: error.message, id, kind });
+      return res.status(500).json({
+        error: { code: 'INTERNAL', message: 'Could not serve vehicle media' },
+      });
+    }
+  });
+
+  app.get('/api/v1/admin/wallets', ...adminOnly, async (req, res) => {
+    if (!requireDb(res, pool, config)) return;
+    const { limit, offset } = parsePaging(req.query);
+    const q = String(req.query.q || '').trim();
+    const view = String(req.query.view || req.query.tab || 'balances').trim().toLowerCase();
+    try {
+      if (view === 'tx' || view === 'ledger') {
+        const params = [];
+        const clauses = [];
+        if (q) {
+          params.push(`%${q}%`);
+          const i = params.length;
+          clauses.push(`(rc.code ILIKE $${i} OR rc.company_name ILIKE $${i} OR wl.entry_type ILIKE $${i})`);
+        }
+        const whereSql = clauses.length ? `WHERE ${clauses.join(' AND ')}` : '';
+        const total = await pool.query(
+          `SELECT COUNT(*)::int AS total
+           FROM wallet_ledger wl
+           LEFT JOIN regional_centers rc ON rc.id = wl.rc_id
+           ${whereSql}`,
+          params,
+        );
+        params.push(limit, offset);
+        const rows = await pool.query(
+          `SELECT wl.id, wl.rc_id, wl.entry_type, wl.amount_inr, wl.balance_after_inr,
+                  wl.status, wl.created_at, rc.code AS rc_code, rc.company_name AS rc_name
+           FROM wallet_ledger wl
+           LEFT JOIN regional_centers rc ON rc.id = wl.rc_id
+           ${whereSql}
+           ORDER BY wl.created_at DESC
+           LIMIT $${params.length - 1} OFFSET $${params.length}`,
+          params,
+        );
+        const spendCredit = await pool.query(
+          `SELECT
+             COALESCE(SUM(ABS(amount_inr)) FILTER (WHERE entry_type = 'rv_payment'), 0)::float AS spend,
+             COALESCE(SUM(ABS(amount_inr)) FILTER (WHERE entry_type IN ('top_up_credit', 'rv_refund')), 0)::float AS credits
+           FROM wallet_ledger`,
+        );
+        const bal = await pool.query(
+          `SELECT COALESCE(SUM(balance_inr), 0)::float AS total_balance,
+                  COUNT(*)::int AS wallet_count
+           FROM rc_wallets`,
+        );
+        return res.json({
+          data: {
+            total: total.rows[0]?.total || 0,
+            limit,
+            offset,
+            view: 'tx',
+            items: rows.rows,
+            summary: {
+              total_balance: bal.rows[0]?.total_balance || 0,
+              spend: spendCredit.rows[0]?.spend || 0,
+              credits: spendCredit.rows[0]?.credits || 0,
+              wallet_count: bal.rows[0]?.wallet_count || 0,
+            },
+          },
+        });
+      }
+
+      if (view === 'dues' || view === 'topup') {
+        const params = [];
+        const clauses = [];
+        if (view === 'dues') clauses.push(`wt.status = 'pending'`);
+        if (q) {
+          params.push(`%${q}%`);
+          const i = params.length;
+          clauses.push(`(rc.code ILIKE $${i} OR rc.company_name ILIKE $${i} OR wt.note ILIKE $${i})`);
+        }
+        const whereSql = clauses.length ? `WHERE ${clauses.join(' AND ')}` : '';
+        const total = await pool.query(
+          `SELECT COUNT(*)::int AS total
+           FROM wallet_top_ups wt
+           LEFT JOIN regional_centers rc ON rc.id = wt.rc_id
+           ${whereSql}`,
+          params,
+        );
+        params.push(limit, offset);
+        const rows = await pool.query(
+          `SELECT wt.id, wt.rc_id, wt.amount_inr, wt.gross_amount_inr, wt.status,
+                  wt.recharge_method, wt.note, wt.submitted_at, wt.reviewed_at,
+                  rc.code AS rc_code, rc.company_name AS rc_name
+           FROM wallet_top_ups wt
+           LEFT JOIN regional_centers rc ON rc.id = wt.rc_id
+           ${whereSql}
+           ORDER BY wt.submitted_at DESC
+           LIMIT $${params.length - 1} OFFSET $${params.length}`,
+          params,
+        );
+        const bal = await pool.query(
+          `SELECT COALESCE(SUM(balance_inr), 0)::float AS total_balance,
+                  COUNT(*)::int AS wallet_count
+           FROM rc_wallets`,
+        );
+        return res.json({
+          data: {
+            total: total.rows[0]?.total || 0,
+            limit,
+            offset,
+            view,
+            items: rows.rows,
+            summary: {
+              total_balance: bal.rows[0]?.total_balance || 0,
+              spend: 0,
+              credits: 0,
+              wallet_count: bal.rows[0]?.wallet_count || 0,
+            },
+          },
+        });
+      }
+
+      const params = [];
+      const clauses = [`rc.code <> 'DEMO-RC'`, 'rc.active = TRUE'];
+      if (q) {
+        params.push(`%${q}%`);
+        const i = params.length;
+        clauses.push(`(rc.code ILIKE $${i} OR rc.company_name ILIKE $${i})`);
+      }
+      const whereSql = `WHERE ${clauses.join(' AND ')}`;
+      const total = await pool.query(
+        `SELECT COUNT(*)::int AS total FROM regional_centers rc ${whereSql}`,
+        params,
+      );
+      params.push(limit, offset);
+      const rows = await pool.query(
+        `SELECT rc.id AS rc_id, rc.code AS rc_code, rc.company_name AS rc_name,
+                COALESCE(w.balance_inr, 0)::float AS balance_inr,
+                w.updated_at
+         FROM regional_centers rc
+         LEFT JOIN rc_wallets w ON w.rc_id = rc.id
+         ${whereSql}
+         ORDER BY COALESCE(w.balance_inr, 0) DESC, rc.company_name ASC
+         LIMIT $${params.length - 1} OFFSET $${params.length}`,
+        params,
+      );
+      const spendCredit = await pool.query(
+        `SELECT
+           COALESCE(SUM(ABS(amount_inr)) FILTER (WHERE entry_type = 'rv_payment'), 0)::float AS spend,
+           COALESCE(SUM(ABS(amount_inr)) FILTER (WHERE entry_type IN ('top_up_credit', 'rv_refund')), 0)::float AS credits
+         FROM wallet_ledger`,
+      );
+      const bal = await pool.query(
+        `SELECT COALESCE(SUM(balance_inr), 0)::float AS total_balance,
+                COUNT(*)::int AS wallet_count
+         FROM rc_wallets`,
+      );
+      return res.json({
+        data: {
+          total: total.rows[0]?.total || 0,
+          limit,
+          offset,
+          view: 'balances',
+          items: rows.rows,
+          summary: {
+            total_balance: bal.rows[0]?.total_balance || 0,
+            spend: spendCredit.rows[0]?.spend || 0,
+            credits: spendCredit.rows[0]?.credits || 0,
+            wallet_count: bal.rows[0]?.wallet_count || 0,
+          },
+        },
+      });
+    } catch (error) {
+      if (String(error.message || '').includes('rc_wallets')
+        || String(error.message || '').includes('wallet_')) {
+        return res.json({
+          data: {
+            total: 0,
+            limit,
+            offset,
+            items: [],
+            summary: { total_balance: 0, spend: 0, credits: 0, wallet_count: 0 },
+            note: 'Run migration 004_domain_parity.sql',
+          },
+        });
+      }
+      logger.error?.('Admin wallets list failed', { error: error.message });
+      return res.status(500).json({
+        error: { code: 'INTERNAL', message: 'Could not list wallets' },
       });
     }
   });
