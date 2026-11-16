@@ -27,6 +27,10 @@
     "yesgatc:download-image-media": "node scripts/download-yesgatc-image-media.mjs",
     "yesgatc:download-product-media": "node scripts/download-yesgatc-product-media.mjs",
     "yesgatc:download-vehicle-media": "node scripts/download-yesgatc-vehicle-media.mjs",
+    "yesgatc:download-user-media": "node scripts/download-yesgatc-user-media.mjs",
+    "yesgatc:download-rc-media": "node scripts/download-yesgatc-rc-media.mjs",
+    "yesgatc:backfill-vct-profiles": "node scripts/backfill-vct-profiles.mjs",
+    "yesgatc:generate-thumbs": "node scripts/generate-media-thumbs.mjs",
     "yesgatc:cleanup-ov-media": "node scripts/cleanup-ov-media-retention.mjs",
     "yesgatc:verify-certs": "node scripts/verify-cert-counts.mjs",
     "yesgatc:sync": "node scripts/sync-yesgatc.mjs"

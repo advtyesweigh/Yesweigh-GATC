@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"/>
-<meta name="gatc-build" content="sa-products-detail-20261114-1"/>
+<meta name="gatc-build" content="sa-hash-nav-fix-20261115T080954Z"/>
 <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate"/>
 <meta http-equiv="Pragma" content="no-cache"/>
 <script>
@@ -17,7 +17,7 @@
   } catch (e) {}
 })();
 </script><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<!-- deploy-tag: sa-products-detail-20261114-1 -->
+<!-- deploy-tag: sa-hash-nav-fix-20261115T080954Z -->
 <title>GATC Calibration &amp; Verification System</title>
 <link rel="icon" href="/assets/favicon.ico" sizes="any"/>
 <link rel="icon" type="image/png" href="/assets/favicon-32.png" sizes="32x32"/>
@@ -40,7 +40,7 @@
 /* GATC Super Admin — yesgatc layout, white / blue / black */
 
 /* GATC Super Admin — navy sidebar + light content (mockup language) */
-.sa-shell{--blue:#2563eb;--blue-deep:#1d4ed8;--blue-soft:#eff6ff;--navy:#0b162c;--navy2:#12213d;--ink:#0f172a;--muted:#64748b;--line:#e2e8f0;--bg:#f1f5f9;--white:#fff;--ok:#16a34a;--warn:#b45309;--bad:#dc2626;height:100vh;display:flex;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif}
+.sa-shell{--blue:#2563eb;--blue-deep:#1d4ed8;--blue-soft:#eff6ff;--navy:#0b162c;--navy2:#12213d;--ink:#0f172a;--muted:#475569;--line:#e2e8f0;--bg:#f1f5f9;--white:#fff;--ok:#16a34a;--warn:#b45309;--bad:#dc2626;height:100vh;display:flex;background:var(--bg);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif}
 .sa-shell .i{width:18px;height:18px;stroke:currentColor;stroke-width:1.85;fill:none;stroke-linecap:round;stroke-linejoin:round}
 .sa-side{width:268px;flex:none;background:linear-gradient(180deg,#071225,#0f1c35 55%,#122445);color:#e2e8f0;display:flex;flex-direction:column;border-right:0;box-shadow:4px 0 24px rgba(7,18,37,.18)}
 .sa-side-top{padding:20px 16px 12px;border-bottom:1px solid rgba(255,255,255,.08)}
@@ -129,15 +129,59 @@
 .sa-rc .body,.sa-vct .body{flex:1;min-width:0}.sa-rc .body b,.sa-vct .body b{display:block;font-size:13px;font-weight:780;color:#0f172a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sa-rc .body span,.sa-vct .body span{font-size:11px;color:var(--muted)}
 .sa-rc .cnt,.sa-vct .cnt{font-weight:800;font-family:Outfit,system-ui,sans-serif;color:#1d4ed8;background:#ebf4ff;border-radius:999px;padding:5px 11px;font-size:12px;min-width:42px;text-align:center}
 .sa-kpi{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.sa-kpi.sa-kpi-5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.sa-kpi.sa-kpi-6{grid-template-columns:repeat(6,minmax(0,1fr))}
 .sa-kpi .card{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 6px 16px rgba(20,40,80,.04)}
 .sa-kpi .card .t{font-size:12px;color:var(--muted);font-weight:700;display:flex;justify-content:space-between;align-items:center}
 .sa-kpi .card .v{font-family:Outfit,system-ui,sans-serif;font-size:1.7rem;font-weight:800;letter-spacing:-.04em;margin-top:8px}
 .sa-kpi .card .s{font-size:11px;color:#94a3b8;margin-top:6px}
 .sa-kpi .ico{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue)}
 .sa-kpi .ico.green{background:#e9f7f0;color:var(--ok)}.sa-kpi .ico.amber{background:#fff4e6;color:var(--warn)}.sa-kpi .ico.purple{background:#f3e8ff;color:#7c3aed}
+.sa-kpi .card.tint-blue{background:#eff6ff;border-color:#dbeafe}.sa-kpi .card.tint-blue .v{color:#1d4ed8}
+.sa-kpi .card.tint-green{background:#ecfdf5;border-color:#d1fae5}.sa-kpi .card.tint-green .v{color:#047857}
+.sa-kpi .card.tint-purple{background:#f5f3ff;border-color:#e9e5ff}.sa-kpi .card.tint-purple .v{color:#6d28d9}
+.sa-kpi .card.tint-orange{background:#fff7ed;border-color:#ffedd5}.sa-kpi .card.tint-orange .v{color:#c2410c}
+.sa-kpi .card.tint-teal{background:#f0fdfa;border-color:#ccfbf1}.sa-kpi .card.tint-teal .v{color:#0f766e}
+.sa-kpi .card.tint-indigo{background:#eef2ff;border-color:#e0e7ff}.sa-kpi .card.tint-indigo .v{color:#4338ca}
+.sa-kpi .ico.orange{background:#ffedd5;color:#ea580c}
+.sa-kpi .ico.teal{background:#ccfbf1;color:#0d9488}
+.sa-kpi .ico.indigo{background:#e0e7ff;color:#4f46e5}
+.sa-tools.sa-rc-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:12px}
+.sa-tools.sa-rc-toolbar .sa-tabs{margin:0;flex:none}
+.sa-tools.sa-rc-toolbar .sa-tabs button{display:inline-flex;align-items:center;gap:6px;background:var(--white);height:38px}
+.sa-tools.sa-rc-toolbar .sa-tabs button .i{width:14px;height:14px}
+.sa-tools.sa-rc-toolbar .sa-tabs button.on .i{color:#fff}
+.sa-tools.sa-rc-toolbar .sa-tabs button:not(.on) .tab-ok{color:var(--ok)}
+.sa-tools.sa-rc-toolbar .sa-tabs button:not(.on) .tab-off{color:var(--bad)}
+.sa-tools.sa-rc-toolbar .sa-search{flex:1;min-width:200px;max-width:380px}
+.sa-tools.sa-rc-toolbar .sa-actions{margin-left:auto}
+.sa-tools.sa-rc-toolbar .sa-btn{height:38px}
+.sa-table.sa-rc-table{min-width:980px}
+.sa-table.sa-rc-table th{font-size:10px;letter-spacing:.45px;text-transform:uppercase;color:#64748b;background:#f8fafc}
+.sa-table.sa-rc-table .sa-rc-idx{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:#eff6ff;color:var(--blue);font-family:Outfit,system-ui,sans-serif;font-size:11px;font-weight:800}
+.sa-table.sa-rc-table .sa-rc-name{display:block;font-family:Outfit,system-ui,sans-serif;font-size:14px;font-weight:800;letter-spacing:-.02em;line-height:1.25;color:var(--blue);text-transform:uppercase}
+.sa-table.sa-rc-table .sa-rc-name:hover{text-decoration:underline}
+.sa-table.sa-rc-table .sub{margin-top:2px;font-size:11px;line-height:1.25;font-weight:650;color:#64748b;letter-spacing:.02em}
+.sa-table.sa-rc-table .sa-rc-code{font-family:Outfit,system-ui,sans-serif;font-size:12px;font-weight:750;color:#334155;letter-spacing:.02em}
+.sa-table.sa-rc-table .sa-rc-loc{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:650;color:#334155}
+.sa-table.sa-rc-table .sa-rc-loc .i{width:14px;height:14px;color:#94a3b8;flex:none}
+.sa-table.sa-rc-table .num{font-variant-numeric:tabular-nums;font-family:Outfit,system-ui,sans-serif;font-size:13px;font-weight:700;letter-spacing:-.02em;color:#1e293b}
+.sa-table.sa-rc-table .num strong{font-weight:800;color:#0f172a}
+.sa-table.sa-rc-table tfoot td{background:#f1f5f9;border-top:1px solid #e2e8f0;font-weight:800;color:#0f172a}
+.sa-table.sa-rc-table tfoot .sa-rc-total-label{font-family:Outfit,system-ui,sans-serif;font-size:13px;font-weight:850;letter-spacing:.02em;text-transform:uppercase;color:#334155}
+.sa-table.sa-rc-table tfoot .num{font-weight:850;color:#0f172a}
+.sa-status-pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 10px;font-size:11px;font-weight:750;white-space:nowrap}
+.sa-status-pill .dot{width:6px;height:6px;border-radius:50%;flex:none}
+.sa-status-pill.on{background:#e9f7f0;color:#0f8a4b}.sa-status-pill.on .dot{background:#16a34a}
+.sa-status-pill.off{background:#fdecec;color:#c62828}.sa-status-pill.off .dot{background:#dc2626}
+.sa-tools .sa-search{max-width:420px}
+.sa-tools .sa-search kbd{font-size:10px;background:#e2e8f0;border-radius:6px;padding:2px 6px;color:#64748b;font-family:inherit;margin-left:4px}
 .sa-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .sa-tabs button{border:1px solid var(--line);background:var(--white);border-radius:999px;padding:8px 12px;font-size:12px;font-weight:750;cursor:pointer;color:#475569}
 .sa-tabs button.on{background:var(--blue);border-color:var(--blue);color:#fff}
+.sa-tools .sa-tabs{margin:0;flex:none;align-items:center}
+.sa-tools .sa-tabs button{height:38px;padding:0 14px;box-sizing:border-box;background:var(--bg)}
+.sa-tools .sa-tabs button.on{background:var(--blue);border-color:var(--blue);color:#fff}
 .sa-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .sa-btn{border:0;border-radius:10px;background:var(--blue);color:#fff;font-size:12px;font-weight:800;padding:10px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
 .sa-btn:hover{background:var(--blue-deep)}
@@ -157,38 +201,50 @@
 .sa-labtile .thumb{width:56px;height:56px;border-radius:12px;background:#eff6ff;color:var(--blue);display:grid;place-items:center;flex:none}
 .sa-labtile h3{margin:0 0 4px;font-size:14px;font-family:Outfit,system-ui,sans-serif}
 .sa-labtile p{margin:0;font-size:12px;color:var(--muted);line-height:1.35}
-.sa-veh{display:flex;flex-direction:column;gap:12px}
-.sa-vehcard{display:grid;grid-template-columns:140px minmax(0,1fr) auto;gap:14px;align-items:stretch;border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--white);box-shadow:0 6px 16px rgba(20,40,80,.04);cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%}
-.sa-vehcard:hover{border-color:#93c5fd;box-shadow:0 8px 22px rgba(37,99,235,.1)}
+.sa-veh{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:stretch}
+.sa-veh--vct{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sa-vehcard{display:grid;grid-template-columns:104px minmax(0,1fr);gap:0;align-items:stretch;border:1px solid var(--line);border-radius:14px;padding:0;background:var(--white);box-shadow:0 6px 16px rgba(20,40,80,.04);cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%;min-width:0;overflow:hidden;transition:border-color .15s,box-shadow .15s}
+.sa-vehcard:hover{border-color:#93c5fd;box-shadow:0 10px 26px rgba(37,99,235,.12)}
 .sa-vehcard:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
-.sa-vehcard .ph{width:140px;height:96px;border-radius:10px;background:linear-gradient(135deg,#e2e8f0,#cbd5e1);display:grid;place-items:center;color:#64748b;overflow:hidden;position:relative;flex:none}
-.sa-vehcard .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.sa-vehcard .ph .i{width:36px;height:36px}
-.sa-vehcard-main{min-width:0;display:flex;flex-direction:column;gap:8px}
-.sa-vehcard-head{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}
-.sa-vehcard h3{margin:0;font-size:15px;font-family:Outfit,system-ui,sans-serif;font-weight:800;letter-spacing:-.01em;text-transform:uppercase;line-height:1.25;flex:1;min-width:0}
-.sa-vehcard-actions{display:flex;align-items:center;gap:6px;flex:none}
+.sa-vehcard .ph{width:104px;min-height:168px;height:100%;align-self:stretch;border-radius:0;background:
+  linear-gradient(165deg,#f1f5f9 0%,#e8eef5 45%,#e2e8f0 100%);display:grid;place-items:center;color:#94a3b8;overflow:hidden;position:relative;flex:none;border-right:1px solid #eef2f7}
+.sa-vehcard .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;padding:6px 4px;box-sizing:border-box;display:block}
+.sa-vehcard--person{grid-template-columns:132px minmax(0,1fr)}
+.sa-vehcard--person .ph{width:132px;min-height:180px;background:#e8eef5}
+.sa-vehcard--person .ph img{object-fit:contain;object-position:center center;padding:0;background:#e8eef5}
+.sa-vehcard .ph .i{width:28px;height:28px;opacity:.45}
+.sa-vehcard-main{min-width:0;display:flex;flex-direction:column;gap:8px;padding:12px 12px 12px 14px;flex:1}
+.sa-vehcard-head{display:flex;align-items:flex-start;gap:8px}
+.sa-vehcard h3{margin:0;font-size:12.5px;font-family:Outfit,system-ui,sans-serif;font-weight:800;letter-spacing:-.015em;text-transform:uppercase;line-height:1.3;flex:1;min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sa-vehcard-head .sa-badge{flex:none;margin-top:1px}
+.sa-veh-plate{display:inline-flex;align-items:stretch;align-self:flex-start;border:1.5px solid #1e3a8a;border-radius:8px;overflow:hidden;background:#eff6ff;box-shadow:0 1px 0 rgba(30,58,138,.08);max-width:100%}
+.sa-veh-plate .ind{display:inline-flex;align-items:center;justify-content:center;background:#1d4ed8;color:#fff;font-size:11px;font-weight:850;letter-spacing:.06em;padding:0 8px;flex:none}
+.sa-veh-plate .num{display:block;font-family:Outfit,ui-monospace,Menlo,monospace;font-size:17px;font-weight:850;letter-spacing:.04em;color:#0f172a;padding:7px 11px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sa-vehcard-foot{display:flex;align-items:center;justify-content:flex-end;gap:8px;margin-top:auto;padding-top:2px}
+.sa-vehcard-actions{display:flex;align-items:center;gap:6px;flex:none;margin-left:auto}
 .sa-vehcard-ico{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:#f8fafc;color:#475569;display:grid;place-items:center;cursor:pointer;padding:0}
 .sa-vehcard-ico:hover{border-color:#93c5fd;color:var(--blue);background:#eff6ff}
 .sa-vehcard-ico .i{width:16px;height:16px}
 .sa-tags{display:flex;flex-wrap:wrap;gap:6px;margin:0}
-.sa-tag{display:inline-flex;align-items:center;gap:5px;background:#eef2ff;color:#334155;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700}
-.sa-tag .i{width:12px;height:12px}
-.sa-tag.plate{background:#dbeafe;color:#1d4ed8}
-.sa-tag.plate .ind{display:inline-flex;align-items:center;justify-content:center;background:#1d4ed8;color:#fff;font-size:8px;font-weight:800;letter-spacing:.04em;border-radius:3px;padding:1px 3px;line-height:1.2}
-.sa-docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding-top:8px;border-top:1px solid #eef2f7;margin-top:2px}
-.sa-docs>div{min-width:0;display:flex;gap:8px;align-items:flex-start}
-.sa-docs .di{width:28px;height:28px;border-radius:8px;background:#f1f5f9;color:#64748b;display:grid;place-items:center;flex:none}
-.sa-docs .di .i{width:14px;height:14px}
-.sa-docs small{display:block;font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.02em}.sa-docs b{display:block;font-size:12px;font-weight:780;color:var(--ink)}
+.sa-tag{display:inline-flex;align-items:center;gap:5px;background:#eef2ff;color:#334155;border-radius:6px;padding:3px 8px;font-size:10.5px;font-weight:700;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sa-tag .i{width:12px;height:12px;flex:none}
+.sa-docs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding-top:8px;border-top:1px solid #eef2f7;margin-top:2px}
+.sa-docs>div{min-width:0;display:flex;flex-direction:column;gap:3px;align-items:flex-start}
+.sa-docs .di{width:24px;height:24px;border-radius:7px;background:#f1f5f9;color:#64748b;display:grid;place-items:center;flex:none}
+.sa-docs .di .i{width:12px;height:12px}
+.sa-docs small{display:block;font-size:9px;color:var(--muted);font-weight:700;letter-spacing:.02em;line-height:1.2}
+.sa-docs b{display:block;font-size:11px;font-weight:780;color:var(--ink);line-height:1.25}
 .sa-docs b.exp{color:#dc2626;text-decoration:underline;text-underline-offset:2px}
 .sa-veh-detail-back{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--white);border-radius:10px;height:36px;padding:0 12px;font-size:12px;font-weight:800;color:#334155;cursor:pointer;margin-bottom:12px}
 .sa-veh-detail-back:hover{border-color:#93c5fd;color:var(--blue);background:#f8fbff}
 .sa-veh-detail{display:grid;gap:16px}
-.sa-veh-detail-hero{display:grid;grid-template-columns:180px minmax(0,1fr);gap:18px;align-items:center}
-.sa-veh-detail-photo{width:180px;height:130px;border-radius:12px;background:linear-gradient(135deg,#e2e8f0,#cbd5e1);overflow:hidden;position:relative;display:grid;place-items:center;color:#64748b;border:1px solid var(--line)}
-.sa-veh-detail-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.sa-veh-detail-photo .i{width:40px;height:40px}
+.sa-veh-detail-hero{display:grid;gap:14px;align-items:start}
+.sa-veh-detail-photo{width:100%;height:280px;border-radius:12px;background:linear-gradient(165deg,#f8fafc 0%,#eef2f7 55%,#e2e8f0 100%);overflow:hidden;position:relative;display:grid;place-items:center;color:#64748b;border:1px solid var(--line)}
+.sa-veh-detail-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;padding:12px 16px;box-sizing:border-box;display:block}
+.sa-veh-detail-photo .i{width:48px;height:48px;opacity:.4}
+.sa-veh-detail-head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px}
+.sa-veh-detail-head h2{margin:0 0 8px;font-family:Outfit,system-ui,sans-serif;font-size:22px;letter-spacing:-.02em;text-transform:uppercase;line-height:1.2}
+.sa-veh-detail-head .sa-veh-plate{margin:0 0 8px}
 .sa-veh-detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .sa-veh-detail-grid .cell{border:1px solid #eef2f7;border-radius:10px;padding:10px 12px;background:#fafbfc;min-width:0}
 .sa-veh-detail-grid .cell span{display:block;font-size:10px;font-weight:700;color:#94a3b8;margin-bottom:4px;letter-spacing:.02em}
@@ -202,10 +258,21 @@
 .sa-empty-polished .ico{width:56px;height:56px;border-radius:16px;background:var(--blue-soft);color:var(--blue);display:grid;place-items:center;margin:0 auto 14px}
 .sa-empty-polished h3{margin:0 0 6px;font-family:Outfit,system-ui,sans-serif;color:var(--ink);font-size:17px}
 .sa-empty-polished p{margin:0 auto;max-width:420px;font-size:13px;line-height:1.5}
+@media(max-width:1180px){
+.sa-veh{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sa-kpi.sa-kpi-5,.sa-kpi.sa-kpi-6{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
 @media(max-width:960px){
 .sa-hero{grid-template-columns:1fr 1fr}.sa-stage-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-.sa-lists{grid-template-columns:1fr}.sa-stats{grid-template-columns:1fr 1fr}.sa-kpi{grid-template-columns:1fr 1fr}
-.sa-labgrid,.sa-reportgrid,.sa-seal{grid-template-columns:1fr}.sa-vehcard{grid-template-columns:1fr}.sa-vehcard .ph{width:100%;height:120px}.sa-docs{grid-template-columns:1fr}.sa-veh-detail-hero{grid-template-columns:1fr}.sa-veh-detail-photo{width:100%;height:160px}.sa-veh-detail-grid{grid-template-columns:1fr 1fr}
+.sa-lists{grid-template-columns:1fr}.sa-stats{grid-template-columns:1fr 1fr}.sa-kpi,.sa-kpi.sa-kpi-5,.sa-kpi.sa-kpi-6{grid-template-columns:1fr 1fr}
+.sa-labgrid,.sa-reportgrid,.sa-seal{grid-template-columns:1fr}.sa-veh,.sa-veh--vct,.sa-prod{grid-template-columns:1fr}.sa-veh-plate .num{font-size:16px}.sa-veh-detail-photo,.sa-prod-detail-photo{height:220px}.sa-veh-detail-grid{grid-template-columns:1fr 1fr}
+@media(max-width:520px){
+.sa-vehcard{grid-template-columns:96px minmax(0,1fr)}.sa-vehcard .ph{width:96px;min-height:148px}
+.sa-vehcard--person{grid-template-columns:108px minmax(0,1fr)}.sa-vehcard--person .ph{width:108px;min-height:160px}
+.sa-prodcard{grid-template-columns:88px minmax(0,1fr);padding:10px;gap:10px}.sa-prodcard .ph{width:88px;height:88px}
+.sa-prod-specs{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 10px}
+.sa-docs{grid-template-columns:1fr}.sa-veh-plate .num,.sa-prodcard .model .num{font-size:14px;padding:6px 9px}
+}
 .sa-side{position:fixed;inset:0 auto 0 0;transform:translateX(-105%);z-index:40;transition:transform .2s}
 .sa-side.open{transform:none}.sa-menu{display:grid}.sa-overlay{display:none;position:fixed;inset:0;background:rgba(10,20,40,.45);z-index:30}
 .sa-overlay.on{display:block}
@@ -221,22 +288,62 @@
 .sa-tools .sa-btn{height:38px;border:0;border-radius:10px;background:var(--blue);color:#fff;font-size:12px;font-weight:800;padding:0 14px;cursor:pointer}
 .sa-tools .sa-btn:hover{background:var(--blue-deep)}
 .sa-tools .sa-btn.ghost{background:var(--bg);color:#334;border:1px solid var(--line)}
-.sa-meta{font-size:12px;color:var(--muted);margin:0 0 10px}
+.sa-meta{font-size:12px;color:var(--muted);margin:0 0 10px;font-weight:650}
 .sa-table-wrap{overflow:auto;border:1px solid var(--line);border-radius:12px}
 .sa-table{width:100%;border-collapse:collapse;min-width:720px;background:var(--white)}
-.sa-table th{text-align:left;background:#f8fafc;padding:11px 14px;font-size:10px;letter-spacing:.4px;font-weight:800;color:#8a96a8;border-bottom:1px solid var(--line);white-space:nowrap}
-.sa-table td{padding:12px 14px;border-top:1px solid #eef2f7;font-size:12px;color:#4b586c;vertical-align:top}
+.sa-table th{text-align:left;background:#f8fafc;padding:11px 14px;font-size:10px;letter-spacing:.4px;font-weight:850;color:#334155;border-bottom:1px solid var(--line);white-space:nowrap}
+.sa-table td{padding:12px 14px;border-top:1px solid #eef2f7;font-size:12px;color:#1e293b;font-weight:650;vertical-align:top}
+.sa-table.sa-rc-table th{padding:9px 12px}
+.sa-table.sa-rc-table td{padding:10px 12px;vertical-align:middle}
 .sa-table tr:nth-child(even) td{background:#fbfdff}
 .sa-table .primary{display:block;font-weight:780;color:#0a0a0a;margin-bottom:3px}
-.sa-table .sub{display:block;font-size:11px;color:#8a96a8}
-.sa-table tr[data-action="open-product"]{cursor:pointer}
-.sa-table tr[data-action="open-product"]:hover td{background:#f0f7ff}
+.sa-table .sub{display:block;font-size:11px;color:#475569;font-weight:650}
+.sa-table tr[data-action="open-product"],.sa-table tr[data-action="open-vct"]{cursor:pointer}
+.sa-table tr[data-action="open-product"]:hover td,.sa-table tr[data-action="open-vct"]:hover td{background:#f0f7ff}
 .sa-pthumb{width:48px;height:48px;border-radius:10px;border:1px solid #e8eef5;background:#f8fafc;display:grid;place-items:center;overflow:hidden;color:var(--blue);padding:0;flex:none}
 .sa-pthumb.has-img{background:#fff}
 .sa-pthumb img{width:100%;height:100%;object-fit:cover;display:block}
-.sa-pback{display:inline-flex;align-items:center;gap:8px;border:0;background:none;color:var(--blue);font-size:13px;font-weight:800;cursor:pointer;padding:0;margin-bottom:14px}
-.sa-pback:hover{color:var(--blue-deep)}
+.sa-pthumb.lg{width:72px;height:72px;border-radius:12px}
+.sa-prod{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:stretch}
+.sa-prodcard{display:grid;grid-template-columns:132px minmax(0,1fr);gap:14px;align-items:center;border:1px solid #dbe4f0;border-radius:16px;padding:12px;background:var(--white);box-shadow:0 6px 18px rgba(20,40,80,.05);cursor:pointer;text-align:left;font:inherit;color:inherit;width:100%;min-width:0;overflow:hidden;transition:border-color .15s,box-shadow .15s}
+.sa-prodcard:hover,.sa-prodcard:focus-visible{border-color:#60a5fa;box-shadow:0 10px 28px rgba(37,99,235,.14)}
+.sa-prodcard:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.sa-prodcard .ph{width:132px;height:132px;border-radius:12px;background:#fff;display:grid;place-items:center;color:#94a3b8;overflow:hidden;position:relative;flex:none;border:1px solid #e8eef5}
+.sa-prodcard .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center center;padding:0;box-sizing:border-box;display:block}
+.sa-prodcard .ph .i{width:32px;height:32px;opacity:.4}
+.sa-prodcard-main{min-width:0;display:flex;flex-direction:column;gap:7px;padding:2px 2px 2px 0;flex:1;align-self:stretch}
+.sa-prodcard-head{display:flex;align-items:flex-start;gap:8px}
+.sa-prodcard h3{margin:0;font-size:15px;font-family:Outfit,system-ui,sans-serif;font-weight:800;letter-spacing:-.02em;text-transform:uppercase;line-height:1.25;flex:1;min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#0a0a0a}
+.sa-prodcard-head .sa-badge{flex:none;margin-top:1px}
+.sa-prodcard .model{display:inline-flex;align-items:stretch;align-self:flex-start;border-radius:999px;overflow:hidden;max-width:100%;box-shadow:0 1px 0 rgba(30,58,138,.06)}
+.sa-prodcard .model .lbl{display:inline-flex;align-items:center;justify-content:center;background:#2563eb;color:#fff;font-size:10px;font-weight:850;letter-spacing:.08em;padding:0 11px;flex:none;text-transform:uppercase}
+.sa-prodcard .model .num{display:block;font-family:Outfit,ui-monospace,Menlo,monospace;font-size:14px;font-weight:850;letter-spacing:.02em;color:#1e3a8a;background:#fff;border:1.5px solid #93c5fd;border-left:0;border-radius:0 999px 999px 0;padding:6px 12px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sa-prodcard .sa-tags{gap:5px}
+.sa-prod-specs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px 8px;padding-top:8px;margin-top:2px}
+.sa-prod-specs>div{min-width:0;display:flex;flex-direction:column;gap:2px;align-items:flex-start}
+.sa-prod-specs small{display:block;font-size:9px;color:#94a3b8;font-weight:750;letter-spacing:.04em;line-height:1.2;text-transform:uppercase}
+.sa-prod-specs b{display:block;font-size:12.5px;font-weight:820;color:#0f172a;font-variant-numeric:tabular-nums;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sa-prodcard-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:8px;border-top:1px solid #eef2f7}
+.sa-prodcard-meta{display:flex;flex-wrap:wrap;align-items:center;gap:4px 0;font-size:11.5px;color:#64748b;min-width:0;flex:1}
+.sa-prodcard-meta span{display:inline-flex;align-items:baseline;gap:4px}
+.sa-prodcard-meta .sep{margin:0 8px;color:#cbd5e1;font-weight:400}
+.sa-prodcard-meta strong{color:#0f172a;font-weight:780}
+.sa-prodcard-actions{display:flex;align-items:center;gap:6px;flex:none;margin-left:auto}
+.sa-prodcard-ico{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:#f8fafc;color:#475569;display:grid;place-items:center;cursor:pointer;padding:0}
+.sa-prodcard-ico:hover{border-color:#93c5fd;color:var(--blue);background:#eff6ff}
+.sa-prodcard-ico .i{width:16px;height:16px}
+.sa-pback{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--white);border-radius:10px;height:36px;padding:0 12px;font-size:12px;font-weight:800;color:#334155;cursor:pointer;margin-bottom:12px}
+.sa-pback:hover{border-color:#93c5fd;color:var(--blue);background:#f8fbff}
 .sa-pdetail{display:flex;flex-direction:column;gap:16px}
+.sa-prod-detail-hero{display:grid;gap:14px;align-items:start}
+.sa-prod-detail-photo{width:100%;height:280px;border-radius:12px;background:#fff;overflow:hidden;position:relative;display:grid;place-items:center;color:#64748b;border:1px solid var(--line)}
+.sa-prod-detail-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;padding:0;box-sizing:border-box;display:block}
+.sa-prod-detail-photo .i{width:48px;height:48px;opacity:.4}
+.sa-prod-detail-head{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:12px}
+.sa-prod-detail-head h2{margin:0 0 8px;font-family:Outfit,system-ui,sans-serif;font-size:22px;letter-spacing:-.02em;text-transform:uppercase;line-height:1.2}
+.sa-prod-detail-head .model{display:inline-flex;align-items:stretch;margin:0 0 8px;border-radius:999px;overflow:hidden;max-width:100%;box-shadow:0 1px 0 rgba(30,58,138,.06)}
+.sa-prod-detail-head .model .lbl{display:inline-flex;align-items:center;justify-content:center;background:#2563eb;color:#fff;font-size:10px;font-weight:850;letter-spacing:.08em;padding:0 12px;flex:none;text-transform:uppercase}
+.sa-prod-detail-head .model .num{display:block;font-family:Outfit,ui-monospace,Menlo,monospace;font-size:16px;font-weight:850;letter-spacing:.02em;color:#1e3a8a;background:#fff;border:1.5px solid #93c5fd;border-left:0;border-radius:0 999px 999px 0;padding:7px 14px;line-height:1.1}
 .sa-pgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .sa-pgrid .span2{grid-column:span 2}
 .sa-pgrid .span3{grid-column:1 / -1}
@@ -393,6 +500,77 @@ a.sa-vcard-pdf:hover{background:#ccfbf1;border-color:#0d9488}
 .sa-emaap-path{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11.5px;color:#0f172a;word-break:break-all}
 @media(max-width:1100px){.sa-intgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:640px){.sa-intgrid{grid-template-columns:1fr}}
+
+/* Shared Super Admin entity create/edit modal */
+.sa-entity-modal{position:fixed;inset:0;background:rgba(10,20,40,.48);display:flex;align-items:flex-start;justify-content:center;padding:16px;z-index:85;overflow:auto}
+.sa-entity-dialog{width:min(100%,720px);background:#fff;border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.22);margin:auto;display:flex;flex-direction:column;max-height:min(92vh,900px)}
+.sa-entity-dialog--wide{width:min(95vw,1280px);max-height:min(96vh,1100px);border-radius:14px}
+.sa-entity-dialog--wide .sa-entity-body{padding:18px 22px 10px}
+.sa-entity-dialog--wide .sa-pgrid--2{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 16px}
+.sa-entity-dialog--wide .sa-pgrid--2 .span2,.sa-entity-dialog--wide .sa-pgrid--2 .span3{grid-column:1 / -1}
+/* Product edit: fill remaining viewport beside sa-side drawer (268px) */
+.sa-entity-modal--panel{padding:0;justify-content:stretch;align-items:stretch;overflow:hidden;background:rgba(10,20,40,.35)}
+.sa-entity-dialog--panel{width:calc(100% - 268px);max-width:none;margin:0 0 0 auto;height:100vh;max-height:100vh;border-radius:0;box-shadow:-12px 0 40px rgba(7,18,37,.18)}
+.sa-entity-dialog--panel .sa-entity-body{padding:18px 22px 12px}
+.sa-entity-dialog--panel .sa-pgrid{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 14px}
+.sa-entity-dialog--panel .sa-pgrid .span2{grid-column:span 2}
+.sa-entity-dialog--panel .sa-pgrid .span3{grid-column:1 / -1}
+.sa-prod-image-block{display:grid;grid-template-columns:140px minmax(0,1fr);gap:14px;align-items:start}
+.sa-prod-image-preview{width:140px;height:140px;border-radius:12px;border:1px solid var(--line);background:#f8fafc;display:grid;place-items:center;overflow:hidden;position:relative;color:#94a3b8}
+.sa-prod-image-preview img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:6px;box-sizing:border-box}
+.sa-prod-image-preview .i{width:36px;height:36px;opacity:.45}
+.sa-media-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px;grid-column:1 / -1}
+.sa-media-card{border:1px solid #e2e8f0;border-radius:12px;background:#f8fafc;padding:12px;display:grid;grid-template-columns:88px minmax(0,1fr);gap:12px;align-items:start}
+.sa-media-preview{width:88px;height:88px;border-radius:10px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;overflow:hidden;position:relative;color:#94a3b8}
+.sa-media-preview img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:4px;box-sizing:border-box}
+.sa-media-preview .i{width:28px;height:28px;opacity:.45}
+.sa-media-preview.is-pdf{font-size:11px;font-weight:800;letter-spacing:.04em;color:#dc2626}
+.sa-media-meta{display:flex;flex-direction:column;gap:8px;min-width:0}
+.sa-media-meta label{margin:0;font-size:10px;font-weight:850;letter-spacing:.04em;text-transform:uppercase;color:#64748b}
+.sa-media-actions{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sa-media-actions .sa-btn{min-height:32px;padding:6px 10px;font-size:12px}
+.sa-media-hint{font-size:11px;color:var(--muted);line-height:1.35}
+.sa-media-file{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.sa-cap-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:4px 0 8px}
+.sa-cap-head h3{margin:0;font-size:13px;font-family:Outfit,system-ui,sans-serif;font-weight:800;letter-spacing:-.02em}
+.sa-cap-rows{display:flex;flex-direction:column;gap:10px}
+.sa-cap-row{border:1px solid #e2e8f0;border-radius:12px;padding:12px;background:#f8fafc}
+.sa-cap-row-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.sa-cap-row-top span{font-size:11px;font-weight:850;letter-spacing:.04em;text-transform:uppercase;color:#64748b}
+.sa-cap-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.sa-cap-grid .sa-pfield label{font-size:10px}
+.sa-cap-grid .sa-pfield input{min-height:38px;padding:8px 10px;font-size:12.5px;font-variant-numeric:tabular-nums}
+.sa-cap-grid .blue input{color:#1d4ed8;font-weight:750;background:#eff6ff;border-color:#bfdbfe}
+.sa-cap-grid .green input{color:#15803d;font-weight:750;background:#f0fdf4;border-color:#bbf7d0}
+.sa-entity-section{grid-column:1 / -1;margin:6px 0 0;padding:10px 0 2px;border-top:1px solid #eef2f7;font-size:11px;font-weight:850;letter-spacing:.04em;text-transform:uppercase;color:#64748b}
+.sa-entity-section:first-child{border-top:0;margin-top:0;padding-top:0}
+.sa-entity-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line);flex:none}
+.sa-entity-head h2{margin:0;font-family:Outfit,system-ui,sans-serif;font-size:1.15rem;letter-spacing:-.02em}
+.sa-entity-head .sub{margin:4px 0 0;font-size:12px;color:var(--muted)}
+.sa-entity-body{padding:16px 20px 8px;overflow:auto;flex:1}
+.sa-entity-foot{display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;border-top:1px solid var(--line);flex:none;flex-wrap:wrap}
+.sa-entity-body .sa-pgrid{margin-bottom:8px}
+@media(max-width:960px){
+.sa-entity-dialog--panel{width:100%;margin:0;height:100dvh;max-height:100dvh}
+.sa-prod-image-block{grid-template-columns:1fr}
+.sa-prod-image-preview{width:100%;height:180px}
+.sa-cap-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.sa-media-grid{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+.sa-entity-dialog--wide .sa-pgrid--2{grid-template-columns:1fr}
+.sa-entity-dialog--panel .sa-pgrid{grid-template-columns:1fr}
+.sa-entity-dialog--panel .sa-pgrid .span2,.sa-entity-dialog--panel .sa-pgrid .span3{grid-column:1 / -1}
+.sa-cap-grid{grid-template-columns:1fr 1fr}
+.sa-media-card{grid-template-columns:72px minmax(0,1fr)}
+.sa-media-preview{width:72px;height:72px}
+}
+.sa-entity-body textarea.sa-efield{min-height:72px;resize:vertical;width:100%;border:1px solid var(--line);border-radius:10px;background:#fff;padding:11px 12px;font-size:13px;color:var(--ink);font:inherit}
+.sa-name-btn{border:0;background:none;padding:0;margin:0;font:inherit;color:var(--blue);font-weight:800;cursor:pointer;text-align:left}
+.sa-name-btn:hover{text-decoration:underline}
+.sa-tools .sa-btn.sa-add{background:var(--blue)}
+.sa-table tr[data-action="open-rc"]{cursor:pointer}
+.sa-table tr[data-action="open-rc"]:hover td{background:#f0f7ff}
 /* Legacy Super Admin helpers (unused by sa-shell) */
 .vps-range{display:flex;gap:4px;background:#f2f5fa;padding:3px;border-radius:9px}.vps-range button{border:0;background:transparent;color:#7b8799;font-size:10.5px;font-weight:800;border-radius:7px;padding:7px 12px}.vps-range button.active{background:#0866ff;color:#fff;box-shadow:0 1px 4px #0866ff44}.vps-hero{background:linear-gradient(108deg,#112746,#11203c 58%,#0e3469);position:relative;overflow:hidden;border-radius:15px;min-height:148px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 26px;color:#fff;margin-bottom:16px}.vps-hero:after{content:"";position:absolute;right:-70px;top:-100px;border:1px solid #a9cbff30;border-radius:50%;height:230px;width:230px;box-shadow:0 0 0 44px #9ec5ff0c,0 0 0 88px #9ec5ff08;pointer-events:none}.vps-hero-main,.vps-hero-side{position:relative;z-index:1}.vps-hero-label{font-size:10px;font-weight:850;color:#a6c9ff;letter-spacing:1.1px;margin-bottom:6px}.vps-hero h2{font-size:26px;letter-spacing:-.7px;font-weight:820;margin:0 0 12px}.vps-hero-pills{display:flex;flex-wrap:wrap;gap:8px}.vps-chip{display:inline-flex;align-items:center;gap:7px;background:#ffffff18;border:1px solid #ffffff22;border-radius:99px;padding:7px 11px;font-size:11px;font-weight:700;color:#d7e5f8}.vps-chip .dot{width:7px;height:7px;border-radius:50%;background:#13a36f;flex:none}.vps-chip.warn .dot{background:#e2a12b}.vps-chip.bad .dot{background:#e25555}.vps-uptime{text-align:center;min-width:96px}.vps-uptime-ring{width:86px;height:86px;border-radius:50%;margin:0 auto 8px;background:conic-gradient(#22c55e 0 99.9%,#ffffff22 99.9% 100%);display:grid;place-items:center}.vps-uptime-ring>span{width:64px;height:64px;border-radius:50%;background:#112746;display:grid;place-items:center;font-size:11px;font-weight:800;line-height:1.15;color:#fff}.vps-uptime small{display:block;font-size:10px;color:#a9bdd8;letter-spacing:.4px;font-weight:700}.res-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.res-card{background:#fff;border:1px solid var(--border);border-radius:13px;padding:15px;box-shadow:var(--shadow);min-width:0}.res-card .res-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px}.res-card .res-name{font-size:12px;font-weight:780;color:#3a465a}.res-card .res-ico{width:30px;height:30px;border-radius:9px;display:grid;place-items:center}.res-card .res-ico.cpu{background:#ebf3ff;color:#0866ff}.res-card .res-ico.ram{background:#f3eaff;color:#7c3aed}.res-card .res-ico.disk{background:#e9f7f0;color:#128260}.res-card .res-ico.bw{background:#fff4e6;color:#b16d12}.res-card .res-val{font-size:26px;font-weight:830;letter-spacing:-1px;line-height:1.1}.res-card .res-sub{font-size:10.5px;color:#97a3b2;margin-top:6px}.svc-panel .svc-list{padding:4px 14px 14px;display:flex;flex-direction:column;gap:8px}.svc-row{display:flex;align-items:center;gap:12px;padding:12px 13px;border:1px solid #eef2f7;border-radius:11px;background:#fbfcfe}.svc-ico{width:34px;height:34px;border-radius:9px;background:#edf3ff;color:#0866ff;display:grid;place-items:center;flex:none}.svc-meta{flex:1;min-width:0}.svc-meta b{display:block;font-size:12.5px;font-weight:780;color:#1f2a3c}.svc-meta small{display:block;font-size:10px;color:#94a0b0;margin-top:3px}.svc-pill{display:inline-flex;align-items:center;gap:6px;border-radius:99px;padding:5px 10px;font-size:10.5px;font-weight:780;white-space:nowrap}.svc-pill .dot{width:6px;height:6px;border-radius:50%;flex:none}.svc-pill.ok{background:var(--green-bg);color:var(--green)}.svc-pill.ok .dot{background:var(--green)}.svc-pill.bad{background:#fdecec;color:#c0392b}.svc-pill.bad .dot{background:#c0392b}.svc-pill.warn{background:var(--amber-bg);color:var(--amber)}.svc-pill.warn .dot{background:var(--amber)}.svc-pill.muted{background:#eef1f5;color:#6b7889}.svc-pill.muted .dot{background:#9aa6b3}.admin-ops-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.85fr);gap:16px;align-items:start}@media(max-width:900px){.res-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-ops-grid{grid-template-columns:1fr}.vps-hero{flex-direction:column;align-items:flex-start}.vps-hero-side{align-self:flex-end}}
 /* non dashboard */
@@ -548,13 +726,20 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
   function authIcon(paths){return `<svg aria-hidden="true" class="i lg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;}
   function escapeHtml(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
-  async function api(path, { method='GET', body, token } = {}) {
-    const headers = { 'content-type': 'application/json' };
+  async function api(path, { method='GET', body, token, formData } = {}) {
+    const headers = {};
     if (token) headers.authorization = `Bearer ${token}`;
+    let payload;
+    if (formData) {
+      payload = formData;
+    } else if (body !== undefined) {
+      headers['content-type'] = 'application/json';
+      payload = JSON.stringify(body);
+    }
     const res = await fetch(API_BASE + path, {
       method,
       headers,
-      body: body ? JSON.stringify(body) : undefined,
+      body: payload,
     });
     const json = await res.json().catch(() => ({}));
     return { res, json };
@@ -748,8 +933,8 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       { id: 'Dashboard', label: 'Dashboard', ico: 'dashboard' },
       { id: 'Verification', label: 'Verification', ico: 'shield' },
       { id: 'Regional Centers', label: 'Regional Centres', ico: 'building' },
-      { id: 'VCT', label: 'VCT', ico: 'user' },
       { id: 'RC Quota', label: 'RC Quota', ico: 'hash' },
+      { id: 'VCT', label: 'VCT', ico: 'user' },
       { id: 'RC Wallet', label: 'Wallet', ico: 'wallet' },
       { id: 'Vehicles', label: 'Car', ico: 'car' },
       { id: 'Customers', label: 'Customers', ico: 'bag' },
@@ -759,6 +944,80 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       { id: 'Settings', label: 'Settings', ico: 'gear' },
     ];
     const LIST_PAGES = new Set(['Verification', 'Regional Centers', 'Products', 'VCT', 'Customers', 'RC Quota', 'RC Wallet', 'Vehicles']);
+    /** Super Admin page id → URL hash slug (`#/<slug>`). Static-host friendly (no Caddy rewrite). */
+    const PAGE_TO_HASH = {
+      Dashboard: 'dashboard',
+      Verification: 'verification',
+      'Regional Centers': 'regional-centres',
+      'RC Quota': 'rc-quota',
+      VCT: 'vct',
+      'RC Wallet': 'rc-wallet',
+      Vehicles: 'vehicles',
+      Customers: 'customers',
+      Products: 'products',
+      Laboratory: 'laboratory',
+      Reports: 'reports',
+      Settings: 'settings',
+      Integrations: 'integrations',
+    };
+    const HASH_TO_PAGE = {
+      dashboard: 'Dashboard',
+      home: 'Dashboard',
+      '': 'Dashboard',
+      verification: 'Verification',
+      'regional-centres': 'Regional Centers',
+      'regional-centers': 'Regional Centers',
+      rc: 'Regional Centers',
+      'rc-quota': 'RC Quota',
+      quota: 'RC Quota',
+      vct: 'VCT',
+      'rc-wallet': 'RC Wallet',
+      wallet: 'RC Wallet',
+      vehicles: 'Vehicles',
+      car: 'Vehicles',
+      cars: 'Vehicles',
+      customers: 'Customers',
+      products: 'Products',
+      laboratory: 'Laboratory',
+      lab: 'Laboratory',
+      reports: 'Reports',
+      settings: 'Settings',
+      integrations: 'Integrations',
+    };
+    function pageHash(page) {
+      return `#/${PAGE_TO_HASH[page] || 'dashboard'}`;
+    }
+    function pageFromHash(hash) {
+      const raw = String(hash || '')
+        .replace(/^#\/?/, '')
+        .split(/[?#]/)[0]
+        .split('/')[0]
+        .trim()
+        .toLowerCase();
+      return HASH_TO_PAGE[raw] || null;
+    }
+    let syncingHash = false;
+    function writePageHash(page) {
+      const next = pageHash(page);
+      if (location.hash === next) return;
+      // Programmatic hash updates via history API — does not fire hashchange.
+      // Back/forward still reach applyHashFromLocation via popstate (+ hashchange).
+      // Never throw after mutating the URL (old bug: undefined queue.then aborted goPage before render).
+      try {
+        history.pushState(null, '', next);
+      } catch (_) {
+        syncingHash = true;
+        try { location.hash = next; } finally {
+          setTimeout(() => { syncingHash = false; }, 0);
+        }
+      }
+    }
+    function applyHashFromLocation() {
+      if (syncingHash) return;
+      const page = pageFromHash(location.hash) || 'Dashboard';
+      if (page === state.page) return;
+      goPage(page, { skipHash: true });
+    }
     const VERIF_PAGE_SIZE = 10;
     const DEFAULT_LIST_LIMIT = 50;
     function listLimitFor(page) {
@@ -781,12 +1040,15 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       rcFilter: '',
       rcOptions: [],
       subTab: '',
+      rcSort: 'total-desc',
       integrationModal: null,
       gallery: null,
+      entityModal: null,
       productDetail: null,
       productDetailLoading: false,
       productDetailError: null,
       vehicleDetail: null,
+      vctDetail: null,
       emaap: { configured: false, label: 'Not connected', userIdMasked: null, loading: false },
       emaapSaving: false,
       emaapApis: { loading: false, error: null, baseUrl: 'https://emaap.gov.in/gatcapi', counts: { v1: 0, v2: 0 }, v1: [], v2: [] },
@@ -833,6 +1095,11 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       car:'<path d="M4 14h16l-1.5-5.5A2 2 0 0 0 16.6 7H7.4a2 2 0 0 0-1.9 1.5L4 14Z"/><path d="M6 17h.01M18 17h.01M5 14v3h14v-3"/>',
       building:'<rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h2M14 7h2M8 11h2M14 11h2M10 21v-5h4v5"/>',
       user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+      people:'<circle cx="9" cy="8" r="3"/><path d="M3 21v-2a6 6 0 0 1 12 0v2M17 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 5v2"/>',
+      pin:'<path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
+      check:'<circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/>',
+      phone:'<path d="M6.6 3.8h2.4l1.2 3.6-1.8 1.2a12.5 12.5 0 0 0 5.4 5.4l1.2-1.8 3.6 1.2v2.3a1.8 1.8 0 0 1-2 1.8A16.6 16.6 0 0 1 4.8 5.8a1.8 1.8 0 0 1 1.8-2Z"/>',
+      zap:'<path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/>',
       bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 10h18c0-3-3-3-3-10M10 21h4"/>',
       chart:'<path d="M4 19V5M8 19v-8M12 19V8M16 19v-5M20 19V7"/>',
       gear:'<circle cx="12" cy="12" r="3"/><path d="M9 3h6l.7 2.5 1.5.7 2.4-1.1 2.4 4.3-2 1.6v2l2 1.6-2.4 4.3-2.4-1.1-1.5.7L15 21H9l-.7-2.5-1.5-.7-2.4 1.1L2 14.6 4 13v-2L2 9.4l2.4-4.3 2.4 1.1 1.5-.7L9 3Z"/>',
@@ -954,8 +1221,14 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         return `/api/v1/admin/verifications?limit=${lim}&offset=${off}&page=${pageNum}&q=${q}&status=${st}&type=${ty}&rcId=${rc}&rc=${rc}&period=${period}`;
       }
       if (state.page === 'Regional Centers') return `/api/v1/admin/regional-centers?q=${q}`;
-      if (state.page === 'Products') return `/api/v1/admin/products?limit=${lim}&offset=${off}&q=${q}`;
-      if (state.page === 'VCT') return `/api/v1/admin/users?role=VCT&limit=${lim}&offset=${off}&q=${q}`;
+      if (state.page === 'Products') {
+        const tab = encodeURIComponent(state.subTab || 'Active');
+        return `/api/v1/admin/products?limit=${lim}&offset=${off}&q=${q}&tab=${tab}`;
+      }
+      if (state.page === 'VCT') {
+        const tab = encodeURIComponent(state.subTab || 'Active');
+        return `/api/v1/admin/users?role=VCT&limit=${lim}&offset=${off}&q=${q}&tab=${tab}`;
+      }
       if (state.page === 'Customers') return `/api/v1/admin/customers?limit=${lim}&offset=${off}&q=${q}`;
       if (state.page === 'RC Quota') return `/api/v1/admin/quota?limit=${lim}&offset=${off}&q=${q}`;
       if (state.page === 'RC Wallet') {
@@ -1024,37 +1297,50 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
     }
 
     function goPage(page, opts = {}) {
+      const nextPage = PAGE_TO_HASH[page] ? page : (pageFromHash(page) || 'Dashboard');
       const prevPage = state.page;
-      state.page = page;
+      state.page = nextPage;
       state.drawer = false;
       state.productDetail = null;
       state.productDetailLoading = false;
       state.productDetailError = null;
       state.vehicleDetail = null;
+      state.vctDetail = null;
+      state.entityModal = null;
       state.q = opts.q != null ? opts.q : '';
       state.statusFilter = opts.statusFilter != null ? opts.statusFilter : '';
       state.typeFilter = opts.typeFilter != null ? opts.typeFilter : '';
       // Keep RC filter when switching Verification tabs; clear when leaving the page.
       state.rcFilter = opts.rcFilter != null
         ? opts.rcFilter
-        : (page === 'Verification' && prevPage === 'Verification' ? state.rcFilter : '');
+        : (nextPage === 'Verification' && prevPage === 'Verification' ? state.rcFilter : '');
       {
-        const defaults = { 'RC Wallet': 'balances', Vehicles: 'All', Laboratory: 'menu' };
+        const defaults = {
+          'RC Wallet': 'balances',
+          Vehicles: 'All',
+          Laboratory: 'menu',
+          Products: 'Active',
+          VCT: 'Active',
+          'Regional Centers': 'All',
+        };
         const incoming = opts.tab != null ? String(opts.tab) : '';
-        state.subTab = incoming || defaults[page] || '';
+        state.subTab = incoming || defaults[nextPage] || '';
       }
-      state.list = { total: 0, items: [], limit: listLimitFor(page), offset: 0, summary: null };
+      if (nextPage === 'Regional Centers' && opts.rcSort == null) state.rcSort = 'total-desc';
+      state.list = { total: 0, items: [], limit: listLimitFor(nextPage), offset: 0, summary: null };
       state.listError = null;
+      // Paint first so a hash-write failure can never leave Dashboard stuck while URL moved.
       render();
-      if (LIST_PAGES.has(page)) {
-        if (page === 'Verification') {
+      if (!opts.skipHash) writePageHash(nextPage);
+      if (LIST_PAGES.has(nextPage)) {
+        if (nextPage === 'Verification') {
           loadRcOptions(true).finally(() => loadList());
         } else {
           loadList();
         }
       }
-      else if (page === 'Dashboard') loadDash(true);
-      else if (page === 'Settings' || page === 'Integrations') {
+      else if (nextPage === 'Dashboard') loadDash(true);
+      else if (nextPage === 'Settings' || nextPage === 'Integrations') {
         loadEmaapStatus(true);
         loadYesoneStatus(true);
         loadRazorpayStatus(true);
@@ -1069,7 +1355,13 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
           state.statusFilter === (m.filter.statusFilter || '');
       }
       if (m.tab != null) {
-        const defaults = { 'RC Wallet': 'balances', Vehicles: 'All', Laboratory: 'menu' };
+        const defaults = {
+          'RC Wallet': 'balances',
+          Vehicles: 'All',
+          Laboratory: 'menu',
+          Products: 'Active',
+          VCT: 'Active',
+        };
         const current = state.subTab || defaults[m.id] || '';
         return current === m.tab;
       }
@@ -1094,7 +1386,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
           <div class="sa-brand">
             <div class="sa-logo">${icon('shield')}</div>
             <div><b>GATC</b><small>Government Approved<br>Test Centre</small></div>
-          </div>
+        </div>
         </div>
         <nav class="sa-nav">
           <div class="sa-cap">WORKSPACE</div>
@@ -1121,16 +1413,18 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
 
     function avatarHtml(url, name) {
       const ini = esc(initialsOf(name));
-      if (url) {
-        return `<span class="sa-avimg"><img src="${esc(url)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove();this.parentNode.textContent='${ini}'"/></span>`;
+      const src = withAuthMediaUrl(url);
+      if (src) {
+        return `<span class="sa-avimg"><img src="${esc(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove();this.parentNode.textContent='${ini}'"/></span>`;
       }
       return `<span class="sa-avimg">${ini}</span>`;
     }
 
     function heading(title, sub, extraRight = '') {
-      const d = new Date().toLocaleDateString(undefined, { day:'numeric', month:'long', year:'numeric' });
-      return `<div class="sa-h-row"><div><div class="eye">SUPER ADMIN</div><h1 style="margin:0;font-family:Outfit,system-ui,sans-serif;font-size:1.7rem;letter-spacing:-.04em">${esc(title)}</h1><p style="margin:4px 0 0;color:var(--muted);font-size:13px">${esc(sub)}</p></div>
-        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">${extraRight}<div class="sa-date">${icon('calendar')}<span>${esc(d)}</span></div></div></div>`;
+      const right = extraRight
+        ? `<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">${extraRight}</div>`
+        : '';
+      return `<div class="sa-h-row"><div><div class="eye">SUPER ADMIN</div><h1 style="margin:0;font-family:Outfit,system-ui,sans-serif;font-size:1.7rem;letter-spacing:-.04em">${esc(title)}</h1><p style="margin:4px 0 0;color:#334155;font-size:13px;font-weight:650">${esc(sub)}</p></div>${right}</div>`;
     }
 
     function periodButtons() {
@@ -1176,7 +1470,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
             const count = st[key] || (key==='certified' ? (st.certified || cert.lifetime || 0) : 0);
             return `<div class="sa-stage-card ${tone}"><div class="row"><span class="lbl">${esc(label)}</span><span class="sa-stage-ico ${tone}">${icon(ico,'sm')}</span></div><span class="cnt">${n(count)}</span></div>`;
           }).join('')}
-        </div>
+          </div>
         <section class="sa-mid" aria-label="Certified totals">
           <div class="sa-q orange"><span class="ico">${icon('chart')}</span><div><b>Total Certified</b><strong>${n(cert.last_month)}</strong><small>Last month</small></div></div>
           <div class="sa-q green"><span class="ico">${icon('award')}</span><div><b>Total Certified</b><strong>${n(cert.this_month)}</strong><small>This month</small></div></div>
@@ -1188,8 +1482,8 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
           <button type="button" class="sa-stat sa-stat-btn" data-page="Customers"><span>Customers</span><b>${n(totals.customers)}</b></button>
         </div>
         <div class="sa-lists">
-          <section class="sa-panel">
-            <div class="sa-panel-h"><h2>Regional Centers</h2><button type="button" class="sa-link" data-page="Regional Centers">View All →</button></div>
+        <section class="sa-panel">
+          <div class="sa-panel-h"><h2>Regional Centers</h2><button type="button" class="sa-link" data-page="Regional Centers">View All →</button></div>
             ${rcs.length ? `<ul class="sa-rc">${rcs.map((rc,i)=>`<li><span class="rank">#${i+1}</span>${avatarHtml(rc.logoUrl, rc.name || rc.code)}<div class="body"><b>${esc(rc.name || rc.code || 'RC')}</b><span>${esc(rc.code || rc.district || '—')}</span></div><span class="cnt">${n(rc.certified)}</span></li>`).join('')}</ul>` : `<p class="ui-note">No regional centers yet.</p>`}
           </section>
           <section class="sa-panel">
@@ -1199,8 +1493,20 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         </div>`;
     }
 
-    function listTools(extra = '') {
+    function statusTabsHtml(page, tab) {
+      return `<div class="sa-tabs" role="tablist" aria-label="Status filters">
+          ${[['Active', 'Active'], ['Inactive', 'Inactive']].map(([k, l]) =>
+            `<button type="button" class="${tab === k ? 'on' : ''}" data-page="${esc(page)}" data-tab="${k}" role="tab" aria-selected="${tab === k ? 'true' : 'false'}">${l}</button>`
+          ).join('')}
+        </div>`;
+    }
+
+    function listTools(extra = '', { leading = '', search = true } = {}) {
+      if (!search) {
+        return `<div class="sa-tools">${leading}${extra}</div>`;
+      }
       return `<div class="sa-tools">
+        ${leading}
         <label class="sa-search">${icon('search','sm')}<input id="sa-q" type="search" placeholder="Search…" value="${esc(state.q)}" aria-label="Search"/></label>
         ${extra}
         <button type="button" class="sa-btn" data-action="list-search">Search</button>
@@ -1330,27 +1636,881 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         </section>`;
     }
 
+
+    function newCapacityLocalId() {
+      if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();
+      return `spec-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    }
+
+    function computeDerivedCapacity(maxRaw, eRaw) {
+      const max = Number(maxRaw);
+      const e = Number(eRaw);
+      const has = Number.isFinite(max) && max > 0 && Number.isFinite(e) && e > 0;
+      if (!has) return { min: '', d: '', n: '' };
+      const round = (v) => String(Math.round(v * 1e6) / 1e6);
+      return { min: round(e * 20), d: round(e), n: round((max * 1000) / e) };
+    }
+
+    function emptyCapacityRow(seed = {}) {
+      const max = seed.maximum_capacity ?? seed.maximumCapacity ?? '';
+      const e = seed.verification_scale_interval ?? seed.verificationScaleInterval ?? '';
+      const mpe = seed.maximum_permissible_error ?? seed.maximumPermissibleError ?? '';
+      const derived = computeDerivedCapacity(max, e);
+      return {
+        id: seed.id || newCapacityLocalId(),
+        maximum_capacity: max === null || max === undefined ? '' : String(max),
+        verification_scale_interval: e === null || e === undefined ? '' : String(e),
+        maximum_permissible_error: mpe === null || mpe === undefined ? '' : String(mpe),
+        minimum_capacity: derived.min || (seed.minimum_capacity ?? seed.minimumCapacity ?? ''),
+        actual_scale_interval: derived.d || (seed.actual_scale_interval ?? seed.actualScaleInterval ?? ''),
+        no_of_verification_intervals: derived.n || (seed.no_of_verification_intervals ?? seed.noOfVerificationIntervals ?? ''),
+      };
+    }
+
+    function capacityRowsFromProduct(p = {}) {
+      const specs = Array.isArray(p.specifications) ? p.specifications : [];
+      if (specs.length) return specs.map((s) => emptyCapacityRow(s));
+      if (
+        p.maximum_capacity != null
+        || p.verification_scale_interval != null
+        || p.maximumCapacity != null
+        || p.verificationScaleInterval != null
+      ) {
+        return [emptyCapacityRow(p)];
+      }
+      return [emptyCapacityRow()];
+    }
+
+    function productCapacityRowHtml(row, index, total) {
+      const derived = computeDerivedCapacity(row.maximum_capacity, row.verification_scale_interval);
+      const min = derived.min || row.minimum_capacity || '';
+      const d = derived.d || row.actual_scale_interval || '';
+      const n = derived.n || row.no_of_verification_intervals || '';
+      return `<div class="sa-cap-row" data-cap-row data-cap-id="${esc(row.id || '')}">
+        <div class="sa-cap-row-top">
+          <span>Capacity ${index + 1}</span>
+          ${total > 1
+            ? `<button type="button" class="sa-btn ghost" data-action="product-cap-remove" data-index="${index}" aria-label="Remove capacity ${index + 1}">Remove</button>`
+            : ''}
+        </div>
+        <div class="sa-cap-grid">
+          <div class="sa-pfield blue"><label>Max *</label><input type="number" step="any" inputmode="decimal" data-cap-field="maximum_capacity" value="${esc(row.maximum_capacity || '')}" placeholder="30"/></div>
+          <div class="sa-pfield blue"><label>e *</label><input type="number" step="any" inputmode="decimal" data-cap-field="verification_scale_interval" value="${esc(row.verification_scale_interval || '')}" placeholder="5"/></div>
+          <div class="sa-pfield blue"><label>MPE</label><input type="number" step="any" inputmode="decimal" data-cap-field="maximum_permissible_error" value="${esc(row.maximum_permissible_error || '')}" placeholder="—"/></div>
+          <div class="sa-pfield green"><label>Min</label><input type="text" data-cap-derived="minimum_capacity" value="${esc(min)}" readonly tabindex="-1"/></div>
+          <div class="sa-pfield green"><label>d</label><input type="text" data-cap-derived="actual_scale_interval" value="${esc(d)}" readonly tabindex="-1"/></div>
+          <div class="sa-pfield green"><label>n</label><input type="text" data-cap-derived="no_of_verification_intervals" value="${esc(n)}" readonly tabindex="-1"/></div>
+        </div>
+      </div>`;
+    }
+
+    function readCapacityRowsFromDom(rootEl) {
+      if (!rootEl) return [];
+      return Array.from(rootEl.querySelectorAll('[data-cap-row]')).map((rowEl) => {
+        const get = (name) => {
+          const el = rowEl.querySelector(`[data-cap-field="${name}"]`);
+          return el ? el.value : '';
+        };
+        const getDerived = (name) => {
+          const el = rowEl.querySelector(`[data-cap-derived="${name}"]`);
+          return el ? el.value : '';
+        };
+        return emptyCapacityRow({
+          id: rowEl.getAttribute('data-cap-id') || newCapacityLocalId(),
+          maximum_capacity: get('maximum_capacity'),
+          verification_scale_interval: get('verification_scale_interval'),
+          maximum_permissible_error: get('maximum_permissible_error'),
+          minimum_capacity: getDerived('minimum_capacity'),
+          actual_scale_interval: getDerived('actual_scale_interval'),
+          no_of_verification_intervals: getDerived('no_of_verification_intervals'),
+        });
+      });
+    }
+
+    function refreshCapacityDerived(rowEl) {
+      if (!rowEl) return;
+      const maxEl = rowEl.querySelector('[data-cap-field="maximum_capacity"]');
+      const eEl = rowEl.querySelector('[data-cap-field="verification_scale_interval"]');
+      const derived = computeDerivedCapacity(maxEl?.value, eEl?.value);
+      const set = (name, val) => {
+        const el = rowEl.querySelector(`[data-cap-derived="${name}"]`);
+        if (el) el.value = val;
+      };
+      set('minimum_capacity', derived.min);
+      set('actual_scale_interval', derived.d);
+      set('no_of_verification_intervals', derived.n);
+    }
+
+    function preserveProductEntityDraft() {
+      const m = state.entityModal;
+      if (!m || m.kind !== 'product') return;
+      const form = readEntityForm();
+      const rows = readCapacityRowsFromDom(root.querySelector('.sa-entity-dialog'));
+      state.entityModal = {
+        ...m,
+        data: {
+          ...(m.data || {}),
+          ...form,
+          capacityRows: rows.length ? rows : capacityRowsFromProduct(m.data || {}),
+        },
+      };
+    }
+
+    function rcMediaFieldHtml(label, kind, url, storage, mode, { pdfOk = false } = {}) {
+      const src = withAuthMediaUrl(url || '');
+      const canUpload = mode === 'edit';
+      const pathHint = String(url || '');
+      const looksPdf = pdfOk && (/\.pdf(?:$|\?)/i.test(pathHint) || /application%2Fpdf/i.test(pathHint));
+      const onImgErr = pdfOk
+        ? `this.style.display='none';this.parentNode.classList.add('is-pdf');this.parentNode.textContent='PDF';`
+        : `this.style.display='none';`;
+      const preview = src
+        ? (looksPdf
+          ? `<div class="sa-media-preview is-pdf" aria-hidden="true">PDF</div>`
+          : `<div class="sa-media-preview" aria-hidden="true"><img src="${esc(src)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="${onImgErr}"/></div>`)
+        : `<div class="sa-media-preview" aria-hidden="true">${icon('file')}</div>`;
+      const status = !canUpload
+        ? 'Save the centre first to upload'
+        : (storage === 'local'
+          ? 'Stored on VPS'
+          : (src ? 'Remote — upload to move onto VPS' : 'No file yet'));
+      const accept = pdfOk ? 'image/*,application/pdf' : 'image/*';
+      return `<div class="sa-media-card" data-rc-media-kind="${esc(kind)}">
+        ${preview}
+        <div class="sa-media-meta">
+          <label>${esc(label)}</label>
+          <div class="sa-media-actions">
+            ${canUpload ? `<button type="button" class="sa-btn ghost" data-action="rc-media-pick" data-kind="${esc(kind)}">Upload</button>` : ''}
+            ${canUpload && src ? `<button type="button" class="sa-btn ghost" data-action="rc-media-clear" data-kind="${esc(kind)}">Clear</button>` : ''}
+            ${src ? `<a class="sa-btn ghost" href="${esc(src)}" target="_blank" rel="noopener">Open</a>` : ''}
+          </div>
+          <div class="sa-media-hint">${esc(status)}</div>
+          <input type="file" class="sa-media-file" data-rc-media-input data-kind="${esc(kind)}" accept="${esc(accept)}"/>
+        </div>
+      </div>`;
+    }
+
+    function fieldHtml(label, name, value, opts = {}) {
+      const type = opts.type || 'text';
+      const span = opts.span ? ` span${opts.span}` : '';
+      const req = opts.required ? ' *' : '';
+      const ph = opts.placeholder ? ` placeholder="${esc(opts.placeholder)}"` : '';
+      const ro = opts.readonly ? ' readonly' : '';
+      if (type === 'textarea') {
+        return `<div class="sa-pfield${span}"><label>${esc(label)}${req}</label><textarea class="sa-efield" name="${esc(name)}" data-field="${esc(name)}"${ph}${ro}>${esc(value ?? '')}</textarea></div>`;
+      }
+      if (type === 'select') {
+        const optsHtml = (opts.options || []).map(([v, l]) =>
+          `<option value="${esc(v)}" ${String(value ?? '') === String(v) ? 'selected' : ''}>${esc(l)}</option>`
+        ).join('');
+        return `<div class="sa-pfield${span}"><label>${esc(label)}${req}</label><select name="${esc(name)}" data-field="${esc(name)}"${ro === ' readonly' ? ' disabled' : ''}>${optsHtml}</select></div>`;
+      }
+      if (type === 'checkbox') {
+        return `<div class="sa-pfield${span}"><label>${esc(label)}</label><label style="display:flex;align-items:center;gap:8px;font-weight:700;color:var(--ink)"><input type="checkbox" name="${esc(name)}" data-field="${esc(name)}" ${value ? 'checked' : ''}/> Active</label></div>`;
+      }
+      return `<div class="sa-pfield${span}"><label>${esc(label)}${req}</label><input type="${esc(type)}" name="${esc(name)}" data-field="${esc(name)}" value="${esc(value ?? '')}"${ph}${ro}/></div>`;
+    }
+
+    function rcSelectOptions(selected) {
+      const opts = state.rcOptions || [];
+      const items = [['', 'Select RC…'], ...opts.map((rc) => [rc.id, `${rc.name || rc.code || rc.id}${rc.code ? ` (${rc.code})` : ''}`])];
+      return items.map(([v, l]) => `<option value="${esc(v)}" ${String(selected || '') === String(v) ? 'selected' : ''}>${esc(l)}</option>`).join('');
+    }
+
+    function entityModalFields(kind, mode, data) {
+      const d = data || {};
+      if (kind === 'rc') {
+        const num = (v) => (v == null || v === '' ? '' : String(v));
+        return `<div class="sa-entity-section">Centre</div>
+          ${fieldHtml('Company / Centre', 'company_name', d.company_name || d.name, { required: true })}
+          ${fieldHtml('RC code', 'code', d.code, { required: true, readonly: mode === 'edit', placeholder: '3 letters or digits' })}
+          ${fieldHtml('Contact person', 'contact_person', d.contact_person)}
+          ${fieldHtml('Place', 'place', d.place, { placeholder: 'City / town / area' })}
+          ${fieldHtml('Phone', 'phone', d.phone, { placeholder: '10-digit' })}
+          ${fieldHtml('Email', 'email', d.email, { type: 'email' })}
+          ${fieldHtml('Pincode', 'pincode', d.pincode, { placeholder: '6-digit PIN' })}
+          ${fieldHtml('District', 'district', d.district)}
+          ${fieldHtml('State', 'state', d.state)}
+          ${fieldHtml('GST', 'gst_number', d.gst_number, { placeholder: 'GSTIN' })}
+          ${fieldHtml('PAN', 'pan_card', d.pan_card, { placeholder: 'ABCDE1234F' })}
+          ${fieldHtml('Seal ID', 'laboratory_seal_identification', d.laboratory_seal_identification || d.seal_id, { placeholder: 'IND/GATC/…' })}
+          <div class="sa-entity-section">Location</div>
+          ${fieldHtml('Latitude', 'location_lat', num(d.location_lat), { placeholder: 'e.g. 10.0159' })}
+          ${fieldHtml('Longitude', 'location_lng', num(d.location_lng), { placeholder: 'e.g. 76.3419' })}
+          ${fieldHtml('Address', 'address', d.address, { type: 'textarea', span: 2, placeholder: 'Street, city, state' })}
+          <div class="sa-entity-section">Zoho &amp; certification</div>
+          ${fieldHtml('Zoho customer ID', 'zoho_customer_id', d.zoho_customer_id, { placeholder: 'Zoho Books contact ID' })}
+          ${fieldHtml('Zoho labour expense account ID', 'zoho_expense_account_id', d.zoho_expense_account_id, { placeholder: 'Chart of accounts ID' })}
+          ${fieldHtml('Labour expense account name', 'zoho_expense_account_name', d.zoho_expense_account_name)}
+          ${fieldHtml('Certification', 'certification_method', d.certification_method || '', { type: 'select', options: [['','—'],['auto_dsc','Auto DSC'],['pdf_signer','PDF signer'],['manual_upload','Manual upload']] })}
+          ${fieldHtml('Std weights cert no.', 'standard_weights_cert_number', d.standard_weights_cert_number)}
+          ${fieldHtml('Cert date', 'standard_weights_cert_date', d.standard_weights_cert_date, { type: 'date' })}
+          ${fieldHtml('Cert expiry', 'standard_weights_cert_expiry', d.standard_weights_cert_expiry, { type: 'date' })}
+          ${fieldHtml('Active', 'active', d.active !== false, { type: 'checkbox' })}
+          <div class="sa-entity-section">Media (VPS)</div>
+          <div class="sa-media-grid">
+            ${rcMediaFieldHtml('Logo', 'logo', d.logo_url, d.logo_storage, mode)}
+            ${rcMediaFieldHtml('Seal image', 'seal', d.seal_url, d.seal_storage, mode)}
+            ${rcMediaFieldHtml('Std weights cert', 'standard_weights_cert', d.standard_weights_cert_url, d.standard_weights_cert_storage, mode, { pdfOk: true })}
+            ${rcMediaFieldHtml('PAN card image', 'pan_card', d.pan_card_url, d.pan_card_storage, mode)}
+            ${rcMediaFieldHtml('PDF signer signature', 'pdf_signer_sign', d.pdf_signer_sign_url, d.pdf_signer_sign_storage, mode)}
+          </div>
+          ${fieldHtml('PDF signer scale', 'pdf_signer_sign_scale', num(d.pdf_signer_sign_scale), { placeholder: '1' })}
+          ${fieldHtml('PDF signer X %', 'pdf_signer_sign_x', num(d.pdf_signer_sign_x), { placeholder: '50' })}
+          ${fieldHtml('PDF signer Y %', 'pdf_signer_sign_y', num(d.pdf_signer_sign_y), { placeholder: '50' })}
+          ${mode === 'create' ? `<div class="sa-entity-section">RC admin login</div>
+          ${fieldHtml('RC admin Aadhaar', 'aadhaar', d.aadhaar || '', { placeholder: '12 digits (optional)' })}
+          ${fieldHtml('RC admin password', 'password', '', { type: 'password', placeholder: 'Min 8 chars if Aadhaar set' })}` : ''}`;
+      }
+      if (kind === 'product') {
+        const imgSrc = withAuthMediaUrl(d.image_url || d.image_thumb_url || '');
+        const imgUrl = d.image_source_url || '';
+        const rows = Array.isArray(d.capacityRows) && d.capacityRows.length
+          ? d.capacityRows
+          : capacityRowsFromProduct(d);
+        return `<div class="sa-entity-section">Identity</div>
+          ${fieldHtml('Product name', 'name', d.name, { required: true, span: 2 })}
+          ${fieldHtml('Model ID', 'model_id', d.model_id, { required: true, readonly: mode === 'edit' })}
+          ${fieldHtml('Model No', 'model_no', d.model_no)}
+          ${fieldHtml('Yesone SKU', 'yesone_sku', d.yesone_sku)}
+          ${fieldHtml('Brand / series', 'manufacturer_brand_series', d.manufacturer_brand_series)}
+          ${fieldHtml('Instrument type', 'type_of_instrument', d.type_of_instrument)}
+          ${fieldHtml('Accuracy class', 'accuracy_class', d.accuracy_class)}
+          ${fieldHtml('Unit', 'unit_of_measurement', d.unit_of_measurement || 'kg')}
+          ${fieldHtml('Approval no.', 'model_approval_no', d.model_approval_no)}
+          ${fieldHtml('Supply voltage', 'supply_voltage', d.supply_voltage)}
+          ${fieldHtml('Serial pool', 'serial_pool', d.serial_pool || (d.pas_pre_allotted ? 'PAS' : 'GAS'), { type: 'select', options: [['GAS','GAS'],['PAS','PAS']] })}
+          ${fieldHtml('Active', 'active', d.active !== false, { type: 'checkbox' })}
+          <div class="sa-entity-section">Product image</div>
+          <div class="sa-pfield span3">
+            <div class="sa-prod-image-block">
+              <div class="sa-prod-image-preview" aria-hidden="true">${icon('package')}${
+                imgSrc
+                  ? `<img src="${esc(imgSrc)}" alt="" data-product-image-preview loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
+                  : '<img alt="" data-product-image-preview style="display:none" referrerpolicy="no-referrer"/>'
+              }</div>
+              <div class="sa-pfield" style="margin:0">
+                <label>Image on VPS</label>
+                <div class="sa-media-actions" style="margin-top:6px">
+                  ${mode === 'edit' && d.id
+                    ? `<button type="button" class="sa-btn ghost" data-action="product-media-pick" data-kind="image">Upload</button>`
+                    : ''}
+                  <input type="file" class="sa-media-file" data-product-media-input accept="image/*"/>
+                </div>
+                <input type="hidden" name="image_source_url" data-field="image_source_url" data-product-image-url value="${esc(imgUrl)}"/>
+                <span class="hint" style="font-size:11px;color:var(--muted);margin-top:4px">${
+                  mode === 'edit' && d.id
+                    ? (d.image_storage === 'local' ? 'Stored on VPS' : (imgSrc ? 'Available (will prefer VPS after upload)' : 'No image yet — upload to VPS'))
+                    : 'Save the product first, then upload an image to the VPS'
+                }</span>
+              </div>
+            </div>
+          </div>
+          <div class="sa-entity-section span3">Capacities</div>
+          <div class="sa-pfield span3">
+            <div class="sa-cap-head">
+              <h3>Specifications <span style="font-weight:600;color:var(--muted);font-size:11px">(Max / e editable · Min d n derived)</span></h3>
+              <button type="button" class="sa-btn ghost" data-action="product-cap-add">${icon('plus')} Add capacity</button>
+            </div>
+            <div class="sa-cap-rows" data-cap-rows>
+              ${rows.map((row, index) => productCapacityRowHtml(row, index, rows.length)).join('')}
+            </div>
+          </div>`;
+      }
+      if (kind === 'vct') {
+        return `${fieldHtml('Name', 'username', d.username, { required: true, span: 2 })}
+          ${fieldHtml('Aadhaar', 'aadhaar', d.aadhaar, { required: mode === 'create', readonly: mode === 'edit' })}
+          ${mode === 'create' ? fieldHtml('Password', 'password', '', { type: 'password', required: true, placeholder: 'Min 8 characters' }) : fieldHtml('New password', 'password', '', { type: 'password', placeholder: 'Leave blank to keep' })}
+          <div class="sa-pfield span2"><label>Regional Centre *</label><select name="rc_id" data-field="rc_id">${rcSelectOptions(d.rc_id)}</select></div>
+          ${fieldHtml('Phone', 'phone', d.phone)}
+          ${fieldHtml('Email', 'email', d.email, { type: 'email' })}
+          ${fieldHtml('Workflow', 'workflow_mode', d.workflow_mode || 'manual', { type: 'select', options: [['manual','Manual'],['auto','Auto']] })}
+          ${fieldHtml('Approval', 'approval_status', d.approval_status || 'approved', { type: 'select', options: [['approved','Approved'],['pending','Pending'],['rejected','Rejected']] })}
+          ${fieldHtml('Blood group', 'blood_group', d.blood_group)}
+          ${fieldHtml('Pincode', 'pincode', d.pincode)}
+          ${fieldHtml('Police station', 'police_station', d.police_station)}
+          ${fieldHtml('Address', 'address', d.address, { type: 'textarea', span: 3 })}
+          ${fieldHtml('Active', 'active', d.active !== false, { type: 'checkbox' })}`;
+      }
+      if (kind === 'vehicle') {
+        const toDate = (v) => {
+          if (!v) return '';
+          const s = String(v);
+          return s.length >= 10 ? s.slice(0, 10) : s;
+        };
+        return `${fieldHtml('Brand', 'brand', d.brand, { required: true })}
+          ${fieldHtml('Model', 'model', d.model)}
+          ${fieldHtml('Year', 'year', d.year)}
+          ${fieldHtml('Registration', 'reg_number', d.reg_number)}
+          <div class="sa-pfield span2"><label>Regional Centre *</label><select name="rc_id" data-field="rc_id">${rcSelectOptions(d.rc_id)}</select></div>
+          ${fieldHtml('RC valid till', 'rc_validity', toDate(d.rc_validity), { type: 'date' })}
+          ${fieldHtml('Insurance valid till', 'insurance_validity', toDate(d.insurance_validity), { type: 'date' })}
+          ${fieldHtml('Pollution valid till', 'pollution_validity', toDate(d.pollution_validity), { type: 'date' })}
+          ${fieldHtml('F2 weight valid till', 'f2_weight_validity', toDate(d.f2_weight_validity), { type: 'date' })}
+          ${fieldHtml('Active', 'active', d.active !== false, { type: 'checkbox' })}`;
+      }
+      return '';
+    }
+
+    function entityModalMeta(kind, mode) {
+      const titles = {
+        rc: mode === 'create' ? 'Add regional centre' : 'Edit regional centre',
+        product: mode === 'create' ? 'Add product' : 'Edit product',
+        vct: mode === 'create' ? 'Add VCT' : 'Edit VCT',
+        vehicle: mode === 'create' ? 'Add vehicle' : 'Edit vehicle',
+      };
+      const subs = {
+        rc: 'SQL regional_centers — media stored on VPS',
+        product: 'Instrument master in Postgres',
+        vct: 'Technician login (VCT role)',
+        vehicle: 'RC-registered vehicle (Car)',
+      };
+      return { title: titles[kind] || 'Edit', sub: subs[kind] || '' };
+    }
+
+    function entityModalHtml() {
+      const m = state.entityModal;
+      if (!m) return '';
+      const meta = entityModalMeta(m.kind, m.mode);
+      const wide = m.kind === 'rc';
+      const panel = m.kind === 'product';
+      const gridClass = wide ? 'sa-pgrid sa-pgrid--2' : 'sa-pgrid';
+      const dialogClass = panel
+        ? 'sa-entity-dialog sa-entity-dialog--panel'
+        : (wide ? 'sa-entity-dialog sa-entity-dialog--wide' : 'sa-entity-dialog');
+      const layerClass = panel ? 'sa-entity-modal sa-entity-modal--panel' : 'sa-entity-modal';
+      const body = m.loading
+        ? '<p class="sa-meta">Loading…</p>'
+        : `<div class="${gridClass}">${entityModalFields(m.kind, m.mode, m.data)}</div>
+           ${m.error ? `<p class="sa-meta" style="color:var(--bad)">${esc(m.error)}</p>` : ''}`;
+      return `<div class="${layerClass}" data-backdrop="entity" role="dialog" aria-modal="true" aria-label="${esc(meta.title)}">
+        <div class="${dialogClass}">
+          <div class="sa-entity-head"><div><h2>${esc(meta.title)}</h2><p class="sub">${esc(meta.sub)}</p></div>
+            <button type="button" class="sa-btn ghost" data-action="close-entity-modal" aria-label="Close">✕</button></div>
+          <div class="sa-entity-body">${body}</div>
+          <div class="sa-entity-foot">
+            <button type="button" class="sa-btn ghost" data-action="close-entity-modal">Cancel</button>
+            <button type="button" class="sa-btn" data-action="save-entity-modal"${m.saving || m.loading ? ' disabled' : ''}>${m.saving ? 'Saving…' : 'Save'}</button>
+          </div>
+        </div>
+      </div>`;
+    }
+
+    function closeEntityModal() {
+      if (!state.entityModal) return;
+      state.entityModal = null;
+      render(true);
+    }
+
+    function readEntityForm() {
+      const rootEl = root.querySelector('.sa-entity-dialog');
+      if (!rootEl) return {};
+      const out = {};
+      rootEl.querySelectorAll('[data-field]').forEach((el) => {
+        const key = el.getAttribute('data-field');
+        if (!key) return;
+        if (el.type === 'checkbox') out[key] = el.checked;
+        else out[key] = el.value;
+      });
+      return out;
+    }
+
+    function hydrateProductFormData(raw) {
+      const data = { ...(raw || {}) };
+      data.capacityRows = capacityRowsFromProduct(data);
+      if (data.image_source_url == null && data.image_url && !String(data.image_url).startsWith('/api/')) {
+        data.image_source_url = data.image_url;
+      }
+      return data;
+    }
+
+    async function openEntityModal(kind, { mode = 'edit', id = null, seed = null } = {}) {
+      if (kind === 'vct' || kind === 'vehicle' || kind === 'rc') {
+        await loadRcOptions(true);
+      }
+      state.productDetail = null;
+      state.vctDetail = null;
+      state.vehicleDetail = null;
+      const seedData = kind === 'product' ? hydrateProductFormData(seed || {}) : (seed || {});
+      state.entityModal = {
+        kind,
+        mode,
+        id: id || null,
+        loading: Boolean(mode === 'edit' && id),
+        saving: false,
+        error: null,
+        data: seedData,
+      };
+      render(true);
+      if (mode === 'create') return;
+      if (!id) return;
+      const paths = {
+        rc: `/api/v1/admin/regional-centers/${encodeURIComponent(id)}`,
+        product: `/api/v1/admin/products/${encodeURIComponent(id)}`,
+        vct: `/api/v1/admin/users/${encodeURIComponent(id)}`,
+        vehicle: `/api/v1/admin/vehicles/${encodeURIComponent(id)}`,
+      };
+      const { res, json } = await api(paths[kind], { token: authState.token });
+      if (!state.entityModal || state.entityModal.kind !== kind || String(state.entityModal.id || '') !== String(id)) return;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        state.entityModal = {
+          ...state.entityModal,
+          loading: false,
+          error: json.error?.message || 'Could not load record',
+          data: seedData,
+        };
+        toast(state.entityModal.error);
+        render(true);
+        return;
+      }
+      const loaded = json.data || seed || {};
+      state.entityModal = {
+        ...state.entityModal,
+        loading: false,
+        error: null,
+        data: kind === 'product' ? hydrateProductFormData(loaded) : loaded,
+      };
+      render(true);
+    }
+
+    async function uploadRcMedia(kind, file) {
+      const m = state.entityModal;
+      if (!m || m.kind !== 'rc' || m.mode !== 'edit' || !m.id || !file) return;
+      const fd = new FormData();
+      fd.append('file', file, file.name || `${kind}.bin`);
+      toast('Uploading…');
+      const { res, json } = await api(
+        `/api/v1/admin/regional-centers/${encodeURIComponent(m.id)}/media?kind=${encodeURIComponent(kind)}`,
+        { method: 'POST', token: authState.token, formData: fd },
+      );
+      if (!state.entityModal || state.entityModal.kind !== 'rc') return;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        toast(json.error?.message || 'Upload failed');
+        return;
+      }
+      state.entityModal = {
+        ...state.entityModal,
+        data: { ...(json.data || state.entityModal.data) },
+        error: null,
+      };
+      toast('Uploaded to VPS');
+      render(true);
+    }
+
+    async function clearRcMedia(kind) {
+      const m = state.entityModal;
+      if (!m || m.kind !== 'rc' || m.mode !== 'edit' || !m.id || !kind) return;
+      const { res, json } = await api(
+        `/api/v1/admin/regional-centers/${encodeURIComponent(m.id)}/media?kind=${encodeURIComponent(kind)}`,
+        { method: 'DELETE', token: authState.token },
+      );
+      if (!state.entityModal || state.entityModal.kind !== 'rc') return;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        toast(json.error?.message || 'Clear failed');
+        return;
+      }
+      state.entityModal = {
+        ...state.entityModal,
+        data: { ...(json.data || state.entityModal.data) },
+        error: null,
+      };
+      toast('Cleared');
+      render(true);
+    }
+
+    async function uploadProductMedia(kind, file) {
+      const m = state.entityModal;
+      if (!m || m.kind !== 'product' || m.mode !== 'edit' || !m.id || !file) return;
+      const fd = new FormData();
+      fd.append('file', file, file.name || `${kind}.bin`);
+      toast('Uploading…');
+      const { res, json } = await api(
+        `/api/v1/admin/products/${encodeURIComponent(m.id)}/media?kind=${encodeURIComponent(kind)}`,
+        { method: 'POST', token: authState.token, formData: fd },
+      );
+      if (!state.entityModal || state.entityModal.kind !== 'product') return;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        toast(json.error?.message || 'Upload failed');
+        return;
+      }
+      const loaded = json.data || {};
+      state.entityModal = {
+        ...state.entityModal,
+        data: hydrateProductFormData({
+          ...state.entityModal.data,
+          ...loaded,
+          capacityRows: state.entityModal.data?.capacityRows,
+        }),
+        error: null,
+      };
+      toast('Image stored on VPS');
+      render(true);
+    }
+
+    async function saveEntityModal() {
+      const m = state.entityModal;
+      if (!m || m.saving) return;
+      const body = readEntityForm();
+      if (m.kind === 'rc' && !String(body.company_name || '').trim()) {
+        toast('Company / Centre is required');
+        return;
+      }
+      if (m.kind === 'rc' && m.mode === 'create' && !String(body.code || '').trim()) {
+        toast('RC code is required');
+        return;
+      }
+      if (m.kind === 'product' && !String(body.name || '').trim()) {
+        toast('Product name is required');
+        return;
+      }
+      if (m.kind === 'product' && m.mode === 'create' && !String(body.model_id || '').trim()) {
+        toast('Model ID is required');
+        return;
+      }
+      if (m.kind === 'vct') {
+        if (!String(body.username || '').trim()) { toast('Name is required'); return; }
+        if (!String(body.rc_id || '').trim()) { toast('Regional Centre is required'); return; }
+        if (m.mode === 'create') {
+          if (String(body.aadhaar || '').replace(/\D/g, '').length !== 12) { toast('Aadhaar must be 12 digits'); return; }
+          if (String(body.password || '').length < 8) { toast('Password must be at least 8 characters'); return; }
+        }
+        body.role = 'VCT';
+      }
+      if (m.kind === 'vehicle') {
+        if (!String(body.rc_id || '').trim()) { toast('Regional Centre is required'); return; }
+        if (!String(body.brand || '').trim() && !String(body.reg_number || '').trim()) {
+          toast('Brand or registration is required');
+          return;
+        }
+      }
+      if (m.kind === 'product') {
+        body.pas_pre_allotted = String(body.serial_pool || '').toUpperCase() === 'PAS';
+        const capRows = readCapacityRowsFromDom(root.querySelector('.sa-entity-dialog'));
+        const specifications = [];
+        for (const row of capRows) {
+          const max = Number(row.maximum_capacity);
+          const e = Number(row.verification_scale_interval);
+          if (!Number.isFinite(max) || max <= 0 || !Number.isFinite(e) || e <= 0) {
+            toast('Each capacity needs Max and e greater than zero');
+            return;
+          }
+          const derived = computeDerivedCapacity(max, e);
+          specifications.push({
+            id: row.id || newCapacityLocalId(),
+            maximumCapacity: max,
+            verificationScaleInterval: e,
+            maximumPermissibleError: Number(row.maximum_permissible_error) || 0,
+            minimumCapacity: Number(derived.min) || e * 20,
+            actualScaleInterval: Number(derived.d) || e,
+            noOfVerificationIntervals: Number(derived.n) || ((max * 1000) / e),
+          });
+        }
+        if (!specifications.length) {
+          toast('Add at least one capacity row');
+          return;
+        }
+        body.specifications = specifications;
+        const primary = specifications[0];
+        body.maximum_capacity = primary.maximumCapacity;
+        body.verification_scale_interval = primary.verificationScaleInterval;
+        body.maximum_permissible_error = primary.maximumPermissibleError;
+        body.minimum_capacity = primary.minimumCapacity;
+        body.actual_scale_interval = primary.actualScaleInterval;
+        body.no_of_verification_intervals = primary.noOfVerificationIntervals;
+        // Always send image URL key so blank clears remote source.
+        body.image_source_url = body.image_source_url || '';
+        delete body.image_url;
+      }
+      if (body.password === '') delete body.password;
+      if (body.aadhaar === '') delete body.aadhaar;
+      const endpoints = {
+        rc: m.mode === 'create' ? '/api/v1/admin/regional-centers' : `/api/v1/admin/regional-centers/${encodeURIComponent(m.id)}`,
+        product: m.mode === 'create' ? '/api/v1/admin/products' : `/api/v1/admin/products/${encodeURIComponent(m.id)}`,
+        vct: m.mode === 'create' ? '/api/v1/admin/users' : `/api/v1/admin/users/${encodeURIComponent(m.id)}`,
+        vehicle: m.mode === 'create' ? '/api/v1/admin/vehicles' : `/api/v1/admin/vehicles/${encodeURIComponent(m.id)}`,
+      };
+      state.entityModal = { ...m, saving: true, error: null };
+      render(true);
+      const { res, json } = await api(endpoints[m.kind], {
+        method: m.mode === 'create' ? 'POST' : 'PATCH',
+        token: authState.token,
+        body,
+      });
+      if (!state.entityModal) return;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        const err = json.error?.message || 'Save failed';
+        state.entityModal = { ...state.entityModal, saving: false, error: err };
+        toast(err);
+        render(true);
+        return;
+      }
+      state.entityModal = null;
+      toast(m.mode === 'create' ? 'Created' : 'Saved');
+      render(true);
+      loadList(true);
+      if (m.kind === 'rc') {
+        state.rcOptions = [];
+        loadRcOptions(true);
+      }
+    }
+
+    function rcLocationLabel(r) {
+      return r.location_label || [r.place, r.district, r.state].filter(Boolean).join(', ')
+        || r.pincode || (r.address ? String(r.address).split(/\n/)[0].trim() : '') || '—';
+    }
+
+    function rcPlaceLabel(r) {
+      return r.place || r.district || rcLocationLabel(r);
+    }
+
+    function rcIsActive(r) {
+      return r.active !== false;
+    }
+
+    function rcFilteredItems() {
+      const tab = state.subTab || 'All';
+      let items = [...(state.list.items || [])];
+      if (tab === 'Active') items = items.filter(rcIsActive);
+      else if (tab === 'Inactive') items = items.filter((r) => !rcIsActive(r));
+      // Always Total high → low (name as tie-breaker)
+      items.sort((a, b) => {
+        const an = String(a.name || a.code || '').toLowerCase();
+        const bn = String(b.name || b.code || '').toLowerCase();
+        const at = Number(a.total ?? a.verifications) || 0;
+        const bt = Number(b.total ?? b.verifications) || 0;
+        return bt - at || an.localeCompare(bn);
+      });
+      return items;
+    }
+
+    function rcExportCsv() {
+      const items = rcFilteredItems();
+      const headers = ['#', 'RC Name', 'RC Code', 'Location', 'Car', 'VCT', 'OV', 'RV', 'Total', 'Status'];
+      const lines = [headers.join(',')];
+      const cell = (v) => {
+        const s = String(v ?? '');
+        return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+      };
+      items.forEach((r, i) => {
+        const ov = r.ov_count ?? r.ov ?? 0;
+        const rv = r.rv_count ?? r.rv ?? 0;
+        const car = r.car_count ?? r.vehicle_count ?? 0;
+        const total = r.total ?? r.verifications ?? (Number(ov) + Number(rv));
+        lines.push([
+          i + 1,
+          r.name || r.code || '',
+          r.code || '',
+          rcLocationLabel(r),
+          car,
+          r.vct_count ?? 0,
+          ov,
+          rv,
+          total,
+          rcIsActive(r) ? 'Active' : 'Inactive',
+        ].map(cell).join(','));
+      });
+      const blob = new Blob([lines.join('\n')], { type: 'text/csv;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `regional-centres-${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      toast(`Exported ${items.length} centres`);
+    }
+
     function rcList() {
-      const items = state.list.items || [];
-      const rows = items.length ? items.map((r,i) => `<tr>
-          <td><span class="primary">#${i+1} ${esc(r.name || r.code)}</span><span class="sub">${esc(r.code || '')}</span></td>
-          <td>${esc(r.district || '—')}${r.state ? `, ${esc(r.state)}` : ''}</td>
-          <td>${esc(r.contact_person || '—')}</td>
-          <td>${n(r.vct_count)}</td>
-          <td>${n(r.verifications)}</td>
-          <td><strong>${n(r.certified)}</strong></td>
-        </tr>`).join('') : `<tr><td colspan="6" class="sa-empty">No regional centers found</td></tr>`;
+      const allItems = state.list.items || [];
+      const sum = state.list.summary || {};
+      const tab = state.subTab || 'All';
+      const items = rcFilteredItems();
+      const activeCount = sum.active != null
+        ? Number(sum.active)
+        : allItems.filter(rcIsActive).length;
+      const inactiveCount = sum.inactive != null
+        ? Number(sum.inactive)
+        : allItems.filter((r) => !rcIsActive(r)).length;
+      const allCount = sum.centres != null ? Number(sum.centres) : allItems.length;
+      const kpiCentres = state.listLoading ? '…' : n(allCount);
+      const kpiVct = state.listLoading ? '…' : n(sum.vct_count != null
+        ? sum.vct_count
+        : allItems.reduce((s, r) => s + (Number(r.vct_count) || 0), 0));
+      const ovCount = sum.ov_count != null
+        ? Number(sum.ov_count)
+        : allItems.reduce((s, r) => s + (Number(r.ov_count ?? r.ov) || 0), 0);
+      const rvCount = sum.rv_count != null
+        ? Number(sum.rv_count)
+        : allItems.reduce((s, r) => s + (Number(r.rv_count ?? r.rv) || 0), 0);
+      const totalJobs = sum.total != null
+        ? Number(sum.total)
+        : (sum.verifications != null ? Number(sum.verifications) : ovCount + rvCount);
+      const kpiOv = state.listLoading ? '…' : n(ovCount);
+      const kpiRv = state.listLoading ? '…' : n(rvCount);
+      const kpiTotal = state.listLoading ? '…' : n(totalJobs);
+      const kpiCars = state.listLoading ? '…' : n(sum.car_count != null
+        ? sum.car_count
+        : allItems.reduce((s, r) => s + (Number(r.car_count ?? r.vehicle_count) || 0), 0));
+      const foot = { car: 0, vct: 0, ov: 0, rv: 0, total: 0 };
+      const rows = items.length ? items.map((r, i) => {
+        const ov = r.ov_count ?? r.ov ?? 0;
+        const rv = r.rv_count ?? r.rv ?? 0;
+        const car = r.car_count ?? r.vehicle_count ?? 0;
+        const vct = r.vct_count ?? 0;
+        const total = r.total ?? r.verifications ?? (Number(ov) + Number(rv));
+        foot.car += Number(car) || 0;
+        foot.vct += Number(vct) || 0;
+        foot.ov += Number(ov) || 0;
+        foot.rv += Number(rv) || 0;
+        foot.total += Number(total) || 0;
+        return `<tr>
+          <td><span class="sa-rc-idx">${i + 1}</span></td>
+          <td>
+            <button type="button" class="sa-name-btn sa-rc-name" data-action="open-rc" data-id="${esc(r.id)}">${esc(r.name || r.code)}</button>
+            <span class="sub">${esc(r.code || '')}</span>
+          </td>
+          <td><span class="sa-rc-code">${esc(r.code || '—')}</span></td>
+          <td><span class="sa-rc-loc">${icon('pin','sm')}${esc(rcPlaceLabel(r))}</span></td>
+          <td class="num" title="Active vehicles">${n(car)}</td>
+          <td class="num">${n(vct)}</td>
+          <td class="num" title="Original Verification">${n(ov)}</td>
+          <td class="num" title="Re-verification">${n(rv)}</td>
+          <td class="num"><strong>${n(total)}</strong></td>
+        </tr>`;
+      }).join('') : `<tr><td colspan="9" class="sa-empty">${state.listLoading ? 'Loading…' : (state.listError ? esc(state.listError) : 'No regional centres found')}</td></tr>`;
+      const footer = items.length ? `<tfoot><tr>
+          <td colspan="4"><span class="sa-rc-total-label">Total</span></td>
+          <td class="num" title="Sum of cars">${n(foot.car)}</td>
+          <td class="num" title="Sum of VCTs">${n(foot.vct)}</td>
+          <td class="num" title="Sum of OV">${n(foot.ov)}</td>
+          <td class="num" title="Sum of RV">${n(foot.rv)}</td>
+          <td class="num"><strong>${n(foot.total)}</strong></td>
+        </tr></tfoot>` : '';
+      const tabs = [
+        ['All', `All Centres (${n(allCount)})`, ''],
+        ['Active', `Active (${n(activeCount)})`, 'check'],
+        ['Inactive', `Inactive (${n(inactiveCount)})`, 'ban'],
+      ].map(([k, label, ico]) => {
+        const icoCls = k === 'Active' ? 'tab-ok' : (k === 'Inactive' ? 'tab-off' : '');
+        return `<button type="button" class="${tab === k ? 'on' : ''}" data-action="rc-tab" data-tab="${k}" role="tab" aria-selected="${tab === k ? 'true' : 'false'}">${ico ? `<span class="${icoCls}">${icon(ico,'sm')}</span>` : ''}${esc(label)}</button>`;
+      }).join('');
       return `${heading('Regional Centres', 'Manage centres, VCTs and certification progress')}
+        <div class="sa-kpi sa-kpi-6">
+          <div class="card tint-blue"><div class="t">Total Centres<span class="ico">${icon('building')}</span></div><div class="v">${kpiCentres}</div><div class="s">Regional centres</div></div>
+          <div class="card tint-green"><div class="t">Total VCTs<span class="ico green">${icon('people')}</span></div><div class="v">${kpiVct}</div><div class="s">Active technicians</div></div>
+          <div class="card tint-purple"><div class="t">OV Count<span class="ico purple">${icon('file')}</span></div><div class="v">${kpiOv}</div><div class="s">Original verifications</div></div>
+          <div class="card tint-orange"><div class="t">RV Count<span class="ico orange">${icon('award')}</span></div><div class="v">${kpiRv}</div><div class="s">Re-verifications</div></div>
+          <div class="card tint-indigo"><div class="t">Total<span class="ico indigo">${icon('layers')}</span></div><div class="v">${kpiTotal}</div><div class="s">OV + RV verifications</div></div>
+          <div class="card tint-teal"><div class="t">Total Cars<span class="ico teal">${icon('car')}</span></div><div class="v">${kpiCars}</div><div class="s">Active vehicles</div></div>
+        </div>
         <section class="sa-panel">
-          ${listTools()}
-          <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} centres`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
-          <div class="sa-table-wrap"><table class="sa-table"><thead><tr><th>Centre</th><th>Location</th><th>Contact</th><th>VCT</th><th>Jobs</th><th>Certified</th></tr></thead><tbody>${rows}</tbody></table></div>
+          <div class="sa-tools sa-rc-toolbar">
+            <div class="sa-tabs" role="tablist" aria-label="Centre status">${tabs}</div>
+            <label class="sa-search">${icon('search','sm')}<input id="sa-q" type="search" placeholder="Search by RC name, code, location..." value="${esc(state.q)}" aria-label="Search regional centres"/><kbd>⌘ K</kbd></label>
+            <div class="sa-actions">
+              <button type="button" class="sa-btn ghost" data-action="rc-export">${icon('download')} Export</button>
+              <button type="button" class="sa-btn sa-add" data-action="entity-create" data-kind="rc">${icon('plus')} Add RC</button>
+            </div>
+          </div>
+          <div class="sa-table-wrap"><table class="sa-table sa-rc-table">
+            <thead><tr>
+              <th>#</th><th>RC Name</th><th>RC Code</th><th>Location</th><th>Car</th><th>VCT</th><th>OV</th><th>RV</th><th>Total</th>
+            </tr></thead>
+            <tbody>${rows}</tbody>
+            ${footer}
+          </table></div>
         </section>`;
     }
 
-    function productThumbHtml(r, sizeClass = '') {
-      const src = r.image_url ? withAuthMediaUrl(r.image_url) : '';
+    function productThumbHtml(r, sizeClass = '', { full = false } = {}) {
+      const src = withAuthMediaUrl(
+        full ? (r.image_url || r.image_thumb_url || '') : (r.image_thumb_url || r.image_url || ''),
+      );
       return `<span class="sa-pthumb${src ? ' has-img' : ''}${sizeClass ? ` ${sizeClass}` : ''}" aria-hidden="true">${icon('package')}${
+        src
+          ? `<img src="${esc(src)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
+          : ''
+      }</span>`;
+    }
+
+    function productSpecChip(label, value) {
+      const v = value == null || value === '' ? '—' : String(value);
+      return `<div><small>${esc(label)}</small><b title="${esc(v)}">${esc(v)}</b></div>`;
+    }
+
+    function productCard(r) {
+      const name = r.name || '—';
+      const model = r.model_no || r.model_id || '';
+      const unit = r.unit_of_measurement || 'kg';
+      const specs = Array.isArray(r.specifications) && r.specifications.length
+        ? r.specifications
+        : [{
+          maximum_capacity: r.maximum_capacity,
+          minimum_capacity: r.minimum_capacity,
+          verification_scale_interval: r.verification_scale_interval,
+          actual_scale_interval: r.actual_scale_interval,
+          maximum_permissible_error: r.maximum_permissible_error,
+          no_of_verification_intervals: r.no_of_verification_intervals,
+        }];
+      const primary = specs[0] || {};
+      const maxLabel = primary.maximum_capacity != null ? `${primary.maximum_capacity} ${unit}` : '—';
+      const multiMax = specs.length > 1
+        ? specs.map((s) => (s.maximum_capacity != null ? `${s.maximum_capacity}` : null)).filter(Boolean).join(' · ')
+        : null;
+      const isPas = Boolean(r.pas_pre_allotted) || r.serial_pool === 'PAS';
+      const photo = withAuthMediaUrl(r.image_url || r.image_thumb_url || '');
+      const ph = `${icon('package')}${photo
+        ? `<img src="${esc(photo)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
+        : ''}`;
+      const modelHtml = model
+        ? `<div class="model" title="${esc(model)}"><span class="lbl">MODEL</span><span class="num">${esc(model)}</span></div>`
+        : '';
+      const footBits = [];
+      if (r.model_approval_no) footBits.push(`<span>Approval <strong>${esc(r.model_approval_no)}</strong></span>`);
+      if (r.supply_voltage) footBits.push(`<span>V <strong>${esc(r.supply_voltage)}</strong></span>`);
+      if (multiMax) footBits.push(`<span>Caps <strong>${esc(multiMax)} ${esc(unit)}</strong></span>`);
+      return `<article class="sa-prodcard" role="button" tabindex="0" data-action="open-product" data-id="${esc(r.id)}" aria-label="Open ${esc(name)}">
+        <div class="ph">${ph}</div>
+        <div class="sa-prodcard-main">
+          <div class="sa-prodcard-head">
+            <h3>${esc(name)}</h3>
+            ${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge off">Inactive</span>'}
+          </div>
+          ${modelHtml}
+          <div class="sa-tags">
+            ${r.type_of_instrument ? `<span class="sa-tag">${esc(r.type_of_instrument)}</span>` : ''}
+            ${r.manufacturer_brand_series ? `<span class="sa-tag">${esc(r.manufacturer_brand_series)}</span>` : ''}
+            ${r.accuracy_class ? `<span class="sa-tag">Class ${esc(r.accuracy_class)}</span>` : ''}
+            <span class="sa-tag">${isPas ? 'PAS' : 'GAS'}</span>
+            ${specs.length > 1 ? `<span class="sa-tag">${specs.length} caps</span>` : ''}
+          </div>
+          <div class="sa-prod-specs">
+            ${productSpecChip('MAX', maxLabel)}
+            ${productSpecChip('MIN', primary.minimum_capacity)}
+            ${productSpecChip('E', primary.verification_scale_interval)}
+            ${productSpecChip('D', primary.actual_scale_interval)}
+            ${productSpecChip('MPE', primary.maximum_permissible_error)}
+            ${productSpecChip('N', primary.no_of_verification_intervals)}
+          </div>
+          <div class="sa-prodcard-foot">
+            <div class="sa-prodcard-meta">${footBits.join('<span class="sep" aria-hidden="true">·</span>')}</div>
+            <div class="sa-prodcard-actions">
+              <button type="button" class="sa-prodcard-ico" data-action="open-product" data-id="${esc(r.id)}" title="View product" aria-label="View ${esc(name)}">${icon('eye')}</button>
+            </div>
+          </div>
+        </div>
+      </article>`;
+    }
+
+    function vctThumbHtml(r, sizeClass = '') {
+      const src = withAuthMediaUrl(r.photo_thumb_url || r.photo_url || '');
+      return `<span class="sa-pthumb${src ? ' has-img' : ''}${sizeClass ? ` ${sizeClass}` : ''}" aria-hidden="true">${icon('user')}${
         src
           ? `<img src="${esc(src)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
           : ''
@@ -1408,9 +2568,13 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
           actual_scale_interval: p.actual_scale_interval,
           no_of_verification_intervals: p.no_of_verification_intervals,
         }];
-      const imgSrc = p.image_url ? withAuthMediaUrl(p.image_url) : '';
+      const imgSrc = withAuthMediaUrl(p.image_url || p.image_thumb_url || '');
       const docUrl = p.approval_doc_url ? withAuthMediaUrl(p.approval_doc_url) : '';
       const isPas = Boolean(p.pas_pre_allotted) || p.serial_pool === 'PAS';
+      const model = p.model_no || p.model_id || '';
+      const modelHtml = model
+        ? `<div class="model" title="${esc(model)}"><span class="lbl">MODEL</span><span class="num">${esc(model)}</span></div>`
+        : '';
       const specBlocks = specs.map((row, index) => `
         <div class="sa-pspecs" aria-label="${specs.length > 1 ? `Specification ${index + 1}` : 'Specifications'}">
           ${specs.length > 1 ? `<div class="sa-pfield span3" style="grid-column:1/-1"><label>Spec ${index + 1}</label></div>` : ''}
@@ -1421,16 +2585,31 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
           <div class="sa-pfield green"><label>d</label><div class="val">${esc(fmtSpec(row.actual_scale_interval))}</div></div>
           <div class="sa-pfield green"><label>n</label><div class="val">${esc(fmtSpec(row.no_of_verification_intervals))}</div></div>
         </div>`).join('');
-      return `${heading(p.name || 'Product', 'Product details')}
+      return `${heading('Products', 'Product details')}
         <button type="button" class="sa-pback" data-action="close-product">${icon('back')} Back to list</button>
         <section class="sa-panel sa-pdetail">
-          ${loading ? `<p class="sa-meta">Loading product…</p>` : ''}
+          ${loading && !p.name ? `<p class="sa-meta">Loading product…</p>` : ''}
           ${state.productDetailError ? `<p class="sa-meta" style="color:var(--bad)">${esc(state.productDetailError)}</p>` : ''}
-          <div class="sa-pmeta">
-            ${p.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge">Inactive</span>'}
-            <span class="sa-badge ${isPas ? 'warn' : 'blue'}">${isPas ? 'PAS' : 'GAS'}</span>
-            ${p.accuracy_class ? `<span class="sa-badge">Class ${esc(p.accuracy_class)}</span>` : ''}
-            ${p.type_of_instrument ? `<span class="sa-badge">${esc(p.type_of_instrument)}</span>` : ''}
+          <div class="sa-prod-detail-hero">
+            <div class="sa-prod-detail-photo">${icon('package')}${imgSrc
+              ? `<img src="${esc(imgSrc)}" alt="${esc(p.name || 'Product')}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
+              : ''}</div>
+            <div class="sa-prod-detail-head">
+              <div style="min-width:0;flex:1">
+                <h2>${esc(p.name || 'Product')}</h2>
+                ${modelHtml}
+                <div class="sa-tags" style="margin-top:4px">
+                  ${p.type_of_instrument ? `<span class="sa-tag">${esc(p.type_of_instrument)}</span>` : ''}
+                  ${p.manufacturer_brand_series ? `<span class="sa-tag">${esc(p.manufacturer_brand_series)}</span>` : ''}
+                  ${p.accuracy_class ? `<span class="sa-tag">Class ${esc(p.accuracy_class)}</span>` : ''}
+                  <span class="sa-tag">${isPas ? 'PAS' : 'GAS'}</span>
+                </div>
+              </div>
+              <div style="display:flex;gap:6px;align-items:center;flex:none">
+                ${p.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge off">Inactive</span>'}
+                ${loading ? '<span class="sa-badge blue">Refreshing…</span>' : ''}
+              </div>
+            </div>
           </div>
           <div class="sa-pgrid">
             <div class="sa-pfield"><label>Model ID *</label><input type="text" readonly value="${esc(p.model_id || '')}"/></div>
@@ -1454,59 +2633,229 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
             <div class="sa-panel-h" style="margin-bottom:10px"><h2>Specifications</h2></div>
             ${specBlocks}
           </div>
-          <div class="sa-pfiles">
-            <div class="sa-pfile">
-              <div><h3>Image</h3><div class="hint">Optional</div></div>
-              <div class="preview">${imgSrc
-                ? `<img src="${esc(imgSrc)}" alt="${esc(p.name || 'Product')}" loading="lazy" referrerpolicy="no-referrer"/>`
-                : `<span class="sa-meta">No image</span>`}</div>
-            </div>
-            <div class="sa-pfile">
-              <div><h3>Approval doc</h3><div class="hint">PDF / image</div></div>
-              <div class="preview">${docUrl
+          <div>
+            <h3 style="margin:0 0 10px;font-size:14px;font-family:Outfit,system-ui,sans-serif">Documents</h3>
+            <div class="sa-veh-detail-docs">
+              ${docUrl
                 ? (/\.pdf(\?|$)/i.test(String(p.approval_doc_url || '')) || /pdf/i.test(String(p.approval_doc_path || ''))
-                  ? `<a href="${esc(docUrl)}" target="_blank" rel="noopener noreferrer" data-action="open-pdf" data-url="${esc(docUrl)}" data-disposition="inline" data-filename="approval-doc.pdf">Open approval document</a>`
-                  : `<img src="${esc(docUrl)}" alt="Approval document" loading="lazy" referrerpolicy="no-referrer"/>`)
-                : `<span class="sa-meta">No document</span>`}</div>
+                  ? `<a href="${esc(docUrl)}" target="_blank" rel="noopener noreferrer" data-action="open-pdf" data-url="${esc(docUrl)}" data-disposition="inline" data-filename="approval-doc.pdf">${icon('file')} Approval</a>`
+                  : `<a href="${esc(docUrl)}" target="_blank" rel="noopener noreferrer">${icon('file')} Approval</a>`)
+                : '<span class="miss">Approval · not uploaded</span>'}
             </div>
           </div>
         </section>`;
     }
 
     function productsList() {
-      if (state.productDetail) return productDetailPage();
+      // Detail editing uses shared entity modal (open-product).
+      const tab = state.subTab || 'Active';
       const items = state.list.items || [];
-      const rows = items.length ? items.map((r) => `<tr data-action="open-product" data-id="${esc(r.id)}" title="Open product details">
-          <td>${productThumbHtml(r)}</td>
-          <td><span class="primary">${esc(r.name || '—')}</span><span class="sub">${esc(r.model_no || r.model_id || '')}</span></td>
-          <td>${esc(r.type_of_instrument || '—')}</td>
-          <td>${esc(r.manufacturer_brand_series || '—')}</td>
-          <td>${esc(r.accuracy_class || '—')}</td>
-          <td>${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge">Inactive</span>'}</td>
-        </tr>`).join('') : `<tr><td colspan="6" class="sa-empty">No products found</td></tr>`;
+      const total = Number(state.list.total) || 0;
+      const lim = Number(state.list.limit) || listLimitFor('Products');
+      const off = Number(state.list.offset) || 0;
+      const from = total ? off + 1 : 0;
+      const to = Math.min(off + (items.length || lim), total);
+      const countLabel = state.listLoading
+        ? 'Loading…'
+        : (total ? `Showing ${n(from)} – ${n(to)} of ${n(total)} products` : '0 products');
+      const emptyHint = tab === 'Inactive'
+        ? 'No inactive instrument master records.'
+        : 'Instrument master records will appear here.';
+      const cards = items.length
+        ? `<div class="sa-prod">${items.map(productCard).join('')}</div>`
+        : `<div class="sa-empty-polished"><div class="ico">${icon('package')}</div><h3>${state.listLoading ? 'Loading…' : 'No products found'}</h3><p>${state.listLoading ? 'Fetching product catalogue.' : emptyHint}</p></div>`;
       return `${heading('Products', 'Instrument master and specifications')}
         <section class="sa-panel">
-          ${listTools()}
-          <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} products`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
-          <div class="sa-table-wrap"><table class="sa-table"><thead><tr><th style="width:64px">Thumb</th><th>Product</th><th>Instrument</th><th>Brand / series</th><th>Class</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>
+          ${listTools(
+            `<button type="button" class="sa-btn sa-add" data-action="entity-create" data-kind="product">${icon('plus')} Add product</button>`,
+            { leading: statusTabsHtml('Products', tab) },
+          )}
+          <p class="sa-meta">${countLabel}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
+          ${cards}
           ${pager()}
         </section>`;
     }
 
+    async function openVctDetail(id) {
+      if (!id) return;
+      const fromList = (state.list.items || []).find((x) => String(x.id) === String(id));
+      state.vctDetail = { id, loading: true, error: null, data: fromList || null };
+      render(true);
+      const { res, json } = await api(`/api/v1/admin/users/${encodeURIComponent(id)}`, {
+        token: authState.token,
+      });
+      if (!state.vctDetail || String(state.vctDetail.id) !== String(id)) return;
+      if (!res.ok) {
+        if (onAuthFail(json, res)) return;
+        state.vctDetail = {
+          id,
+          loading: false,
+          error: json.error?.message || 'Could not load VCT',
+          data: fromList || null,
+        };
+        toast(state.vctDetail.error);
+        render(true);
+        return;
+      }
+      state.vctDetail = { id, loading: false, error: null, data: json.data || fromList || null };
+      render(true);
+    }
+
+    function closeVctDetail() {
+      state.vctDetail = null;
+      render(true);
+      if (!(state.list.items || []).length) loadList(true);
+    }
+
+    function vctDetailPage() {
+      const detail = state.vctDetail || {};
+      const r = detail.data || {};
+      const loading = detail.loading;
+      const photo = withAuthMediaUrl(r.photo_url || r.photo_thumb_url || '');
+      const docs = r.docs || {};
+      const docLinks = [
+        ['Aadhaar doc', docs.aadhaar_url],
+        ['Biodata', docs.biodata_url],
+        ['Education', docs.education_url],
+        ['PCC', docs.pcc_url],
+      ];
+      const approval = String(r.approval_status || '').toLowerCase();
+      const approvalBadge = approval === 'approved'
+        ? '<span class="sa-badge ok">Approved</span>'
+        : approval === 'pending'
+          ? '<span class="sa-badge warn">Pending</span>'
+          : (approval ? `<span class="sa-badge">${esc(r.approval_status)}</span>` : '');
+      return `${heading(r.username || 'VCT', 'Technician details')}
+        <button type="button" class="sa-pback" data-action="close-vct">${icon('back')} Back to list</button>
+        <section class="sa-panel sa-pdetail">
+          ${loading ? `<p class="sa-meta">Loading technician…</p>` : ''}
+          ${detail.error ? `<p class="sa-meta" style="color:var(--bad)">${esc(detail.error)}</p>` : ''}
+          <div class="sa-pmeta">
+            ${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge off">Inactive</span>'}
+            ${r.workflow_mode ? `<span class="sa-badge blue">${esc(r.workflow_mode)}</span>` : ''}
+            ${approvalBadge}
+            ${r.blood_group ? `<span class="sa-badge">${esc(r.blood_group)}</span>` : ''}
+          </div>
+          <div class="sa-pfiles" style="grid-template-columns:180px 1fr">
+            <div class="sa-pfile">
+              <div><h3>Photo</h3><div class="hint">Profile</div></div>
+              <div class="preview">${photo
+                ? `<img src="${esc(photo)}" alt="${esc(r.username || 'VCT')}" loading="lazy" referrerpolicy="no-referrer"/>`
+                : `<span class="sa-meta">No photo</span>`}</div>
+            </div>
+            <div class="sa-pfile">
+              <div><h3>Documents</h3><div class="hint">Synced from yesgatc</div></div>
+              <div class="preview" style="flex-direction:column;gap:8px;align-items:flex-start;padding:12px">
+                ${docLinks.map(([label, url]) => {
+                  const href = url ? withAuthMediaUrl(url) : '';
+                  return href
+                    ? `<a href="${esc(href)}" target="_blank" rel="noopener noreferrer" data-action="open-pdf" data-url="${esc(href)}" data-disposition="inline">${esc(label)}</a>`
+                    : `<span class="sa-meta">${esc(label)} — not available</span>`;
+                }).join('')}
+              </div>
+            </div>
+          </div>
+          <div class="sa-pgrid">
+            <div class="sa-pfield span2"><label>Name</label><input type="text" readonly value="${esc(r.username || '')}"/></div>
+            <div class="sa-pfield"><label>Aadhaar</label><input type="text" readonly value="${esc(r.aadhaar || '')}"/></div>
+            <div class="sa-pfield"><label>Phone</label><input type="text" readonly value="${esc(r.phone || '')}"/></div>
+            <div class="sa-pfield"><label>Email</label><input type="text" readonly value="${esc(r.email || '')}"/></div>
+            <div class="sa-pfield"><label>Workflow</label><input type="text" readonly value="${esc(r.workflow_mode || '')}"/></div>
+            <div class="sa-pfield span2"><label>Regional Centre</label><input type="text" readonly value="${esc(r.rc_name || r.rc_code || '')}"/></div>
+            <div class="sa-pfield span3"><label>Address</label><input type="text" readonly value="${esc(r.address || '')}"/></div>
+            <div class="sa-pfield"><label>Pincode</label><input type="text" readonly value="${esc(r.pincode || '')}"/></div>
+            <div class="sa-pfield"><label>Police station</label><input type="text" readonly value="${esc(r.police_station || '')}"/></div>
+            <div class="sa-pfield"><label>Blood group</label><input type="text" readonly value="${esc(r.blood_group || '')}"/></div>
+            <div class="sa-pfield"><label>Secondary contact</label><input type="text" readonly value="${esc(r.secondary_contact_name || '')}"/></div>
+            <div class="sa-pfield"><label>Relationship</label><input type="text" readonly value="${esc(r.secondary_contact_relationship || '')}"/></div>
+            <div class="sa-pfield"><label>Secondary phone</label><input type="text" readonly value="${esc(r.secondary_contact_phone || '')}"/></div>
+            <div class="sa-pfield"><label>Approved at</label><input type="text" readonly value="${esc(fmtDate(r.approved_at) === '—' ? (r.approved_at || '') : fmtDate(r.approved_at))}"/></div>
+            <div class="sa-pfield"><label>Firebase UID</label><input type="text" readonly value="${esc(r.firebase_uid || '')}"/></div>
+          </div>
+        </section>`;
+    }
+
+    function vctTitle(r) {
+      return String(r.username || '').trim().toUpperCase() || 'TECHNICIAN';
+    }
+
+    function vctPhotoSrc(r, { thumb = false } = {}) {
+      if (thumb) {
+        return withAuthMediaUrl(r.photo_thumb_url || r.photo_url || '');
+      }
+      return withAuthMediaUrl(r.photo_url || r.photo_thumb_url || '');
+    }
+
+    function vctMetaCell(label, value, ico) {
+      const text = value == null || value === '' ? '—' : String(value);
+      return `<div><span class="di">${icon(ico)}</span><div><small>${esc(label)}</small><b title="${esc(text)}">${esc(text)}</b></div></div>`;
+    }
+
+    function vctCard(r) {
+      const title = vctTitle(r);
+      const photo = vctPhotoSrc(r, { thumb: false });
+      const rc = r.rc_name || r.rc_code || '—';
+      const aadhaar = String(r.aadhaar || '').trim();
+      const workflow = String(r.workflow_mode || '').trim() || '—';
+      const approval = String(r.approval_status || '').trim() || '—';
+      const thumb = `${icon('user')}${photo
+        ? `<img src="${esc(photo)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
+        : ''}`;
+      const idHtml = aadhaar
+        ? `<div class="sa-veh-plate" title="${esc(aadhaar)}"><span class="ind">ID</span><span class="num">${esc(aadhaar)}</span></div>`
+        : `<div class="sa-veh-plate" title="No Aadhaar"><span class="ind">ID</span><span class="num" style="opacity:.45">—</span></div>`;
+      return `<article class="sa-vehcard sa-vehcard--person" role="button" tabindex="0" data-action="open-vct" data-id="${esc(r.id)}" aria-label="View ${esc(title)}">
+        <div class="ph">${thumb}</div>
+        <div class="sa-vehcard-main">
+          <div class="sa-vehcard-head">
+            <h3>${esc(title)}</h3>
+            ${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge off">Inactive</span>'}
+          </div>
+          ${idHtml}
+          <div class="sa-tags">
+            <span class="sa-tag" title="${esc(rc)}">${icon('building')}${esc(rc)}</span>
+            ${r.blood_group ? `<span class="sa-tag">${esc(r.blood_group)}</span>` : ''}
+          </div>
+          <div class="sa-docs">
+            ${vctMetaCell('Phone', r.phone || '—', 'phone')}
+            ${vctMetaCell('Workflow', workflow, workflow.toLowerCase() === 'auto' ? 'zap' : 'layers')}
+            ${vctMetaCell('Approval', approval, 'shield')}
+          </div>
+          <div class="sa-vehcard-foot">
+            <div class="sa-vehcard-actions">
+              <button type="button" class="sa-vehcard-ico" data-action="open-vct" data-id="${esc(r.id)}" title="View technician" aria-label="View ${esc(title)}">${icon('eye')}</button>
+            </div>
+          </div>
+        </div>
+      </article>`;
+    }
+
     function vctList() {
+      // Detail editing uses shared entity modal (open-vct).
+      const tab = state.subTab || 'Active';
       const items = state.list.items || [];
-      const rows = items.length ? items.map((r) => `<tr>
-          <td><span class="primary">${esc(r.username || '—')}</span><span class="sub">${esc(r.aadhaar || '')}</span></td>
-          <td>${esc(r.rc_name || r.rc_code || '—')}</td>
-          <td>${esc(r.phone || '—')}</td>
-          <td>${esc(r.workflow_mode || '—')}</td>
-          <td>${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge">Inactive</span>'}</td>
-        </tr>`).join('') : `<tr><td colspan="5" class="sa-empty">No VCT users found</td></tr>`;
+      const total = Number(state.list.total) || 0;
+      const lim = Number(state.list.limit) || listLimitFor('VCT');
+      const off = Number(state.list.offset) || 0;
+      const from = total ? off + 1 : 0;
+      const to = Math.min(off + (items.length || lim), total);
+      const countLabel = state.listLoading
+        ? 'Loading…'
+        : (total ? `Showing ${n(from)} – ${n(to)} of ${n(total)} technicians` : '0 technicians');
+      const emptyHint = tab === 'Inactive'
+        ? 'No inactive technicians.'
+        : 'Synced VCT users from yesgatc will appear here.';
+      const cards = items.length
+        ? `<div class="sa-veh sa-veh--vct">${items.map(vctCard).join('')}</div>`
+        : `<div class="sa-empty-polished"><div class="ico">${icon('user')}</div><h3>${state.listLoading ? 'Loading…' : 'No technicians found'}</h3><p>${state.listLoading ? 'Fetching technicians from VPS.' : emptyHint}</p></div>`;
       return `${heading('VCT', 'Verification and Calibration Technicians')}
         <section class="sa-panel">
-          ${listTools()}
-          <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} technicians`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
-          <div class="sa-table-wrap"><table class="sa-table"><thead><tr><th>Name</th><th>Regional Centre</th><th>Phone</th><th>Workflow</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>
+          ${listTools(
+            `<button type="button" class="sa-btn sa-add" data-action="entity-create" data-kind="vct">${icon('plus')} Add VCT</button>`,
+            { leading: statusTabsHtml('VCT', tab) },
+          )}
+          <p class="sa-meta">${countLabel}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
+          ${cards}
           ${pager()}
         </section>`;
     }
@@ -1629,7 +2978,10 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       return `${r.brand || ''} ${r.model || ''}`.trim().toUpperCase() || 'VEHICLE';
     }
 
-    function vehiclePhotoSrc(r) {
+    function vehiclePhotoSrc(r, { thumb = true } = {}) {
+      if (thumb) {
+        return withAuthMediaUrl(r.photo_thumb_url || r.photo_url || r.vehicle_photo_url || '');
+      }
       return withAuthMediaUrl(r.photo_url || r.vehicle_photo_url || '');
     }
 
@@ -1640,12 +2992,16 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
 
     function vehicleCard(r) {
       const title = vehicleTitle(r);
-      const photo = vehiclePhotoSrc(r);
+      // Full photo for portrait crop (cover fills the tall phone-screen strip).
+      const photo = vehiclePhotoSrc(r, { thumb: false });
       const plate = String(r.reg_number || '').trim();
       const rc = r.rc_name || r.rc_code || '—';
       const thumb = `${icon('car')}${photo
-        ? `<img src="${esc(photo)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
+        ? `<img src="${esc(photo)}" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
         : ''}`;
+      const plateHtml = plate
+        ? `<div class="sa-veh-plate" title="${esc(plate)}"><span class="ind">IND</span><span class="num">${esc(plate)}</span></div>`
+        : `<div class="sa-veh-plate" title="No registration"><span class="ind">IND</span><span class="num" style="opacity:.45">—</span></div>`;
       return `<article class="sa-vehcard" role="button" tabindex="0" data-action="open-vehicle" data-id="${esc(r.id)}" aria-label="View ${esc(title)}">
         <div class="ph">${thumb}</div>
         <div class="sa-vehcard-main">
@@ -1653,9 +3009,9 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
             <h3>${esc(title)}</h3>
             ${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge off">Inactive</span>'}
           </div>
+          ${plateHtml}
           <div class="sa-tags">
-            <span class="sa-tag">${icon('building')}${esc(rc)}</span>
-            ${plate ? `<span class="sa-tag plate"><span class="ind">IND</span>${esc(plate)}</span>` : ''}
+            <span class="sa-tag" title="${esc(rc)}">${icon('building')}${esc(rc)}</span>
             ${r.year ? `<span class="sa-tag">${icon('calendar')}${esc(r.year)}</span>` : ''}
           </div>
           <div class="sa-docs">
@@ -1663,9 +3019,11 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
             ${vehicleDateCell('Insurance Valid Till', r.insurance_validity, 'shield')}
             ${vehicleDateCell('Pollution Valid Till', r.pollution_validity, 'wind')}
           </div>
-        </div>
-        <div class="sa-vehcard-actions">
-          <button type="button" class="sa-vehcard-ico" data-action="open-vehicle" data-id="${esc(r.id)}" title="View vehicle" aria-label="View ${esc(title)}">${icon('eye')}</button>
+          <div class="sa-vehcard-foot">
+            <div class="sa-vehcard-actions">
+              <button type="button" class="sa-vehcard-ico" data-action="open-vehicle" data-id="${esc(r.id)}" title="View vehicle" aria-label="View ${esc(title)}">${icon('eye')}</button>
+            </div>
+          </div>
         </div>
       </article>`;
     }
@@ -1714,7 +3072,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       const detail = state.vehicleDetail || {};
       const r = detail.data || {};
       const title = vehicleTitle(r);
-      const photo = vehiclePhotoSrc(r);
+      const photo = vehiclePhotoSrc(r, { thumb: false });
       const docs = r.docs || {};
       const docLinks = [
         ['RC', docs.rc_url],
@@ -1736,6 +3094,10 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         ['Approval', r.approval_status || '—'],
         ['Updated', fmtDateTime(r.updated_at)],
       ];
+      const plate = String(r.reg_number || '').trim();
+      const plateHtml = plate
+        ? `<div class="sa-veh-plate" title="${esc(plate)}"><span class="ind">IND</span><span class="num">${esc(plate)}</span></div>`
+        : '';
       return `${heading('Car', 'Vehicle details')}
         <button type="button" class="sa-veh-detail-back" data-action="close-vehicle">${icon('back')} Back to list</button>
         <section class="sa-panel">
@@ -1744,13 +3106,21 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
           <div class="sa-veh-detail">
             <div class="sa-veh-detail-hero">
               <div class="sa-veh-detail-photo">${icon('car')}${photo
-                ? `<img src="${esc(photo)}" alt="${esc(title)}" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
+                ? `<img src="${esc(photo)}" alt="${esc(title)}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.style.display='none'"/>`
                 : ''}</div>
-              <div>
-                <h2 style="margin:0 0 6px;font-family:Outfit,system-ui,sans-serif;font-size:20px;letter-spacing:-.02em">${esc(title)}</h2>
-                <p style="margin:0 0 10px;font-size:13px;color:var(--muted)">${esc(r.reg_number || '—')} · ${esc(r.rc_name || r.rc_code || '—')}</p>
-                ${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge off">Inactive</span>'}
-                ${detail.loading ? '<span class="sa-badge blue" style="margin-left:6px">Refreshing…</span>' : ''}
+              <div class="sa-veh-detail-head">
+                <div style="min-width:0;flex:1">
+                  <h2>${esc(title)}</h2>
+                  ${plateHtml}
+                  <div class="sa-tags" style="margin-top:4px">
+                    <span class="sa-tag">${icon('building')}${esc(r.rc_name || r.rc_code || '—')}</span>
+                    ${r.year ? `<span class="sa-tag">${icon('calendar')}${esc(r.year)}</span>` : ''}
+                  </div>
+                </div>
+                <div style="display:flex;gap:6px;align-items:center;flex:none">
+                  ${r.active ? '<span class="sa-badge ok">Active</span>' : '<span class="sa-badge off">Inactive</span>'}
+                  ${detail.loading ? '<span class="sa-badge blue">Refreshing…</span>' : ''}
+                </div>
               </div>
             </div>
             <div class="sa-veh-detail-grid">
@@ -1769,7 +3139,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
     }
 
     function vehiclesPage() {
-      if (state.vehicleDetail) return vehicleDetailPage();
+      // Detail editing uses shared entity modal (open-vehicle).
       const tab = state.subTab || 'All';
       const items = state.list.items || [];
       const sum = state.list.summary || {};
@@ -1792,7 +3162,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
           ${[['All','All Vehicles'],['Active','Active'],['Expired','Expired'],['Inactive','Inactive']].map(([k,l])=>`<button type="button" class="${tab===k?'on':''}" data-page="Vehicles" data-tab="${k}">${l}</button>`).join('')}
         </div>
         <section class="sa-panel">
-          ${listTools()}
+          ${listTools(`<button type="button" class="sa-btn sa-add" data-action="entity-create" data-kind="vehicle">${icon('plus')} Add car</button>`)}
           <p class="sa-meta">${state.listLoading ? 'Loading…' : `${n(state.list.total)} vehicles`}${state.listError ? ` · ${esc(state.listError)}` : ''}</p>
           ${cards}
           ${pager()}
@@ -1834,16 +3204,16 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
 
     function reportsPage() {
       const cards = [
-        ['Verification report','Verification records by selected date','shield'],
-        ['RC quota report','Allotted, used and available units','hash'],
-        ['RC wallet report','Current balances and lifetime totals','wallet'],
-        ['Regional centre report','Centre register and certification','building'],
-        ['Technician report','VCT directory and performance','user'],
-        ['Customer report','Customer master export','bag'],
+        ['Verification report','shield'],
+        ['RC quota report','hash'],
+        ['RC wallet report','wallet'],
+        ['Regional centre report','building'],
+        ['Technician report','user'],
+        ['Customer report','bag'],
       ];
       return `${heading('Reports', 'Verification and operational reports', periodButtons())}
         <div class="sa-reportgrid">
-          ${cards.map((r)=>`<div class="sa-panel" style="margin:0"><div style="display:flex;gap:12px;align-items:flex-start"><span class="sa-kpi"><span class="ico" style="width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue)">${icon(r[2])}</span></span><div style="flex:1"><h3 style="margin:0 0 4px;font-family:Outfit,system-ui,sans-serif;font-size:15px">${esc(r[0])}</h3><p style="margin:0 0 10px;font-size:12px;color:var(--muted)">${esc(r[1])}</p><button type="button" class="sa-btn outline" data-action="noop-export">${icon('download')} Export CSV</button></div></div></div>`).join('')}
+          ${cards.map((r)=>`<div class="sa-panel" style="margin:0"><div style="display:flex;gap:12px;align-items:flex-start"><span class="sa-kpi"><span class="ico" style="width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:var(--blue-soft);color:var(--blue)">${icon(r[1])}</span></span><div style="flex:1"><h3 style="margin:0 0 4px;font-family:Outfit,system-ui,sans-serif;font-size:15px">${esc(r[0])}</h3><p style="margin:0;font-size:12px;color:var(--muted)">Coming soon</p></div></div></div>`).join('')}
         </div>`;
     }
 
@@ -2957,7 +4327,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
 
     function render(preserve) {
       const scrollTop = preserve ? (root.querySelector('.sa-scroll')?.scrollTop || 0) : 0;
-      root.innerHTML = `<div class="sa-shell">${sidebar()}<div class="sa-main">${topbar()}<div class="sa-scroll"><div class="sa-content">${state.page==='Dashboard'?dashboard():modulePage()}</div></div></div>${state.toast?`<div class="toast" role="status">${esc(state.toast)}</div>`:''}</div>${galleryModalHtml()}`;
+      root.innerHTML = `<div class="sa-shell">${sidebar()}<div class="sa-main">${topbar()}<div class="sa-scroll"><div class="sa-content">${state.page==='Dashboard'?dashboard():modulePage()}</div></div></div>${state.toast?`<div class="toast" role="status">${esc(state.toast)}</div>`:''}</div>${galleryModalHtml()}${entityModalHtml()}`;
       if (preserve) {
         const sc = root.querySelector('.sa-scroll');
         if (sc) sc.scrollTop = scrollTop;
@@ -3061,6 +4431,10 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
         closeIntegrationModal();
         return;
       }
+      if (e.target.classList?.contains('sa-entity-modal') && e.target.dataset.backdrop === 'entity') {
+        closeEntityModal();
+        return;
+      }
       if (e.target.classList?.contains('sa-gallery') && e.target.dataset.action === 'close-gallery') {
         closeGallery();
         return;
@@ -3080,7 +4454,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       }
       if (btn.dataset.action === 'open-product') {
         e.preventDefault();
-        openProductDetail(btn.dataset.id);
+        openEntityModal('product', { mode: 'edit', id: btn.dataset.id });
         return;
       }
       if (btn.dataset.action === 'close-product') {
@@ -3090,12 +4464,87 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       }
       if (btn.dataset.action === 'open-vehicle') {
         e.preventDefault();
-        openVehicleDetail(btn.dataset.id);
+        openEntityModal('vehicle', { mode: 'edit', id: btn.dataset.id });
         return;
       }
       if (btn.dataset.action === 'close-vehicle') {
         e.preventDefault();
         closeVehicleDetail();
+        return;
+      }
+      if (btn.dataset.action === 'open-vct') {
+        e.preventDefault();
+        openEntityModal('vct', { mode: 'edit', id: btn.dataset.id });
+        return;
+      }
+      if (btn.dataset.action === 'close-vct') {
+        e.preventDefault();
+        closeVctDetail();
+        return;
+      }
+      if (btn.dataset.action === 'open-rc') {
+        e.preventDefault();
+        openEntityModal('rc', { mode: 'edit', id: btn.dataset.id });
+        return;
+      }
+      if (btn.dataset.action === 'entity-create') {
+        e.preventDefault();
+        openEntityModal(btn.dataset.kind, { mode: 'create', seed: {} });
+        return;
+      }
+      if (btn.dataset.action === 'close-entity-modal') {
+        e.preventDefault();
+        closeEntityModal();
+        return;
+      }
+      if (btn.dataset.action === 'product-cap-add') {
+        e.preventDefault();
+        if (!state.entityModal || state.entityModal.kind !== 'product') return;
+        preserveProductEntityDraft();
+        const rows = [...(state.entityModal.data.capacityRows || []), emptyCapacityRow()];
+        state.entityModal = {
+          ...state.entityModal,
+          data: { ...state.entityModal.data, capacityRows: rows },
+        };
+        render(true);
+        return;
+      }
+      if (btn.dataset.action === 'product-cap-remove') {
+        e.preventDefault();
+        if (!state.entityModal || state.entityModal.kind !== 'product') return;
+        preserveProductEntityDraft();
+        const idx = Number(btn.dataset.index);
+        const rows = [...(state.entityModal.data.capacityRows || [])];
+        if (rows.length <= 1) return;
+        if (Number.isFinite(idx)) rows.splice(idx, 1);
+        state.entityModal = {
+          ...state.entityModal,
+          data: { ...state.entityModal.data, capacityRows: rows },
+        };
+        render(true);
+        return;
+      }
+      if (btn.dataset.action === 'save-entity-modal') {
+        e.preventDefault();
+        saveEntityModal();
+        return;
+      }
+      if (btn.dataset.action === 'rc-media-pick') {
+        e.preventDefault();
+        const kind = btn.dataset.kind;
+        const input = root.querySelector(`[data-rc-media-input][data-kind="${kind}"]`);
+        if (input) input.click();
+        return;
+      }
+      if (btn.dataset.action === 'rc-media-clear') {
+        e.preventDefault();
+        clearRcMedia(btn.dataset.kind);
+        return;
+      }
+      if (btn.dataset.action === 'product-media-pick') {
+        e.preventDefault();
+        const input = root.querySelector('[data-product-media-input]');
+        if (input) input.click();
         return;
       }
       if (btn.dataset.action === 'gallery-prev') {
@@ -3146,7 +4595,7 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
           state.list.offset = 0;
           loadList();
         } else {
-          loadDash();
+        loadDash();
         }
         return;
       }
@@ -3156,8 +4605,19 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       else if (action === 'refresh') { toast('Refreshing…'); loadDash(); }
       else if (action === 'logout') { doLogout(); }
       else if (action === 'list-search') { syncFiltersFromDom(); state.list.offset = 0; loadList(); }
+      else if (action === 'rc-tab') {
+        state.subTab = btn.dataset.tab || 'All';
+        render(true);
+      }
+      else if (action === 'rc-export') {
+        rcExportCsv();
+      }
       else if (action === 'list-reset') {
         state.q = ''; state.statusFilter = ''; state.typeFilter = ''; state.rcFilter = '';
+        if (state.page === 'Regional Centers') {
+          state.subTab = 'All';
+          state.rcSort = 'total-desc';
+        }
         state.list.offset = 0; loadList();
       }
       else if (action === 'list-prev') {
@@ -3248,7 +4708,57 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       }
     };
 
+    root.addEventListener('input', (e) => {
+      const t = e.target;
+      if (!t) return;
+      if (t.matches('[data-cap-field="maximum_capacity"],[data-cap-field="verification_scale_interval"]')) {
+        refreshCapacityDerived(t.closest('[data-cap-row]'));
+        return;
+      }
+      if (t.matches('[data-product-image-url]')) {
+        const preview = root.querySelector('[data-product-image-preview]');
+        if (!preview) return;
+        const url = String(t.value || '').trim();
+        if (/^https?:\/\//i.test(url)) {
+          preview.src = url;
+          preview.style.display = '';
+        }
+      }
+    });
+
+    root.addEventListener('change', (e) => {
+      const t = e.target;
+      if (!t) return;
+      if (t.matches('[data-rc-media-input]')) {
+        const file = t.files && t.files[0];
+        const kind = t.getAttribute('data-kind');
+        t.value = '';
+        if (file && kind) uploadRcMedia(kind, file);
+        return;
+      }
+      if (t.matches('[data-product-media-input]')) {
+        const file = t.files && t.files[0];
+        t.value = '';
+        if (file) uploadProductMedia('image', file);
+      }
+    });
+
     root.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && String(e.key || '').toLowerCase() === 'k'
+        && state.page === 'Regional Centers' && !state.entityModal) {
+        const qEl = root.querySelector('#sa-q');
+        if (qEl) {
+          e.preventDefault();
+          qEl.focus();
+          qEl.select?.();
+        }
+        return;
+      }
+      if (e.key === 'Escape' && state.entityModal) {
+        e.preventDefault();
+        closeEntityModal();
+        return;
+      }
       if (e.key === 'Escape' && state.gallery) {
         e.preventDefault();
         closeGallery();
@@ -3310,8 +4820,20 @@ body.mobile{background:#e7ebf1;display:flex;justify-content:center;align-items:c
       loadZohoStatus(true);
     });
 
-    render();
-    loadDash();
+    window.addEventListener('hashchange', applyHashFromLocation);
+    window.addEventListener('popstate', applyHashFromLocation);
+
+    // Restore Super Admin page from URL hash after auth (refresh stays on current module).
+    {
+      const startPage = pageFromHash(location.hash) || 'Dashboard';
+      if (!location.hash || location.hash === '#' || location.hash === '#/') {
+        history.replaceState(null, '', pageHash(startPage));
+      } else if (location.hash !== pageHash(startPage)) {
+        // Normalize aliases (#/car → #/vehicles, #/regional-centers → #/regional-centres).
+        history.replaceState(null, '', pageHash(startPage));
+      }
+      goPage(startPage, { skipHash: true });
+    }
     loadEmaapStatus(true);
     loadYesoneStatus(true);
     loadRazorpayStatus(true);

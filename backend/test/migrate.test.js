@@ -17,6 +17,9 @@ describe('migrations', () => {
     assert.ok(files.includes('003_auth_sessions_otp.sql'));
     assert.ok(files.includes('004_domain_parity.sql'));
     assert.ok(files.includes('005_product_media_urls.sql'));
+    assert.ok(files.includes('006_regional_center_details.sql'));
+    assert.ok(files.includes('007_regional_center_media.sql'));
+    assert.ok(files.includes('008_product_capacities_specs.sql'));
   });
 
   it('005 migration adds product media URL columns', async () => {
@@ -26,6 +29,37 @@ describe('migrations', () => {
     );
     assert.match(sql, /image_url/);
     assert.match(sql, /approval_doc_url/);
+  });
+
+  it('006 migration adds regional centre profile columns', async () => {
+    const sql = await fs.readFile(
+      path.join(MIGRATIONS_DIR, '006_regional_center_details.sql'),
+      'utf8',
+    );
+    assert.match(sql, /ADD COLUMN IF NOT EXISTS place/);
+    assert.match(sql, /gst_number/);
+    assert.match(sql, /certification_method/);
+  });
+
+  it('007 migration adds regional centre media / PDF-signer columns', async () => {
+    const sql = await fs.readFile(
+      path.join(MIGRATIONS_DIR, '007_regional_center_media.sql'),
+      'utf8',
+    );
+    assert.match(sql, /ADD COLUMN IF NOT EXISTS logo_url/);
+    assert.match(sql, /seal_url/);
+    assert.match(sql, /pdf_signer_sign_url/);
+    assert.match(sql, /pdf_signer_sign_scale/);
+  });
+
+  it('008 migration backfills capacities.specifications from legacy scalars', async () => {
+    const sql = await fs.readFile(
+      path.join(MIGRATIONS_DIR, '008_product_capacities_specs.sql'),
+      'utf8',
+    );
+    assert.match(sql, /specifications/);
+    assert.match(sql, /maximumCapacity/);
+    assert.match(sql, /verificationScaleInterval/);
   });
 
   it('M1 migration SQL defines required tables', async () => {

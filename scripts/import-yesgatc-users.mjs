@@ -79,8 +79,35 @@ const PROFILE_KEEP = [
   'profilePhotoPath',
   'profilePhotoName',
   'profilePhotoContentType',
+  'profilePhotoLocalPath',
   'sealUrl',
   'sealPath',
+  'rcId',
+  'approvedAt',
+  'approvedByUid',
+  'forceLogoutAt',
+  'deactivatedAt',
+  'deactivatedByUid',
+  'aadharDocUrl',
+  'aadharDocPath',
+  'aadharDocName',
+  'aadharDocContentType',
+  'aadharDocLocalPath',
+  'biodataDocUrl',
+  'biodataDocPath',
+  'biodataDocName',
+  'biodataDocContentType',
+  'biodataDocLocalPath',
+  'educationCertDocUrl',
+  'educationCertDocPath',
+  'educationCertDocName',
+  'educationCertDocContentType',
+  'educationCertDocLocalPath',
+  'pccDocUrl',
+  'pccDocPath',
+  'pccDocName',
+  'pccDocContentType',
+  'pccDocLocalPath',
 ];
 
 function argValue(flag) {
@@ -177,24 +204,58 @@ async function upsertRegionalCenter(client, doc) {
   if (doc.logoContentType) fees.logoContentType = doc.logoContentType;
   if (doc.sealUrl) fees.sealUrl = doc.sealUrl;
   if (doc.sealPath) fees.sealPath = doc.sealPath;
+  if (doc.standardWeightsCertUrl) fees.standardWeightsCertUrl = doc.standardWeightsCertUrl;
+  if (doc.panCardUrl) fees.panCardUrl = doc.panCardUrl;
+  if (doc.pdfSignerSignUrl) fees.pdfSignerSignUrl = doc.pdfSignerSignUrl;
+  if (doc.pdfSignerSignScale != null) fees.pdfSignerSignScale = doc.pdfSignerSignScale;
+  if (doc.pdfSignerSignX != null) fees.pdfSignerSignX = doc.pdfSignerSignX;
+  if (doc.pdfSignerSignY != null) fees.pdfSignerSignY = doc.pdfSignerSignY;
   const result = await client.query(
     `INSERT INTO regional_centers (
-       code, company_name, contact_person, phone, email, address,
+       code, company_name, contact_person, phone, email, address, place,
        state, district, pincode, location_lat, location_lng,
-       laboratory_seal_identification, fees_json, active
-     ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13::jsonb,TRUE)
+       gst_number, pan_card, zoho_customer_id, zoho_expense_account_id,
+       zoho_expense_account_name, certification_method,
+       laboratory_seal_identification, standard_weights_cert_number,
+       standard_weights_cert_date, standard_weights_cert_expiry,
+       logo_url, seal_url, standard_weights_cert_url, pan_card_url,
+       pdf_signer_sign_url, pdf_signer_sign_scale, pdf_signer_sign_x,
+       pdf_signer_sign_y, fees_json, active
+     ) VALUES (
+       $1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19,$20,$21,$22,
+       $23,$24,$25,$26,$27,$28,$29,$30,
+       $31::jsonb,TRUE
+     )
      ON CONFLICT (code) DO UPDATE SET
        company_name = EXCLUDED.company_name,
        contact_person = EXCLUDED.contact_person,
        phone = EXCLUDED.phone,
        email = EXCLUDED.email,
        address = EXCLUDED.address,
+       place = COALESCE(EXCLUDED.place, regional_centers.place),
        state = EXCLUDED.state,
        district = EXCLUDED.district,
        pincode = EXCLUDED.pincode,
        location_lat = EXCLUDED.location_lat,
        location_lng = EXCLUDED.location_lng,
+       gst_number = COALESCE(EXCLUDED.gst_number, regional_centers.gst_number),
+       pan_card = COALESCE(EXCLUDED.pan_card, regional_centers.pan_card),
+       zoho_customer_id = COALESCE(EXCLUDED.zoho_customer_id, regional_centers.zoho_customer_id),
+       zoho_expense_account_id = COALESCE(EXCLUDED.zoho_expense_account_id, regional_centers.zoho_expense_account_id),
+       zoho_expense_account_name = COALESCE(EXCLUDED.zoho_expense_account_name, regional_centers.zoho_expense_account_name),
+       certification_method = COALESCE(EXCLUDED.certification_method, regional_centers.certification_method),
        laboratory_seal_identification = EXCLUDED.laboratory_seal_identification,
+       standard_weights_cert_number = COALESCE(EXCLUDED.standard_weights_cert_number, regional_centers.standard_weights_cert_number),
+       standard_weights_cert_date = COALESCE(EXCLUDED.standard_weights_cert_date, regional_centers.standard_weights_cert_date),
+       standard_weights_cert_expiry = COALESCE(EXCLUDED.standard_weights_cert_expiry, regional_centers.standard_weights_cert_expiry),
+       logo_url = COALESCE(EXCLUDED.logo_url, regional_centers.logo_url),
+       seal_url = COALESCE(EXCLUDED.seal_url, regional_centers.seal_url),
+       standard_weights_cert_url = COALESCE(EXCLUDED.standard_weights_cert_url, regional_centers.standard_weights_cert_url),
+       pan_card_url = COALESCE(EXCLUDED.pan_card_url, regional_centers.pan_card_url),
+       pdf_signer_sign_url = COALESCE(EXCLUDED.pdf_signer_sign_url, regional_centers.pdf_signer_sign_url),
+       pdf_signer_sign_scale = COALESCE(EXCLUDED.pdf_signer_sign_scale, regional_centers.pdf_signer_sign_scale),
+       pdf_signer_sign_x = COALESCE(EXCLUDED.pdf_signer_sign_x, regional_centers.pdf_signer_sign_x),
+       pdf_signer_sign_y = COALESCE(EXCLUDED.pdf_signer_sign_y, regional_centers.pdf_signer_sign_y),
        fees_json = EXCLUDED.fees_json,
        active = TRUE,
        updated_at = NOW()
@@ -206,12 +267,30 @@ async function upsertRegionalCenter(client, doc) {
       doc.phone || null,
       doc.email || null,
       doc.address || null,
+      doc.place || null,
       doc.state || null,
       doc.district || null,
       doc.pincode || null,
       doc.location?.lat ?? null,
       doc.location?.lng ?? null,
+      doc.gstNumber || null,
+      doc.panCard || null,
+      doc.zohoId || null,
+      doc.zohoExpenseAccountId || null,
+      doc.zohoExpenseAccountName || null,
+      doc.certificationMethod || null,
       doc.laboratorySealIdentification || null,
+      doc.standardWeightsCertNumber || null,
+      doc.standardWeightsCertDate || null,
+      doc.standardWeightsCertExpiry || null,
+      doc.logoUrl || null,
+      doc.sealUrl || null,
+      doc.standardWeightsCertUrl || null,
+      doc.panCardUrl || null,
+      doc.pdfSignerSignUrl || null,
+      doc.pdfSignerSignScale ?? null,
+      doc.pdfSignerSignX ?? null,
+      doc.pdfSignerSignY ?? null,
       JSON.stringify(fees),
     ],
   );

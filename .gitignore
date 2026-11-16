@@ -96,3 +96,15 @@ android/.idea/
 *.aab
 .android-export/
 .postgres-wip-aside/
+
+# VPS runtime markers / backup pointers (not source)
+CURRENT_*
+.deploy-tag
+**/assets/.deploy-tag
+backups/
+insuranceDocUrl
+pollutionDocUrl
+rcDocUrl
+vehiclePhotoLocalPath
+vehiclePhotoUrl
+

@@ -3,13 +3,29 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GATC — Stamping Management</title>
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate" />
+    <meta name="gatc-build" content="gatc-vps-linux" />
+    <title>GATC — Stamping Management (gatc-vps)</title>
     <link rel="stylesheet" href="/src/styles.css" />
+    <script>
+      // Kill legacy YES LAB / Firebase service workers that cache the old app on this domain.
+      (function () {
+        if (!('serviceWorker' in navigator)) return;
+        navigator.serviceWorker.getRegistrations().then(function (regs) {
+          return Promise.all(regs.map(function (r) { return r.unregister(); }));
+        }).then(function () {
+          if (!('caches' in window)) return;
+          return caches.keys().then(function (keys) {
+            return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+          });
+        }).catch(function () {});
+      })();
+    </script>
   </head>
   <body>
     <main class="shell">
       <header class="brand">
-        <p class="eyebrow">Government Authorized Testing Center</p>
+        <p class="eyebrow">GATC-VPS · POSTGRES · NOT FIREBASE</p>
         <h1>GATC</h1>
         <p class="tagline">Stamping management for weighing and measuring instruments</p>
       </header>

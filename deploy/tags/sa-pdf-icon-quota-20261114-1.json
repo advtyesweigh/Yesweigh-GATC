@@ -1,0 +1,6 @@
+{
+  "tag": "sa-pdf-icon-quota-20261114-1",
+  "at": "2026-11-14T09:35:12Z",
+  "changes": ["remove Purchases menu", "PDF download pill", "admin quota/vehicles/wallets APIs", "sync-yesgatc-quota-car-wallet", "migration 004 applied"],
+  "data": {"vehicles":13,"wallets":7,"ledger":688,"topUps":35,"quota_allotted":5231,"quota_used":4364,"wallet_sum":4143}
+}

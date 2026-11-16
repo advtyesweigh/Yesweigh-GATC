@@ -2,9 +2,11 @@
 
 GATC stamping management application for original verification and re-verification of weighing and measuring instruments through the Government of India eMaap portal.
 
-**Status:** Infrastructure bootstrap + Phase 1 architecture. Customer UI target is **native Android** (not the Vite scaffold). Government portal (eMaap) form submission is intentionally not implemented yet.
+**Status:** M1 auth + Postgres in progress. **Production domain** target: `https://gatc.yesweigh.in` on **Linux VPS** (Caddy). Clients: **React desktop** (UI HTML reference) + **native Android**. No Firebase. eMaap automation only after authorization (Phase 5/7).
 
-**Phase 1 design:** [ARCHITECTURE.md](./ARCHITECTURE.md) · [IMPLEMENTATION_PLAN.md](./IMPLEMENTATION_PLAN.md)
+**Phase 1 design:** [ARCHITECTURE.md](./ARCHITECTURE.md) · [IMPLEMENTATION_PLAN.md](./IMPLEMENTATION_PLAN.md) · [docs/LINUX_DESKTOP_ALIGNMENT.md](./docs/LINUX_DESKTOP_ALIGNMENT.md)
+
+**Desktop UI reference:** [design/reference/GATC_Final_Desktop_UI.html](./design/reference/GATC_Final_Desktop_UI.html)
 
 ## Repository layout
 
